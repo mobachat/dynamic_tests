@@ -35,8 +35,9 @@ export default function TestEngine({ params }) {
       const savedProgress = await getFromDB('progress', testId);
       if (savedProgress) {
         setAnswers(savedProgress.answers);
-        const firstUnanswered = testData.findIndex((_, idx) => !savedProgress.answers[idx]);
-        if (firstUnanswered !== -1) setCurrentIndex(firstUnanswered);
+        // Optional: jump to first unanswered
+        // const firstUnanswered = testData.findIndex((_, idx) => !savedProgress.answers[idx]);
+        // if (firstUnanswered !== -1) setCurrentIndex(firstUnanswered);
       }
 
       setLoading(false);
@@ -44,15 +45,44 @@ export default function TestEngine({ params }) {
     initializeTest();
   }, [params.filename, testId]);
 
-  const handleAnswerSelect = async (opt) => {
-    const newAnswers = { ...answers, [currentIndex]: opt };
-    setAnswers(newAnswers);
-    
+  // Unified save function
+  const persistProgress = async (newAnswers) => {
     await saveToDB('progress', {
       testId: testId,
       answers: newAnswers,
       lastUpdated: new Date().toISOString()
     });
+  };
+
+  // MCSA (Single Answer)
+  const handleMcsaSelect = (opt) => {
+    const newAnswers = { ...answers, [currentIndex]: opt };
+    setAnswers(newAnswers);
+    persistProgress(newAnswers);
+  };
+
+  // MCMA (Multiple Answer - toggles selections)
+  const handleMcmaSelect = (opt) => {
+    let currentSelection = answers[currentIndex];
+    if (!Array.isArray(currentSelection)) currentSelection = [];
+    
+    let newSelection;
+    if (currentSelection.includes(opt)) {
+      newSelection = currentSelection.filter(item => item !== opt); // Remove if already selected
+    } else {
+      newSelection = [...currentSelection, opt]; // Add if not selected
+    }
+
+    const newAnswers = { ...answers, [currentIndex]: newSelection };
+    setAnswers(newAnswers);
+    persistProgress(newAnswers);
+  };
+
+  // Text Input
+  const handleTextInput = (text) => {
+    const newAnswers = { ...answers, [currentIndex]: text };
+    setAnswers(newAnswers);
+    persistProgress(newAnswers);
   };
 
   const submitTest = async () => {
@@ -87,6 +117,7 @@ export default function TestEngine({ params }) {
   if (loading) return <div className="flex min-h-screen items-center justify-center font-bold text-gray-500">Loading your test data...</div>;
   if (data.length === 0) return <div className="flex min-h-screen items-center justify-center font-bold text-red-500">No data found for this test.</div>;
 
+  // --- RESULTS SCREEN ---
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6 text-center">
@@ -98,12 +129,16 @@ export default function TestEngine({ params }) {
         
         <div className="w-full max-w-2xl bg-white shadow rounded-lg p-6 text-left mb-8 max-h-96 overflow-y-auto">
           <h2 className="font-bold text-lg border-b pb-2 mb-4">Your Responses</h2>
-          {data.map((item, idx) => (
-            <div key={idx} className="mb-3 flex justify-between border-b border-gray-100 pb-2">
-              <span className="font-medium text-gray-700">Q{idx + 1}.</span>
-              <span className="text-blue-700 font-semibold">{answers[idx] || 'Skipped'}</span>
-            </div>
-          ))}
+          {data.map((item, idx) => {
+            let ans = answers[idx];
+            if (Array.isArray(ans)) ans = ans.join(', '); // Format array for MCMA
+            return (
+              <div key={idx} className="mb-3 flex justify-between border-b border-gray-100 pb-2">
+                <span className="font-medium text-gray-700">Q{idx + 1}.</span>
+                <span className="text-blue-700 font-semibold">{ans || 'Skipped'}</span>
+              </div>
+            );
+          })}
         </div>
 
         <button 
@@ -116,17 +151,33 @@ export default function TestEngine({ params }) {
     );
   }
 
+  // --- DATA PARSING ---
   const currentItem = data[currentIndex];
+  
+  // Col A (0): Passage
   const passageText = currentItem[0]?.trim();
   const hasPassage = !!passageText;
-  const questionText = hasPassage ? currentItem[1] : currentItem[5];
-  const optionsStart = hasPassage ? 2 : 6;
-  const options = [
-    currentItem[optionsStart],
-    currentItem[optionsStart + 1],
-    currentItem[optionsStart + 2],
-    currentItem[optionsStart + 3]
-  ].filter(Boolean);
+  
+  // Col B (1): Question & Options Text
+  const questionText = currentItem[1];
+  
+  // Col G (6): Flags
+  const flagsStr = currentItem[6] ? currentItem[6].toLowerCase() : "";
+  const flags = flagsStr.split(';').map(f => f.trim());
+  
+  // Default values
+  let questionType = 'mcsa'; // mcsa, mcma, textinput
+  let maxOptions = 4;
+  
+  // Parse Flags
+  if (flags.includes('mcma')) questionType = 'mcma';
+  else if (flags.includes('textinput')) questionType = 'textinput';
+  
+  const numFlag = flags.find(f => !isNaN(parseInt(f)));
+  if (numFlag) maxOptions = parseInt(numFlag);
+
+  // Generate Array for Option Buttons (e.g., ["1", "2", "3", "4"])
+  const optionButtons = Array.from({length: maxOptions}, (_, i) => (i + 1).toString());
 
   return (
     <div 
@@ -149,34 +200,82 @@ export default function TestEngine({ params }) {
       </header>
 
       <main className={`flex-1 flex overflow-hidden p-2 md:p-4 gap-2 md:gap-4 ${hasPassage ? 'flex-col md:flex-row' : 'flex-col items-center justify-center'}`}>
+        
+        {/* PASSAGE PANEL */}
         {hasPassage && (
-          <div className="w-full md:w-1/2 h-[40%] md:h-full bg-white rounded-xl shadow-sm border border-gray-200 overflow-y-auto p-4 md:p-6 text-sm md:text-base leading-relaxed text-gray-800">
+          <div className="w-full md:w-1/2 h-[40%] md:h-full bg-white rounded-xl shadow-sm border border-gray-200 overflow-y-auto p-4 md:p-6 text-sm md:text-base leading-relaxed text-gray-800 whitespace-pre-wrap">
             <h2 className="font-bold text-gray-400 uppercase tracking-wider text-xs mb-3">Passage</h2>
             <div dangerouslySetInnerHTML={{ __html: passageText.replace(/\n/g, '<br/>') }} />
           </div>
         )}
 
+        {/* QUESTION PANEL */}
         <div className={`w-full ${hasPassage ? 'md:w-1/2 h-[60%] md:h-full' : 'max-w-4xl h-full'} flex flex-col bg-white rounded-xl shadow-sm border border-gray-200 overflow-y-auto p-4 md:p-6`}>
           <h2 className="font-bold text-gray-400 uppercase tracking-wider text-xs mb-3">Question {currentIndex + 1}</h2>
-          <p className="text-lg md:text-xl font-medium text-gray-900 mb-6">{questionText}</p>
           
-          <div className="flex flex-col gap-3 mt-auto md:mt-0">
-            {options.map((opt, idx) => {
-              const isSelected = answers[currentIndex] === opt;
-              return (
-                <button 
-                  key={idx}
-                  onClick={() => handleAnswerSelect(opt)}
-                  className={`p-3 md:p-4 rounded-lg border-2 text-left transition-all ${
-                    isSelected 
-                      ? 'border-blue-600 bg-blue-50 text-blue-900 font-semibold shadow-sm scale-[1.01]' 
-                      : 'border-gray-200 hover:border-blue-300 hover:bg-gray-50'
-                  }`}
-                >
-                  <span className="mr-2 font-bold text-gray-400">{String.fromCharCode(65 + idx)}.</span> {opt}
-                </button>
-              )
-            })}
+          {/* Question Text (whitespace-pre-wrap preserves your newlines for options) */}
+          <div className="text-lg font-medium text-gray-900 mb-8 whitespace-pre-wrap">
+            {questionText}
+          </div>
+          
+          {/* DYNAMIC ANSWER PAD */}
+          <div className="mt-auto">
+            <h3 className="font-bold text-gray-400 uppercase tracking-wider text-xs mb-3">Your Answer</h3>
+            
+            {/* 1. MCSA (Single Choice) */}
+            {questionType === 'mcsa' && (
+              <div className="flex flex-wrap gap-4">
+                {optionButtons.map(opt => {
+                  const isSelected = answers[currentIndex] === opt;
+                  return (
+                    <button 
+                      key={opt}
+                      onClick={() => handleMcsaSelect(opt)}
+                      className={`w-14 h-14 md:w-16 md:h-16 rounded-full border-2 text-lg font-bold transition-all ${
+                        isSelected 
+                          ? 'border-blue-600 bg-blue-600 text-white shadow-md transform scale-105' 
+                          : 'border-gray-300 hover:border-blue-400 hover:bg-blue-50 text-gray-700'
+                      }`}
+                    >
+                      {opt}
+                    </button>
+                  )
+                })}
+              </div>
+            )}
+
+            {/* 2. MCMA (Multiple Choice) */}
+            {questionType === 'mcma' && (
+              <div className="flex flex-wrap gap-4">
+                {optionButtons.map(opt => {
+                  const isSelected = Array.isArray(answers[currentIndex]) && answers[currentIndex].includes(opt);
+                  return (
+                    <button 
+                      key={opt}
+                      onClick={() => handleMcmaSelect(opt)}
+                      className={`w-14 h-14 md:w-16 md:h-16 rounded-xl border-2 text-lg font-bold transition-all ${
+                        isSelected 
+                          ? 'border-indigo-600 bg-indigo-600 text-white shadow-md transform scale-105' 
+                          : 'border-gray-300 hover:border-indigo-400 hover:bg-indigo-50 text-gray-700'
+                      }`}
+                    >
+                      {opt}
+                    </button>
+                  )
+                })}
+                <div className="w-full text-xs text-indigo-500 mt-1">Select all that apply</div>
+              </div>
+            )}
+
+            {/* 3. Text Input */}
+            {questionType === 'textinput' && (
+              <textarea
+                value={answers[currentIndex] || ""}
+                onChange={(e) => handleTextInput(e.target.value)}
+                placeholder="Type your answer here..."
+                className="w-full p-4 border-2 border-gray-300 rounded-xl focus:border-blue-600 focus:ring-0 resize-none min-h-[120px] transition-colors"
+              />
+            )}
           </div>
         </div>
       </main>
