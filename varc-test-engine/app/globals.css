@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  /* Custom scrollbar to keep the UI clean */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 20px;
+  }
+}
+
+html, body {
+  overscroll-behavior: none; /* Prevents "pull-to-refresh" on mobile */
+  -webkit-tap-highlight-color: transparent; /* Removes blue tap highlight on mobile buttons */
+}
