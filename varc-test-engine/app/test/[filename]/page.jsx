@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { getTestData } from '@/lib/githubFetcher';
-import { saveToDB, getFromDB } from '@/lib/db';
+import { getTestData } from '../../../lib/githubFetcher';
+import { saveToDB, getFromDB } from '../../../lib/db';
 import { Maximize, ArrowRight, ArrowLeft, CheckCircle, Home } from 'lucide-react';
 
 export default function TestEngine({ params }) {

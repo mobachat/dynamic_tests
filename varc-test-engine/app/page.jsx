@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getAvailableTests } from '@/lib/githubFetcher';
+import { getAvailableTests } from '../lib/githubFetcher';
 import { BookOpen } from 'lucide-react';
 
 export default async function Home() {
