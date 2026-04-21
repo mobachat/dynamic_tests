@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { getTestData } from '../../../lib/githubFetcher';
 import { saveToDB, getFromDB } from '../../../lib/db';
-import { Maximize, ArrowRight, ArrowLeft, CheckCircle, Home } from 'lucide-react';
+import { Maximize, ArrowRight, ArrowLeft, CheckCircle, Home, Check, X } from 'lucide-react';
 
 export default function TestEngine({ params }) {
   const router = useRouter();
@@ -14,7 +14,10 @@ export default function TestEngine({ params }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  
+  // States for Persistence & Feedback
   const [answers, setAnswers] = useState({});
+  const [locked, setLocked] = useState({}); 
   const [isSubmitted, setIsSubmitted] = useState(false);
   
   const testRef = useRef(null);
@@ -26,7 +29,8 @@ export default function TestEngine({ params }) {
 
       const savedResult = await getFromDB('results', testId);
       if (savedResult) {
-        setAnswers(savedResult.answers);
+        setAnswers(savedResult.answers || {});
+        setLocked(savedResult.locked || {});
         setIsSubmitted(true);
         setLoading(false);
         return;
@@ -34,10 +38,8 @@ export default function TestEngine({ params }) {
 
       const savedProgress = await getFromDB('progress', testId);
       if (savedProgress) {
-        setAnswers(savedProgress.answers);
-        // Optional: jump to first unanswered
-        // const firstUnanswered = testData.findIndex((_, idx) => !savedProgress.answers[idx]);
-        // if (firstUnanswered !== -1) setCurrentIndex(firstUnanswered);
+        setAnswers(savedProgress.answers || {});
+        setLocked(savedProgress.locked || {});
       }
 
       setLoading(false);
@@ -45,44 +47,47 @@ export default function TestEngine({ params }) {
     initializeTest();
   }, [params.filename, testId]);
 
-  // Unified save function
-  const persistProgress = async (newAnswers) => {
+  const persistProgress = async (newAnswers, newLocked) => {
     await saveToDB('progress', {
       testId: testId,
-      answers: newAnswers,
+      answers: newAnswers || answers,
+      locked: newLocked || locked,
       lastUpdated: new Date().toISOString()
     });
   };
 
-  // MCSA (Single Answer)
   const handleMcsaSelect = (opt) => {
+    if (locked[currentIndex]) return;
     const newAnswers = { ...answers, [currentIndex]: opt };
     setAnswers(newAnswers);
-    persistProgress(newAnswers);
+    persistProgress(newAnswers, locked);
   };
 
-  // MCMA (Multiple Answer - toggles selections)
   const handleMcmaSelect = (opt) => {
+    if (locked[currentIndex]) return;
     let currentSelection = answers[currentIndex];
     if (!Array.isArray(currentSelection)) currentSelection = [];
     
-    let newSelection;
-    if (currentSelection.includes(opt)) {
-      newSelection = currentSelection.filter(item => item !== opt); // Remove if already selected
-    } else {
-      newSelection = [...currentSelection, opt]; // Add if not selected
-    }
+    let newSelection = currentSelection.includes(opt) 
+      ? currentSelection.filter(item => item !== opt) 
+      : [...currentSelection, opt];
 
     const newAnswers = { ...answers, [currentIndex]: newSelection };
     setAnswers(newAnswers);
-    persistProgress(newAnswers);
+    persistProgress(newAnswers, locked);
   };
 
-  // Text Input
   const handleTextInput = (text) => {
+    if (locked[currentIndex]) return;
     const newAnswers = { ...answers, [currentIndex]: text };
     setAnswers(newAnswers);
-    persistProgress(newAnswers);
+    persistProgress(newAnswers, locked);
+  };
+
+  const handleCheckAnswer = () => {
+    const newLocked = { ...locked, [currentIndex]: true };
+    setLocked(newLocked);
+    persistProgress(answers, newLocked);
   };
 
   const submitTest = async () => {
@@ -90,6 +95,7 @@ export default function TestEngine({ params }) {
       await saveToDB('results', {
         testId: testId,
         answers: answers,
+        locked: locked,
         completedAt: new Date().toISOString(),
         totalQuestions: data.length
       });
@@ -117,30 +123,12 @@ export default function TestEngine({ params }) {
   if (loading) return <div className="flex min-h-screen items-center justify-center font-bold text-gray-500">Loading your test data...</div>;
   if (data.length === 0) return <div className="flex min-h-screen items-center justify-center font-bold text-red-500">No data found for this test.</div>;
 
-  // --- RESULTS SCREEN ---
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6 text-center">
         <CheckCircle size={64} className="text-green-500 mb-6" />
         <h1 className="text-3xl font-bold text-gray-800 mb-2">Test Completed!</h1>
-        <p className="text-gray-600 mb-8 max-w-md">
-          Your answers for <strong>{testId}</strong> have been saved securely on your device.
-        </p>
-        
-        <div className="w-full max-w-2xl bg-white shadow rounded-lg p-6 text-left mb-8 max-h-96 overflow-y-auto">
-          <h2 className="font-bold text-lg border-b pb-2 mb-4">Your Responses</h2>
-          {data.map((item, idx) => {
-            let ans = answers[idx];
-            if (Array.isArray(ans)) ans = ans.join(', '); // Format array for MCMA
-            return (
-              <div key={idx} className="mb-3 flex justify-between border-b border-gray-100 pb-2">
-                <span className="font-medium text-gray-700">Q{idx + 1}.</span>
-                <span className="text-blue-700 font-semibold">{ans || 'Skipped'}</span>
-              </div>
-            );
-          })}
-        </div>
-
+        <p className="text-gray-600 mb-8 max-w-md">Your answers have been saved locally.</p>
         <button 
           onClick={() => router.push('/')}
           className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition"
@@ -151,33 +139,36 @@ export default function TestEngine({ params }) {
     );
   }
 
-  // --- DATA PARSING ---
   const currentItem = data[currentIndex];
   
-  // Col A (0): Passage
+  // 1. Column A (Index 0): Passage
   const passageText = currentItem[0]?.trim();
   const hasPassage = !!passageText;
   
-  // Col B (1): Question & Options Text
-  const questionText = currentItem[1];
+  // 2. Correct Answer: Column B (Index 1)
+  const correctAnswer = currentItem[1] ? currentItem[1].toString().trim() : "";
+
+  // 3. Question Text: ALWAYS Column F (Index 5)
+  const rawQuestionText = currentItem[5];
+  const questionBlocks = rawQuestionText ? rawQuestionText.split('***') : ["No question text found."];
   
-  // Col G (6): Flags
+  // 4. Flags: Column G (Index 6)
   const flagsStr = currentItem[6] ? currentItem[6].toLowerCase() : "";
   const flags = flagsStr.split(';').map(f => f.trim());
   
-  // Default values
-  let questionType = 'mcsa'; // mcsa, mcma, textinput
+  // Parse Flags
+  let questionType = 'mcsa'; 
   let maxOptions = 4;
   
-  // Parse Flags
   if (flags.includes('mcma')) questionType = 'mcma';
   else if (flags.includes('textinput')) questionType = 'textinput';
   
   const numFlag = flags.find(f => !isNaN(parseInt(f)));
   if (numFlag) maxOptions = parseInt(numFlag);
 
-  // Generate Array for Option Buttons (e.g., ["1", "2", "3", "4"])
   const optionButtons = Array.from({length: maxOptions}, (_, i) => (i + 1).toString());
+  const isQuestionLocked = locked[currentIndex];
+  const hasAnswered = answers[currentIndex] !== undefined && answers[currentIndex] !== "" && answers[currentIndex]?.length !== 0;
 
   return (
     <div 
@@ -203,63 +194,81 @@ export default function TestEngine({ params }) {
         
         {/* PASSAGE PANEL */}
         {hasPassage && (
-          <div className="w-full md:w-1/2 h-[40%] md:h-full bg-white rounded-xl shadow-sm border border-gray-200 overflow-y-auto p-4 md:p-6 text-sm md:text-base leading-relaxed text-gray-800 whitespace-pre-wrap">
+          <div className="w-full md:w-1/2 h-[40%] md:h-full bg-white rounded-xl shadow-sm border border-gray-200 overflow-y-auto p-4 md:p-6 text-sm md:text-base leading-relaxed text-gray-800 whitespace-pre-wrap scrollbar-thin">
             <h2 className="font-bold text-gray-400 uppercase tracking-wider text-xs mb-3">Passage</h2>
             <div dangerouslySetInnerHTML={{ __html: passageText.replace(/\n/g, '<br/>') }} />
           </div>
         )}
 
         {/* QUESTION PANEL */}
-        <div className={`w-full ${hasPassage ? 'md:w-1/2 h-[60%] md:h-full' : 'max-w-4xl h-full'} flex flex-col bg-white rounded-xl shadow-sm border border-gray-200 overflow-y-auto p-4 md:p-6`}>
+        <div className={`w-full ${hasPassage ? 'md:w-1/2 h-[60%] md:h-full' : 'max-w-4xl h-full'} flex flex-col bg-white rounded-xl shadow-sm border border-gray-200 overflow-y-auto p-4 md:p-6 scrollbar-thin`}>
           <h2 className="font-bold text-gray-400 uppercase tracking-wider text-xs mb-3">Question {currentIndex + 1}</h2>
           
-          {/* Question Text (whitespace-pre-wrap preserves your newlines for options) */}
           <div className="text-lg font-medium text-gray-900 mb-8 whitespace-pre-wrap">
-            {questionText}
+            {questionBlocks.map((block, idx) => (
+              <div key={idx} className={`${idx !== 0 ? 'mt-6 pt-6 border-t border-gray-100' : ''}`}>
+                {block.trim()}
+              </div>
+            ))}
           </div>
           
-          {/* DYNAMIC ANSWER PAD */}
           <div className="mt-auto">
             <h3 className="font-bold text-gray-400 uppercase tracking-wider text-xs mb-3">Your Answer</h3>
             
-            {/* 1. MCSA (Single Choice) */}
+            {/* MCSA */}
             {questionType === 'mcsa' && (
               <div className="flex flex-wrap gap-4">
                 {optionButtons.map(opt => {
                   const isSelected = answers[currentIndex] === opt;
+                  const isCorrectAnswer = opt === correctAnswer;
+                  
+                  let btnColor = "border-gray-300 hover:border-blue-400 hover:bg-blue-50 text-gray-700";
+                  if (isSelected) btnColor = "border-blue-600 bg-blue-600 text-white shadow-md transform scale-105";
+                  
+                  if (isQuestionLocked) {
+                    if (isCorrectAnswer) btnColor = "border-green-500 bg-green-500 text-white shadow-md"; 
+                    else if (isSelected && !isCorrectAnswer) btnColor = "border-red-500 bg-red-500 text-white shadow-md"; 
+                    else btnColor = "border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed"; 
+                  }
+
                   return (
                     <button 
                       key={opt}
                       onClick={() => handleMcsaSelect(opt)}
-                      className={`w-14 h-14 md:w-16 md:h-16 rounded-full border-2 text-lg font-bold transition-all ${
-                        isSelected 
-                          ? 'border-blue-600 bg-blue-600 text-white shadow-md transform scale-105' 
-                          : 'border-gray-300 hover:border-blue-400 hover:bg-blue-50 text-gray-700'
-                      }`}
+                      disabled={isQuestionLocked}
+                      className={`w-14 h-14 md:w-16 md:h-16 rounded-full border-2 text-lg font-bold transition-all flex items-center justify-center ${btnColor}`}
                     >
-                      {opt}
+                      {isQuestionLocked && isCorrectAnswer ? <Check size={24} /> : (isQuestionLocked && isSelected ? <X size={24}/> : opt)}
                     </button>
                   )
                 })}
               </div>
             )}
 
-            {/* 2. MCMA (Multiple Choice) */}
+            {/* MCMA */}
             {questionType === 'mcma' && (
               <div className="flex flex-wrap gap-4">
                 {optionButtons.map(opt => {
                   const isSelected = Array.isArray(answers[currentIndex]) && answers[currentIndex].includes(opt);
+                  const isCorrectAnswer = correctAnswer.includes(opt);
+                  
+                  let btnColor = "border-gray-300 hover:border-indigo-400 hover:bg-indigo-50 text-gray-700";
+                  if (isSelected) btnColor = "border-indigo-600 bg-indigo-600 text-white shadow-md transform scale-105";
+                  
+                  if (isQuestionLocked) {
+                    if (isCorrectAnswer) btnColor = "border-green-500 bg-green-500 text-white shadow-md"; 
+                    else if (isSelected && !isCorrectAnswer) btnColor = "border-red-500 bg-red-500 text-white shadow-md"; 
+                    else btnColor = "border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed"; 
+                  }
+
                   return (
                     <button 
                       key={opt}
                       onClick={() => handleMcmaSelect(opt)}
-                      className={`w-14 h-14 md:w-16 md:h-16 rounded-xl border-2 text-lg font-bold transition-all ${
-                        isSelected 
-                          ? 'border-indigo-600 bg-indigo-600 text-white shadow-md transform scale-105' 
-                          : 'border-gray-300 hover:border-indigo-400 hover:bg-indigo-50 text-gray-700'
-                      }`}
+                      disabled={isQuestionLocked}
+                      className={`w-14 h-14 md:w-16 md:h-16 rounded-xl border-2 text-lg font-bold transition-all flex items-center justify-center ${btnColor}`}
                     >
-                      {opt}
+                      {isQuestionLocked && isCorrectAnswer ? <Check size={24} /> : (isQuestionLocked && isSelected ? <X size={24}/> : opt)}
                     </button>
                   )
                 })}
@@ -267,20 +276,38 @@ export default function TestEngine({ params }) {
               </div>
             )}
 
-            {/* 3. Text Input */}
+            {/* TextInput */}
             {questionType === 'textinput' && (
-              <textarea
-                value={answers[currentIndex] || ""}
-                onChange={(e) => handleTextInput(e.target.value)}
-                placeholder="Type your answer here..."
-                className="w-full p-4 border-2 border-gray-300 rounded-xl focus:border-blue-600 focus:ring-0 resize-none min-h-[120px] transition-colors"
-              />
+              <div className="flex flex-col gap-2">
+                <textarea
+                  value={answers[currentIndex] || ""}
+                  onChange={(e) => handleTextInput(e.target.value)}
+                  disabled={isQuestionLocked}
+                  placeholder="Type your answer here..."
+                  className={`w-full p-4 border-2 rounded-xl focus:border-blue-600 focus:ring-0 resize-none min-h-[120px] transition-colors ${isQuestionLocked ? 'bg-gray-100 border-gray-300 text-gray-600' : 'border-gray-300'}`}
+                />
+                {isQuestionLocked && (
+                  <div className="p-3 bg-blue-50 border border-blue-200 text-blue-800 rounded-lg font-medium">
+                    Correct Answer: {correctAnswer}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Check Answer Button */}
+            {hasAnswered && !isQuestionLocked && (
+              <button 
+                onClick={handleCheckAnswer}
+                className="mt-6 px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-bold rounded-lg shadow transition transform hover:scale-105"
+              >
+                Check Answer
+              </button>
             )}
           </div>
         </div>
       </main>
 
-      <footer className="bg-white border-t border-gray-200 p-3 md:p-4 flex justify-between shrink-0">
+      <footer className="bg-white border-t border-gray-200 p-3 md:p-4 flex justify-between shrink-0 shadow-lg z-10">
         <button 
           disabled={currentIndex === 0}
           onClick={() => setCurrentIndex(prev => prev - 1)}
