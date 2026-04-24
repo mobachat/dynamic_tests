@@ -1,0 +1,399 @@
+Passage,Correct answers,Type,Difficulty,Size,Questions,Flags
+"Q1: Read the paragraph and complete the argument: All Eskimos dislike long summers. All Para-gliders love long summers. Some Eskimos are not Mountaineers. Hence, no Para-gliders are Mountaineers. Which of the following, if true, will best complete the above argument?
+
+(1) Some Mountaineers like long summers.
+(2) No Mountaineer is not Eskimo.
+(3) Some Para-gliders don't like summers.
+(4) Some Eskimos are not mountaineers.",2,,,,,max_options=4
+"Q2: Kiran is adamant. All adamant boys like Mathematics. Kiran likes mathematics. Hence, which of the following, if true, will best complete the above argument?
+
+(1) Kiran is an adamant boy.
+(2) Kiran's friend Aman, who is adamant, doesn't like Mathematics.
+(3) Kiran's brother Subhen, who doesn't like Mathematics, is not adamant.
+(4) All of these.",3,,,,,max_options=4
+"Q3: Freebies promised by political parties... Which of the following, if true, will most strongly mitigate the suggestion given by the Supreme Court?
+
+(1) Many political parties don't discuss all freebies in manifestos.
+(2) It is very difficult for EC to prove violation of model code of conduct in court.
+(3) Election manifesto is not a legally enforceable document.
+(4) Violation of model code of conduct is not a punishable offence.",4,,,,,max_options=4
+"Q4: It is true that all elves are dementors. Also, all dementors are patronus and some patronus are poltergeists. We also know that no poltergeist is a centaur. Which is a valid conclusion?
+
+(1) Some dementors are not centaurs.
+(2) Some poltergeists are elves.
+(3) Some patronus are not centaurs.
+(4) None of these",3,,,,,max_options=4
+"Q5: For RBI, price stability dominates policymaking... Which of the following, if true, will best justify the author's opinion in the last sentence of the paragraph?
+
+(1) Moderation in core inflation in first fiscal quarter has largely reversed.
+(2) Given India's reliance on imports, OPEC decision to maintain output cuts can hardly provide comfort.
+(3) Price gains as measured by CPI had accelerated to a seven-month high in October and RBI's survey showed ""firming up"".
+(4) Centre's move to recapitalise PSU banks has won a vote of confidence for its potential to revive credit flows.",3,,,,,max_options=4
+"Q6: Vishnu thought the last problem on the test was a real ______. It was much harder and more complex than any of the previous problems.
+
+(1) doozy
+(2) whooper
+(3) carp
+(4) snafu",1,,,,,max_options=4
+"Q7: I used to be kind of a ______ when I was little, but I lost most of the weight in my teenage years.
+
+(1) runt
+(2) beanpole
+(3) doughboy
+(4) punk",3,,,,,max_options=4
+"Q8: Choose the option in which the usage of the word FOR is incorrect or inappropriate.
+
+(1) He has a great eye for detail.
+(2) We are waiting for the day.
+(3) I can't bear for her to be angry.
+(4) It couldn't be done for ever.",3,,,,,max_options=4
+"Q9: Choose the option in which the usage of the word NEAR is incorrect or inappropriate.
+
+(1) I got there just after you left - a near miss!
+(2) She and her near friend left early.
+(3) The war led to a near doubling of oil prices.
+(4) They came near to tear seeing the plight of the victims.",2,,,,,max_options=4
+"Q10: A shortfall in supplies would knock the bottom out of the engineering industry. What does ""knock the bottom out of"" stand for?
+
+(1) Shake its foundation
+(2) Cause it to collapse
+(3) Cause a paradigm shift
+(4) Cause it to shift",2,,,,,max_options=4
+"Q11: Choose the option in which the usage of the word LOOK is incorrect or inappropriate.
+
+(1) Don't waste time looking back on things which have caused you distress.
+(2) James looked Jenna up and down thoroughly before answering.
+(3) My cranky neighbour looked down on most of her neighbours.
+(4) Satish looked on and helped the blind poet cross the road.",4,,,,,max_options=4
+"Q12: Choose the option in which the usage of the word COME is incorrect or inappropriate.
+
+(1) The dog came forward with his master's finger prints.
+(2) As I cleaned up the painting, it came up like new.
+(3) Come upon everyone and meet me behind the stage.
+(4) My friend Graham came down with dengue this weekend.",3,,,,,max_options=4
+"Q13: Choose the option in which the usage of the word DROP is incorrect or inappropriate.
+
+(1) I dropped out of Commerce because I found it too tough.
+(2) The horse started to gallop with a higher speed to drop back.
+(3) I might drop in for a snack sometime this week.
+(4) Although she struggled a lot, she kept dropping off.",2,,,,,max_options=4
+"Q14: Choose the option in which the usage of the word PUT is incorrect or inappropriate.
+
+(1) I'm so tired that I can't put in with any more nonsense.
+(2) Don't forget to put on your new shoes for the interview.
+(3) We are putting off our business trip until February.
+(4) Mandora is putting a few thoughts down on paper.",1,,,,,max_options=4
+"Q15: Choose the option in which the usage of the word TAKE is incorrect or inappropriate.
+
+(1) I take at my father. We are both punctual.
+(2) I have to take my new Sony headphones back because it doesn't work.
+(3) Please take the garbage out to the street for me.
+(4) Mahesh took the car breaks apart and then he found the problem.",1,,,,,max_options=4
+"Q16: I keep ______ to school. I wish I had studied more seriously. Now I'll have to ______ this job offer. But I guess I'll have to accept it.
+
+(1) thinking back, think to
+(2) thinking back, think over
+(3) thinking over, think over
+(4) think down, think of",2,,,,,max_options=4
+"Q17: Snape continued to ______ Harry despite Harry's attempts to please him. In this process, Harry ______ some important life lessons.
+
+(1) pick out, picked on
+(2) pick on, picked up
+(3) pick up, picked on
+(4) pick up on, picked up",2,,,,,max_options=4
+"Q18: To escape the wrath of her mentor, Tulika ______ an entire story. However, her story just ______ a hilarious office gossip.
+
+(1) made off, made to
+(2) made off, made in
+(3) made up, made out
+(4) made up, made for",4,,,,,max_options=4
+"Q19: Though his best friend had always ______ him for having an insane girlfriend, this time he ______ the criticism and decided to marry her.
+
+(1) laughed on, laughed through
+(2) laughed at, laughed on
+(3) laughed at, laughed off
+(4) laughed on, laughed off",3,,,,,max_options=4
+"Q20: Match the phrasal verb in Column A with the sentence where its synonym is used in Column B.
+
+Column A & Column B (inside this cell):
+a. Add up ----- i) He continued after lathi charge.
+b. Cut down ----- ii) He made the tree fall.
+c. Set up ----- iii) Her alibi didn't sound convincing.
+d. Bring up ----- iv) He walked into a trap.
+e. Carry on ----- v) Honal was raised by grandparents.
+
+Options:
+(1) a-ii, b-iii, c-iv, d-v, e-i
+(2) a-iv, b-ii, c-iii, d-i, e-v
+(3) a-iii, b-i, c-ii, d-v, e-iv
+(4) a-iii, b-ii, c-iv, d-v, e-i",4,,,,,max_options=4
+"Q21: Match the phrasal verb in Column A with the sentence where its synonym is used in Column B.
+
+Column A & Column B (inside this cell):
+a. Air out ----- i) Robin held the boat side.
+b. Bank on ----- ii) He registered in Hotel California.
+c. Check in ----- iii) Give Rajeev a proper farewell.
+d. Hang on ----- iv) Counting on your support.
+e. Send off ----- v) Leave pillow in sunlight.
+
+Options:
+(1) a-ii, b-iii, c-v, d-iv, e-ii
+(2) a-i, b-ii, c-iv, d-v, e-iii
+(3) a-v, b-iv, c-ii, d-i, e-iii
+(4) a-i, b-iii, c-v, d-ii, e-iv",3,,,,,max_options=4
+"Q22: Match the phrasal verb in Column A with the sentence where its synonym is used in Column B.
+
+Column A & Column B (inside this cell):
+a. Sort out ----- i) Prepare for the match.
+b. Stick to ----- ii) Body ripped into pieces.
+c. Tear up ----- iii) Continue with your diet.
+d. Wipe out ----- iv) Problem got resolved.
+e. Warm up ----- v) Lawsuits ruined him.
+
+Options:
+(1) a-ii, b-iii, c-iv, d-v, e-i
+(2) a-iv, b-iii, c-ii, d-v, e-i
+(3) a-iii, b-ii, c-i, d-iv, e-v
+(4) a-v, b-iii, c-iv, d-i, e-v",2,,,,,max_options=4
+"Q23: Match the phrasal verb in Column A with the sentence where its synonym is used in Column B.
+
+Column A & Column B (inside this cell):
+a. Use up ----- i) Bus drove over him.
+b. Wear off ----- ii) Kids finished all chips.
+c. Sleep on it ----- iii) Make-up faded away.
+d. Run over ----- iv) Flaws shown by manager.
+e. Point out ----- v) Delayed decision till next day.
+
+Options:
+(1) a-ii, b-iii, c-v, d-i, e-iv
+(2) a-iv, b-iii, c-v, d-ii, e-i
+(3) a-iii, b-ii, c-iv, d-i, e-v
+(4) a-v, b-iv, c-i, d-ii, e-iii",1,,,,,max_options=4
+"Q24: Match the phrasal verb in Column A with the sentence where its synonym is used in Column B.
+
+Column A & Column B (inside this cell):
+a. Mix up ----- i) Protest got over without incident.
+b. Pass off ----- ii) I wasn't the only one wrong.
+c. Figure on ----- iii) Confused by twins.
+d. Ease up ----- iv) Practice moderation.
+e. Do up ----- v) Unable to fasten jeans.
+
+Options:
+(1) a-ii, b-iii, c-iv, d-i, e-v
+(2) a-iii, b-i, c-ii, d-v, e-iv
+(3) a-iv, b-ii, c-iii, d-v, e-i
+(4) a-i, b-iv, c-v, d-ii, e-iii",2,,,,,max_options=4
+"Q25: Find which idiom usage is incorrect.
+
+(1) Her hands were as black as a skillet.
+(2) We told her a white lie.
+(3) Because of blue tape, it took six months to get US visa.
+(4) Jane was green with envy.",3,,,,,max_options=4
+"Q26: Find which idiom usage is incorrect.
+
+(1) Opened a whole new can of worms.
+(2) Sick of being on a huge goose chase.
+(3) A little bird told me.
+(4) The invigilator watched like an eagle.",4,,,,,max_options=4
+"Q27: Find which idiom usage is incorrect.
+
+(1) She's got a chip on her shoulder.
+(2) Lucy's comment was close to home for Lucinda.
+(3) Entire team bears the brunt of the boss's anger.
+(4) Alan has a habit of corking up his feelings.",2,,,,,max_options=4
+"Q28: Find which idiom usage is incorrect.
+
+(1) Shed some light on how my dress would look.
+(2) Never short of nuggets of wisdom.
+(3) Offline shopping costs a long arm.
+(4) My brother let the cat out of the bag.",3,,,,,max_options=4
+"Q29: Find which idiom usage is incorrect.
+
+(1) Huck had such a pale face.
+(2) Indians are poor at keeping a stiff upper lip.
+(3) He was in a stew.
+(4) Political leaders go bananas.",1,,,,,max_options=4
+"Q30: Complete the idiom: Currently, it is the ______ of my life.
+
+(1) bane
+(2) problem
+(3) plague
+(4) issue",1,,,,,max_options=4
+"Q31: Complete the idiom: I am caught between a rock and a ______.
+
+(1) trouble
+(2) dilemma
+(3) hell
+(4) hard place",4,,,,,max_options=4
+"Q32: Complete the idiom: She had the guts to ______ our door.
+
+(1) Close
+(2) darken
+(3) paint
+(4) knock",2,,,,,max_options=4
+"Q33: Complete the idiom: Aliza is ______ about splitting the bill.
+
+(1) sincere
+(2) honest
+(3) religious
+(4) trustworthy",3,,,,,max_options=4
+"Q34: Complete the idiom: My grandfather feels young ______.
+
+(1) with memory
+(2) at living
+(3) at heart
+(4) in body",3,,,,,max_options=4
+"Q35: Match the idioms to their meanings.
+
+Column A & Column B (inside this cell):
+a. Dead ringer ----- i) Very easy
+b. Dry run ----- ii) Replica
+c. Funny farm ----- iii) Testing
+d. High on hog ----- iv) Asylum
+e. Plum job ----- v) Affluent
+
+Options:
+(1) A-i, B-iv, C-v, D-iii, E-ii
+(2) A-ii, B-iii, C-iv, D-v, E-i
+(3) A-ii, B-v, C-iii, D-iv, E-i
+(4) A-v, B-i, C-ii, D-iii, E-iv",2,,,,,max_options=4
+"Q36: Match the idioms to their meanings.
+
+Column A & Column B (inside this cell):
+a. Chase your tail ----- i) Strike powerfully
+b. Dead wood ----- ii) Transfer blame
+c. Acid test ----- iii) Rush ineffectually
+d. Pack a wallop ----- iv) Barren
+e. Pass the buck ----- v) Concluding step to prove value
+
+Options:
+(1) A-v, B-iii, C-i, D-ii, E-iv
+(2) A-iv, B-i, C-ii, D-v, E-iii
+(3) A-ii, B-v, C-iv, D-iii, E-i
+(4) A-iii, B-iv, C-v, D-i, E-ii",4,,,,,max_options=4
+"Q37: Match the idioms to their meanings.
+
+Column A & Column B (inside this cell):
+a. Pain in the neck ----- i) Reprimand
+b. Call on the carpet ----- ii) Handle result of own actions
+c. Carrot and stick ----- iii) Die
+d. Face the music ----- iv) Improve performance by contradictory moves
+e. Kick the bucket ----- v) Obnoxious person
+
+Options:
+(1) A-i, B-iii, C-v, D-ii, E-iv
+(2) A-v, B-iv, C-iii, D-ii, E-i
+(3) A-v, B-i, C-iv, D-ii, E-iii
+(4) A-iv, B-iii, C-i, D-v, E-ii",3,,,,,max_options=4
+"Q38: Match the idioms to their meanings.
+
+Column A & Column B (inside this cell):
+a. Out of the blue ----- i) Signs of exhaustion
+b. Blue in the face ----- ii) Aristocratic
+c. Blue collar ----- iii) Rarely
+d. Feel blue ----- iv) Labourers
+e. Blue blood ----- v) Sad
+
+Options:
+(1) A-ii, B-v, C-i, D-iv, E-iii
+(2) A-iii, B-i, C-iv, D-v, E-ii
+(3) A-iv, B-ii, C-i, D-v, E-iii
+(4) A-v, B-iii, C-ii, D-i, E-iv",2,,,,,max_options=4
+"Q39: Match the idioms to their meanings.
+
+Column A & Column B (inside this cell):
+a. Fifth wheel ----- i) Unnecessary
+b. Law of the jungle ----- ii) Observe carefully
+c. Lie like a rug ----- iii) Survival of strongest
+d. Keep tabs on ----- iv) No longer young
+e. No spring chicken ----- v) Use falsehood
+
+Options:
+(1) A-iii, B-i, C-iv, D-v, E-ii
+(2) A-ii, B-iii, C-i, D-v, E-iv
+(3) A-v, B-iii, C-i, D-ii, E-iv
+(4) A-i, B-iii, C-v, D-ii, E-iv",4,,,,,max_options=4
+"Q40: He worked his fingers with the bone to keep his wife happy. Choose correct replacement.
+
+(1) worked his fingers with the bone
+(2) worked his fingers on the fly
+(3) kept his fingers to the bone
+(4) kept his fingers with the bone",3,,,,,max_options=4
+"Q41: You can't make a horse drink water but you can lead it to water. Choose correct replacement.
+
+(1) You can't make a horse drink water but you can lead it to water.
+(2) You can never lead a horse to water, let alone making it drink.
+(3) Anyone can lead a horse to water but not everyone can make him drink.
+(4) You can lead a horse to water but you can't make him drink.",4,,,,,max_options=4
+"Q42: We are always on the equal wavelength. Choose correct replacement.
+
+(1) beyond the pale
+(2) on the same wavelength
+(3) on the equal foot
+(4) in the equal wavelength",2,,,,,max_options=4
+"Q43: Zubair was given his talking sheets. Choose correct replacement.
+
+(1) talking sheets
+(2) cash cow
+(3) walking papers
+(4) walking letters",3,,,,,max_options=4
+"Q44: Lina is an early beaver. Choose correct replacement.
+
+(1) an early beaver
+(2) an eager beaver
+(3) a brave beaver
+(4) a beaver",2,,,,,max_options=4
+"Q45: Select proverb that best captures the moral of the paragraph (competitive exams, systematic preparation, slow and steady).
+
+(1) Discontent is the first step towards progress.
+(2) Slow and steady wins the race.
+(3) A rolling stone gathers no moss.
+(4) Fortune favours the brave.",2,,,,,max_options=4
+"Q46: Select proverb that best captures the moral (Bhagat Singh, Gandhi, Buddha, etc. sacrificed for others).
+
+(1) God helps those who help themselves.
+(2) To err is human, to forgive divine.
+(3) Actions speak louder than words.
+(4) Service to mankind is service to God.",4,,,,,max_options=4
+"Q47: Select proverb that best captures the moral (partition of India in 1947 and its lasting effects).
+
+(1) Rome was not built in a day.
+(2) Preparedness for war for preserving peace.
+(3) Strike when the iron is hot.
+(4) As you sow, so shall you reap.",4,,,,,max_options=4
+"Q48: A leopard cannot change its ______.
+
+(1) strips
+(2) Dots
+(3) Spots
+(4) colours",3,,,,,max_options=4
+"Q49: All is ______ that comes to the ______.
+
+(1) toast, oven
+(2) grist, mill
+(3) fair, love
+(4) game, match",2,,,,,max_options=4
+"Q50: Discretion is the better part of ______.
+
+(1) valour
+(2) Valediction
+(3) validation
+(4) victory",1,,,,,max_options=4
+"Q51: The devil can quote ______ for his purpose.
+
+(1) apple, the orange
+(2) scripture
+(3) evil man, the Bible
+(4) stupid, Plato",2,,,,,max_options=4
+"Q52: Mighty oaks from little ______ grow.
+
+(1) rivers
+(2) grass
+(3) seeds
+(4) acorns",4,,,,,max_options=4
+"Q53: ______ and ______ may break my bones but names will never hurt me.
+
+(1) Sticks, rubbles
+(2) Stones, rubbles
+(3) Sticks, stones
+(4) Stones, words",3,,,,,max_options=4
