@@ -13,16 +13,13 @@ export default function TestEngine({ params }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   
-  // App Modes: 'selector' | 'testing' | 'submitted'
   const [viewState, setViewState] = useState('selector');
   const [currentIndex, setCurrentIndex] = useState(0);
   
-  // Feature States
-  const [fontSize, setFontSize] = useState(16); // Base text size in px
+  const [fontSize, setFontSize] = useState(16); 
   const [timeSpent, setTimeSpent] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   
-  // Storage States
   const [answers, setAnswers] = useState({});
   const [locked, setLocked] = useState({}); 
   
@@ -55,7 +52,6 @@ export default function TestEngine({ params }) {
     initializeTest();
   }, [params.filename, testId]);
 
-  // Timer Hook
   useEffect(() => {
     let interval;
     if (viewState === 'testing') {
@@ -114,7 +110,6 @@ export default function TestEngine({ params }) {
     persistProgress(answers, newLocked);
   };
 
-  // Helper to extract questions accurately from a data row
   const extractQuestionsFromRow = (row) => {
     const rawQuestionText = row[5] ? String(row[5]).trim() : "";
     const isSingleColumn = rawQuestionText === ""; 
@@ -136,7 +131,6 @@ export default function TestEngine({ params }) {
 
   const submitTest = async () => {
     if (confirm("Are you sure you want to finish and evaluate the test?")) {
-      // Calculate correctness for Dashboard automatically
       let totalQs = 0;
       let correctCount = 0;
 
@@ -151,14 +145,11 @@ export default function TestEngine({ params }) {
 
           const flags = q.flagsStr.split(';').map(f => f.trim());
           if (flags.includes('mcma')) {
-            // MCMA strict array check
-            const correctArr = q.correctAnswer.split(',').map(s => s.trim()); // Assume comma separated correct answer for mcma? Adjust if exact string match is used.
             if (Array.isArray(ans) && ans.length > 0) {
                 const isCorrect = ans.every(a => q.correctAnswer.includes(a)) && ans.length === q.correctAnswer.replace(/[^1-9]/g,"").length;
                 if(isCorrect) correctCount++;
             }
           } else {
-             // MCSA and text input exact match
             if (String(ans).trim() === q.correctAnswer) correctCount++;
           }
         });
@@ -179,7 +170,6 @@ export default function TestEngine({ params }) {
     }
   };
 
-  // Aggressive Fullscreen handler
   const handleAggressiveFullscreen = async () => {
     if (viewState !== 'testing') return;
     try {
@@ -189,7 +179,7 @@ export default function TestEngine({ params }) {
           await window.screen.orientation.lock("landscape").catch(() => {});
         }
       }
-    } catch (e) {} // Silent catch
+    } catch (e) {} 
   };
 
   const formatTime = (seconds) => new Date(seconds * 1000).toISOString().substring(11, 19);
@@ -200,9 +190,9 @@ export default function TestEngine({ params }) {
       <span className="font-semibold text-lg tracking-wide">Initializing Engine...</span>
     </div>
   );
+  
   if (data.length === 0) return <div className="flex min-h-screen items-center justify-center font-bold text-rose-500 text-xl">No data found.</div>;
 
-  // VIEW: SUBMITTED
   if (viewState === 'submitted') {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 text-center">
@@ -218,14 +208,12 @@ export default function TestEngine({ params }) {
     );
   }
 
-  // VIEW: SELECTOR
   if (viewState === 'selector') {
-    // Generate preview list
     const previews = data.map((row, idx) => {
       const rawQ = row[5] ? String(row[5]).trim() : "";
       const isSingle = rawQ === "";
       let previewText = isSingle ? String(row[0]).trim() : String(row[0]).trim() || rawQ;
-      previewText = previewText.replace(/<[^>]*>?/gm, ''); // strip html
+      previewText = previewText.replace(/<[^>]*>?/gm, ''); 
       return { idx, text: previewText.substring(0, 150) + '...', hasAnswered: answers[idx] !== undefined && Object.keys(answers[idx] || {}).length > 0 };
     });
 
@@ -244,7 +232,7 @@ export default function TestEngine({ params }) {
            </div>
         </header>
 
-        <div className="max-w-4xl mx-auto w-full grid gap-4">
+        <div className="max-w-4xl mx-auto w-full grid gap-4 flex-1">
           {filtered.map((item) => (
             <div 
               key={item.idx} 
@@ -266,14 +254,12 @@ export default function TestEngine({ params }) {
     );
   }
 
-  // VIEW: TESTING
   const currentItem = data[currentIndex] || [];
   const rawQuestionText = currentItem[5] ? String(currentItem[5]).trim() : "";
   const isSingleColumn = rawQuestionText === ""; 
   const passageText = currentItem[0] ? String(currentItem[0]).trim() : "";
   const questionsData = extractQuestionsFromRow(currentItem);
 
-  // Helper to render an individual Option Pane for a specific question
   const renderOptionsPane = (qData, qIndex) => {
     const { correctAnswer, flagsStr } = qData;
     const flags = flagsStr.split(';').map(f => f.trim());
@@ -298,81 +284,84 @@ export default function TestEngine({ params }) {
     const hasAnswered = qAns !== undefined && qAns !== "" && (Array.isArray(qAns) ? qAns.length > 0 : true);
 
     return (
-      <div key={`opts-${qIndex}`} className="mt-4 bg-slate-50/70 rounded-2xl p-4 md:p-5 border border-slate-100">
-        <h3 className="font-bold text-slate-400 uppercase tracking-widest text-[10px] md:text-xs mb-3">
-          Select Answer {questionsData.length > 1 ? `(Q${qIndex + 1})` : ''}
-        </h3>
-        
-        {questionType === 'mcsa' && (
-          <div className="flex flex-wrap gap-3">
-            {optionButtons.map(opt => {
-              const isSelected = qAns === opt;
-              const isCorrectAnswer = opt === correctAnswer;
-              let btnColor = "border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 bg-white";
-              if (isSelected) btnColor = "border-indigo-600 bg-indigo-600 text-white shadow-md transform scale-105";
-              if (qLocked) {
-                if (isCorrectAnswer) btnColor = "border-emerald-500 bg-emerald-500 text-white shadow-md"; 
-                else if (isSelected && !isCorrectAnswer) btnColor = "border-rose-500 bg-rose-500 text-white shadow-md"; 
-                else btnColor = "border-slate-200 bg-slate-100 text-slate-400 cursor-not-allowed opacity-60"; 
-              }
-              return (
+      <div key={`opts-${qIndex}`} className="mb-4 bg-slate-100/80 rounded-xl p-3 md:p-4 border border-slate-200">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+             <span className="font-bold text-slate-400 uppercase tracking-widest text-[10px] md:text-xs">
+                Options {questionsData.length > 1 ? `(Q${qIndex + 1})` : ''}
+             </span>
+             {hasAnswered && !qLocked && (
                 <button 
-                  key={opt} onClick={() => handleMcsaSelect(qIndex, opt)} disabled={qLocked}
-                  className={`w-12 h-12 md:w-14 md:h-14 rounded-full border-2 text-base md:text-lg font-extrabold transition-all duration-200 flex items-center justify-center ${btnColor}`}
+                  onClick={(e) => { e.stopPropagation(); handleCheckAnswer(qIndex); }}
+                  className="px-3 py-1 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-lg shadow-sm transition-all active:scale-95 text-[10px] md:text-xs"
                 >
-                  {qLocked && isCorrectAnswer ? <Check size={22} strokeWidth={3} /> : (qLocked && isSelected ? <X size={22} strokeWidth={3}/> : opt)}
+                  Verify
                 </button>
-              )
-            })}
+              )}
           </div>
-        )}
+          
+          {questionType === 'mcsa' && (
+            <div className="flex flex-wrap gap-2">
+              {optionButtons.map(opt => {
+                const isSelected = qAns === opt;
+                const isCorrectAnswer = opt === correctAnswer;
+                let btnColor = "border-slate-300 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 bg-white";
+                if (isSelected) btnColor = "border-indigo-600 bg-indigo-600 text-white shadow-md transform scale-105";
+                if (qLocked) {
+                  if (isCorrectAnswer) btnColor = "border-emerald-500 bg-emerald-500 text-white shadow-md"; 
+                  else if (isSelected && !isCorrectAnswer) btnColor = "border-rose-500 bg-rose-500 text-white shadow-md"; 
+                  else btnColor = "border-slate-200 bg-slate-100 text-slate-400 cursor-not-allowed opacity-60"; 
+                }
+                return (
+                  <button 
+                    key={opt} onClick={() => handleMcsaSelect(qIndex, opt)} disabled={qLocked}
+                    className={`w-9 h-9 md:w-11 md:h-11 rounded-full border-2 text-sm md:text-base font-extrabold transition-all duration-200 flex items-center justify-center ${btnColor}`}
+                  >
+                    {qLocked && isCorrectAnswer ? <Check size={18} strokeWidth={3} /> : (qLocked && isSelected ? <X size={18} strokeWidth={3}/> : opt)}
+                  </button>
+                )
+              })}
+            </div>
+          )}
 
-        {questionType === 'mcma' && (
-          <div className="flex flex-wrap gap-3">
-            {optionButtons.map(opt => {
-              const isSelected = Array.isArray(qAns) && qAns.includes(opt);
-              const isCorrectAnswer = correctAnswer.includes(opt);
-              let btnColor = "border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 bg-white";
-              if (isSelected) btnColor = "border-indigo-600 bg-indigo-600 text-white shadow-md transform scale-105";
-              if (qLocked) {
-                if (isCorrectAnswer) btnColor = "border-emerald-500 bg-emerald-500 text-white shadow-md"; 
-                else if (isSelected && !isCorrectAnswer) btnColor = "border-rose-500 bg-rose-500 text-white shadow-md"; 
-                else btnColor = "border-slate-200 bg-slate-100 text-slate-400 cursor-not-allowed opacity-60"; 
-              }
-              return (
-                <button 
-                  key={opt} onClick={() => handleMcmaSelect(qIndex, opt)} disabled={qLocked}
-                  className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl border-2 text-base md:text-lg font-extrabold transition-all duration-200 flex items-center justify-center ${btnColor}`}
-                >
-                  {qLocked && isCorrectAnswer ? <Check size={22} strokeWidth={3} /> : (qLocked && isSelected ? <X size={22} strokeWidth={3}/> : opt)}
-                </button>
-              )
-            })}
-          </div>
-        )}
+          {questionType === 'mcma' && (
+            <div className="flex flex-wrap gap-2">
+              {optionButtons.map(opt => {
+                const isSelected = Array.isArray(qAns) && qAns.includes(opt);
+                const isCorrectAnswer = correctAnswer.includes(opt);
+                let btnColor = "border-slate-300 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 bg-white";
+                if (isSelected) btnColor = "border-indigo-600 bg-indigo-600 text-white shadow-md transform scale-105";
+                if (qLocked) {
+                  if (isCorrectAnswer) btnColor = "border-emerald-500 bg-emerald-500 text-white shadow-md"; 
+                  else if (isSelected && !isCorrectAnswer) btnColor = "border-rose-500 bg-rose-500 text-white shadow-md"; 
+                  else btnColor = "border-slate-200 bg-slate-100 text-slate-400 cursor-not-allowed opacity-60"; 
+                }
+                return (
+                  <button 
+                    key={opt} onClick={() => handleMcmaSelect(qIndex, opt)} disabled={qLocked}
+                    className={`w-9 h-9 md:w-11 md:h-11 rounded-xl border-2 text-sm md:text-base font-extrabold transition-all duration-200 flex items-center justify-center ${btnColor}`}
+                  >
+                    {qLocked && isCorrectAnswer ? <Check size={18} strokeWidth={3} /> : (qLocked && isSelected ? <X size={18} strokeWidth={3}/> : opt)}
+                  </button>
+                )
+              })}
+            </div>
+          )}
+        </div>
 
         {questionType === 'textinput' && (
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2 mt-3">
             <textarea
               value={qAns || ""} onChange={(e) => handleTextInput(qIndex, e.target.value)} disabled={qLocked}
               placeholder="Type answer..."
-              className={`w-full p-4 border-2 rounded-xl focus:border-indigo-600 resize-none min-h-[80px] text-sm md:text-base ${qLocked ? 'bg-slate-100 text-slate-500' : 'bg-white shadow-inner'}`}
+              className={`w-full p-2 border-2 rounded-xl focus:border-indigo-600 resize-none min-h-[60px] text-xs md:text-sm ${qLocked ? 'bg-slate-100 text-slate-500' : 'bg-white shadow-inner'}`}
             />
             {qLocked && (
-              <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl font-semibold text-sm flex items-center gap-2">
-                <CheckCircle size={16} /> Correct: {correctAnswer}
+              <div className="p-2 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg font-semibold text-xs flex items-center gap-2">
+                <CheckCircle size={14} /> Correct: {correctAnswer}
               </div>
             )}
           </div>
-        )}
-
-        {hasAnswered && !qLocked && (
-          <button 
-            onClick={(e) => { e.stopPropagation(); handleCheckAnswer(qIndex); }}
-            className="mt-4 px-6 py-2 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition-all active:scale-95 text-sm md:text-base"
-          >
-            Check Answer
-          </button>
         )}
       </div>
     );
@@ -382,37 +371,36 @@ export default function TestEngine({ params }) {
     <div 
       ref={mainRef}
       onClick={handleAggressiveFullscreen}
-      className="w-full h-screen bg-slate-900 flex flex-col overflow-hidden font-sans select-none"
+      className="w-full h-[100dvh] bg-slate-900 flex flex-col overflow-hidden font-sans select-none"
     >
-      {/* MINIMALIST HEADER */}
-      <header className="text-white p-1 md:p-2 flex justify-between items-center shrink-0 border-b border-slate-800 bg-slate-900 z-10 text-xs md:text-sm">
-        <div className="flex items-center gap-2 md:gap-4 ml-1 md:ml-2">
-          <button onClick={() => setViewState('selector')} className="hover:bg-slate-800 p-1.5 md:p-2 rounded-lg flex items-center gap-2 transition-colors border border-slate-700">
-            <List size={16} /> <span className="hidden md:inline font-semibold">Selector</span>
+      {/* EXTREMELY MINIMAL HEADER FOR MOBILE */}
+      <header className="text-white p-1 md:p-2 flex justify-between items-center shrink-0 border-b border-slate-800 bg-slate-900 z-10 text-[10px] md:text-sm">
+        <div className="flex items-center gap-1 md:gap-3 ml-1">
+          <button onClick={() => setViewState('selector')} className="hover:bg-slate-800 p-1 md:p-1.5 rounded-md flex items-center gap-1 border border-slate-700 transition-colors">
+            <List size={14} /> <span className="hidden md:inline font-semibold">List</span>
           </button>
-          <div className="font-mono bg-slate-800 px-3 py-1 rounded-md text-slate-300 font-bold border border-slate-700 flex items-center gap-2">
-            <Clock size={14} className="text-indigo-400" /> {formatTime(timeSpent)}
+          <div className="font-mono bg-slate-800 px-2 py-0.5 md:py-1 rounded-md text-slate-300 font-bold border border-slate-700 flex items-center gap-1">
+            <Clock size={12} className="text-indigo-400" /> {formatTime(timeSpent)}
           </div>
         </div>
         
-        <div className="flex items-center gap-2 md:gap-4 mr-1 md:mr-2">
-           {/* FONT CONTROLS */}
-           <div className="flex items-center gap-1 bg-slate-800 rounded-md border border-slate-700 p-0.5">
-              <button onClick={(e) => {e.stopPropagation(); setFontSize(f => Math.max(12, f - 2))}} className="p-1 hover:bg-slate-700 rounded text-slate-300 transition-colors"><AArrowDown size={18} /></button>
-              <div className="w-px h-4 bg-slate-700"></div>
-              <button onClick={(e) => {e.stopPropagation(); setFontSize(f => Math.min(32, f + 2))}} className="p-1 hover:bg-slate-700 rounded text-slate-300 transition-colors"><AArrowUp size={18} /></button>
+        <div className="flex items-center gap-1 md:gap-3 mr-1">
+           <div className="flex items-center gap-0.5 md:gap-1 bg-slate-800 rounded-md border border-slate-700 p-0.5">
+              <button onClick={(e) => {e.stopPropagation(); setFontSize(f => Math.max(12, f - 2))}} className="p-1 hover:bg-slate-700 rounded text-slate-300"><AArrowDown size={14} /></button>
+              <div className="w-px h-3 bg-slate-700"></div>
+              <button onClick={(e) => {e.stopPropagation(); setFontSize(f => Math.min(32, f + 2))}} className="p-1 hover:bg-slate-700 rounded text-slate-300"><AArrowUp size={14} /></button>
            </div>
-           <span className="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-md font-mono font-bold tracking-widest border border-indigo-500/30">
+           <span className="bg-indigo-600/20 text-indigo-300 px-2 py-0.5 rounded-md font-mono font-bold tracking-widest border border-indigo-500/30">
             {currentIndex + 1}/{data.length}
           </span>
         </div>
       </header>
 
-      {/* MAXIMIZED MAIN CONTENT - Almost no outer margins */}
-      <main className={`flex-1 flex overflow-hidden p-1 md:p-2 gap-1 md:gap-2 ${isSingleColumn ? 'justify-center items-center' : 'flex-col lg:flex-row'}`}>
+      {/* MAX VIEW CONTENT - Padding removed on mobile */}
+      <main className={`flex-1 flex overflow-hidden p-0.5 md:p-2 gap-0.5 md:gap-2 ${isSingleColumn ? 'justify-center items-center' : 'flex-col lg:flex-row'}`}>
         
         {!isSingleColumn && (
-          <div className="w-full lg:w-1/2 h-[45%] lg:h-full bg-white rounded-lg md:rounded-xl shadow-inner overflow-y-auto p-3 md:p-6 scrollbar-thin">
+          <div className="w-full lg:w-1/2 h-[45%] lg:h-full bg-white md:rounded-xl shadow-inner overflow-y-auto p-2 md:p-6 scrollbar-thin">
             <div 
               style={{ fontSize: `${fontSize}px`, lineHeight: '1.7' }}
               className="text-slate-800 whitespace-pre-wrap" 
@@ -421,45 +409,47 @@ export default function TestEngine({ params }) {
           </div>
         )}
 
-        <div className={`w-full ${isSingleColumn ? 'max-w-5xl h-full' : 'lg:w-1/2 h-[55%] lg:h-full'} flex flex-col bg-slate-50 rounded-lg md:rounded-xl shadow-inner overflow-y-auto p-3 md:p-6 scrollbar-thin`}>
-          <div className="flex-1 pb-4">
+        <div className={`w-full ${isSingleColumn ? 'max-w-5xl h-full' : 'lg:w-1/2 h-[55%] lg:h-full'} flex flex-col bg-slate-50 md:rounded-xl shadow-inner overflow-y-auto p-2 md:p-6 scrollbar-thin`}>
+          <div className="flex-1 pb-2">
             {questionsData.map((q, idx) => (
-              <div key={idx} className={`${idx !== 0 ? 'mt-8 pt-8 border-t-2 border-slate-200' : ''}`}>
+              <div key={idx} className={`${idx !== 0 ? 'mt-6 pt-6 border-t-2 border-slate-200' : ''}`}>
+                {/* Options Pane rendered BEFORE text */}
+                {renderOptionsPane(q, idx)}
+                
                 <div 
                   style={{ fontSize: `${fontSize}px`, lineHeight: '1.6' }}
-                  className="font-medium text-slate-900 mb-4 whitespace-pre-wrap" 
+                  className="font-medium text-slate-900 mb-2 whitespace-pre-wrap" 
                   dangerouslySetInnerHTML={{ __html: q.text.replace(/\n/g, '<br/>') }} 
                 />
-                {renderOptionsPane(q, idx)}
               </div>
             ))}
           </div>
         </div>
       </main>
 
-      {/* MINIMALIST FOOTER */}
-      <footer className="bg-slate-900 border-t border-slate-800 p-2 md:p-3 flex justify-between shrink-0 z-10">
+      {/* MINIMAL FOOTER */}
+      <footer className="bg-slate-900 border-t border-slate-800 p-1 md:p-2 flex justify-between shrink-0 z-10 text-[10px] md:text-sm">
         <button 
           disabled={currentIndex === 0}
           onClick={(e) => { e.stopPropagation(); setCurrentIndex(prev => prev - 1); }}
-          className="flex items-center gap-2 px-5 py-2.5 bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed rounded-lg font-bold text-slate-300 hover:bg-slate-700 transition-colors border border-slate-700"
+          className="flex items-center gap-1 md:gap-2 px-3 md:px-5 py-1.5 md:py-2 bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed rounded-md md:rounded-lg font-bold text-slate-300 hover:bg-slate-700 border border-slate-700"
         >
-          <ArrowLeft size={18} /> Prev
+          <ArrowLeft size={14} /> Prev
         </button>
 
         {currentIndex === data.length - 1 ? (
           <button 
             onClick={(e) => { e.stopPropagation(); submitTest(); }}
-            className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 text-white rounded-lg font-bold hover:bg-emerald-500 shadow-lg shadow-emerald-900/50 transition-all active:scale-95"
+            className="flex items-center gap-1 md:gap-2 px-4 md:px-6 py-1.5 md:py-2 bg-emerald-600 text-white rounded-md md:rounded-lg font-bold hover:bg-emerald-500 shadow-sm"
           >
-            Submit <CheckCircle size={18} />
+            Submit <CheckCircle size={14} />
           </button>
         ) : (
           <button 
             onClick={(e) => { e.stopPropagation(); setCurrentIndex(prev => prev + 1); }}
-            className="flex items-center gap-2 px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-500 shadow-lg shadow-indigo-900/50 transition-all active:scale-95"
+            className="flex items-center gap-1 md:gap-2 px-4 md:px-6 py-1.5 md:py-2 bg-indigo-600 text-white rounded-md md:rounded-lg font-bold hover:bg-indigo-500 shadow-sm"
           >
-            Next <ArrowRight size={18} />
+            Next <ArrowRight size={14} />
           </button>
         )}
       </footer>

@@ -31,7 +31,7 @@ export default async function Home() {
           <p className="text-sm mt-1">Please check the GitHub "testdata" folder.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
           {tests.map((test) => (
             <Link href={`/test/${test.filename}`} key={test.filename} className="group h-full">
               <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200/60 hover:shadow-xl hover:border-indigo-500/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-between h-full cursor-pointer">
@@ -47,6 +47,11 @@ export default async function Home() {
           ))}
         </div>
       )}
+      
+      {/* Subtle Credits */}
+      <footer className="mt-12 py-4 text-center text-xs text-slate-400 font-medium shrink-0 tracking-wide">
+        created by - Arjan Chatterjee
+      </footer>
     </main>
   );
 }

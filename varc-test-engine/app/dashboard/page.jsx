@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { getAllFromDB, restoreStore } from '../../lib/db';
-import { Home, Download, Upload, BarChart2, Trash2, CheckCircle } from 'lucide-react';
+import { Home, Download, Upload, BarChart2, CheckCircle } from 'lucide-react';
 
 export default function Dashboard() {
   const [results, setResults] = useState([]);
@@ -48,7 +48,7 @@ export default function Dashboard() {
       }
     };
     reader.readAsText(file);
-    e.target.value = ''; // Reset input
+    e.target.value = ''; 
   };
 
   if (loading) return <div className="min-h-screen flex items-center justify-center font-bold text-slate-500">Loading Dashboard...</div>;
@@ -69,7 +69,6 @@ export default function Dashboard() {
         </div>
       </header>
 
-      {/* Backup & Restore Controls */}
       <div className="bg-indigo-50 border border-indigo-100 rounded-3xl p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
         <div>
           <h3 className="font-bold text-indigo-900 text-lg">Data Management</h3>
@@ -93,9 +92,7 @@ export default function Dashboard() {
       ) : (
         <div className="grid gap-6">
           {results.map((res, i) => {
-            // Calculate accuracy dynamically based on total Questions vs saved correct count
             const accuracy = res.totalQuestions > 0 ? Math.round((res.correctCount / res.totalQuestions) * 100) || 0 : 0;
-            
             return (
               <div key={i} className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col md:flex-row gap-6 items-center">
                 <div className="flex-1 w-full text-center md:text-left">
@@ -111,7 +108,6 @@ export default function Dashboard() {
                       {accuracy}% Accuracy
                     </span>
                   </div>
-                  {/* CSS Based Progress Bar */}
                   <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden border border-slate-200">
                     <div 
                       className={`h-3 rounded-full ${accuracy >= 70 ? 'bg-emerald-500' : accuracy >= 40 ? 'bg-amber-400' : 'bg-rose-500'}`}

@@ -64,7 +64,7 @@ export const restoreStore = async (storeName, dataArray) => {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction(storeName, 'readwrite');
     const store = transaction.objectStore(storeName);
-    store.clear(); // Clear existing to prevent conflicts during restore
+    store.clear(); 
     dataArray.forEach(item => store.put(item));
     transaction.oncomplete = () => resolve();
     transaction.onerror = () => reject(transaction.error);
