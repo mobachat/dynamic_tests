@@ -1,22 +1,25 @@
 import Link from 'next/link';
 import { getAvailableTests } from '../lib/githubFetcher';
-import { BookOpen, ChevronRight, LayoutDashboard } from 'lucide-react';
+import { BookOpen, ChevronRight, LayoutDashboard, BarChart3 } from 'lucide-react';
 
 export default async function Home() {
   const tests = await getAvailableTests();
 
   return (
     <main className="flex-1 p-6 md:p-12 max-w-5xl mx-auto w-full flex flex-col">
-      <header className="mb-12 mt-8 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
+      <header className="mb-10 mt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="text-center md:text-left">
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight flex items-center gap-3 justify-center md:justify-start">
             <LayoutDashboard className="text-indigo-600" size={40} />
             VARC Engine
           </h1>
           <p className="text-slate-500 mt-3 text-lg max-w-xl">
-            Select a test module below to begin. For the best experience, the engine will automatically enter fullscreen mode.
+            Select a test module below to begin. The engine will automatically optimize your display.
           </p>
         </div>
+        <Link href="/dashboard" className="flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl font-bold hover:bg-indigo-600 hover:shadow-lg transition-all transform hover:-translate-y-1">
+          <BarChart3 size={20} /> My Performance
+        </Link>
       </header>
 
       {tests.length === 0 ? (
