@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { getTestData } from '../../../lib/githubFetcher';
 import { saveToDB, getFromDB } from '../../../lib/db';
-import { Maximize, ArrowRight, ArrowLeft, CheckCircle, Home, Check, X, Loader2 } from 'lucide-react';
+import { Maximize, ArrowRight, ArrowLeft, CheckCircle, Home, Check, X, Loader2, BookOpen } from 'lucide-react';
 
 export default function TestEngine({ params }) {
   const router = useRouter();
@@ -57,9 +57,9 @@ export default function TestEngine({ params }) {
     });
   };
 
-  // Safe getter/setter for nested states to support backward compatibility
-  const getPageAnswers = (idx) => (typeof answers[idx] === 'object' && !Array.isArray(answers[idx])) ? answers[idx] : { 0: answers[idx] };
-  const getPageLocked = (idx) => (typeof locked[idx] === 'object') ? locked[idx] : { 0: locked[idx] };
+  // Safe getter/setter for nested states (fortified to handle nulls cleanly)
+  const getPageAnswers = (idx) => (answers[idx] && typeof answers[idx] === 'object' && !Array.isArray(answers[idx])) ? answers[idx] : { 0: answers[idx] };
+  const getPageLocked = (idx) => (locked[idx] && typeof locked[idx] === 'object') ? locked[idx] : { 0: locked[idx] };
 
   const handleMcsaSelect = (qIndex, opt) => {
     const pageLocked = getPageLocked(currentIndex);
@@ -162,11 +162,11 @@ export default function TestEngine({ params }) {
 
   const currentItem = data[currentIndex] || [];
   
-  // Logic: Change Main Identification to Questions Column Empty
-  const rawQuestionText = currentItem[5]?.trim() || "";
+  // Safe string casting before calling .trim() to prevent numerical crashes
+  const rawQuestionText = currentItem[5] ? String(currentItem[5]).trim() : "";
   const isSingleColumn = rawQuestionText === ""; 
   
-  const passageText = currentItem[0]?.trim() || "";
+  const passageText = currentItem[0] ? String(currentItem[0]).trim() : "";
 
   // Prepare questions payload
   let questionsData = [];
@@ -175,14 +175,14 @@ export default function TestEngine({ params }) {
     // Single column: Everything is in the passage column
     questionsData.push({
       text: passageText,
-      correctAnswer: currentItem[1] ? currentItem[1].toString().trim() : "",
-      flagsStr: currentItem[6] ? currentItem[6].toLowerCase() : ""
+      correctAnswer: currentItem[1] ? String(currentItem[1]).trim() : "",
+      flagsStr: currentItem[6] ? String(currentItem[6]).toLowerCase() : ""
     });
   } else {
     // Two column: Split Questions, Answers, and Flags by ***
     const qBlocks = rawQuestionText.split('***').map(s => s.trim());
-    const ansBlocks = (currentItem[1] ? currentItem[1].toString() : "").split('***').map(s => s.trim());
-    const flagBlocks = (currentItem[6] ? currentItem[6].toString().toLowerCase() : "").split('***').map(s => s.trim());
+    const ansBlocks = (currentItem[1] ? String(currentItem[1]) : "").split('***').map(s => s.trim());
+    const flagBlocks = (currentItem[6] ? String(currentItem[6]).toLowerCase() : "").split('***').map(s => s.trim());
 
     questionsData = qBlocks.map((qText, i) => ({
       text: qText,
@@ -198,11 +198,15 @@ export default function TestEngine({ params }) {
     
     let questionType = 'mcsa'; 
     let maxOptions = 4;
+    
     if (flags.includes('mcma')) questionType = 'mcma';
     else if (flags.includes('textinput')) questionType = 'textinput';
     
-    const numFlag = flags.find(f => !isNaN(parseInt(f)));
-    if (numFlag) maxOptions = parseInt(numFlag);
+    const numFlag = flags.find(f => !isNaN(parseInt(f)) && f.trim() !== "");
+    if (numFlag) {
+      const parsed = parseInt(numFlag);
+      if (parsed > 0 && parsed <= 10) maxOptions = parsed; // cap limit
+    }
 
     const optionButtons = Array.from({length: maxOptions}, (_, i) => (i + 1).toString());
     
