@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: '#2563eb',
+  themeColor: '#4f46e5', // Updated to modern indigo-600
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -17,8 +17,16 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-gray-50 text-gray-900 antialiased selection:bg-blue-200">
-        {children}
+      <body className="bg-slate-50 text-slate-900 antialiased selection:bg-indigo-200 flex flex-col min-h-screen">
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col">
+          {children}
+        </div>
+        
+        {/* Subtle Credits Footer */}
+        <footer className="py-4 text-center text-xs text-slate-400 font-medium shrink-0 tracking-wide">
+          created by - Arjan Chatterjee
+        </footer>
       </body>
     </html>
   );
