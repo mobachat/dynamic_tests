@@ -1,28 +1,59 @@
 import { useState, useEffect, useRef } from 'react';
-import { ArrowRight, ArrowLeft, CheckCircle, Check, X, Clock, AArrowUp, AArrowDown, List, Activity } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle, Check, X, Clock, AArrowUp, AArrowDown, List, Activity, GripHorizontal, GripVertical } from 'lucide-react';
 
 export default function TestPassage({ data, testId, currentIndex, setCurrentIndex, answers, setAnswers, locked, setLocked, setViewState, persistProgress, submitTest, extractQuestionsFromRow, liveStats }) {
   const [fontSize, setFontSize] = useState(16); 
-  const [passageTimeSpent, setPassageTimeSpent] = useState(0); // Resets per passage
-  const [leftWidth, setLeftWidth] = useState(50);
+  const [passageTimeSpent, setPassageTimeSpent] = useState(0);
+  const [splitSize, setSplitSize] = useState(50); // Controls height on mobile, width on desktop
   const [dictBox, setDictBox] = useState(null);
+  const [activeQ, setActiveQ] = useState(0); // Tracks which question is currently in view
   
   const mainRef = useRef(null);
+  const leftPaneRef = useRef(null);
+  const rightPaneRef = useRef(null);
+  const questionRefs = useRef([]);
   const isDragging = useRef(false);
-  const touchStartX = useRef(0);
-  const touchStartY = useRef(0);
-  const touchEndX = useRef(0);
-  const touchEndY = useRef(0);
 
-  // Per-Passage Timer
+  const currentItem = data[currentIndex] || [];
+  const rawQuestionText = currentItem[5] ? String(currentItem[5]).trim() : "";
+  const isSingleColumn = rawQuestionText === ""; 
+  const passageText = currentItem[0] ? String(currentItem[0]).trim() : "";
+  const questionsData = extractQuestionsFromRow(currentItem);
+
+  // Reset scroll positions & timer on new passage to fix the blank space bug
   useEffect(() => {
-    setPassageTimeSpent(0); // Reset whenever we switch passages
+    setPassageTimeSpent(0);
+    setActiveQ(0);
+    if (leftPaneRef.current) leftPaneRef.current.scrollTop = 0;
+    if (rightPaneRef.current) rightPaneRef.current.scrollTop = 0;
   }, [currentIndex]);
 
   useEffect(() => {
     const interval = setInterval(() => setPassageTimeSpent(prev => prev + 1), 1000);
     return () => clearInterval(interval);
   }, [currentIndex]);
+
+  // Intersection Observer to track which question is in view
+  useEffect(() => {
+    if (isSingleColumn || questionsData.length === 0) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+      // Find the first intersecting question
+      for (let entry of entries) {
+        if (entry.isIntersecting) {
+          setActiveQ(Number(entry.target.dataset.index));
+          break;
+        }
+      }
+    }, { 
+      root: rightPaneRef.current, 
+      rootMargin: '-20% 0px -50% 0px', 
+      threshold: 0 
+    });
+
+    questionRefs.current.forEach(ref => { if(ref) observer.observe(ref) });
+    return () => observer.disconnect();
+  }, [currentIndex, questionsData, isSingleColumn]);
 
   // Dictionary Lookup
   useEffect(() => {
@@ -56,7 +87,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     };
   }, []);
 
-  // Resizing Logic
+  // Resizing Logic (Handles both Horizontal and Vertical splitting)
   const startResize = (e) => {
     e.preventDefault();
     isDragging.current = true;
@@ -65,13 +96,27 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     document.addEventListener('touchmove', onTouchDragMove, { passive: false });
     document.addEventListener('touchend', onDragEnd);
   };
+
+  const calculateSplit = (clientX, clientY) => {
+    const isDesktop = window.innerWidth >= 1024;
+    if (isDesktop) {
+      setSplitSize(Math.max(20, Math.min(80, (clientX / window.innerWidth) * 100)));
+    } else {
+      // Offset by the header height (~60px)
+      const usableHeight = window.innerHeight - 60;
+      const relativeY = clientY - 60;
+      setSplitSize(Math.max(20, Math.min(80, (relativeY / usableHeight) * 100)));
+    }
+  };
+
   const onDragMove = (e) => {
     if (!isDragging.current) return;
-    if (e.clientX) setLeftWidth(Math.max(20, Math.min(80, (e.clientX / window.innerWidth) * 100)));
+    calculateSplit(e.clientX, e.clientY);
   };
   const onTouchDragMove = (e) => {
     if (!isDragging.current) return;
-    if (e.touches[0].clientX) setLeftWidth(Math.max(20, Math.min(80, (e.touches[0].clientX / window.innerWidth) * 100)));
+    e.preventDefault(); // prevent scrolling while dragging
+    calculateSplit(e.touches[0].clientX, e.touches[0].clientY);
   };
   const onDragEnd = () => {
     isDragging.current = false;
@@ -79,26 +124,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     document.removeEventListener('mouseup', onDragEnd);
     document.removeEventListener('touchmove', onTouchDragMove);
     document.removeEventListener('touchend', onDragEnd);
-  };
-
-  // Swipe Gestures
-  const onTouchStart = (e) => {
-    touchStartX.current = e.targetTouches[0].clientX;
-    touchStartY.current = e.targetTouches[0].clientY;
-  };
-  const onTouchMove = (e) => {
-    touchEndX.current = e.targetTouches[0].clientX;
-    touchEndY.current = e.targetTouches[0].clientY;
-  };
-  const onTouchEnd = () => {
-    if (!touchStartX.current || !touchEndX.current) return;
-    const dx = touchStartX.current - touchEndX.current;
-    const dy = touchStartY.current - touchEndY.current;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 75) {
-      if (dx > 0 && currentIndex < data.length - 1) setCurrentIndex(prev => prev + 1);
-      else if (dx < 0 && currentIndex > 0) setCurrentIndex(prev => prev - 1);
-    }
-    touchStartX.current = 0; touchEndX.current = 0;
   };
 
   const getPageAnswers = (idx) => (answers[idx] && typeof answers[idx] === 'object' && !Array.isArray(answers[idx])) ? answers[idx] : { 0: answers[idx] };
@@ -144,12 +169,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     persistProgress(newAnswers, locked);
   };
 
-  const currentItem = data[currentIndex] || [];
-  const rawQuestionText = currentItem[5] ? String(currentItem[5]).trim() : "";
-  const isSingleColumn = rawQuestionText === ""; 
-  const passageText = currentItem[0] ? String(currentItem[0]).trim() : "";
-  const questionsData = extractQuestionsFromRow(currentItem);
-
   const formatTime = (seconds) => {
     const m = Math.floor(seconds / 60).toString().padStart(2, '0');
     const s = (seconds % 60).toString().padStart(2, '0');
@@ -157,6 +176,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
   };
 
   const renderOptionsPane = (qData, qIndex) => {
+    if (!qData) return null;
     const { correctAnswer, flagsStr } = qData;
     const flags = flagsStr.split(';').map(f => f.trim());
     let questionType = 'mcsa'; 
@@ -186,49 +206,45 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     const qAns = pageAnswers[qIndex];
     const qLocked = pageLocked[qIndex] || false;
 
-    // Notice padding is smaller (p-2 on mobile vs p-4 on desktop)
     return (
-      <div key={`opts-${qIndex}`} className="sticky top-0 z-20 mb-3 md:mb-5 bg-white/95 backdrop-blur-xl rounded-2xl p-2 md:p-4 border border-slate-200 shadow-md">
-        <div className="flex flex-row items-center justify-between gap-2 md:gap-4">
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-3">
-             <span className="font-extrabold text-slate-400 uppercase tracking-widest text-[9px] md:text-xs">
-                {questionsData.length > 1 ? `Question ${qIndex + 1}` : 'Options'}
-             </span>
-             {questionType === 'mcma' && !qLocked && (
-               <span className="text-[9px] bg-amber-100 text-amber-700 px-1.5 md:px-2 py-0.5 rounded font-bold">Select Multiple</span>
-             )}
-          </div>
-          
-          {(questionType === 'mcsa' || questionType === 'mcma') && (
-            <div className="flex flex-wrap justify-end gap-1.5 md:gap-3">
-              {optionButtons.map(opt => {
-                const isSelected = questionType === 'mcma' ? (Array.isArray(qAns) && qAns.includes(opt)) : qAns === opt;
-                const isCorrectAnswer = questionType === 'mcma' ? correctAnswer.includes(opt) : opt === correctAnswer;
-                
-                let btnColor = "border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 bg-white";
-                if (isSelected) btnColor = "border-indigo-600 bg-indigo-600 text-white shadow-md transform scale-105";
-                if (qLocked) {
-                  if (isCorrectAnswer) btnColor = "border-emerald-500 bg-emerald-500 text-white shadow-md"; 
-                  else if (isSelected && !isCorrectAnswer) btnColor = "border-rose-500 bg-rose-500 text-white shadow-sm opacity-80"; 
-                  else btnColor = "border-slate-100 bg-slate-50 text-slate-300 cursor-not-allowed opacity-50"; 
-                }
-                
-                // Button size is strictly smaller on mobile (w-8 h-8 text-xs vs desktop sizes)
-                return (
-                  <button 
-                    key={opt} onClick={() => questionType === 'mcma' ? handleMcmaSelect(qIndex, opt, correctAnswer) : handleMcsaSelect(qIndex, opt)} disabled={qLocked}
-                    className={`w-8 h-8 md:w-12 md:h-12 ${questionType === 'mcma' ? 'rounded-lg' : 'rounded-full'} border md:border-2 text-xs md:text-lg font-extrabold transition-all duration-300 flex items-center justify-center shrink-0 ${btnColor}`}
-                  >
-                    {qLocked && isCorrectAnswer ? <Check size={16} strokeWidth={4} /> : (qLocked && isSelected ? <X size={16} strokeWidth={4}/> : opt)}
-                  </button>
-                )
-              })}
-            </div>
-          )}
+      <div className="w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm p-3 md:p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shrink-0">
+        <div className="flex items-center gap-3 w-full md:w-auto justify-between">
+           <span className="font-extrabold text-indigo-500 uppercase tracking-widest text-[10px] md:text-xs bg-indigo-50 px-2 py-1 rounded-md">
+              {questionsData.length > 1 ? `Question ${qIndex + 1}` : 'Options'}
+           </span>
+           {questionType === 'mcma' && !qLocked && (
+             <span className="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-bold">Select Multiple</span>
+           )}
         </div>
+        
+        {(questionType === 'mcsa' || questionType === 'mcma') && (
+          <div className="flex flex-wrap gap-2 w-full md:w-auto justify-start md:justify-end">
+            {optionButtons.map(opt => {
+              const isSelected = questionType === 'mcma' ? (Array.isArray(qAns) && qAns.includes(opt)) : qAns === opt;
+              const isCorrectAnswer = questionType === 'mcma' ? correctAnswer.includes(opt) : opt === correctAnswer;
+              
+              let btnColor = "border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 bg-white";
+              if (isSelected) btnColor = "border-indigo-600 bg-indigo-600 text-white shadow-md transform scale-105";
+              if (qLocked) {
+                if (isCorrectAnswer) btnColor = "border-emerald-500 bg-emerald-500 text-white shadow-md"; 
+                else if (isSelected && !isCorrectAnswer) btnColor = "border-rose-500 bg-rose-500 text-white shadow-sm opacity-80"; 
+                else btnColor = "border-slate-100 bg-slate-50 text-slate-300 cursor-not-allowed opacity-50"; 
+              }
+              
+              return (
+                <button 
+                  key={opt} onClick={() => questionType === 'mcma' ? handleMcmaSelect(qIndex, opt, correctAnswer) : handleMcsaSelect(qIndex, opt)} disabled={qLocked}
+                  className={`w-10 h-10 md:w-12 md:h-12 ${questionType === 'mcma' ? 'rounded-lg' : 'rounded-full'} border md:border-2 text-sm md:text-lg font-extrabold transition-all duration-200 flex items-center justify-center shrink-0 ${btnColor}`}
+                >
+                  {qLocked && isCorrectAnswer ? <Check size={18} strokeWidth={4} /> : (qLocked && isSelected ? <X size={18} strokeWidth={4}/> : opt)}
+                </button>
+              )
+            })}
+          </div>
+        )}
 
         {questionType === 'textinput' && (
-          <div className="flex flex-col gap-2 mt-2">
+          <div className="flex flex-col gap-2 w-full">
             <textarea
               value={qAns || ""} onChange={(e) => handleTextInput(qIndex, e.target.value)} disabled={qLocked}
               placeholder="Type answer & press Enter..."
@@ -240,7 +256,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
                    persistProgress(answers, newLocked);
                  }
               }}
-              className={`w-full p-2 md:p-4 border md:border-2 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 resize-none min-h-[60px] md:min-h-[80px] text-xs md:text-base transition-all ${qLocked ? 'bg-slate-50 text-slate-500 border-slate-200' : 'bg-white shadow-inner'}`}
+              className={`w-full p-2 border md:border-2 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 resize-none min-h-[50px] text-sm transition-all ${qLocked ? 'bg-slate-50 text-slate-500 border-slate-200' : 'bg-white shadow-inner'}`}
             />
             {qLocked && (
               <div className="p-2 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg font-bold text-xs flex items-center gap-2">
@@ -257,7 +273,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     <div ref={mainRef} className="w-full h-[100dvh] bg-slate-950 flex flex-col overflow-hidden font-sans select-none relative">
       {dictBox && (
         <div 
-          className="fixed z-50 bg-slate-900/90 backdrop-blur-xl text-white p-4 rounded-xl shadow-2xl max-w-[250px] md:max-w-sm border border-slate-700/50 animate-in fade-in zoom-in duration-200 transform -translate-x-1/2"
+          className="fixed z-50 bg-slate-900/95 backdrop-blur-xl text-white p-4 rounded-xl shadow-2xl max-w-[250px] md:max-w-sm border border-slate-700/50 animate-in fade-in zoom-in duration-200 transform -translate-x-1/2"
           style={{ left: Math.max(130, Math.min(dictBox.x, window.innerWidth - 130)), top: Math.max(60, dictBox.y - 120) }}
         >
            <button onClick={(e) => {e.stopPropagation(); setDictBox(null)}} className="absolute top-2 right-2 text-slate-400 hover:text-white bg-slate-800 p-1 rounded-full"><X size={12}/></button>
@@ -266,8 +282,8 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         </div>
       )}
 
-      {/* Top Header - Consolidated */}
-      <header className="text-slate-300 p-2 flex justify-between items-center shrink-0 border-b border-slate-800/80 bg-slate-950 z-30 shadow-md">
+      {/* Header */}
+      <header className="text-slate-300 p-2 flex justify-between items-center shrink-0 border-b border-slate-800/80 bg-slate-950 z-40 shadow-md">
         <div className="flex items-center gap-1.5 md:gap-3">
           <button onClick={() => setViewState('selector')} className="hover:bg-slate-800 p-2 rounded-xl border border-slate-700/50 flex items-center gap-1.5 transition-colors">
             <List size={16} /> <span className="hidden md:inline font-bold text-xs">Index</span>
@@ -309,14 +325,17 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         </div>
       </header>
 
-      {/* Main Content Area */}
+      {/* Main Resizable Area */}
       <main 
-        onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}
-        style={{ '--left-width': `${leftWidth}%` }}
-        className={`flex-1 flex overflow-hidden p-1 md:p-2 gap-1 md:gap-2 ${isSingleColumn ? 'justify-center items-center' : 'flex-col landscape:flex-row lg:flex-row'}`}
+        style={{ '--split-size': `${splitSize}%` }}
+        className={`flex-1 flex overflow-hidden ${isSingleColumn ? 'justify-center items-center p-2' : 'flex-col lg:flex-row'}`}
       >
+        {/* Left/Top Pane (Passage) */}
         {!isSingleColumn && (
-          <div className="w-full lg:w-[var(--left-width)] landscape:w-[var(--left-width)] shrink-0 h-[50%] lg:h-full landscape:h-full bg-slate-50 md:rounded-2xl shadow-inner overflow-y-auto p-4 md:p-8 scrollbar-thin relative">
+          <div 
+            ref={leftPaneRef}
+            className="w-full h-[var(--split-size)] lg:w-[var(--split-size)] lg:h-full shrink-0 bg-slate-50 md:m-2 md:rounded-2xl shadow-inner overflow-y-auto p-4 md:p-8 scrollbar-thin relative z-0"
+          >
             <div 
               style={{ fontSize: `${fontSize}px`, lineHeight: '1.7' }}
               className="text-slate-800 font-medium whitespace-pre-wrap select-text selection:bg-indigo-200" 
@@ -325,20 +344,46 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
           </div>
         )}
 
+        {/* Resizer Handle (Vertical on Mobile, Horizontal on Desktop) */}
         {!isSingleColumn && (
-          <div onMouseDown={startResize} onTouchStart={startResize} className="hidden lg:flex landscape:flex w-2 lg:w-3 cursor-col-resize hover:bg-indigo-300 active:bg-indigo-400 items-center justify-center shrink-0 z-20 transition-colors">
-            <div className="w-1 h-12 bg-slate-300 rounded-full"></div>
+          <div 
+            onMouseDown={startResize} onTouchStart={startResize} 
+            className="flex w-full h-3 cursor-row-resize lg:w-3 lg:h-full lg:cursor-col-resize hover:bg-indigo-300 active:bg-indigo-400 items-center justify-center shrink-0 z-20 transition-colors bg-slate-200 lg:bg-transparent"
+          >
+            <div className="lg:hidden flex items-center justify-center w-8 h-1 bg-slate-400 rounded-full"></div>
+            <div className="hidden lg:flex w-1 h-12 bg-slate-400 rounded-full"></div>
           </div>
         )}
 
-        <div className={`w-full ${isSingleColumn ? 'max-w-5xl h-full' : 'flex-1 h-[50%] lg:h-full landscape:h-full'} flex flex-col bg-slate-100 md:rounded-2xl shadow-inner overflow-y-auto p-2 md:p-6 scrollbar-thin relative`}>
-          <div className="flex-1 pb-4">
+        {/* Right/Bottom Pane (Questions & Options) */}
+        <div 
+          className={`flex-1 bg-slate-100 flex flex-col relative ${isSingleColumn ? 'max-w-5xl h-full md:rounded-2xl shadow-inner m-2' : 'w-full h-full md:mr-2 md:my-2 md:rounded-2xl shadow-inner overflow-hidden'}`}
+        >
+          {/* Unified Sticky Options Pane */}
+          {!isSingleColumn && questionsData.length > 0 && (
+             <div className="sticky top-0 z-30 w-full shrink-0">
+               {renderOptionsPane(questionsData[activeQ], activeQ)}
+             </div>
+          )}
+
+          {/* Scrolling Questions List */}
+          <div ref={rightPaneRef} className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin scroll-smooth pb-32">
+             {isSingleColumn && questionsData.length > 0 && (
+                <div className="sticky top-0 z-30 mb-6 shrink-0 rounded-2xl overflow-hidden shadow-sm">
+                  {renderOptionsPane(questionsData[activeQ], activeQ)}
+                </div>
+             )}
+            
             {questionsData.map((q, idx) => (
-              <div key={idx} className={`relative ${idx !== 0 ? 'mt-6 md:mt-8 pt-6 md:pt-8 border-t-2 border-slate-200/60' : ''}`}>
-                {renderOptionsPane(q, idx)}
+              <div 
+                key={idx} 
+                data-index={idx}
+                ref={el => questionRefs.current[idx] = el}
+                className={`relative transition-opacity duration-300 ${activeQ === idx ? 'opacity-100' : 'opacity-40'} ${idx !== 0 ? 'mt-8 pt-8 border-t-2 border-slate-200/60' : ''}`}
+              >
                 <div 
                   style={{ fontSize: `${fontSize}px`, lineHeight: '1.6' }}
-                  className="font-bold text-slate-900 mb-2 whitespace-pre-wrap px-1 md:px-2" 
+                  className="font-bold text-slate-900 whitespace-pre-wrap" 
                   dangerouslySetInnerHTML={{ __html: q.text.replace(/\n/g, '<br/>') }} 
                 />
               </div>

@@ -3,7 +3,8 @@
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { getAllFromDB, restoreStore } from '../../lib/db';
-import { Home, Download, Upload, Activity, CheckCircle, Clock, Target, BrainCircuit } from 'lucide-react';
+import { Home, Download, Upload, Activity, CheckCircle, Clock, Target, BrainCircuit, TrendingUp } from 'lucide-react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from 'recharts';
 
 export default function Dashboard() {
   const [results, setResults] = useState([]);
@@ -17,7 +18,7 @@ export default function Dashboard() {
   const loadData = async () => {
     setLoading(true);
     const data = await getAllFromDB('results');
-    setResults(data.sort((a, b) => new Date(b.completedAt) - new Date(a.completedAt)));
+    setResults(data.sort((a, b) => new Date(a.completedAt) - new Date(b.completedAt))); // Ascending for charts
     setLoading(false);
   };
 
@@ -51,99 +52,165 @@ export default function Dashboard() {
     e.target.value = ''; 
   };
 
+  // Compute Aggregates
+  const totalTests = results.length;
+  const totalQuestions = results.reduce((acc, curr) => acc + (curr.totalQuestions || 0), 0);
+  const totalCorrect = results.reduce((acc, curr) => acc + (curr.correctCount || 0), 0);
+  const avgAccuracy = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
+
+  // Chart Data Preparation
+  const chartData = results.map((res, i) => ({
+    name: `Test ${i + 1}`,
+    testId: res.testId,
+    accuracy: res.totalQuestions > 0 ? Math.round((res.correctCount / res.totalQuestions) * 100) : 0,
+    correct: res.correctCount || 0,
+    wrong: (res.totalQuestions || 0) - (res.correctCount || 0)
+  }));
+
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center flex-col gap-4 text-slate-500 bg-slate-50">
       <Activity className="animate-pulse text-indigo-600" size={56} strokeWidth={2.5}/>
-      <span className="font-bold text-xl tracking-wide text-slate-700 animate-pulse">Loading Dashboard...</span>
+      <span className="font-bold text-xl tracking-wide text-slate-700 animate-pulse">Loading Analytics...</span>
     </div>
   );
 
   return (
-    <main className="flex-1 p-6 md:p-10 max-w-5xl mx-auto w-full flex flex-col font-sans bg-slate-50 min-h-screen">
-      <header className="mb-10 flex flex-col md:flex-row items-center justify-between gap-6 bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-slate-200/60 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-50 rounded-full blur-3xl -z-10 transform translate-x-1/2 -translate-y-1/2"></div>
+    <main className="flex-1 p-4 md:p-8 max-w-6xl mx-auto w-full flex flex-col font-sans bg-slate-50 min-h-screen">
+      <header className="mb-8 flex flex-col md:flex-row items-center justify-between gap-6 bg-white p-6 md:p-10 rounded-[2rem] shadow-sm border border-slate-200/60 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-50/50 rounded-full blur-3xl -z-10 transform translate-x-1/2 -translate-y-1/2"></div>
         
         <div className="z-10 text-center md:text-left">
-          <h1 className="text-4xl font-extrabold text-slate-900 flex items-center justify-center md:justify-start gap-4 tracking-tight">
-            <Activity className="text-indigo-600 drop-shadow-sm" size={40} /> My Performance
+          <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 flex items-center justify-center md:justify-start gap-3 tracking-tight">
+            <TrendingUp className="text-indigo-600 drop-shadow-sm" size={32} /> Analytics Dashboard
           </h1>
-          <p className="text-slate-500 mt-3 text-lg font-medium max-w-xl leading-relaxed">
-            Track your progress, view recent test evaluations, and manage your local offline data securely.
+          <p className="text-slate-500 mt-2 text-base md:text-lg font-medium max-w-xl leading-relaxed">
+            Realtime insights, visual trend analysis, and secure data management.
           </p>
         </div>
         <div className="flex gap-3 z-10 w-full md:w-auto">
-          <Link href="/" className="w-full md:w-auto px-6 py-3.5 bg-slate-900 text-white rounded-2xl font-bold hover:bg-indigo-600 flex items-center justify-center gap-2 transition-all shadow-md transform hover:-translate-y-1">
+          <Link href="/" className="w-full md:w-auto px-6 py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-indigo-600 flex items-center justify-center gap-2 transition-all shadow-md transform hover:-translate-y-0.5">
             <Home size={18} /> Home
           </Link>
         </div>
       </header>
 
-      <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100/60 rounded-[2rem] p-6 md:p-8 mb-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
-        <div className="text-center md:text-left">
-          <h3 className="font-extrabold text-indigo-900 text-xl flex items-center justify-center md:justify-start gap-2 mb-1">
-             <Download size={20} className="text-indigo-600"/> Data Management
-          </h3>
-          <p className="text-sm text-indigo-700 font-medium">Backup your performance records to prevent data loss on device wipe.</p>
+      {/* Aggregate Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+         <div className="bg-white p-6 rounded-[1.5rem] border border-slate-200 shadow-sm flex items-center gap-4">
+            <div className="bg-indigo-50 p-4 rounded-full text-indigo-600"><CheckCircle size={28}/></div>
+            <div>
+              <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">Tests Taken</p>
+              <p className="text-3xl font-extrabold text-slate-800">{totalTests}</p>
+            </div>
+         </div>
+         <div className="bg-white p-6 rounded-[1.5rem] border border-slate-200 shadow-sm flex items-center gap-4">
+            <div className="bg-emerald-50 p-4 rounded-full text-emerald-600"><Target size={28}/></div>
+            <div>
+              <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">Questions Attempted</p>
+              <p className="text-3xl font-extrabold text-slate-800">{totalQuestions}</p>
+            </div>
+         </div>
+         <div className="bg-white p-6 rounded-[1.5rem] border border-slate-200 shadow-sm flex items-center gap-4">
+            <div className="bg-amber-50 p-4 rounded-full text-amber-600"><Activity size={28}/></div>
+            <div>
+              <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">Avg Accuracy</p>
+              <p className="text-3xl font-extrabold text-slate-800">{avgAccuracy}%</p>
+            </div>
+         </div>
+      </div>
+
+      {results.length > 0 && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          {/* Accuracy Trend Chart */}
+          <div className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm">
+            <h3 className="font-extrabold text-slate-800 mb-6 text-lg">Accuracy Trend</h3>
+            <div className="h-64 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={chartData}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} />
+                  <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} domain={[0, 100]} unit="%" />
+                  <Tooltip contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }} />
+                  <Line type="monotone" dataKey="accuracy" stroke="#4f46e5" strokeWidth={4} dot={{r: 4, strokeWidth: 2}} activeDot={{r: 8}} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* Correct vs Wrong Bar Chart */}
+          <div className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm">
+            <h3 className="font-extrabold text-slate-800 mb-6 text-lg">Questions Breakdown</h3>
+            <div className="h-64 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartData}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} />
+                  <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} />
+                  <Tooltip contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }} cursor={{fill: '#f1f5f9'}} />
+                  <Legend wrapperStyle={{ paddingTop: '10px' }} />
+                  <Bar dataKey="correct" name="Correct" stackId="a" fill="#10b981" radius={[0, 0, 4, 4]} />
+                  <Bar dataKey="wrong" name="Incorrect" stackId="a" fill="#f43f5e" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-wrap justify-center gap-3 w-full md:w-auto">
-          <button onClick={handleBackup} className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-md">
-            <Download size={18} /> Backup
+      )}
+
+      {/* Data Management Section */}
+      <div className="bg-indigo-900 border border-indigo-800 rounded-[2rem] p-6 md:p-8 mb-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none"></div>
+        <div className="text-center md:text-left z-10">
+          <h3 className="font-extrabold text-white text-xl flex items-center justify-center md:justify-start gap-2 mb-1">
+             <Database size={20} className="text-indigo-400"/> Data Management
+          </h3>
+          <p className="text-sm text-indigo-200 font-medium">Offline backups are essential. Secure your metrics locally.</p>
+        </div>
+        <div className="flex flex-wrap justify-center gap-3 w-full md:w-auto z-10">
+          <button onClick={handleBackup} className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-indigo-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-indigo-400 transition-all shadow-md">
+            <Download size={18} /> Backup JSON
           </button>
           <input type="file" accept=".json" className="hidden" ref={fileInputRef} onChange={handleRestore} />
-          <button onClick={() => fileInputRef.current.click()} className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-white border border-indigo-200 text-indigo-700 px-6 py-3 rounded-xl font-bold hover:bg-indigo-100 transition-all shadow-sm">
+          <button onClick={() => fileInputRef.current.click()} className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white px-6 py-3 rounded-xl font-bold hover:bg-white/20 transition-all shadow-sm">
             <Upload size={18} /> Restore
           </button>
         </div>
       </div>
 
-      <div className="flex items-center gap-3 mb-6 px-4">
-         <div className="h-8 w-2 bg-emerald-500 rounded-full"></div>
-         <h2 className="text-2xl font-extrabold text-slate-800">Recent Evaluations</h2>
+      <div className="flex items-center gap-3 mb-6 px-2">
+         <div className="h-6 w-1.5 bg-slate-800 rounded-full"></div>
+         <h2 className="text-xl font-extrabold text-slate-800">Recent Logs</h2>
       </div>
 
       {results.length === 0 ? (
-        <div className="text-center p-16 bg-white rounded-[2.5rem] shadow-sm border border-slate-200/60 text-slate-500 font-medium flex flex-col items-center">
-          <div className="bg-slate-50 p-5 rounded-full mb-4">
-            <CheckCircle size={40} className="text-slate-300"/>
-          </div>
-          <span className="text-xl font-bold text-slate-700">No completed tests yet.</span>
-          <span className="text-sm mt-2 text-slate-500">Go to the home page and launch a module to get started.</span>
+        <div className="text-center p-12 bg-white rounded-[2rem] shadow-sm border border-slate-200/60 text-slate-500 font-medium">
+          <span className="text-lg font-bold text-slate-700 block mb-2">No historical data available.</span>
+          <span className="text-sm text-slate-400">Complete a test module to generate analytics.</span>
         </div>
       ) : (
-        <div className="grid gap-6">
-          {results.map((res, i) => {
+        <div className="grid gap-4">
+          {/* We reverse results array slice to show newest first for logs, since we sorted ascending earlier for charts */}
+          {[...results].reverse().map((res, i) => {
             const accuracy = res.totalQuestions > 0 ? Math.round((res.correctCount / res.totalQuestions) * 100) || 0 : 0;
             return (
-              <div key={i} className="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-slate-200/60 flex flex-col md:flex-row gap-8 items-center hover:shadow-xl hover:border-indigo-200 transition-all group">
-                <div className="flex-1 w-full text-center md:text-left">
-                  <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
-                    <div className="bg-indigo-50 text-indigo-600 p-2 rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-                      <BrainCircuit size={20} />
-                    </div>
-                    <h2 className="text-xl font-extrabold text-slate-800">{res.testId}</h2>
+              <div key={i} className="bg-white p-5 rounded-[1.5rem] shadow-sm border border-slate-200/60 flex flex-col md:flex-row gap-5 items-center hover:border-indigo-200 transition-all">
+                <div className="flex-1 w-full flex items-center gap-4">
+                  <div className="bg-slate-50 text-slate-400 p-3 rounded-xl">
+                    <BrainCircuit size={24} />
                   </div>
-                  <p className="text-sm text-slate-400 font-medium">Completed: {new Date(res.completedAt).toLocaleString()}</p>
-                  
-                  {res.timeSpent > 0 && (
-                     <div className="flex items-center justify-center md:justify-start gap-1.5 mt-4 text-xs font-bold text-slate-500 bg-slate-50 w-fit mx-auto md:mx-0 px-3 py-1.5 rounded-lg border border-slate-100">
-                       <Clock size={14} className="text-indigo-400"/> {new Date(res.timeSpent * 1000).toISOString().substring(11, 19)} elapsed
-                     </div>
-                  )}
+                  <div>
+                    <h2 className="text-lg font-extrabold text-slate-800 leading-tight">{res.testId}</h2>
+                    <p className="text-xs text-slate-400 font-medium mt-1">Logged: {new Date(res.completedAt).toLocaleString()}</p>
+                  </div>
                 </div>
                 
-                <div className="w-full md:w-5/12 bg-slate-50 p-5 rounded-2xl border border-slate-100">
-                  <div className="flex justify-between text-sm font-extrabold text-slate-700 mb-3">
-                    <span className="flex items-center gap-1.5"><Target size={16} className="text-slate-400"/> Score: {res.correctCount || 0} / {res.totalQuestions || 0}</span>
-                    <span className={accuracy >= 70 ? 'text-emerald-600' : accuracy >= 40 ? 'text-amber-500' : 'text-rose-500'}>
-                      {accuracy}% Accuracy
-                    </span>
-                  </div>
-                  <div className="w-full bg-slate-200 rounded-full h-3.5 overflow-hidden shadow-inner">
-                    <div 
-                      className={`h-3.5 rounded-full transition-all duration-1000 ${accuracy >= 70 ? 'bg-gradient-to-r from-emerald-400 to-emerald-500' : accuracy >= 40 ? 'bg-gradient-to-r from-amber-400 to-amber-500' : 'bg-gradient-to-r from-rose-400 to-rose-500'}`}
-                      style={{ width: `${accuracy}%` }}
-                    ></div>
-                  </div>
+                <div className="w-full md:w-auto min-w-[200px] bg-slate-50 p-3.5 rounded-xl border border-slate-100 flex items-center justify-between gap-4">
+                  <span className="flex items-center gap-1.5 text-sm font-bold text-slate-600">
+                     <Target size={16} className="text-slate-400"/> {res.correctCount || 0}/{res.totalQuestions || 0}
+                  </span>
+                  <span className={`text-sm font-extrabold px-3 py-1 rounded-md ${accuracy >= 70 ? 'bg-emerald-100 text-emerald-700' : accuracy >= 40 ? 'bg-amber-100 text-amber-700' : 'bg-rose-100 text-rose-700'}`}>
+                    {accuracy}%
+                  </span>
                 </div>
               </div>
             )
