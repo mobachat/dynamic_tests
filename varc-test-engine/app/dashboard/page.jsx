@@ -4,7 +4,6 @@ import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { getAllFromDB, restoreStore } from '../../lib/db';
 import { Home, Download, Upload, Activity, CheckCircle, Clock, Target, BrainCircuit, TrendingUp } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from 'recharts';
 
 export default function Dashboard() {
   const [results, setResults] = useState([]);
@@ -59,13 +58,13 @@ export default function Dashboard() {
   const avgAccuracy = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
 
   // Chart Data Preparation
-  const chartData = results.map((res, i) => ({
-    name: `Test ${i + 1}`,
-    testId: res.testId,
-    accuracy: res.totalQuestions > 0 ? Math.round((res.correctCount / res.totalQuestions) * 100) : 0,
-    correct: res.correctCount || 0,
-    wrong: (res.totalQuestions || 0) - (res.correctCount || 0)
-  }));
+  const chartData = results.map((res, i) => {
+    const totalQ = res.totalQuestions || 0;
+    const correct = res.correctCount || 0;
+    const wrong = totalQ - correct;
+    const accuracy = totalQ > 0 ? Math.round((correct / totalQ) * 100) : 0;
+    return { name: `T${i + 1}`, testId: res.testId, accuracy, correct, wrong, totalQ };
+  });
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center flex-col gap-4 text-slate-500 bg-slate-50">
@@ -84,7 +83,7 @@ export default function Dashboard() {
             <TrendingUp className="text-indigo-600 drop-shadow-sm" size={32} /> Analytics Dashboard
           </h1>
           <p className="text-slate-500 mt-2 text-base md:text-lg font-medium max-w-xl leading-relaxed">
-            Realtime insights, visual trend analysis, and secure data management.
+            Realtime insights, visual trend analysis, and secure local data management.
           </p>
         </div>
         <div className="flex gap-3 z-10 w-full md:w-auto">
@@ -121,37 +120,68 @@ export default function Dashboard() {
 
       {results.length > 0 && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Accuracy Trend Chart */}
-          <div className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm">
+          
+          {/* Tailwind Native Bar Chart: Accuracy Trend */}
+          <div className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm flex flex-col">
             <h3 className="font-extrabold text-slate-800 mb-6 text-lg">Accuracy Trend</h3>
-            <div className="h-64 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} />
-                  <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} domain={[0, 100]} unit="%" />
-                  <Tooltip contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }} />
-                  <Line type="monotone" dataKey="accuracy" stroke="#4f46e5" strokeWidth={4} dot={{r: 4, strokeWidth: 2}} activeDot={{r: 8}} />
-                </LineChart>
-              </ResponsiveContainer>
+            <div className="flex-1 flex items-end gap-2 h-48 w-full border-b border-slate-100 pb-2 relative">
+              {/* Y-Axis Guidelines */}
+              <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
+                 <div className="border-t border-slate-400 w-full"></div>
+                 <div className="border-t border-slate-400 w-full"></div>
+                 <div className="border-t border-slate-400 w-full"></div>
+                 <div className="border-t border-slate-400 w-full"></div>
+                 <div className="border-t border-slate-400 w-full"></div>
+              </div>
+              
+              {chartData.slice(-15).map((d, i) => (
+                <div key={i} className="flex-1 flex flex-col items-center gap-2 group z-10 h-full justify-end">
+                  <div className="w-full max-w-[2.5rem] bg-indigo-50 rounded-t-md relative flex items-end h-full">
+                     {/* Tooltip */}
+                     <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20">
+                       {d.accuracy}%
+                     </div>
+                     <div 
+                       className={`w-full rounded-t-md transition-all duration-500 ${d.accuracy >= 70 ? 'bg-emerald-400' : d.accuracy >= 40 ? 'bg-amber-400' : 'bg-rose-400'}`} 
+                       style={{ height: `${d.accuracy}%` }}
+                     ></div>
+                  </div>
+                  <span className="text-[10px] font-bold text-slate-400">{d.name}</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Correct vs Wrong Bar Chart */}
-          <div className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm">
-            <h3 className="font-extrabold text-slate-800 mb-6 text-lg">Questions Breakdown</h3>
-            <div className="h-64 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} />
-                  <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} />
-                  <Tooltip contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }} cursor={{fill: '#f1f5f9'}} />
-                  <Legend wrapperStyle={{ paddingTop: '10px' }} />
-                  <Bar dataKey="correct" name="Correct" stackId="a" fill="#10b981" radius={[0, 0, 4, 4]} />
-                  <Bar dataKey="wrong" name="Incorrect" stackId="a" fill="#f43f5e" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
+          {/* Tailwind Native Stacked Progress Bars: Questions Breakdown */}
+          <div className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm flex flex-col">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="font-extrabold text-slate-800 text-lg">Questions Breakdown</h3>
+              <div className="flex items-center gap-3 text-xs font-bold text-slate-500">
+                <span className="flex items-center gap-1"><div className="w-3 h-3 bg-emerald-400 rounded-sm"></div> Correct</span>
+                <span className="flex items-center gap-1"><div className="w-3 h-3 bg-rose-400 rounded-sm"></div> Incorrect</span>
+              </div>
+            </div>
+            
+            <div className="flex-1 flex flex-col gap-3 w-full h-48 overflow-y-auto pr-2 scrollbar-thin">
+              {chartData.slice().reverse().map((d, i) => (
+                 <div key={i} className="flex items-center gap-3 group">
+                    <span className="text-[10px] font-bold text-slate-400 w-6 shrink-0">{d.name}</span>
+                    <div className="flex-1 h-5 flex rounded-full overflow-hidden bg-slate-100 shadow-inner">
+                       <div 
+                         className="bg-emerald-400 h-full flex items-center justify-center text-[10px] text-white font-bold transition-all duration-500" 
+                         style={{ width: `${(d.correct / d.totalQ) * 100}%` }}
+                       >
+                         {d.correct > 0 && d.correct}
+                       </div>
+                       <div 
+                         className="bg-rose-400 h-full flex items-center justify-center text-[10px] text-white font-bold transition-all duration-500" 
+                         style={{ width: `${(d.wrong / d.totalQ) * 100}%` }}
+                       >
+                         {d.wrong > 0 && d.wrong}
+                       </div>
+                    </div>
+                 </div>
+              ))}
             </div>
           </div>
         </div>
@@ -164,7 +194,7 @@ export default function Dashboard() {
           <h3 className="font-extrabold text-white text-xl flex items-center justify-center md:justify-start gap-2 mb-1">
              <Database size={20} className="text-indigo-400"/> Data Management
           </h3>
-          <p className="text-sm text-indigo-200 font-medium">Offline backups are essential. Secure your metrics locally.</p>
+          <p className="text-sm text-indigo-200 font-medium">Offline backups are essential for PWAs. Secure your metrics locally.</p>
         </div>
         <div className="flex flex-wrap justify-center gap-3 w-full md:w-auto z-10">
           <button onClick={handleBackup} className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-indigo-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-indigo-400 transition-all shadow-md">
@@ -189,7 +219,6 @@ export default function Dashboard() {
         </div>
       ) : (
         <div className="grid gap-4">
-          {/* We reverse results array slice to show newest first for logs, since we sorted ascending earlier for charts */}
           {[...results].reverse().map((res, i) => {
             const accuracy = res.totalQuestions > 0 ? Math.round((res.correctCount / res.totalQuestions) * 100) || 0 : 0;
             return (
