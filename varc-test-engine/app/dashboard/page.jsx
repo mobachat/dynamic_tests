@@ -114,4 +114,42 @@ export default function Dashboard() {
           {results.map((res, i) => {
             const accuracy = res.totalQuestions > 0 ? Math.round((res.correctCount / res.totalQuestions) * 100) || 0 : 0;
             return (
-              <div key={i} className="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-slate-
+              <div key={i} className="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-slate-200/60 flex flex-col md:flex-row gap-8 items-center hover:shadow-xl hover:border-indigo-200 transition-all group">
+                <div className="flex-1 w-full text-center md:text-left">
+                  <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
+                    <div className="bg-indigo-50 text-indigo-600 p-2 rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                      <BrainCircuit size={20} />
+                    </div>
+                    <h2 className="text-xl font-extrabold text-slate-800">{res.testId}</h2>
+                  </div>
+                  <p className="text-sm text-slate-400 font-medium">Completed: {new Date(res.completedAt).toLocaleString()}</p>
+                  
+                  {res.timeSpent > 0 && (
+                     <div className="flex items-center justify-center md:justify-start gap-1.5 mt-4 text-xs font-bold text-slate-500 bg-slate-50 w-fit mx-auto md:mx-0 px-3 py-1.5 rounded-lg border border-slate-100">
+                       <Clock size={14} className="text-indigo-400"/> {new Date(res.timeSpent * 1000).toISOString().substring(11, 19)} elapsed
+                     </div>
+                  )}
+                </div>
+                
+                <div className="w-full md:w-5/12 bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                  <div className="flex justify-between text-sm font-extrabold text-slate-700 mb-3">
+                    <span className="flex items-center gap-1.5"><Target size={16} className="text-slate-400"/> Score: {res.correctCount || 0} / {res.totalQuestions || 0}</span>
+                    <span className={accuracy >= 70 ? 'text-emerald-600' : accuracy >= 40 ? 'text-amber-500' : 'text-rose-500'}>
+                      {accuracy}% Accuracy
+                    </span>
+                  </div>
+                  <div className="w-full bg-slate-200 rounded-full h-3.5 overflow-hidden shadow-inner">
+                    <div 
+                      className={`h-3.5 rounded-full transition-all duration-1000 ${accuracy >= 70 ? 'bg-gradient-to-r from-emerald-400 to-emerald-500' : accuracy >= 40 ? 'bg-gradient-to-r from-amber-400 to-amber-500' : 'bg-gradient-to-r from-rose-400 to-rose-500'}`}
+                      style={{ width: `${accuracy}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </main>
+  );
+}
