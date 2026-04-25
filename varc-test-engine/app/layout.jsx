@@ -2,12 +2,12 @@ import './globals.css';
 
 export const metadata = {
   title: 'VARC Testing Engine',
-  description: 'PWA Testing Platform',
+  description: 'Premium PWA Testing Platform',
   manifest: '/manifest.json',
 };
 
 export const viewport = {
-  themeColor: '#4f46e5',
+  themeColor: '#0f172a', // Updated to match the dark top navigation bars
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
