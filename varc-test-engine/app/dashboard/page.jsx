@@ -17,7 +17,7 @@ export default function Dashboard() {
   const loadData = async () => {
     setLoading(true);
     const data = await getAllFromDB('results');
-    setResults(data.sort((a, b) => new Date(a.completedAt) - new Date(b.completedAt))); // Ascending for charts
+    setResults(data.sort((a, b) => new Date(a.completedAt) - new Date(b.completedAt)));
     setLoading(false);
   };
 
@@ -51,13 +51,11 @@ export default function Dashboard() {
     e.target.value = ''; 
   };
 
-  // Compute Aggregates
   const totalTests = results.length;
   const totalQuestions = results.reduce((acc, curr) => acc + (curr.totalQuestions || 0), 0);
   const totalCorrect = results.reduce((acc, curr) => acc + (curr.correctCount || 0), 0);
   const avgAccuracy = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
 
-  // Chart Data Preparation
   const chartData = results.map((res, i) => {
     const totalQ = res.totalQuestions || 0;
     const correct = res.correctCount || 0;
@@ -93,7 +91,6 @@ export default function Dashboard() {
         </div>
       </header>
 
-      {/* Aggregate Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
          <div className="bg-white p-6 rounded-[1.5rem] border border-slate-200 shadow-sm flex items-center gap-4">
             <div className="bg-indigo-50 p-4 rounded-full text-indigo-600"><CheckCircle size={28}/></div>
@@ -120,12 +117,9 @@ export default function Dashboard() {
 
       {results.length > 0 && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          
-          {/* Tailwind Native Bar Chart: Accuracy Trend */}
           <div className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm flex flex-col">
             <h3 className="font-extrabold text-slate-800 mb-6 text-lg">Accuracy Trend</h3>
             <div className="flex-1 flex items-end gap-2 h-48 w-full border-b border-slate-100 pb-2 relative">
-              {/* Y-Axis Guidelines */}
               <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
                  <div className="border-t border-slate-400 w-full"></div>
                  <div className="border-t border-slate-400 w-full"></div>
@@ -137,7 +131,6 @@ export default function Dashboard() {
               {chartData.slice(-15).map((d, i) => (
                 <div key={i} className="flex-1 flex flex-col items-center gap-2 group z-10 h-full justify-end">
                   <div className="w-full max-w-[2.5rem] bg-indigo-50 rounded-t-md relative flex items-end h-full">
-                     {/* Tooltip */}
                      <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20">
                        {d.accuracy}%
                      </div>
@@ -152,7 +145,6 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Tailwind Native Stacked Progress Bars: Questions Breakdown */}
           <div className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm flex flex-col">
             <div className="flex items-center justify-between mb-6">
               <h3 className="font-extrabold text-slate-800 text-lg">Questions Breakdown</h3>
@@ -169,13 +161,13 @@ export default function Dashboard() {
                     <div className="flex-1 h-5 flex rounded-full overflow-hidden bg-slate-100 shadow-inner">
                        <div 
                          className="bg-emerald-400 h-full flex items-center justify-center text-[10px] text-white font-bold transition-all duration-500" 
-                         style={{ width: `${(d.correct / d.totalQ) * 100}%` }}
+                         style={{ width: `${d.totalQ > 0 ? (d.correct / d.totalQ) * 100 : 0}%` }}
                        >
                          {d.correct > 0 && d.correct}
                        </div>
                        <div 
                          className="bg-rose-400 h-full flex items-center justify-center text-[10px] text-white font-bold transition-all duration-500" 
-                         style={{ width: `${(d.wrong / d.totalQ) * 100}%` }}
+                         style={{ width: `${d.totalQ > 0 ? (d.wrong / d.totalQ) * 100 : 0}%` }}
                        >
                          {d.wrong > 0 && d.wrong}
                        </div>
@@ -187,7 +179,6 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Data Management Section */}
       <div className="bg-indigo-900 border border-indigo-800 rounded-[2rem] p-6 md:p-8 mb-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none"></div>
         <div className="text-center md:text-left z-10">

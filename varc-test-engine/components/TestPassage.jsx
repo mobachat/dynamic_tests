@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
-import { ArrowRight, ArrowLeft, CheckCircle, Check, X, Clock, AArrowUp, AArrowDown, List, Activity, GripHorizontal, GripVertical } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle, Check, X, Clock, AArrowUp, AArrowDown, List, Activity } from 'lucide-react';
 
 export default function TestPassage({ data, testId, currentIndex, setCurrentIndex, answers, setAnswers, locked, setLocked, setViewState, persistProgress, submitTest, extractQuestionsFromRow, liveStats }) {
   const [fontSize, setFontSize] = useState(16); 
   const [passageTimeSpent, setPassageTimeSpent] = useState(0);
-  const [splitSize, setSplitSize] = useState(50); // Controls height on mobile, width on desktop
+  const [splitSize, setSplitSize] = useState(50);
   const [dictBox, setDictBox] = useState(null);
-  const [activeQ, setActiveQ] = useState(0); // Tracks which question is currently in view
+  const [activeQ, setActiveQ] = useState(0); 
   
   const mainRef = useRef(null);
   const leftPaneRef = useRef(null);
@@ -20,12 +20,14 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
   const passageText = currentItem[0] ? String(currentItem[0]).trim() : "";
   const questionsData = extractQuestionsFromRow(currentItem);
 
-  // Reset scroll positions & timer on new passage to fix the blank space bug
   useEffect(() => {
     setPassageTimeSpent(0);
     setActiveQ(0);
-    if (leftPaneRef.current) leftPaneRef.current.scrollTop = 0;
-    if (rightPaneRef.current) rightPaneRef.current.scrollTop = 0;
+    // Setting scroll slightly delayed helps fix layout repaints on mobile
+    setTimeout(() => {
+      if (leftPaneRef.current) leftPaneRef.current.scrollTop = 0;
+      if (rightPaneRef.current) rightPaneRef.current.scrollTop = 0;
+    }, 10);
   }, [currentIndex]);
 
   useEffect(() => {
@@ -33,29 +35,45 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     return () => clearInterval(interval);
   }, [currentIndex]);
 
-  // Intersection Observer to track which question is in view
+  // Refactored Observer: Tracks the element holding the highest percentage of the viewport
   useEffect(() => {
     if (isSingleColumn || questionsData.length === 0) return;
     
+    const visibilities = {};
     const observer = new IntersectionObserver((entries) => {
-      // Find the first intersecting question
-      for (let entry of entries) {
-        if (entry.isIntersecting) {
-          setActiveQ(Number(entry.target.dataset.index));
-          break;
-        }
+      entries.forEach(entry => {
+        const idx = Number(entry.target.dataset.index);
+        visibilities[idx] = entry.intersectionRatio;
+      });
+
+      let maxVisible = -1;
+      let bestIndex = activeQ;
+
+      for (const [idx, ratio] of Object.entries(visibilities)) {
+         if (ratio > maxVisible && ratio > 0.05) {
+            maxVisible = ratio;
+            bestIndex = Number(idx);
+         }
+      }
+
+      if (bestIndex !== activeQ) {
+        setActiveQ(bestIndex);
       }
     }, { 
       root: rightPaneRef.current, 
-      rootMargin: '-20% 0px -50% 0px', 
-      threshold: 0 
+      threshold: [0, 0.25, 0.5, 0.75, 1] 
     });
 
-    questionRefs.current.forEach(ref => { if(ref) observer.observe(ref) });
-    return () => observer.disconnect();
-  }, [currentIndex, questionsData, isSingleColumn]);
+    const timer = setTimeout(() => {
+      questionRefs.current.forEach(ref => { if(ref) observer.observe(ref) });
+    }, 50); // Small delay lets the DOM calculate flex heights first
+    
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    }
+  }, [currentIndex, questionsData.length, isSingleColumn, activeQ]);
 
-  // Dictionary Lookup
   useEffect(() => {
     const handleSelection = async () => {
       const selection = window.getSelection();
@@ -87,7 +105,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     };
   }, []);
 
-  // Resizing Logic (Handles both Horizontal and Vertical splitting)
   const startResize = (e) => {
     e.preventDefault();
     isDragging.current = true;
@@ -102,7 +119,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     if (isDesktop) {
       setSplitSize(Math.max(20, Math.min(80, (clientX / window.innerWidth) * 100)));
     } else {
-      // Offset by the header height (~60px)
       const usableHeight = window.innerHeight - 60;
       const relativeY = clientY - 60;
       setSplitSize(Math.max(20, Math.min(80, (relativeY / usableHeight) * 100)));
@@ -115,7 +131,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
   };
   const onTouchDragMove = (e) => {
     if (!isDragging.current) return;
-    e.preventDefault(); // prevent scrolling while dragging
+    e.preventDefault(); 
     calculateSplit(e.touches[0].clientX, e.touches[0].clientY);
   };
   const onDragEnd = () => {
@@ -175,6 +191,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     return `${m}:${s}`;
   };
 
+  // Redesigned to place options side-by-side with the question number
   const renderOptionsPane = (qData, qIndex) => {
     if (!qData) return null;
     const { correctAnswer, flagsStr } = qData;
@@ -207,18 +224,18 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     const qLocked = pageLocked[qIndex] || false;
 
     return (
-      <div className="w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm p-3 md:p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shrink-0">
-        <div className="flex items-center gap-3 w-full md:w-auto justify-between">
-           <span className="font-extrabold text-indigo-500 uppercase tracking-widest text-[10px] md:text-xs bg-indigo-50 px-2 py-1 rounded-md">
-              {questionsData.length > 1 ? `Question ${qIndex + 1}` : 'Options'}
+      <div className="w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm p-2 md:p-3 flex items-center justify-between gap-3 shrink-0">
+        <div className="flex items-center gap-2">
+           <span className="font-extrabold text-indigo-500 uppercase tracking-widest text-[10px] md:text-xs bg-indigo-50 px-2 py-1 rounded-md whitespace-nowrap">
+              {questionsData.length > 1 ? `Q ${qIndex + 1}` : 'Opts'}
            </span>
            {questionType === 'mcma' && !qLocked && (
-             <span className="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-bold">Select Multiple</span>
+             <span className="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-bold whitespace-nowrap hidden sm:inline-block">Select Multiple</span>
            )}
         </div>
         
         {(questionType === 'mcsa' || questionType === 'mcma') && (
-          <div className="flex flex-wrap gap-2 w-full md:w-auto justify-start md:justify-end">
+          <div className="flex flex-wrap items-center gap-1.5 md:gap-2 justify-end">
             {optionButtons.map(opt => {
               const isSelected = questionType === 'mcma' ? (Array.isArray(qAns) && qAns.includes(opt)) : qAns === opt;
               const isCorrectAnswer = questionType === 'mcma' ? correctAnswer.includes(opt) : opt === correctAnswer;
@@ -234,9 +251,9 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
               return (
                 <button 
                   key={opt} onClick={() => questionType === 'mcma' ? handleMcmaSelect(qIndex, opt, correctAnswer) : handleMcsaSelect(qIndex, opt)} disabled={qLocked}
-                  className={`w-10 h-10 md:w-12 md:h-12 ${questionType === 'mcma' ? 'rounded-lg' : 'rounded-full'} border md:border-2 text-sm md:text-lg font-extrabold transition-all duration-200 flex items-center justify-center shrink-0 ${btnColor}`}
+                  className={`w-8 h-8 md:w-10 md:h-10 ${questionType === 'mcma' ? 'rounded-md' : 'rounded-full'} border md:border-2 text-xs md:text-sm font-extrabold transition-all duration-200 flex items-center justify-center shrink-0 ${btnColor}`}
                 >
-                  {qLocked && isCorrectAnswer ? <Check size={18} strokeWidth={4} /> : (qLocked && isSelected ? <X size={18} strokeWidth={4}/> : opt)}
+                  {qLocked && isCorrectAnswer ? <Check size={16} strokeWidth={4} /> : (qLocked && isSelected ? <X size={16} strokeWidth={4}/> : opt)}
                 </button>
               )
             })}
@@ -244,10 +261,11 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         )}
 
         {questionType === 'textinput' && (
-          <div className="flex flex-col gap-2 w-full">
-            <textarea
+          <div className="flex-1 flex flex-col gap-1 ml-2 max-w-sm">
+            <input
+              type="text"
               value={qAns || ""} onChange={(e) => handleTextInput(qIndex, e.target.value)} disabled={qLocked}
-              placeholder="Type answer & press Enter..."
+              placeholder="Type answer & Enter"
               onKeyDown={(e) => {
                  if(e.key === 'Enter') {
                    e.preventDefault();
@@ -256,13 +274,8 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
                    persistProgress(answers, newLocked);
                  }
               }}
-              className={`w-full p-2 border md:border-2 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 resize-none min-h-[50px] text-sm transition-all ${qLocked ? 'bg-slate-50 text-slate-500 border-slate-200' : 'bg-white shadow-inner'}`}
+              className={`w-full p-2 border rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 text-xs md:text-sm transition-all ${qLocked ? 'bg-slate-50 text-slate-500 border-slate-200' : 'bg-white shadow-inner'}`}
             />
-            {qLocked && (
-              <div className="p-2 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg font-bold text-xs flex items-center gap-2">
-                <CheckCircle size={14} className="text-emerald-500"/> Correct Answer: {correctAnswer}
-              </div>
-            )}
           </div>
         )}
       </div>
@@ -282,7 +295,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         </div>
       )}
 
-      {/* Header */}
       <header className="text-slate-300 p-2 flex justify-between items-center shrink-0 border-b border-slate-800/80 bg-slate-950 z-40 shadow-md">
         <div className="flex items-center gap-1.5 md:gap-3">
           <button onClick={() => setViewState('selector')} className="hover:bg-slate-800 p-2 rounded-xl border border-slate-700/50 flex items-center gap-1.5 transition-colors">
@@ -325,12 +337,11 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         </div>
       </header>
 
-      {/* Main Resizable Area */}
+      {/* Added min-h-0 to flex children to permanently kill the iOS/Safari blank space layout bug */}
       <main 
         style={{ '--split-size': `${splitSize}%` }}
-        className={`flex-1 flex overflow-hidden ${isSingleColumn ? 'justify-center items-center p-2' : 'flex-col lg:flex-row'}`}
+        className={`flex-1 flex overflow-hidden min-h-0 ${isSingleColumn ? 'justify-center items-center p-2' : 'flex-col lg:flex-row'}`}
       >
-        {/* Left/Top Pane (Passage) */}
         {!isSingleColumn && (
           <div 
             ref={leftPaneRef}
@@ -344,7 +355,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
           </div>
         )}
 
-        {/* Resizer Handle (Vertical on Mobile, Horizontal on Desktop) */}
         {!isSingleColumn && (
           <div 
             onMouseDown={startResize} onTouchStart={startResize} 
@@ -355,9 +365,8 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
           </div>
         )}
 
-        {/* Right/Bottom Pane (Questions & Options) */}
         <div 
-          className={`flex-1 bg-slate-100 flex flex-col relative ${isSingleColumn ? 'max-w-5xl h-full md:rounded-2xl shadow-inner m-2' : 'w-full h-full md:mr-2 md:my-2 md:rounded-2xl shadow-inner overflow-hidden'}`}
+          className={`flex-1 bg-slate-100 flex flex-col relative min-h-0 ${isSingleColumn ? 'max-w-5xl h-full md:rounded-2xl shadow-inner m-2' : 'w-full h-full md:mr-2 md:my-2 md:rounded-2xl shadow-inner overflow-hidden'}`}
         >
           {/* Unified Sticky Options Pane */}
           {!isSingleColumn && questionsData.length > 0 && (
@@ -366,10 +375,9 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
              </div>
           )}
 
-          {/* Scrolling Questions List */}
-          <div ref={rightPaneRef} className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin scroll-smooth pb-32">
+          <div ref={rightPaneRef} className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin scroll-smooth pb-48">
              {isSingleColumn && questionsData.length > 0 && (
-                <div className="sticky top-0 z-30 mb-6 shrink-0 rounded-2xl overflow-hidden shadow-sm">
+                <div className="sticky top-0 z-30 mb-6 shrink-0 rounded-xl overflow-hidden shadow-sm border border-slate-200">
                   {renderOptionsPane(questionsData[activeQ], activeQ)}
                 </div>
              )}
@@ -379,7 +387,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
                 key={idx} 
                 data-index={idx}
                 ref={el => questionRefs.current[idx] = el}
-                className={`relative transition-opacity duration-300 ${activeQ === idx ? 'opacity-100' : 'opacity-40'} ${idx !== 0 ? 'mt-8 pt-8 border-t-2 border-slate-200/60' : ''}`}
+                className={`relative transition-opacity duration-300 ${activeQ === idx ? 'opacity-100' : 'opacity-40'} ${idx !== 0 ? 'mt-12 pt-12 border-t-2 border-slate-200/60' : ''}`}
               >
                 <div 
                   style={{ fontSize: `${fontSize}px`, lineHeight: '1.6' }}
