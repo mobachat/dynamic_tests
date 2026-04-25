@@ -14,12 +14,12 @@ export async function getAvailableTests() {
     if (!res.ok) throw new Error('Failed to fetch from GitHub');
     
     const files = await res.json();
-    // Return only CSV files, stripping the extension for clean UI
+    // Return only CSV files, stripping the extension and decoding %20 spaces for clean UI
     return files
       .filter(file => file.name.endsWith('.csv'))
       .map(file => ({
         filename: file.name,
-        name: file.name.replace('.csv', '')
+        name: decodeURIComponent(file.name.replace('.csv', ''))
       }));
   } catch (error) {
     console.error(error);
