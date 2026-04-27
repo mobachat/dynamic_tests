@@ -1,18 +1,17 @@
 "use client";
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { supabase } from '../../../../lib/supabaseClient';
 import { generateRandomQuiz } from '../../../../lib/quizGenerator';
 import TestPassage from '../../../../components/TestPassage';
 import TestSelector from '../../../../components/TestSelector';
-import { ShieldCheck, Wifi, UserCheck, Copy, Home } from 'lucide-react';
+import { ShieldCheck, Wifi, UserCheck, Copy, Home, Loader2 } from 'lucide-react';
 
-export default function QuizRoom({ params }) {
+function QuizRoomEngine({ roomId }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const role = searchParams.get('role'); 
-  const roomId = params.roomId;
 
   const [connectionStatus, setConnectionStatus] = useState('initializing');
   const [quizData, setQuizData] = useState([]);
@@ -33,9 +32,11 @@ export default function QuizRoom({ params }) {
   const dcRef = useRef(null);
 
   const extractQuestionsFromRow = (row) => {
+    if (!row || row.length === 0) return []; // Safeguard against empty data during initial load
+    
     const rawQuestionText = row[5] ? String(row[5]).trim() : "";
     if (rawQuestionText === "") {
-      return [{ text: String(row[0]).trim(), correctAnswer: row[1] ? String(row[1]).trim() : "", flagsStr: row[6] ? String(row[6]).toLowerCase() : "" }];
+      return [{ text: String(row[0] || "").trim(), correctAnswer: row[1] ? String(row[1]).trim() : "", flagsStr: row[6] ? String(row[6]).toLowerCase() : "" }];
     } else {
       const qBlocks = rawQuestionText.split('***').map(s => s.trim());
       const ansBlocks = (row[1] ? String(row[1]) : "").split('***').map(s => s.trim());
@@ -51,6 +52,8 @@ export default function QuizRoom({ params }) {
   const computeLiveStats = (currentAnswers, currentLocked, currentData) => {
     let correct = 0;
     let totalChecked = 0;
+    if (!currentData || currentData.length === 0) return { correct, totalChecked };
+    
     currentData.forEach((row, pIdx) => {
       const qs = extractQuestionsFromRow(row);
       const pAnswers = currentAnswers[pIdx] || {};
@@ -95,7 +98,6 @@ export default function QuizRoom({ params }) {
           if (isMounted) setConnectionStatus('connected');
           
           // CRITICAL: Supabase handshake is complete. DISCONNECT FROM SUPABASE entirely.
-          // From this point on, all communication is 100% Peer-to-Peer directly over WebRTC.
           if (channelRef.current) {
             supabase.removeChannel(channelRef.current);
             channelRef.current = null;
@@ -139,23 +141,27 @@ export default function QuizRoom({ params }) {
       channel.on('broadcast', { event: 'signal' }, async ({ payload }) => {
         if (!isMounted || payload.from === role) return;
 
-        if (payload.type === 'join' && role === 'host') {
-           setConnectionStatus('connecting');
-           const offer = await pc.createOffer();
-           await pc.setLocalDescription(offer);
-           channel.send({ type: 'broadcast', event: 'signal', payload: { type: 'offer', sdp: offer, from: role }});
-        } 
-        else if (payload.type === 'offer' && role === 'join') {
-           await pc.setRemoteDescription(payload.sdp);
-           const answer = await pc.createAnswer();
-           await pc.setLocalDescription(answer);
-           channel.send({ type: 'broadcast', event: 'signal', payload: { type: 'answer', sdp: answer, from: role }});
-        } 
-        else if (payload.type === 'answer' && role === 'host') {
-           await pc.setRemoteDescription(payload.sdp);
-        } 
-        else if (payload.type === 'ice') {
-           await pc.addIceCandidate(payload.candidate).catch(e => console.error(e));
+        try {
+          if (payload.type === 'join' && role === 'host') {
+             setConnectionStatus('connecting');
+             const offer = await pc.createOffer();
+             await pc.setLocalDescription(offer);
+             channel.send({ type: 'broadcast', event: 'signal', payload: { type: 'offer', sdp: offer, from: role }});
+          } 
+          else if (payload.type === 'offer' && role === 'join') {
+             await pc.setRemoteDescription(payload.sdp);
+             const answer = await pc.createAnswer();
+             await pc.setLocalDescription(answer);
+             channel.send({ type: 'broadcast', event: 'signal', payload: { type: 'answer', sdp: answer, from: role }});
+          } 
+          else if (payload.type === 'answer' && role === 'host') {
+             await pc.setRemoteDescription(payload.sdp);
+          } 
+          else if (payload.type === 'ice') {
+             await pc.addIceCandidate(payload.candidate);
+          }
+        } catch (err) {
+          console.error("WebRTC Negotiation Error:", err);
         }
       }).subscribe((status) => {
          if (status === 'SUBSCRIBED' && role === 'join') {
@@ -180,7 +186,6 @@ export default function QuizRoom({ params }) {
   }, [roomId, role]);
 
   const handlePersistProgress = (newAnswers, newLocked) => {
-    // Send directly to the peer over the direct connection, no backend server
     if (dcRef.current?.readyState === 'open') {
        dcRef.current.send(JSON.stringify({
          type: 'PROGRESS', answers: newAnswers || myAnswers, locked: newLocked || myLocked
@@ -202,9 +207,9 @@ export default function QuizRoom({ params }) {
   if (roomState === 'waiting' || connectionStatus !== 'connected') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 flex-col gap-6 text-center px-4 relative">
-        <Link href="/" className="absolute top-6 left-6 flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold transition-colors">
+        <button onClick={() => router.push('/')} className="absolute top-6 left-6 flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold transition-colors">
           <Home size={18}/> Cancel
-        </Link>
+        </button>
 
         <div className="bg-white p-12 rounded-[2rem] shadow-xl border border-slate-200/60 max-w-sm w-full relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1.5 bg-indigo-100"><div className="h-full bg-indigo-500 animate-pulse w-full"></div></div>
@@ -294,5 +299,20 @@ export default function QuizRoom({ params }) {
         />
       )}
     </div>
+  );
+}
+
+// Wrapping the main component in Suspense to fix the Next.js Client-Side Exception caused by useSearchParams
+export default function QuizRoom({ params }) {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 flex-col gap-6 text-center px-4 relative">
+        <Loader2 size={56} className="text-indigo-500 animate-spin mb-4"/>
+        <h2 className="text-2xl font-extrabold text-slate-800">Loading Arena...</h2>
+        <p className="text-sm text-slate-500 font-medium">Please wait while the environment initializes.</p>
+      </div>
+    }>
+      <QuizRoomEngine roomId={params.roomId} />
+    </Suspense>
   );
 }
