@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getAvailableTests } from '../lib/githubFetcher';
-import { BookOpen, ChevronRight, Activity, Database, Zap } from 'lucide-react';
+import { BookOpen, ChevronRight, Activity, Database, Zap, Swords } from 'lucide-react';
 
 export default async function Home() {
   const tests = await getAvailableTests();
@@ -21,9 +21,12 @@ export default async function Home() {
             High-performance testing environment with dynamic filtering, auto-evaluation, and realtime analytics.
           </p>
         </div>
-        <div className="z-10 w-full md:w-auto flex flex-col gap-3">
-            <Link href="/dashboard" className="flex items-center justify-center gap-2 bg-slate-900 text-white px-6 py-3.5 rounded-xl font-bold text-sm hover:bg-indigo-600 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
-              <Activity size={18} /> View Analytics
+        <div className="z-10 w-full md:w-auto flex flex-col sm:flex-row gap-3">
+            <Link href="/quiz" className="flex items-center justify-center gap-2 bg-indigo-600 text-white px-6 py-3.5 rounded-xl font-bold text-sm hover:bg-indigo-500 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 border border-indigo-400">
+              <Swords size={18} /> P2P Quiz Mode
+            </Link>
+            <Link href="/dashboard" className="flex items-center justify-center gap-2 bg-slate-900 text-white px-6 py-3.5 rounded-xl font-bold text-sm hover:bg-slate-800 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 border border-slate-700">
+              <Activity size={18} /> Analytics
             </Link>
         </div>
       </header>
