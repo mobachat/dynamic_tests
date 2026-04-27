@@ -6,7 +6,6 @@ import { getTestData } from '../../../lib/githubFetcher';
 import { saveToDB, getFromDB } from '../../../lib/db';
 import { Target, Home, Loader2 } from 'lucide-react';
 
-// We will create these two components in the next steps
 import TestSelector from '../../../components/TestSelector';
 import TestPassage from '../../../components/TestPassage';
 
@@ -82,11 +81,15 @@ export default function TestEngine({ params }) {
         if (pLocked[qIdx]) {
           totalChecked++;
           const ans = pAnswers[qIdx];
-          const flags = q.flagsStr.split(';').map(f => f.trim());
-          if (flags.includes('mcma')) {
-             if (Array.isArray(ans) && ans.every(a => q.correctAnswer.includes(a)) && ans.length === q.correctAnswer.replace(/[^1-9A-Za-z]/g,"").length) correct++;
+          
+          // Auto-detect commas instead of flags
+          const isMcma = String(q.correctAnswer).includes(',');
+          const cleanCorrectArr = String(q.correctAnswer).split(',').map(s => s.trim().toLowerCase());
+          
+          if (isMcma) {
+             if (Array.isArray(ans) && ans.length === cleanCorrectArr.length && ans.every(a => cleanCorrectArr.includes(String(a).trim().toLowerCase()))) correct++;
           } else {
-             if (String(ans).trim() === q.correctAnswer) correct++;
+             if (String(ans).trim().toLowerCase() === cleanCorrectArr[0]) correct++;
           }
         }
       });

@@ -32,7 +32,7 @@ function QuizRoomEngine({ roomId }) {
   const dcRef = useRef(null);
 
   const extractQuestionsFromRow = (row) => {
-    if (!row || row.length === 0) return []; // Safeguard against empty data during initial load
+    if (!row || row.length === 0) return [];
     
     const rawQuestionText = row[5] ? String(row[5]).trim() : "";
     if (rawQuestionText === "") {
@@ -62,13 +62,14 @@ function QuizRoomEngine({ roomId }) {
         if (pLocked[qIdx]) {
           totalChecked++;
           const ans = pAnswers[qIdx];
-          const flags = q.flagsStr.split(';').map(f => f.trim());
-          const cleanCorrect = String(q.correctAnswer).trim().toLowerCase();
           
-          if (flags.includes('mcma')) {
-             if (Array.isArray(ans) && ans.every(a => cleanCorrect.includes(String(a).trim().toLowerCase())) && ans.length === q.correctAnswer.replace(/[^1-9A-Za-z]/g,"").length) correct++;
+          const isMcma = String(q.correctAnswer).includes(',');
+          const cleanCorrectArr = String(q.correctAnswer).split(',').map(s => s.trim().toLowerCase());
+          
+          if (isMcma) {
+             if (Array.isArray(ans) && ans.length === cleanCorrectArr.length && ans.every(a => cleanCorrectArr.includes(String(a).trim().toLowerCase()))) correct++;
           } else {
-             if (String(ans).trim().toLowerCase() === cleanCorrect) correct++;
+             if (String(ans).trim().toLowerCase() === cleanCorrectArr[0]) correct++;
           }
         }
       });
@@ -86,7 +87,6 @@ function QuizRoomEngine({ roomId }) {
         if (isMounted) setQuizData(generatedQuiz);
       }
 
-      // STUN Server config to penetrate NAT networks securely P2P
       const pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
       pcRef.current = pc;
       
@@ -97,7 +97,6 @@ function QuizRoomEngine({ roomId }) {
         dc.onopen = () => {
           if (isMounted) setConnectionStatus('connected');
           
-          // CRITICAL: Supabase handshake is complete. DISCONNECT FROM SUPABASE entirely.
           if (channelRef.current) {
             supabase.removeChannel(channelRef.current);
             channelRef.current = null;
@@ -137,7 +136,6 @@ function QuizRoomEngine({ roomId }) {
         };
       }
 
-      // Handle the initial handshake to exchange connection data
       channel.on('broadcast', { event: 'signal' }, async ({ payload }) => {
         if (!isMounted || payload.from === role) return;
 
@@ -302,7 +300,6 @@ function QuizRoomEngine({ roomId }) {
   );
 }
 
-// Wrapping the main component in Suspense to fix the Next.js Client-Side Exception caused by useSearchParams
 export default function QuizRoom({ params }) {
   return (
     <Suspense fallback={

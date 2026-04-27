@@ -23,7 +23,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
   useEffect(() => {
     setPassageTimeSpent(0);
     setActiveQ(0);
-    // Setting scroll slightly delayed helps fix layout repaints on mobile
     setTimeout(() => {
       if (leftPaneRef.current) leftPaneRef.current.scrollTop = 0;
       if (rightPaneRef.current) rightPaneRef.current.scrollTop = 0;
@@ -35,7 +34,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     return () => clearInterval(interval);
   }, [currentIndex]);
 
-  // Aggressive Full Screen Enforcer
   useEffect(() => {
     const enforceFullscreen = async () => {
       if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
@@ -43,10 +41,9 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
       }
     };
     
-    // Bind to native user actions to trigger fullscreen protocol immediately on exit
     const interactionEvents = ['click', 'touchstart', 'scroll', 'keydown'];
     interactionEvents.forEach(e => document.addEventListener(e, enforceFullscreen, { passive: true }));
-    enforceFullscreen(); // attempt immediate mount execution 
+    enforceFullscreen(); 
 
     return () => {
       interactionEvents.forEach(e => document.removeEventListener(e, enforceFullscreen));
@@ -56,7 +53,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     };
   }, []);
 
-  // Refactored Observer: Tracks the element holding the highest percentage of the viewport
   useEffect(() => {
     if (isSingleColumn || questionsData.length === 0) return;
     
@@ -77,9 +73,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
          }
       }
 
-      if (bestIndex !== activeQ) {
-        setActiveQ(bestIndex);
-      }
+      if (bestIndex !== activeQ) setActiveQ(bestIndex);
     }, { 
       root: rightPaneRef.current, 
       threshold: [0, 0.25, 0.5, 0.75, 1] 
@@ -87,7 +81,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
 
     const timer = setTimeout(() => {
       questionRefs.current.forEach(ref => { if(ref) observer.observe(ref) });
-    }, 50); // Small delay lets the DOM calculate flex heights first
+    }, 50); 
     
     return () => {
       clearTimeout(timer);
@@ -95,7 +89,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     }
   }, [currentIndex, questionsData.length, isSingleColumn, activeQ]);
 
-  // Dictionary Tool with native Selection Tracking debounce
   useEffect(() => {
     let timeoutId;
     const handleSelection = async () => {
@@ -110,7 +103,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         const range = selection.getRangeAt(0);
         const rect = range.getBoundingClientRect();
         
-        // Use loading state
         setDictBox(prev => prev && prev.word === text ? prev : { loading: true, word: text, x: rect.left + (rect.width / 2), y: rect.top });
         
         try {
@@ -130,7 +122,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
 
     const debouncedSelection = () => {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(handleSelection, 400); // Wait 400ms after text dragging ends to pull definition
+      timeoutId = setTimeout(handleSelection, 400); 
     };
 
     document.addEventListener('selectionchange', debouncedSelection);
@@ -202,7 +194,8 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     const newAnswers = { ...answers, [currentIndex]: { ...pageAnswers, [qIndex]: newSelection } };
     let newLocked = locked;
     
-    const correctCount = correctAnswer.replace(/[^1-9A-Za-z]/g,"").length;
+    // Auto-lock when correct amount of boxes are checked based on commas
+    const correctCount = String(correctAnswer).split(',').length;
     if (newSelection.length === correctCount) {
         newLocked = { ...locked, [currentIndex]: { ...pageLocked, [qIndex]: true } };
         setLocked(newLocked);
@@ -230,12 +223,13 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     if (!qData) return null;
     const { correctAnswer, flagsStr } = qData;
     const flags = flagsStr.split(';').map(f => f.trim());
-    let questionType = 'mcsa'; 
+    
+    // Auto-detect Multi-Answer via Commas
+    const isMcma = String(correctAnswer).includes(',');
+    let questionType = isMcma ? 'mcma' : 'mcsa'; 
+    if (flags.includes('textinput')) questionType = 'textinput';
+    
     let maxOptions = 4;
-    
-    if (flags.includes('mcma')) questionType = 'mcma';
-    else if (flags.includes('textinput')) questionType = 'textinput';
-    
     const numFlag = flags.find(f => !isNaN(parseInt(f)) && f.trim() !== "");
     if (numFlag) {
       const parsed = parseInt(numFlag);
@@ -243,8 +237,9 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     }
 
     let optFormat = 'number';
-    if (/[A-Z]/.test(String(correctAnswer))) optFormat = 'upper';
-    else if (/[a-z]/.test(String(correctAnswer))) optFormat = 'lower';
+    const cleanCorrectString = String(correctAnswer).replace(/[^A-Za-z0-9]/g, '');
+    if (/[A-Z]/.test(cleanCorrectString)) optFormat = 'upper';
+    else if (/[a-z]/.test(cleanCorrectString)) optFormat = 'lower';
 
     const optionButtons = Array.from({length: maxOptions}, (_, i) => {
        if (optFormat === 'upper') return String.fromCharCode(65 + i);
@@ -256,6 +251,9 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     const pageLocked = getPageLocked(currentIndex);
     const qAns = pageAnswers[qIndex];
     const qLocked = pageLocked[qIndex] || false;
+
+    // Build the universally strict array for Answer validation
+    const cleanCorrectArr = String(correctAnswer).split(',').map(s => s.trim().toLowerCase());
 
     return (
       <div className="w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm p-2 md:p-3 flex items-center justify-between gap-3 shrink-0">
@@ -271,24 +269,34 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         {(questionType === 'mcsa' || questionType === 'mcma') && (
           <div className="flex flex-wrap items-center gap-1.5 md:gap-2 justify-end">
             {optionButtons.map(opt => {
-              // Ensure perfect string case-insensitive matching for bugless verification across modes
-              const cleanCorrect = String(correctAnswer).trim().toLowerCase();
               const cleanOpt = String(opt).trim().toLowerCase();
               
-              const isSelected = questionType === 'mcma' ? (Array.isArray(qAns) && qAns.some(a => String(a).toLowerCase() === cleanOpt)) : String(qAns).toLowerCase() === cleanOpt;
-              const isCorrectAnswer = questionType === 'mcma' ? cleanCorrect.includes(cleanOpt) : cleanOpt === cleanCorrect;
+              const isSelected = questionType === 'mcma' 
+                ? (Array.isArray(qAns) && qAns.some(a => String(a).trim().toLowerCase() === cleanOpt)) 
+                : String(qAns).trim().toLowerCase() === cleanOpt;
+              
+              const isCorrectAnswer = questionType === 'mcma' 
+                ? cleanCorrectArr.includes(cleanOpt) 
+                : cleanOpt === cleanCorrectArr[0];
               
               let btnColor = "border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 bg-white";
               if (isSelected) btnColor = "border-indigo-600 bg-indigo-600 text-white shadow-md transform scale-105";
+              
               if (qLocked) {
-                if (isCorrectAnswer) btnColor = "border-emerald-500 bg-emerald-500 text-white shadow-md"; 
-                else if (isSelected && !isCorrectAnswer) btnColor = "border-rose-500 bg-rose-500 text-white shadow-sm opacity-80"; 
-                else btnColor = "border-slate-100 bg-slate-50 text-slate-300 cursor-not-allowed opacity-50"; 
+                if (isCorrectAnswer) {
+                  btnColor = "border-emerald-500 bg-emerald-500 text-white shadow-md z-10 relative"; 
+                } else if (isSelected && !isCorrectAnswer) {
+                  btnColor = "border-rose-500 bg-rose-500 text-white shadow-sm opacity-80"; 
+                } else {
+                  btnColor = "border-slate-100 bg-slate-50 text-slate-300 cursor-not-allowed opacity-50"; 
+                }
               }
               
               return (
                 <button 
-                  key={opt} onClick={() => questionType === 'mcma' ? handleMcmaSelect(qIndex, opt, correctAnswer) : handleMcsaSelect(qIndex, opt)} disabled={qLocked}
+                  key={opt} 
+                  onClick={() => questionType === 'mcma' ? handleMcmaSelect(qIndex, opt, correctAnswer) : handleMcsaSelect(qIndex, opt)} 
+                  disabled={qLocked}
                   className={`w-8 h-8 md:w-10 md:h-10 ${questionType === 'mcma' ? 'rounded-md' : 'rounded-full'} border md:border-2 text-xs md:text-sm font-extrabold transition-all duration-200 flex items-center justify-center shrink-0 ${btnColor}`}
                 >
                   {qLocked && isCorrectAnswer ? <Check size={16} strokeWidth={4} /> : (qLocked && isSelected ? <X size={16} strokeWidth={4}/> : opt)}
@@ -418,7 +426,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
              </div>
           )}
 
-          <div ref={rightPaneRef} className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin scroll-smooth pb-48">
+          <div ref={rightPaneRef} className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin scroll-smooth pb-48 relative">
              {isSingleColumn && questionsData.length > 0 && (
                 <div className="sticky top-0 z-30 mb-6 shrink-0 rounded-xl overflow-hidden shadow-sm border border-slate-200">
                   {renderOptionsPane(questionsData[activeQ], activeQ)}
