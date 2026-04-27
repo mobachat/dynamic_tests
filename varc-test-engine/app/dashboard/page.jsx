@@ -15,10 +15,20 @@ export default function Dashboard() {
   }, []);
 
   const loadData = async () => {
-    setLoading(true);
-    const data = await getAllFromDB('results');
-    setResults(data.sort((a, b) => new Date(a.completedAt) - new Date(b.completedAt)));
-    setLoading(false);
+    try {
+      setLoading(true);
+      const data = await getAllFromDB('results');
+      if (Array.isArray(data)) {
+        setResults(data.sort((a, b) => new Date(a.completedAt) - new Date(b.completedAt)));
+      } else {
+        setResults([]);
+      }
+    } catch (error) {
+      console.error(error);
+      setResults([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleBackup = () => {

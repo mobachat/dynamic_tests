@@ -2,23 +2,31 @@ const DB_NAME = 'VARC_Engine_DB';
 const DB_VERSION = 1;
 
 export const initDB = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     if (typeof window === 'undefined') return resolve(null);
+    if (!window.indexedDB) {
+      console.warn("IndexedDB not supported in this environment");
+      return resolve(null);
+    }
     
-    const request = indexedDB.open(DB_NAME, DB_VERSION);
-    
-    request.onupgradeneeded = (event) => {
-      const db = event.target.result;
-      if (!db.objectStoreNames.contains('progress')) {
-        db.createObjectStore('progress', { keyPath: 'testId' });
-      }
-      if (!db.objectStoreNames.contains('results')) {
-        db.createObjectStore('results', { keyPath: 'testId' });
-      }
-    };
+    try {
+      const request = window.indexedDB.open(DB_NAME, DB_VERSION);
+      
+      request.onupgradeneeded = (event) => {
+        const db = event.target.result;
+        if (!db.objectStoreNames.contains('progress')) {
+          db.createObjectStore('progress', { keyPath: 'testId' });
+        }
+        if (!db.objectStoreNames.contains('results')) {
+          db.createObjectStore('results', { keyPath: 'testId' });
+        }
+      };
 
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => resolve(null); 
+    } catch (e) {
+      resolve(null);
+    }
   });
 };
 

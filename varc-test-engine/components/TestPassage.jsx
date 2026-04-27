@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { ArrowRight, ArrowLeft, CheckCircle, Check, X, Clock, AArrowUp, AArrowDown, List, Activity } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle, Check, X, Clock, AArrowUp, AArrowDown, List, Activity, Loader2 } from 'lucide-react';
 
 export default function TestPassage({ data, testId, currentIndex, setCurrentIndex, answers, setAnswers, locked, setLocked, setViewState, persistProgress, submitTest, extractQuestionsFromRow, liveStats }) {
   const [fontSize, setFontSize] = useState(16); 
@@ -34,6 +34,27 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     const interval = setInterval(() => setPassageTimeSpent(prev => prev + 1), 1000);
     return () => clearInterval(interval);
   }, [currentIndex]);
+
+  // Aggressive Full Screen Enforcer
+  useEffect(() => {
+    const enforceFullscreen = async () => {
+      if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+        try { await document.documentElement.requestFullscreen(); } catch (e) {}
+      }
+    };
+    
+    // Bind to native user actions to trigger fullscreen protocol immediately on exit
+    const interactionEvents = ['click', 'touchstart', 'scroll', 'keydown'];
+    interactionEvents.forEach(e => document.addEventListener(e, enforceFullscreen, { passive: true }));
+    enforceFullscreen(); // attempt immediate mount execution 
+
+    return () => {
+      interactionEvents.forEach(e => document.removeEventListener(e, enforceFullscreen));
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+    };
+  }, []);
 
   // Refactored Observer: Tracks the element holding the highest percentage of the viewport
   useEffect(() => {
@@ -74,15 +95,24 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     }
   }, [currentIndex, questionsData.length, isSingleColumn, activeQ]);
 
+  // Dictionary Tool with native Selection Tracking debounce
   useEffect(() => {
+    let timeoutId;
     const handleSelection = async () => {
       const selection = window.getSelection();
-      if (!selection || selection.rangeCount === 0) return;
-      const text = selection.toString().trim();
+      if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
+        setDictBox(null);
+        return;
+      }
       
+      const text = selection.toString().trim();
       if (text && text.length > 2 && text.length < 25 && !text.includes(' ')) {
         const range = selection.getRangeAt(0);
         const rect = range.getBoundingClientRect();
+        
+        // Use loading state
+        setDictBox(prev => prev && prev.word === text ? prev : { loading: true, word: text, x: rect.left + (rect.width / 2), y: rect.top });
+        
         try {
           const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(text)}`);
           if (res.ok) {
@@ -90,18 +120,23 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
             const meaning = resData[0]?.meanings[0]?.definitions[0]?.definition;
             if (meaning) {
               setDictBox({ word: text, meaning, x: rect.left + (rect.width / 2), y: rect.top });
-            }
-          }
-        } catch (e) {}
+            } else setDictBox(null);
+          } else setDictBox(null);
+        } catch (e) { setDictBox(null); }
       } else {
         setDictBox(null);
       }
     };
-    document.addEventListener('touchend', handleSelection);
-    document.addEventListener('mouseup', handleSelection);
+
+    const debouncedSelection = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(handleSelection, 400); // Wait 400ms after text dragging ends to pull definition
+    };
+
+    document.addEventListener('selectionchange', debouncedSelection);
     return () => {
-      document.removeEventListener('touchend', handleSelection);
-      document.removeEventListener('mouseup', handleSelection);
+       document.removeEventListener('selectionchange', debouncedSelection);
+       clearTimeout(timeoutId);
     };
   }, []);
 
@@ -191,7 +226,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     return `${m}:${s}`;
   };
 
-  // Redesigned to place options side-by-side with the question number
   const renderOptionsPane = (qData, qIndex) => {
     if (!qData) return null;
     const { correctAnswer, flagsStr } = qData;
@@ -209,8 +243,8 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     }
 
     let optFormat = 'number';
-    if (/[A-Z]/.test(correctAnswer)) optFormat = 'upper';
-    else if (/[a-z]/.test(correctAnswer)) optFormat = 'lower';
+    if (/[A-Z]/.test(String(correctAnswer))) optFormat = 'upper';
+    else if (/[a-z]/.test(String(correctAnswer))) optFormat = 'lower';
 
     const optionButtons = Array.from({length: maxOptions}, (_, i) => {
        if (optFormat === 'upper') return String.fromCharCode(65 + i);
@@ -237,8 +271,12 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         {(questionType === 'mcsa' || questionType === 'mcma') && (
           <div className="flex flex-wrap items-center gap-1.5 md:gap-2 justify-end">
             {optionButtons.map(opt => {
-              const isSelected = questionType === 'mcma' ? (Array.isArray(qAns) && qAns.includes(opt)) : qAns === opt;
-              const isCorrectAnswer = questionType === 'mcma' ? correctAnswer.includes(opt) : opt === correctAnswer;
+              // Ensure perfect string case-insensitive matching for bugless verification across modes
+              const cleanCorrect = String(correctAnswer).trim().toLowerCase();
+              const cleanOpt = String(opt).trim().toLowerCase();
+              
+              const isSelected = questionType === 'mcma' ? (Array.isArray(qAns) && qAns.some(a => String(a).toLowerCase() === cleanOpt)) : String(qAns).toLowerCase() === cleanOpt;
+              const isCorrectAnswer = questionType === 'mcma' ? cleanCorrect.includes(cleanOpt) : cleanOpt === cleanCorrect;
               
               let btnColor = "border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 bg-white";
               if (isSelected) btnColor = "border-indigo-600 bg-indigo-600 text-white shadow-md transform scale-105";
@@ -289,9 +327,16 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
           className="fixed z-50 bg-slate-900/95 backdrop-blur-xl text-white p-4 rounded-xl shadow-2xl max-w-[250px] md:max-w-sm border border-slate-700/50 animate-in fade-in zoom-in duration-200 transform -translate-x-1/2"
           style={{ left: Math.max(130, Math.min(dictBox.x, window.innerWidth - 130)), top: Math.max(60, dictBox.y - 120) }}
         >
-           <button onClick={(e) => {e.stopPropagation(); setDictBox(null)}} className="absolute top-2 right-2 text-slate-400 hover:text-white bg-slate-800 p-1 rounded-full"><X size={12}/></button>
-           <div className="font-extrabold text-indigo-400 mb-1 pb-1 mr-4 text-sm md:text-lg border-b border-slate-700/50">{dictBox.word}</div>
-           <div className="text-slate-200 leading-snug max-h-32 overflow-y-auto scrollbar-thin text-xs md:text-sm pr-1">{dictBox.meaning}</div>
+           <button onClick={(e) => { e.stopPropagation(); window.getSelection()?.removeAllRanges(); setDictBox(null); }} className="absolute top-2 right-2 text-slate-400 hover:text-white bg-slate-800 p-1 rounded-full"><X size={12}/></button>
+           
+           {dictBox.loading ? (
+              <div className="flex justify-center items-center py-4 px-8"><Loader2 className="animate-spin text-indigo-400" size={24} /></div>
+           ) : (
+             <>
+               <div className="font-extrabold text-indigo-400 mb-1 pb-1 mr-4 text-sm md:text-lg border-b border-slate-700/50">{dictBox.word}</div>
+               <div className="text-slate-200 leading-snug max-h-32 overflow-y-auto scrollbar-thin text-xs md:text-sm pr-1">{dictBox.meaning}</div>
+             </>
+           )}
         </div>
       )}
 
@@ -337,7 +382,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         </div>
       </header>
 
-      {/* Added min-h-0 to flex children to permanently kill the iOS/Safari blank space layout bug */}
       <main 
         style={{ '--split-size': `${splitSize}%` }}
         className={`flex-1 flex overflow-hidden min-h-0 ${isSingleColumn ? 'justify-center items-center p-2' : 'flex-col lg:flex-row'}`}
@@ -368,7 +412,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         <div 
           className={`flex-1 bg-slate-100 flex flex-col relative min-h-0 ${isSingleColumn ? 'max-w-5xl h-full md:rounded-2xl shadow-inner m-2' : 'w-full h-full md:mr-2 md:my-2 md:rounded-2xl shadow-inner overflow-hidden'}`}
         >
-          {/* Unified Sticky Options Pane */}
           {!isSingleColumn && questionsData.length > 0 && (
              <div className="sticky top-0 z-30 w-full shrink-0">
                {renderOptionsPane(questionsData[activeQ], activeQ)}
