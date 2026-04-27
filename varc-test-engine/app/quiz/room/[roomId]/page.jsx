@@ -39,8 +39,15 @@ function QuizRoomEngine({ roomId }) {
       return [{ text: String(row[0] || "").trim(), correctAnswer: row[1] ? String(row[1]).trim() : "", flagsStr: row[6] ? String(row[6]).toLowerCase() : "" }];
     } else {
       const qBlocks = rawQuestionText.split('***').map(s => s.trim());
-      const ansBlocks = (row[1] ? String(row[1]) : "").split('***').map(s => s.trim());
+      
+      // FIX: Splits answers by EITHER '***' OR a newline, then removes empty blank lines
+      const ansBlocks = (row[1] ? String(row[1]) : "")
+        .split(/\*\*\*|\r?\n/)
+        .map(s => s.trim())
+        .filter(s => s !== "");
+        
       const flagBlocks = (row[6] ? String(row[6]).toLowerCase() : "").split('***').map(s => s.trim());
+      
       return qBlocks.map((qText, i) => ({
         text: qText,
         correctAnswer: ansBlocks[i] || ansBlocks[0] || "",
