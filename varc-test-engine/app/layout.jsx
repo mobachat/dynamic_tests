@@ -17,14 +17,21 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-slate-50 text-slate-900 antialiased selection:bg-indigo-200 flex flex-col min-h-screen relative">
-        <div className="flex-1 flex flex-col z-10 pb-6">
+      <body className="bg-slate-50 text-slate-900 antialiased selection:bg-indigo-200 flex flex-col min-h-screen">
+        {/* Removed the pb-6 padding that was breaking the 100dvh layout */}
+        <div className="flex-1 flex flex-col min-h-0">
           {children}
         </div>
         
-        {/* Subtle Global Credits Footer */}
-        <footer className="fixed bottom-0 w-full text-center py-1 opacity-40 hover:opacity-100 transition-opacity z-0 pointer-events-none">
-          <p className="text-[10px] font-medium text-slate-500 tracking-wider">Powered by Verbalist Elite</p>
+        {/* 
+          Completely decoupled fixed footer. 
+          pointer-events-none ensures you can still click things underneath it.
+          mix-blend-difference ensures it stays visible on both the light dashboard and the dark testing screen.
+        */}
+        <footer className="fixed bottom-1 w-full text-center opacity-30 transition-opacity z-50 pointer-events-none">
+          <p className="text-[9px] font-bold text-slate-400 tracking-widest uppercase mix-blend-difference drop-shadow-sm">
+            Powered by Verbalist Elite
+          </p>
         </footer>
       </body>
     </html>
