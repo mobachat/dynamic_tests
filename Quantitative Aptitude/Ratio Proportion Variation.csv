@@ -1,0 +1,558 @@
+Passage,Correct answers,Type,Difficulty,Size,Questions,Flags
+"1. If a = (9/8)b, then 3b/(4a) =
+
+(A) 2/3
+(B) 1/3
+(C) 4/3
+(D) 2",A,,,,,
+"2. If 2.4p = 0.08q, then (q + p)/(q - p) =
+
+(A) 31/28
+(B) 31/27
+(C) 31/29
+(D) 39/35",C,,,,,
+"3. If a : b = 2 : 3, find (3a + 4b)/(4a + 5b)
+
+(A) 6 : 7
+(B) 18 : 23
+(C) 19 : 23
+(D) 20 : 23",B,,,,,
+"4. If a : b = b : c = 2 : 3, find a : b : c.
+
+(A) 4 : 6 : 9
+(B) 2 : 3 : 3
+(C) 3 : 3 : 4
+(D) 9 : 6 : 4",A,,,,,
+"5. If p : q = 5 : 6 and q : r = 4 : 7, then find p : q : r
+
+(A) 10 : 12 : 21
+(B) 20 : 24 : 35
+(C) 15 : 18 : 28
+(D) 25 : 30 : 35",A,,,,,
+"6. Find a : e, if a : b = 2 : 3, b : c = 6 : 7, c : d = 14 : 25 and d : e = 1 : 2.
+
+(A) 14 : 25
+(B) 6 : 25
+(C) 12 : 25
+(D) 4 : 25",D,,,,,
+"7. If p : q = 5 : 4 and p = a + b and q = a - b, find a : b.
+
+(A) 1 : 9
+(B) 9 : 1
+(C) 5 : 4
+(D) 4 : 5",B,,,,,
+"8. Thirty five sweets are distributed among Sita and Gita in the ratio 4 : 3. Find the number of sweets received by Sita.
+
+(No options provided in PDF)",20,,,,,
+"9. Two numbers are in the ratio of 2 : 5. If 4 is added to each, they would be in the ratio 4 : 9. Find the numbers.
+
+(A) 16 and 40
+(B) 18 and 45
+(C) 22 and 55
+(D) 20 and 50",A,,,,,
+"10. The ratio of the ages of A, B and C is 7 : 5 : 4. If C's age is 32 years, find the sum of the ages of A, B and C (in years).
+
+(No options provided in PDF)",128,,,,,
+"11. The ratio of the ages of four members of a family is 9 : 8 : 3 : 2. The average age of the family is 22 years. What is the age of the eldest person in the family?
+
+(A) 36 years
+(B) 32 years
+(C) 12 years
+(D) 6 years",A,,,,,
+"12. The number of marbles with A and B are in the ratio of 10 : 11. Which of the following cannot be a possible number of marbles with A and B together?
+
+(A) 189
+(B) 210
+(C) 231
+(D) 153",D,,,,,
+"13. The strength of a class is 70. Which of the following cannot be the ratio of the number of boys and girls in the class?
+
+(A) 2:5
+(B) 3:2
+(C) 11:3
+(D) 9:2",D,,,,,
+"14. The ratio of the number of ladies and gentlemen in a party is 3:4. If eight ladies join the party, the ratio of ladies and gentlemen would become 5:4. Find the number of gentlemen in the party.
+
+(No options provided in PDF)",16,,,,,
+"15. The ratio of the present ages of a mother and a son is 4:1. Twelve years from now, the ratio of their ages will be 2:1. Find the present ages of mother and son respectively. (in years)
+
+(A) 36,9
+(B) 28,6
+(C) 24,6
+(D) 32,8",C,,,,,
+"16. The ratio of the number of chocolates with A and B is 3:4. If A gives four chocolates to B, the ratio of the number of chocolates with them becomes 5:9. How many chocolates did A have initially?
+
+(No options provided in PDF)",24,,,,,
+"17. The ratio of the number of students in three classes A,B and C is 3:7:8. If ten students, are transferred from C to B, B will have 80 students. Find the total number of students in the three classes.
+
+(No options provided in PDF)",180,,,,,
+"18. The ratio of the incomes of A and B is 4:3. The ratio of the savings of A and B is 5:6. Find the ratio of the expenditures of A and B, if A spends three-fourth of his income.
+
+(A) 3:2
+(B) 5:3
+(C) 3:5
+(D) 2:3",A,,,,,
+"19. The ratio of the monthly incomes of A and B is 3:4. The ratio of the monthly expenditures of A and B is 4:5. Which of the following represents a possible value of the ratio of their savings?
+
+(A) 9:10
+(B) 3:4
+(C) 13:20
+(D) 4:5",C,,,,,
+"20. The ratio of the present ages of a husband and a wife is 5:4.
+
+(i) Which of the following can be a possible ratio of their ages 20 years ago?
+(A) 5:4
+(B) 6:5
+(C) 23:20
+(D) 13:10
+
+(ii) Which of the following can be a possible ratio of their ages 20 years hence?
+(A) 5:4
+(B) 6:5
+(C) 7:5
+(D) 13:10","(i) D
+(ii) B",,,,,
+"21. Four positive numbers are in the ratio of 1:2:3:4. If the sum of their squares is equal to 480, find the numbers.
+
+(A) 2,4,8,10
+(B) 8,12,16,20
+(C) 4,8,12,16
+(D) 8,10,12,16",C,,,,,
+"22. Three positive numbers p, q and r satisfy (q + r)/p = (p + r)/q = (p + q)/r = K. K =
+
+(A) 3/2
+(B) 5/2
+(C) 3
+(D) 2",D,,,,,
+"23. x varies directly as y² and when y = 12, x = 4. Find x when y = 18.
+
+(A) 9 1/16
+(B) 9
+(C) 1/9
+(D) 16/9",B,,,,,
+"24. The area of a square varies with the square of its diagonal. The area of a square whose diagonal measures eight units is 32 sq.units. Find the diagonal of a square of area 72 sq.units (in units).
+
+(No options provided in PDF)",12,,,,,
+"25. The monthly salary of an employee in an office varies directly with the number of days he works in that month. An employee gets 10400 as salary in a month in which he works for 26 days. Find his salary (in ₹) in a month in which he works for 24 days.
+
+(No options provided in PDF)",9600,,,,,
+"26. For a given distance, speed is inversely proportional to the time taken. Raju would take six hours to cover it if his speed was 50 km/hr. Find the time taken (in hours) by him to cover it if his speed was 100 km/hr.
+
+(A) 2
+(B) 3
+(C) 4
+(D) 6",B,,,,,
+"27. P, Q and R are three quantities, P varies directly with the sum of Q and R. If both Q and R decrease by 1, find the change in P.
+
+(A) No change
+(B) A decrease of 2
+(C) An increase of 2
+(D) Cannot be determined",D,,,,,
+"28. A, B and C are three quantities. A varies directly with B when C is constant. A varies directly with C when B is constant. A = 6000 if B = 20 and C = 30. Find A if B = 40 and C = 60.
+
+(No options provided in PDF)",24000,,,,,
+"29. A varies directly with B when C is constant and inversely with C when B is constant. When A = 26, B = 65 and C = 30. Find A when B = 84 and C = 42.
+
+(A) 24
+(B) 36
+(C) 14
+(D) 32",A,,,,,
+"30. X, Y and Z are three quantities. X varies inversely with Y when Z is constant. Y varies inversely with Z when X is constant. When Y = 8, and Z = 7, X = 30. Find X if Y = 16 and Z = 21.
+
+(No options provided in PDF)",5,,,,,
+"Exercise - 2(a) Q1. If a:b=3:7, what is the value of (4a + 5b)/(2a + 2b)?
+
+(A) 47/20
+(B) 3/2
+(C) 7/4
+(D) 5/2",A,,,,,
+"Exercise - 2(a) Q2. If a:b=2:3, b:c=4:3 and c:d=2:3, then find a:b:c:d.
+
+(A) 8:12:9:27
+(B) 16:24:18:27
+(C) 18:27:36:8
+(D) 12:18:15:20",B,,,,,
+"Exercise - 2(a) Q3. The weights of Bimal and Basu are in the ratio 2:3 and the weights of Basu and Bali are in the ratio 4:3. What is Basu's weight (in kg) if the sum of the weights of Bimal, Basu and Bali is 203 kg?
+
+(No options provided in PDF)",84,,,,,
+"Exercise - 2(a) Q4. The ratio of the number of boys to the number of girls in a school is 7:3. If an additional 15 girls were to join the class, the ratio of the number of boys to the number of girls would become 2:3. What is the initial number of girls in the class?
+
+(A) 4
+(B) 10
+(C) 12
+(D) 6",D,,,,,
+"Exercise - 2(a) Q5. If 3x - 4y + 2z = 0 and 4x - 2y - z = 0, find x:z:y
+
+(A) 8:10:11
+(B) 8:11:40
+(C) 11:40:8
+(D) 8:40:11",A,,,,,
+"Exercise - 2(a) Q6. What must be subtracted from p and added to q so that the ratio of the resultants becomes 1:3?
+
+(A) (p + q)/3
+(B) (3p - q)/4
+(C) (p - q)/(p + q)
+(D) (q - 3p)/4",B,,,,,
+"Exercise - 2(a) Q7. A certain number is added to each of a pair of numbers which are in the ratio 4:7. The sum of the resulting numbers is 75 and their ratio (taken in the same order as mentioned above) is 8:17. What is the number added?
+
+(No options provided in PDF)",-12,,,,,
+"Exercise - 2(a) Q8. Rohan and Sohan had certain amounts of money with them. The ratio of the amounts with them is 8:5. Each day Rohan spends a certain amount and Sohan earns one-sixth of the amount that Rohan spends. After 9 days, the ratio of the amounts with them is 10:11. After how many more days, will the ratio of the amounts with them be 18:35?
+
+(No options provided in PDF)",6,,,,,
+"Exercise - 2(a) Q9. Vipin's present age is twice the age of Kishore one year ago. What is the sum of their present ages (in years), if the ratio of the sum of their present ages to the difference of their present ages is 19:5?
+
+(No options provided in PDF)",19,,,,,
+"Exercise - 2(a) Q10. Three different types of balls priced at 5, 8 and 13 per piece are displayed in three different boxes by a trader. Mr. Paul bought from this shop all three types of balls spending a total sum of 768. The numbers of the balls he bought, taken in the order in which the prices are mentioned above, are in the ratio 5:4:3. How many balls of the costliest variety did he buy?
+
+(A) 104
+(B) 64
+(C) 48
+(D) 24",D,,,,,
+"Exercise - 2(a) Q11. A certain amount of money is divided among nine brothers. The second brother gets 12 more than twice the amount given to the first brother. The third brother gets 13 more than three times the amount given to the first brother, and so on till the ninth brother. If the ratio of the amount with the ninth brother to the amount with the first brother is 10:1, how much did the fifth brother get (in ₹)?
+
+(A) 100
+(B) 80
+(C) 90
+(D) 50",C,,,,,
+"Exercise - 2(a) Q12. Some apples are divided among four people Karan, Kiran, Kumar and Khanna. The ratio of the number of apples given to Kiran to the total number of apples given to Karan and Khanna is 1:2. The ratio of the number of apples given to Kumar to that of the remaining apples is 2:5. Khanna gets 2 apples more than Kiran. Karan gets half the number of apples that Kumar gets. What is the total number of apples distributed?
+
+(A) 21
+(B) 18
+(C) 19
+(D) 24",A,,,,,
+"Exercise - 2(a) Q13. Alok distributed a certain number of toffees among his brothers Bala, Chetan and David in the ratio 4:4:9. David distributed the toffees that he received among his sisters Amitha, Bama and Chandra in the ratio 1:7:8. If Amitha received 18 toffees, the number of toffees distributed by Alok is
+
+(No options provided in PDF)",544,,,,,
+"Exercise - 2(a) Q14. The amount used to purchase one litre of petrol can be used to purchase three litres of diesel or five litres of kerosene. Out of a certain amount, 510 is spent on diesel. How much is spent on kerosene if equal volumes of the three liquids are purchased with the total amount?
+
+(A) 300
+(B) 306
+(C) 382
+(D) 354",B,,,,,
+"Exercise - 2(a) Q15. The amount used to purchase one litre of petrol can be used to purchase three litres of diesel or five litres of kerosene. Out of a certain amount, 510 is spent on diesel. What will be the amount spent on petrol if the total amount referred in the above question is instead spent to purchase equal volumes of petrol and kerosene only?
+
+(A) 1250
+(B) 1275
+(C) 1955
+(D) 1360",C,,,,,
+"Exercise - 2(a) Q16. If k = (a + c)/(b + d) = (c + e)/(d + f) = (a + e)/(b + f), when all quantities are positive, then which of the following must be true?
+
+(A) k = e/f
+(B) k = a/b
+(C) k = c/d
+(D) All of the above",D,,,,,
+"Exercise - 2(a) Q17. A number of coins can be divided in the ratio 13:14:15. They can also be divided in the ratio 9:10:11:12. If the difference between the greatest parts in the two cases is 6, the number of coins is
+
+(No options provided in PDF)",180,,,,,
+"Exercise - 2(a) Q18. The mean proportional between two numbers is 9 and the third proportional of the two numbers is 243. Find the larger of the two numbers.
+
+(A) 27
+(B) 81
+(C) 9
+(D) 54",B,,,,,
+"Exercise - 2(a) Q19. P and Q are distinct two-digit numbers. Ps and Qs denote the sums of the digits in P and Q respectively. If P/Ps = Q/Qs, then find the minimum possible value of Ps + Qs
+
+(A) 8
+(B) 9
+(C) 6
+(D) 3",C,,,,,
+"Exercise - 2(a) Q20. For a body starting from rest, the distance travelled (d) is directly proportional to the square of the time elapsed from the start (t). When t = 4 sec, d = 48 m. What is the value of d (in metres) at t = 7 sec?
+
+(A) 128
+(B) 150
+(C) 115
+(D) 147",D,,,,,
+"Exercise - 2(a) Q21. A certain sum of money is sufficient to pay the wages of worker A for 55 days. It is also sufficient to pay the wages of worker B for 66 days. The number of days that the sum of money is sufficient to pay the wages of both workers is
+
+(No options provided in PDF)",30,,,,,
+"Exercise - 2(a) Q22. The volume of a cone varies as the square of the radius of its base when its height is fixed and also varies as its height when radius of its base is fixed. If a radius of 3cm and height of 7cm give it a volume of 66 cubic centimetre, then what will be the radius, (in centimetres), if the cone has a height of 6cm and volume of 308 cubic centimetres?
+
+(A) 9
+(B) 15
+(C) 7
+(D) 11",C,,,,,
+"Exercise - 2(a) Q23. The kinetic energy of a body is directly proportional to the square of its speed when the mass is kept constant and is directly proportional to mass when its speed is kept constant. A body with a mass of 2kg and a speed of 10m/s has a kinetic energy of 100 joules. What is the kinetic energy of a body whose mass is 20kg and speed is 1m/s?
+
+(A) 100 joules
+(B) 1000 joules
+(C) 10 joules
+(D) 20 joules",C,,,,,
+"Exercise - 2(a) Q24. A writer gets a fixed amount for his book apart from the royalty he gets per book sold. He gets 46000 and 66000 for 2000 and 3000 books sold respectively. Find his income per book when 6000 books are sold (in ₹).
+
+(No options provided in PDF)",21,,,,,
+"Exercise - 2(a) Q25. 'A' varies directly as the sum of two quantities 'B' and 'C'. 'B' in turn varies directly as 'x' and 'C' varies inversely as 'x'. When x = 1 or 2, A = 3. Find the value of A when x = 4.
+
+(No options provided in PDF)",4.5,,,,,
+"Exercise - 2(a) Q26. A garrison of 900 soldiers had food-stock sufficient for 30 days when the rate of consumption is 2.5kg/day/soldier. After some days of consumption at that rate, 300 soldiers were transferred to another garrison and the balance food lasted for 25 days for the remaining soldiers. If the rate of consumption of the remaining soldiers was 3.0kg/day/soldier, after how many days from the start, were the soldiers transferred?
+
+(No options provided in PDF)",10,,,,,
+"Exercise - 2(a) Q27. The speed of a locomotive without any wagons attached to it is 40 kmph. It diminishes by a quantity which is proportional to the cube root of the number of wagons attached. If the speed of the locomotive is 34 kmph when 27 wagons are attached, what is the maximum number of wagons that can be attached if the condition is that the speed should not fall below 30 kmph?
+
+(A) 64
+(B) 125
+(C) 216
+(D) 343",A,,,,,
+"Exercise - 2(a) Q28. A precious stone worth 10872 fell and broke into three pieces, the weights of which are proportional to 1:2:3. The value of each stone is directly proportional to the square of its weight. Find the loss in the value caused by the breakage.
+
+(A) 3624
+(B) 4228
+(C) 6644
+(D) 7510",C,,,,,
+"Exercise - 2(a) Q29. The distance (in meters) to which a boy can throw a stone is inversely proportional to its weight (in kg). He breaks the stone into 3 pieces whose weights (in kg) are in the ratio 1:3:2. He then throws the stones one by one. The sum of the distances they cover is 22 meters. To what distance can he throw the unbroken stone? (in m)
+
+(No options provided in PDF)",2,,,,,
+"Exercise - 2(a) Q30. The amount collected per month from a consumer of electrical power consists of two parts - a fixed charge for providing the service and a variable charge which is directly proportional to the number of units of power consumed. An amount of 700 is collected from the consumer when he consumed 50 units in a month. It is also noticed that when the consumption increases from 100 units per month to 200 units per month, the bill amount increases to 5/4 times that of the former. How much is the fixed charge per month?
+
+(A) 600
+(B) 350
+(C) 500
+(D) 400",A,,,,,
+"Exercise - 2(b) Q1. If a+b-c : b+c-a : a+c-b = 5:6:7, then find a:b:c.
+
+(A) 12:13:11
+(B) 12:11:13
+(C) 13:12:11
+(D) 13:11:12",B,,,,,
+"Exercise - 2(b) Q2. Which of the following represents a possible value of p:q satisfying (20p² - 40pq)/(pq + 4q²) = 20?
+
+(A) 3:1
+(B) 1:4
+(C) 4:1
+(D) 5:1",C,,,,,
+"Exercise - 2(b) Q3. If a:b = 3:4 and c:d = 2:3, then find (a³c² + b³d²)/(ab² + a²bc)
+
+(A) 19/3
+(B) 19/4
+(C) 19/9
+(D) 19/18",D,,,,,
+"Exercise - 2(b) Q4. Ajay and Vijay wrote a test. The sum of Ajay's score and twice Vijay's score is 310. The sum of Vijay's score and twice Ajay's score is 290. Find the ratio of the scores of Ajay and Vijay.
+
+(A) 9:11
+(B) 13:17
+(C) 11:19
+(D) 7:13",A,,,,,
+"Exercise - 2(b) Q5. Ninety three is divided into two parts such that three times the first part and twice the second part are in the ratio 25:4. Find the first part.
+
+(No options provided in PDF)",75,,,,,
+"Exercise - 2(b) Q6. If three is subtracted from the numerator and five is added to the denominator of a fraction, the new fraction formed is 1/2. If two is added to the numerator of the initial fraction, the ratio of the new numerator to the denominator becomes 1:1. Find the original fraction.
+
+(A) 11/13
+(B) 18/23
+(C) 13/15
+(D) 13/11",C,,,,,
+"Exercise - 2(b) Q7. The ratio of the number of students in classes A, B and C is 3:7:8. If 10 students leave C and join B, the ratio of the number of students in B and C would be reversed. Find the total number of students in the classes A, B and C.
+
+(No options provided in PDF)",180,,,,,
+"Exercise - 2(b) Q8. Ajay distributed a total of 60 sweets among his sons Ram, Shyam and Tarun. For every five sweets received by Ram, Shyam received four sweets. For every two sweets received by Shyam, Tarun received three sweets. Find the number of sweets received by Tarun.
+
+(No options provided in PDF)",24,,,,,
+"Exercise - 2(b) Q9. Divide 66 into three parts such that the sum of the first two parts equals the third part and the second part is three less than twice the first part. What is the ratio of the parts as arranged in the ascending order?
+
+(A) 14:17:19
+(B) 5:9:11
+(C) 11:7:4
+(D) 4:7:11",D,,,,,
+"Exercise - 2(b) Q10. A person has with him a certain number of weighing stones of 100gm, 500gm and 1kg in the ratio of 3:5:1. If a maximum of 5kg can be measured using weighing stones of 500gm alone, then what is the number of 100gm stones he has?
+
+(A) 6
+(B) 3
+(C) 9
+(D) 5",A,,,,,
+"Exercise - 2(b) Q11. In a class, the ratio of the number of boys and girls is 1:2. Among the boys, one-third are day scholars and one-fourth of these day scholars travel to school by bus. Among the girls, two-thirds are day scholars and half of these day scholars travel to school by bus. What part of the students in the class are day scholars travelling to school by bus?
+
+(A) 1/3
+(B) 1/5
+(C) 1/4
+(D) 2/5",C,,,,,
+"Exercise - 2(b) Q12. In a bag, there are balls of three colours - white, black and green. The ratio of the number of white and black balls is 3:4. The ratio of the number of black and green balls is 3:5. Which of the following can be a possible value of the total number of white and green balls in the bag?
+
+(A) 42
+(B) 32
+(C) 58
+(D) 41",C,,,,,
+"Exercise - 2(b) Q13. Amar, Bhavan and Chetan have some coins with them. The total number of coins with Bhavan and Chetan and those with Amar and Chetan are in the ratio 4:5. The total number of coins with Bhavan and Chetan and those with Amar and Bhavan are in the ratio 4:3. Which of the following is the ratio of the number of coins with Bhavan and Chetan?
+
+(A) 7:4
+(B) 3:2
+(C) 7:5
+(D) 1:3",B,,,,,
+"Exercise - 2(b) Q14. The ratio of the prices of tea, last year and this year is 5:6. The ratio of the prices of coffee last year and this year is 7:8. The sum of prices of a kg of tea and a kg of coffee this year is 48. Find the price of tea (in ₹) last year if it was 20% of the price of coffee last year.
+
+(No options provided in PDF)",20,,,,,
+"Exercise - 2(b) Q15. 117 was supposed to be divided among Rohan, Sohan and Mohan in the ratio 2:3:4. By mistake, it was divided in the ratio 1/2 : 1/3 : 1/4. Find the loss/gain of Rohan due to his mistake (in ₹).
+
+(A) gain, 26
+(B) loss, 26
+(C) gain, 28
+(D) loss, 28",A,,,,,
+"Exercise - 2(b) Q16. Five vessels have equal capacities. Each vessel contains some milk. The ratio of the quantities of milk in these vessels is 3:4:5:6:7. The total quantity of milk is three-fifth of the combined capacity of the vessels. How many vessels contain at least half milk?
+
+(No options provided in PDF)",3,,,,,
+"Exercise - 2(b) Q17. The monthly incomes of Ashok and Bala be 3:4. The ratio of the expenditures of Ashok and Bala is 4:5. Which of the following cannot be the ratio of the savings of Ashok and Bala?
+
+(A) 2:3
+(B) 4:5
+(C) 8:11
+(D) 5:7",B,,,,,
+"Exercise - 2(b) Q18. Manoj and Shiva, who are colleagues in an office, have their monthly savings in the ratio of 2:3. Manoj spends two-thirds of his income every month. If the ratio of their monthly incomes is 3:4, what is the ratio of their expenditures?
+
+(A) 3:2
+(B) 4:5
+(C) 4:3
+(D) 5:3",B,,,,,
+"Exercise - 2(b) Q19. In a three digit number, the units digit is the sum of the other two digits and it exceeds the tens digit by as much as the latter exceeds the hundreds digit. How many such three digit numbers exist?
+
+(A) 1
+(B) 2
+(C) 3
+(D) 4",C,,,,,
+"Exercise - 2(b) Q20. The sum of the present ages of a mother and her daughter is 60 years. When the mother attains her husband's present age, the ratio of her husband's age and her daughter's age would be 2:1. Find the present age of the daughter. (in years)
+
+(No options provided in PDF)",20,,,,,
+"Exercise - 2(b) Q21. A person had two plots of land. In each plot, he cultivated maize and barley. The ratio of the area under maize cultivation and barley cultivation in the larger plot is 8:9. The ratio of the total areas under maize cultivation and barley cultivation in the two plots together is 29:33. The ratio of the areas under maize cultivation and barley cultivation in the smaller plot is 13:15. The ratio of the area under maize cultivation in the larger plot and that under barley cultivation in the smaller plot is
+
+(A) 8:15
+(B) 16:15
+(C) 15:16
+(D) 15:8",B,,,,,
+"Exercise - 2(b) Q22. A test of 60 minutes contains questions on Mathematics and English only. The time taken to solve a Mathematics question is twice the time taken to answer an English question and the ratio of time taken to solve all Mathematics questions to time taken to answer all English questions is 8/7. What is the ratio of the number of English questions to that of Mathematics?
+
+(A) 11/7
+(B) 7/4
+(C) 9/4
+(D) 7/5",B,,,,,
+"Exercise - 2(b) Q23. A test of 60 minutes contains questions on Mathematics and English only. The time taken to solve a Mathematics question is twice the time taken to answer an English question and the ratio of time taken to solve all Mathematics questions to time taken to answer all English questions is 8/7. If the total number of questions is 22, how many English questions can be answered in 18 minutes?
+
+(A) 8
+(B) 10
+(C) 11
+(D) 9",D,,,,,
+"Exercise - 2(b) Q24. If (a² + c²)/(a + c) = (b² + c²)/(b + c) = k and a ≠ b, which of the following is equal to k?
+
+(A) a + c
+(B) b + c
+(C) a + b
+(D) a - c",C,,,,,
+"Exercise - 2(b) Q25. If (p + q)/r = (q + r)/p = (p + r)/q = k, find the sum of all the possible values of k.
+
+(A) 1
+(B) 2
+(C) 0
+(D) 3",A,,,,,
+"Exercise - 2(b) Q26. If (2x² - 4x + 3)/(4x - 3) = (2x² - 3x + 5)/(3x - 5), find the value(s) of x.
+
+(A) 0
+(B) 2
+(C) -2
+(D) Both (A) and (C)",D,,,,,
+"Exercise - 2(b) Q27. There are 2 two-digit numbers. Their product equals the product of the numbers formed by reversing their digits. Which of the following holds true if the numbers are denoted by ab and cd?
+
+(A) a, b, d and c are in proportion.
+(B) a, b, c and d are in proportion.
+(C) a, d, c and b are in proportion.
+(D) a, c, b, d are in proportion.",A,,,,,
+"Exercise - 2(b) Q28. A string is cut into two parts. The ratio of the lengths of the string and the smaller part is six times the ratio of the lengths of the smaller and the larger parts. Find the ratio of the lengths of the larger and smaller parts of the string.
+
+(A) 2:1
+(B) 3:1
+(C) 4:1
+(D) 5:1",B,,,,,
+"Exercise - 2(b) Q29. The mean proportional between two numbers is 9. The third proportional of the same numbers is 6561. Find the greater of the numbers.
+
+(No options provided in PDF)",81,,,,,
+"Exercise - 2(b) Q30. The ratio of Ahmed's age to Mohammed's age is the same as the ratio of the ages of their respective elder brothers. The ratio of the difference of the ages of Ahmed and Mohammed to that of the difference of the ages of their respective brothers is 1:2. What is the ratio of the sum of the ages of their respective brothers to the sum of the ages of Ahmed and Mohammed?
+
+(A) 2:1
+(B) 4:1
+(C) 3:1
+(D) √2:1",A,,,,,
+"Exercise - 2(b) Q31. x is directly proportional to 4 more than the square of y. x is 39 when y is 3. What is the positive value of y when x is 60?
+
+(No options provided in PDF)",4,,,,,
+"Exercise - 2(b) Q32. In a three digit number the tens digit is the average of the other two digits. The ratio of the number formed by its first two digits and their sum equals the ratio of the number formed by its last two digits and their sum. How many three digit numbers satisfy these conditions?
+
+(A) 7
+(B) 8
+(C) 9
+(D) 6",C,,,,,
+"Exercise - 2(b) Q33. The distance that a body falls through when dropped from a certain height varies directly with the square of the time of fall. A body falls through a total of 500m in 10 seconds. Find the distance it falls through, in the 9th second (in m).
+
+(No options provided in PDF)",85,,,,,
+"Exercise - 2(b) Q34. A quantity Q is obtained by adding three quantities. The first is a constant, the second varies directly with the square root of y and the third varies directly with the cube root of y. When y = 1, Q = 60. When y = 64, Q = 230 and when y = 729, Q = 660. Find the constant.
+
+(No options provided in PDF)",30,,,,,
+"Exercise - 2(b) Q35. The cost of supply of a commodity equals the sum of three quantities. The first one is a constant, the second varies directly as the price per unit of the commodity and the third varies directly as the square of the price per unit. The costs of supply are 9, 24 and 47 when the prices per unit are 1, 2 and 3 respectively. Find the cost (in ₹) of supply when price per unit of commodity is 4.
+
+(A) 80
+(B) 72
+(C) 76
+(D) 78",D,,,,,
+"Exercise - 2(b) Q36. The pressure of a gas varies directly with the temperature when the volume is constant and varies inversely with the volume when temperature is constant. If the present temperature is 100K, what will be the increase in temperature if the pressure triples and the volume doubles? (in K)
+
+(No options provided in PDF)",500,,,,,
+"Exercise - 2(b) Q37. Two diaphragms partition a cylinder into three chambers, whose volumes are in the ratio of 1:2:3. Pressure of a gas, which is in joint variation with its mass and volume, is directly proportional to its mass and inversely proportional to its volume. If the masses of the gas in the three chambers are same, find the ratio of the pressures of the gases in the three chambers taking them in the same order as the volumes have been taken.
+
+(A) 3:2:1
+(B) 1:2:3
+(C) 6:3:2
+(D) 1:1:1",C,,,,,
+"Exercise - 2(b) Q38. The heat radiated by a certain body per unit time varies directly with the square root of the excess of the temperature of the body over the ambient temperature which is 20°C. The heat radiated by the body in one second is 16 joules when the temperature of the body is 36°C. Find the temperature of the body when the heat radiated in one second is 20 joules.
+
+(A) 56°C
+(B) 45°C
+(C) 50°C
+(D) 60°C",B,,,,,
+"Exercise - 2(b) Q39. In a colony, the expenses for yoga classes are partly constant and partly vary directly with the number of members. If there are 50 members, each member has to bear 110 per month. If there are 30 more members, each member has to bear 80 per month. How many members are there if the share of each member is 130 per month?
+
+(No options provided in PDF)",40,,,,,
+"Exercise - 2(b) Q40. The telephone bill consists of a fixed monthly rent and a variable part that varies with the number of units of calls made per month. The monthly rents charged for a telephone connection in Bangalore and Patna are in the ratio 5:3. The bill amounts corresponding to 100 calls made from a phone in Patna and 300 calls made from a phone in Bangalore are respectively 500 and 1100. What is the difference in the fixed monthly rent of a telephone connection in Bangalore and one in Patna, if call rate per unit is same in both cities?
+
+(A) 200
+(B) 100
+(C) 500
+(D) 300",A,,,,,
+"Exercise - 2(b) Q41. A bowl contains ₹1, 50 paise and 25 paise coins. What is the total amount in the bowl?
+
+I. The total number of coins in the bowl is 20.
+II. The total value of ₹1 coins is 6 and the number of 50 paise coins and 25 paise coins are in the ratio 6:1.
+
+Mark (A) if the question can be answered using one of the statements alone, but cannot be answered using the other statement alone.
+Mark (B) if the question can be answered using either statement alone.
+Mark (C) if the question can be answered using I and II together but not using I or II alone.
+Mark (D) if the question cannot be answered even using I and II together.",C,,,,,
+"Exercise - 2(b) Q42. The ratio of technical staff and non-technical staff in a company is 3:10. What percentage of the staff are graduates?
+
+I. 80% of the technical staff and 40% of the non-technical staff are graduates.
+II. The ratio of the number of graduates to the total staff in the company is 32:65.
+
+Mark (A) if the question can be answered using one of the statements alone, but cannot be answered using the other statement alone.
+Mark (B) if the question can be answered using either statement alone.
+Mark (C) if the question can be answered using I and II together but not using I or II alone.
+Mark (D) if the question cannot be answered even using I and II together.",B,,,,,
+"Exercise - 2(b) Q43. How many girls are there in the class?
+
+I. The ratio of the number of boys to girls is 5:4.
+II. If four boys leave the class, the ratio of number of boys to girls in the class will be 1:1.
+
+Mark (A) if the question can be answered using one of the statements alone, but cannot be answered using the other statement alone.
+Mark (B) if the question can be answered using either statement alone.
+Mark (C) if the question can be answered using I and II together but not using I or II alone.
+Mark (D) if the question cannot be answered even using I and II together.",C,,,,,
+"Exercise - 2(b) Q44. What is the percentage of students who are not intelligent?
+
+I. The ratio of number of boys and girls is 3:2.
+II. 20% of the boys and 20% of the girls are intelligent.
+
+Mark (A) if the question can be answered using one of the statements alone, but cannot be answered using the other statement alone.
+Mark (B) if the question can be answered using either statement alone.
+Mark (C) if the question can be answered using I and II together but not using I or II alone.
+Mark (D) if the question cannot be answered even using I and II together.",A,,,,,
+"Exercise - 2(b) Q45. If a cake is distributed among two boys A and B and three girls X, Y and Z, who received the largest part?
+
+I. X received one-eighth part of the cake, which is two-thirds of B's share.
+II. A received twice B's share, which is equal to thrice the share of Y.
+
+Mark (A) if the question can be answered using one of the statements alone, but cannot be answered using the other statement alone.
+Mark (B) if the question can be answered using either statement alone.
+Mark (C) if the question can be answered using I and II together but not using I or II alone.
+Mark (D) if the question cannot be answered even using I and II together.",C,,,,,
