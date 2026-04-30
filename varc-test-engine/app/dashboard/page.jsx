@@ -1,9 +1,8 @@
 "use client";
-
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { getAllFromDB, restoreStore } from '../../lib/db';
-import { Home, Download, Upload, Activity, CheckCircle, Clock, Target, BrainCircuit, TrendingUp } from 'lucide-react';
+import { Home, Download, Upload, Activity, CheckCircle, Clock, Target, BrainCircuit, TrendingUp, Database } from 'lucide-react';
 
 export default function Dashboard() {
   const [results, setResults] = useState([]);
@@ -61,17 +60,19 @@ export default function Dashboard() {
     e.target.value = ''; 
   };
 
+  // FIX: Safely parse numbers to prevent NaN/Infinity crashes on corrupt data
   const totalTests = results.length;
-  const totalQuestions = results.reduce((acc, curr) => acc + (curr.totalQuestions || 0), 0);
-  const totalCorrect = results.reduce((acc, curr) => acc + (curr.correctCount || 0), 0);
+  const totalQuestions = results.reduce((acc, curr) => acc + (Number(curr.totalQuestions) || 0), 0);
+  const totalCorrect = results.reduce((acc, curr) => acc + (Number(curr.correctCount) || 0), 0);
   const avgAccuracy = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
 
+  // FIX: Safe chart data generation
   const chartData = results.map((res, i) => {
-    const totalQ = res.totalQuestions || 0;
-    const correct = res.correctCount || 0;
-    const wrong = totalQ - correct;
+    const totalQ = Number(res.totalQuestions) || 0;
+    const correct = Number(res.correctCount) || 0;
+    const wrong = Math.max(0, totalQ - correct);
     const accuracy = totalQ > 0 ? Math.round((correct / totalQ) * 100) : 0;
-    return { name: `T${i + 1}`, testId: res.testId, accuracy, correct, wrong, totalQ };
+    return { name: `T${i + 1}`, testId: res.testId || 'Unknown', accuracy, correct, wrong, totalQ };
   });
 
   if (loading) return (
@@ -145,8 +146,8 @@ export default function Dashboard() {
                        {d.accuracy}%
                      </div>
                      <div 
-                       className={`w-full rounded-t-md transition-all duration-500 ${d.accuracy >= 70 ? 'bg-emerald-400' : d.accuracy >= 40 ? 'bg-amber-400' : 'bg-rose-400'}`} 
-                       style={{ height: `${d.accuracy}%` }}
+                        className={`w-full rounded-t-md transition-all duration-500 ${d.accuracy >= 70 ? 'bg-emerald-400' : d.accuracy >= 40 ? 'bg-amber-400' : 'bg-rose-400'}`}
+                        style={{ height: `${d.accuracy}%` }}
                      ></div>
                   </div>
                   <span className="text-[10px] font-bold text-slate-400">{d.name}</span>
@@ -170,14 +171,14 @@ export default function Dashboard() {
                     <span className="text-[10px] font-bold text-slate-400 w-6 shrink-0">{d.name}</span>
                     <div className="flex-1 h-5 flex rounded-full overflow-hidden bg-slate-100 shadow-inner">
                        <div 
-                         className="bg-emerald-400 h-full flex items-center justify-center text-[10px] text-white font-bold transition-all duration-500" 
-                         style={{ width: `${d.totalQ > 0 ? (d.correct / d.totalQ) * 100 : 0}%` }}
+                          className="bg-emerald-400 h-full flex items-center justify-center text-[10px] text-white font-bold transition-all duration-500"
+                          style={{ width: `${d.totalQ > 0 ? (d.correct / d.totalQ) * 100 : 0}%` }}
                        >
                          {d.correct > 0 && d.correct}
                        </div>
                        <div 
-                         className="bg-rose-400 h-full flex items-center justify-center text-[10px] text-white font-bold transition-all duration-500" 
-                         style={{ width: `${d.totalQ > 0 ? (d.wrong / d.totalQ) * 100 : 0}%` }}
+                          className="bg-rose-400 h-full flex items-center justify-center text-[10px] text-white font-bold transition-all duration-500"
+                          style={{ width: `${d.totalQ > 0 ? (d.wrong / d.totalQ) * 100 : 0}%` }}
                        >
                          {d.wrong > 0 && d.wrong}
                        </div>

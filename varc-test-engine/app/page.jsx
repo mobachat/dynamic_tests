@@ -7,17 +7,20 @@ export default async function Home() {
 
   return (
     <main className="flex-1 p-4 md:p-8 max-w-7xl mx-auto w-full flex flex-col min-h-screen bg-slate-50 font-sans">
-      <header className="mb-10 mt-4 flex flex-col md:flex-row items-center justify-between gap-6 bg-white p-6 md:p-10 rounded-[2rem] shadow-sm border border-slate-200/60 relative overflow-hidden">
+      {/* Updated Header for Branding and Top Bar Space */}
+      <header className="mb-8 mt-2 flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-4 md:p-6 rounded-[1.5rem] shadow-sm border border-slate-200/60 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-50/50 rounded-full blur-3xl -z-10 transform translate-x-1/2 -translate-y-1/2"></div>
         
         <div className="text-center md:text-left z-10 flex-1">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 font-bold text-[10px] uppercase tracking-widest mb-4">
             <Zap size={12} /> Next-Gen Platform
           </div>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight flex items-center gap-3 justify-center md:justify-start">
-            VARC Engine
+          {/* Updated Title */}
+          <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-3 justify-center md:justify-start">
+            Verbalist Elite Engine
           </h1>
-          <p className="text-slate-500 mt-4 text-base md:text-lg max-w-xl font-medium leading-relaxed">
+          {/* Updated Subtitle padding and size */}
+          <p className="text-slate-500 mt-2 text-sm md:text-base max-w-xl font-medium leading-relaxed">
             High-performance testing environment with dynamic filtering, auto-evaluation, and realtime analytics.
           </p>
         </div>
