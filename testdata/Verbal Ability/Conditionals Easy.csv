@@ -1,0 +1,501 @@
+Passage,Correct answers,Type,Difficulty,Size,Questions,Flags
+"If you freeze water, it becomes solid.
+A) Zero Conditional
+B) First Conditional
+C) Second Conditional
+D) Third Conditional",A,,,,,max_options=4
+"If it rains tomorrow, we will cancel the match.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I were a bird, I would fly.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If she had studied, she would have passed.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you heat ice, it melts.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If he arrives late, we will start without him.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I had a car, I would drive to work.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If they had left earlier, they wouldn't have missed the flight.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you don't water plants, they die.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If she calls me, I will tell her the truth.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I were rich, I would buy a yacht.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If we had known about the party, we would have gone.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If it snows tomorrow, schools will close.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If you mix red and blue, you get purple.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If I were you, I would apologize.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If he had taken the medicine, he would have recovered.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If she practices every day, she will improve.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If you touch a flame, you get burned.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If I won the lottery, I would travel the world.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If they had invited us, we would have attended.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you heat water to 100°C, it boils.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If he doesn't hurry, he will miss the bus.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I spoke French, I would work in Paris.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If she had seen the sign, she wouldn't have parked there.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you drop glass, it breaks.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If we leave now, we will arrive on time.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I had more time, I would learn guitar.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If you had told me earlier, I would have helped.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you press this button, the machine starts.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If it is sunny tomorrow, we will go to the beach.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I were taller, I could reach the top shelf.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If she had worn a helmet, she wouldn't have been injured.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you heat metal, it expands.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If they win the match, they will celebrate.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I knew the answer, I would tell you.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If we had arrived earlier, we would have seen the opening.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you add sugar, the tea tastes sweet.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If she studies hard, she will get a scholarship.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I had a million dollars, I would donate half.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If they had listened carefully, they would have understood.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you don't eat, you get hungry.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If it rains later, we will stay indoors.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I were the CEO, I would change the policy.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If she had saved more, she would have bought the house.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you boil water, steam forms.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If he calls, tell him I'm busy.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I had wings, I would fly.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If you had asked politely, she would have helped you.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you freeze water, it turns to ice.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If we miss the train, we will take the next one.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I were invisible, I would spy on people.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If they had practiced more, they would have won the trophy.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you leave ice in the sun, it melts.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If she apologizes, I will forgive her.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I had a superpower, I would choose teleportation.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If he had worn a seatbelt, he would have survived.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you heat ice, it becomes water.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If they offer me the job, I will accept.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I were a child again, I would play more.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If she had set an alarm, she wouldn't have overslept.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you shake the bottle, the liquid fizzes.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If you eat too much, you will feel sick.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I had a time machine, I would visit the future.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If they had followed the map, they wouldn't have gotten lost.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you pour oil on water, it floats.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If the price drops, I will buy the phone.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I were a cat, I would sleep all day.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If you had told me the truth, I would have believed you.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you add salt to water, it boils at a higher temperature.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If she works hard, she will succeed.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I were the president, I would lower taxes.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If they had checked the weather, they wouldn't have been caught in the storm.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you press the pedal, the car accelerates.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If he apologizes, I might forgive him.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I had a garden, I would grow roses.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If you had arrived on time, you would have met the CEO.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you mix yellow and blue, you get green.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If they invest wisely, they will become rich.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I were a doctor, I would help the poor.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If she had studied medicine, she would have become a surgeon.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you leave milk out, it sours.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If you save money, you will be able to travel.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I had a private jet, I would fly everywhere.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If they had taken the train, they wouldn't have been delayed.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you heat metal, it conducts electricity better.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If you ask nicely, she will help you.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I were a famous singer, I would tour the world.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If you had locked the door, the thief wouldn't have entered.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you freeze carbon dioxide, it becomes dry ice.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If she practices daily, she will win the competition.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I had a photographic memory, I would ace every exam.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If you had listened to the warning, you wouldn't have gotten lost.
+A) Zero
+B) First
+C) Second
+D) Third",D,,,,,max_options=4
+"If you add vinegar to baking soda, it fizzes.
+A) Zero
+B) First
+C) Second
+D) Third",A,,,,,max_options=4
+"If it is cold tonight, we will light a fire.
+A) Zero
+B) First
+C) Second
+D) Third",B,,,,,max_options=4
+"If I were a billionaire, I would end poverty.
+A) First
+B) Second
+C) Third
+D) Mixed",B,,,,,max_options=4
+"If you had taken my advice, you wouldn't be in trouble now.
+A) Zero
+B) First
+C) Second
+D) Mixed (past→present)",D,,,,,max_options=4
+"If she weren't afraid of heights, she would have climbed the mountain last year.
+A) Second
+B) Third
+C) Mixed (present→past)
+D) First",C,,,,,max_options=4
+"If I had studied law, I would be a judge now.
+A) Second
+B) Third
+C) Mixed (past→present)
+D) First",C,,,,,max_options=4
+"If he were more careful, he wouldn't have broken the vase yesterday.
+A) Mixed (present→past)
+B) Second
+C) Third
+D) Zero",A,,,,,max_options=4
+"If you had told me the truth yesterday, I would trust you today.
+A) Third
+B) Mixed (past→present)
+C) Second
+D) First",B,,,,,max_options=4

@@ -1,0 +1,711 @@
+Passage,Correct answers,Type,Difficulty,Size,Questions,Flags
+"Which figure of speech directly compares two unlike things using ""like"" or ""as""?
+A) Metaphor
+B) Simile
+C) Personification
+D) Hyperbole",B,,,,,max_options=4
+"Identify the figure in: ""Life is a roller coaster — full of ups and downs.""
+A) Simile
+B) Allegory
+C) Metaphor
+D) Litotes",C,,,,,max_options=4
+"""The wind whispered secrets through the ancient oaks."" This is an example of:
+A) Metaphor
+B) Personification
+C) Onomatopoeia
+D) Chiasmus",B,,,,,max_options=4
+"""Peter's purple peppers pickled perfectly."" The repeated /p/ sound illustrates:
+A) Assonance
+B) Consonance
+C) Alliteration
+D) Cacophony",C,,,,,max_options=4
+"""The light of the fire is a sight."" The repetition of the long 'i' sound is:
+A) Alliteration
+B) Assonance
+C) Onomatopoeia
+D) Epigram",B,,,,,max_options=4
+"""The rusty gate creaked and groaned in the wind."" The words ""creaked"" and ""groaned"" represent:
+A) Onomatopoeia
+B) Euphony
+C) Antithesis
+D) Zeugma",A,,,,,max_options=4
+"""All hands on deck!"" uses a part (hands) to mean whole sailors. This is:
+A) Metonymy
+B) Synecdoche
+C) Transferred epithet
+D) Paradox",B,,,,,max_options=4
+"""The crown issued a decree."" Here ""crown"" stands for monarchy. Which trope?
+A) Synecdoche
+B) Metonymy
+C) Allegory
+D) Pun",B,,,,,max_options=4
+"""I've told you a million times not to exaggerate!"" The extreme exaggeration is:
+A) Litotes
+B) Hyperbole
+C) Irony
+D) Climax",B,,,,,max_options=4
+"""That's not a bad performance at all"" — meaning it's very good. This understatement is:
+A) Hyperbole
+B) Anticlimax
+C) Litotes
+D) Oxymoron",C,,,,,max_options=4
+"""Ask not what your country can do for you — ask what you can do for your country."" This inverted structure is:
+A) Zeugma
+B) Chiasmus
+C) Antithesis
+D) Anaphora",B,,,,,max_options=4
+"""He lost his wallet, his temper, and then his hat."" The single verb ""lost"" governs three objects. This is:
+A) Zeugma
+B) Synecdoche
+C) Epigram
+D) Climax",A,,,,,max_options=4
+"""It was the best of times, it was the worst of times."" The balanced contrast is:
+A) Antithesis
+B) Paradox
+C) Oxymoron
+D) Pun",A,,,,,max_options=4
+"""The more you learn, the less you know."" This self-contradictory statement that reveals truth is:
+A) Irony
+B) Paradox
+C) Hyperbole
+D) Litotes",B,,,,,max_options=4
+"""I have a dream that one day... I have a dream that my children..."" The repetition of ""I have a dream"" at the start is:
+A) Epistrophe
+B) Anaphora
+C) Chiasmus
+D) Zeugma",B,,,,,max_options=4
+"""Time flies like an arrow. Fruit flies like a banana."" The playful use of double meaning is:
+A) Pun
+B) Irony
+C) Metaphor
+D) Synecdoche",A,,,,,max_options=4
+"""What a lovely day!"" she said during a thunderstorm. The intended meaning opposite to literal is:
+A) Paradox
+B) Irony
+C) Oxymoron
+D) Litotes",B,,,,,max_options=4
+"""George Orwell's Animal Farm represents the Russian Revolution."" This extended metaphor is:
+A) Allegory
+B) Fable
+C) Epigram
+D) Climax",A,,,,,max_options=4
+"""I can resist everything except temptation."" This witty, concise statement is:
+A) Epigram
+B) Paradox
+C) Pun
+D) Chiasmus",A,,,,,max_options=4
+"""He arrived, he saw, he conquered."" The arrangement of ideas in increasing importance is:
+A) Anticlimax
+B) Climax
+C) Zeugma
+D) Litotes",B,,,,,max_options=4
+"""The mellow wedding bells chimed softly."" The pleasant, harmonious sounds create:
+A) Cacophony
+B) Euphony
+C) Alliteration
+D) Onomatopoeia",B,,,,,max_options=4
+"""The clashing, crashing cymbals assaulted our ears."" The harsh, discordant sounds create:
+A) Euphony
+B) Cacophony
+C) Assonance
+D) Consonance",B,,,,,max_options=4
+"""He spent a sleepless night worrying."" The adjective ""sleepless"" logically belongs to him, not the night. This is:
+A) Transferred epithet
+B) Oxymoron
+C) Zeugma
+D) Chiasmus",A,,,,,max_options=4
+"""He lost his fortune, his family, and then his favorite pen."" The descent from serious to trivial is:
+A) Climax
+B) Anticlimax
+C) Hyperbole
+D) Litotes",B,,,,,max_options=4
+"""Deafening silence filled the room."" The combination of contradictory terms is:
+A) Paradox
+B) Oxymoron
+C) Antithesis
+D) Irony",B,,,,,max_options=4
+"""O death, where is thy sting? O grave, where is thy victory?"" Addressing an abstract idea directly is:
+A) Apostrophe
+B) Personification
+C) Synecdoche
+D) Metonymy",A,,,,,max_options=4
+"""He's not the sharpest tool in the shed."" meaning he's not intelligent. This polite expression is:
+A) Hyperbole
+B) Litotes
+C) Euphemism
+D) Oxymoron",C,,,,,max_options=4
+"""We passed away, passed on, and departed this life."" The gentle word for death is:
+A) Euphemism
+B) Litotes
+C) Irony
+D) Pun",A,,,,,max_options=4
+"""The only thing we have to fear is fear itself."" This circular statement is:
+A) Paradox
+B) Oxymoron
+C) Antithesis
+D) Epigram",A,,,,,max_options=4
+"""Stop, stop, stop! Don't move an inch!"" The immediate repetition of ""stop"" without interruption is:
+A) Anaphora
+B) Epizeuxis
+C) Assonance
+D) Consonance",B,,,,,max_options=4
+"""The boy was a lion in the battlefield."" This direct comparison without ""like"" or ""as"" is:
+A) Simile
+B) Metaphor
+C) Personification
+D) Hyperbole",B,,,,,max_options=4
+"""He fights like a lion."" This comparison using ""like"" is:
+A) Simile
+B) Metaphor
+C) Allegory
+D) Oxymoron",A,,,,,max_options=4
+"""The sun smiled down on the children playing."" Attributing human trait to the sun is:
+A) Metaphor
+B) Personification
+C) Hyperbole
+D) Litotes",B,,,,,max_options=4
+"""She sells sea shells by the sea shore."" The repeated initial consonants are:
+A) Alliteration
+B) Assonance
+C) Onomatopoeia
+D) Cacophony",A,,,,,max_options=4
+"""Hear the mellow wedding bells, golden bells!"" The pleasant vowel and consonant harmony is:
+A) Alliteration
+B) Assonance
+C) Euphony
+D) Cacophony",C,,,,,max_options=4
+"""The clash of swords and crash of shields echoed through the valley."" The harsh, jarring sounds create:
+A) Euphony
+B) Cacophony
+C) Assonance
+D) Alliteration",B,,,,,max_options=4
+"""The kettle whistled its cheerful announcement."" The word ""whistled"" imitates the sound. This is:
+A) Onomatopoeia
+B) Metaphor
+C) Simile
+D) Personification",A,,,,,max_options=4
+"""The pen is mightier than the sword."" (pen = writing, sword = violence). This substitution is:
+A) Synecdoche
+B) Metonymy
+C) Metaphor
+D) Simile",B,,,,,max_options=4
+"""Give me your tired, your poor, your huddled masses."" Using ""tired"" and ""poor"" to stand for people is:
+A) Synecdoche
+B) Metonymy
+C) Transferred epithet
+D) Zeugma",A,,,,,max_options=4
+"""I'm so hungry I could eat a horse."" This obvious exaggeration is:
+A) Hyperbole
+B) Litotes
+C) Irony
+D) Understatement",A,,,,,max_options=4
+"""It's a bit chilly outside"" — during a blizzard. This deliberate understatement is:
+A) Hyperbole
+B) Litotes
+C) Irony
+D) Climax",B,,,,,max_options=4
+"""One should eat to live, not live to eat."" The reversed grammatical structure is:
+A) Chiasmus
+B) Zeugma
+C) Antithesis
+D) Anaphora",A,,,,,max_options=4
+"""She stole my heart and my wallet on the same night."" The verb ""stole"" applies to both emotional and physical theft. This is:
+A) Zeugma
+B) Synecdoche
+C) Pun
+D) Oxymoron",A,,,,,max_options=4
+"""Success is counted sweetest by those who never succeed."" This contradictory yet true statement is:
+A) Paradox
+B) Oxymoron
+C) Antithesis
+D) Hyperbole",A,,,,,max_options=4
+"""I came, I saw, I conquered."" The ascending power of the verbs creates:
+A) Climax
+B) Anticlimax
+C) Zeugma
+D) Litotes",A,,,,,max_options=4
+"""He lost his wife, his job, and then his car keys."" The sudden drop in seriousness is:
+A) Climax
+B) Anticlimax
+C) Hyperbole
+D) Irony",B,,,,,max_options=4
+"""Bittersweet memories lingered in her heart."" Two opposite words joined together form:
+A) Paradox
+B) Oxymoron
+C) Antithesis
+D) Pun",B,,,,,max_options=4
+"""Hello darkness, my old friend."" Addressing darkness as if it were a person is:
+A) Apostrophe
+B) Personification
+C) Synecdoche
+D) Metonymy",A,,,,,max_options=4
+"""He's between jobs at the moment."" The gentle substitute for ""unemployed"" is:
+A) Euphemism
+B) Litotes
+C) Hyperbole
+D) Irony",A,,,,,max_options=4
+"""Water, water, water everywhere!"" The immediate repetition of ""water"" three times is:
+A) Anaphora
+B) Epizeuxis
+C) Assonance
+D) Consonance",B,,,,,max_options=4
+"""Her eyes were sparkling diamonds in the moonlight."" This direct comparison is:
+A) Simile
+B) Metaphor
+C) Personification
+D) Hyperbole",B,,,,,max_options=4
+"""As busy as a bee preparing for winter."" The comparison using ""as...as"" is:
+A) Simile
+B) Metaphor
+C) Allegory
+D) Oxymoron",A,,,,,max_options=4
+"""The angry storm lashed the coastline with fury."" Human emotion given to storm is:
+A) Metaphor
+B) Personification
+C) Simile
+D) Hyperbole",B,,,,,max_options=4
+"""Big blue balloons bobbed beautifully."" The repeated /b/ sound is:
+A) Alliteration
+B) Assonance
+C) Onomatopoeia
+D) Consonance",A,,,,,max_options=4
+"""The rain in Spain falls mainly on the plain."" The repeated long 'a' vowel sound is:
+A) Alliteration
+B) Assonance
+C) Euphony
+D) Cacophony",B,,,,,max_options=4
+"""The grunting, growling, grinding gears of the old factory."" The harsh unpleasant sounds create:
+A) Euphony
+B) Cacophony
+C) Assonance
+D) Alliteration",B,,,,,max_options=4
+"""The old door creaked a warning as it opened."" The word ""creaked"" imitates the sound. This is:
+A) Onomatopoeia
+B) Metaphor
+C) Simile
+D) Personification",A,,,,,max_options=4
+"""Wall Street reacted with panic to the news."" (Wall Street = financial markets). This substitution is:
+A) Synecdoche
+B) Metonymy
+C) Metaphor
+D) Simile",B,,,,,max_options=4
+"""All hands abandoned the sinking ship."" (hands = sailors). This part-for-whole is:
+A) Synecdoche
+B) Metonymy
+C) Pun
+D) Oxymoron",A,,,,,max_options=4
+"""I've told you a gazillion times to clean your room."" The impossible number is:
+A) Hyperbole
+B) Litotes
+C) Irony
+D) Understatement",A,,,,,max_options=4
+"""That's no small achievement for a beginner."" meaning it's actually impressive. This double negative is:
+A) Hyperbole
+B) Litotes
+C) Oxymoron
+D) Pun",B,,,,,max_options=4
+"""Fair is foul and foul is fair."" The reversed word order is:
+A) Chiasmus
+B) Zeugma
+C) Antithesis
+D) Anaphora",A,,,,,max_options=4
+"""She opened the door and her heart to the stranger."" The verb ""opened"" applies to both physical and emotional action. This is:
+A) Zeugma
+B) Synecdoche
+C) Pun
+D) Oxymoron",A,,,,,max_options=4
+"""The child is father of the man."" This seemingly contradictory statement is:
+A) Paradox
+B) Oxymoron
+C) Antithesis
+D) Hyperbole",A,,,,,max_options=4
+"""The silent scream echoed in his mind."" The combination of ""silent"" and ""scream"" is:
+A) Paradox
+B) Oxymoron
+C) Antithesis
+D) Irony",B,,,,,max_options=4
+"""O Romeo, Romeo, wherefore art thou Romeo?"" Juliet addressing Romeo who is not present is:
+A) Apostrophe
+B) Personification
+C) Synecdoche
+D) Metonymy",A,,,,,max_options=4
+"""He passed away peacefully in his sleep."" The gentle term for death is:
+A) Euphemism
+B) Litotes
+C) Hyperbole
+D) Irony",A,,,,,max_options=4
+"""No, no, no! I absolutely refuse!"" The immediate repetition of ""no"" is:
+A) Anaphora
+B) Epizeuxis
+C) Assonance
+D) Consonance",B,,,,,max_options=4
+"""The classroom was a zoo after the substitute left."" This direct comparison is:
+A) Simile
+B) Metaphor
+C) Personification
+D) Hyperbole",B,,,,,max_options=4
+"""Her cheeks are like roses blooming in spring."" The comparison using ""like"" is:
+A) Simile
+B) Metaphor
+C) Allegory
+D) Oxymoron",A,,,,,max_options=4
+"""The tired old couch groaned under his weight."" Giving human action to furniture is:
+A) Metaphor
+B) Personification
+C) Simile
+D) Hyperbole",B,,,,,max_options=4
+"""Wild and woolly, wary weasels wandered."" The repeated /w/ sound is:
+A) Alliteration
+B) Assonance
+C) Onomatopoeia
+D) Consonance",A,,,,,max_options=4
+"""The cold snow fell slow over the lonely road."" The repeated long 'o' sound is:
+A) Alliteration
+B) Assonance
+C) Euphony
+D) Cacophony",B,,,,,max_options=4
+"""The screeching, scratching, scraping of chalk on the board."" The harsh discordant sounds create:
+A) Euphony
+B) Cacophony
+C) Assonance
+D) Alliteration",B,,,,,max_options=4
+"""The clock ticked away the final moments."" The word ""ticked"" imitates the sound. This is:
+A) Onomatopoeia
+B) Metaphor
+C) Simile
+D) Personification",A,,,,,max_options=4
+"""Hollywood produces more films than any other place."" (Hollywood = American film industry). This is:
+A) Synecdoche
+B) Metonymy
+C) Metaphor
+D) Simile",B,,,,,max_options=4
+"""The village needed fifty plows for the harvest."" (plows = farming families). This part-for-whole is:
+A) Synecdoche
+B) Metonymy
+C) Pun
+D) Oxymoron",A,,,,,max_options=4
+"""I've been waiting since the dawn of time for this moment."" The extreme exaggeration is:
+A) Hyperbole
+B) Litotes
+C) Irony
+D) Understatement",A,,,,,max_options=4
+"""She's not unlike her mother in that regard."" meaning she is similar. This understatement is:
+A) Hyperbole
+B) Litotes
+C) Oxymoron
+D) Pun",B,,,,,max_options=4
+"""You should work to live, not live to work."" The inverted parallel structure is:
+A) Chiasmus
+B) Zeugma
+C) Antithesis
+D) Anaphora",A,,,,,max_options=4
+"""He took his hat and his leave without a word."" The verb ""took"" applies to both physical and abstract objects. This is:
+A) Zeugma
+B) Synecdoche
+C) Pun
+D) Oxymoron",A,,,,,max_options=4
+"""The beginning of the end."" This contradictory phrase is:
+A) Paradox
+B) Oxymoron
+C) Antithesis
+D) Irony",B,,,,,max_options=4
+"""O mighty Caesar, dost thou lie so low?"" Addressing the dead Caesar as if present is:
+A) Apostrophe
+B) Personification
+C) Synecdoche
+D) Metonymy",A,,,,,max_options=4
+"""He's vertically challenged."" The gentle term for short height is:
+A) Euphemism
+B) Litotes
+C) Hyperbole
+D) Irony",A,,,,,max_options=4
+"""Never, never, never give up on your dreams."" The immediate repetition of ""never"" is:
+A) Anaphora
+B) Epizeuxis
+C) Assonance
+D) Consonance",B,,,,,max_options=4
+"""Her voice was silk sliding over satin."" This direct comparison without ""like"" or ""as"" is:
+A) Simile
+B) Metaphor
+C) Personification
+D) Hyperbole",B,,,,,max_options=4
+"""He runs as fast as the wind."" The comparison using ""as...as"" is:
+A) Simile
+B) Metaphor
+C) Allegory
+D) Oxymoron",A,,,,,max_options=4
+"""The flowers danced in the gentle breeze."" Human action given to flowers is:
+A) Metaphor
+B) Personification
+C) Simile
+D) Hyperbole",B,,,,,max_options=4
+"""Crazy cats climbed carefully."" The repeated /c/ and /k/ sound is:
+A) Alliteration
+B) Assonance
+C) Onomatopoeia
+D) Consonance",A,,,,,max_options=4
+"""The lonely boat floated home alone."" The repeated long 'o' sound is:
+A) Alliteration
+B) Assonance
+C) Euphony
+D) Cacophony",B,,,,,max_options=4
+"""The hissing, sputtering, crackling campfire kept us awake."" The harsh sounds create:
+A) Euphony
+B) Cacophony
+C) Assonance
+D) Alliteration",B,,,,,max_options=4
+"""The snake hissed a warning."" The word ""hissed"" imitates the sound. This is:
+A) Onomatopoeia
+B) Metaphor
+C) Simile
+D) Personification",A,,,,,max_options=4
+"""The White House confirmed the meeting."" (White House = US presidency). This substitution is:
+A) Synecdoche
+B) Metonymy
+C) Metaphor
+D) Simile",B,,,,,max_options=4
+"""The army needed a thousand swords for the battle."" (swords = soldiers). This part-for-whole is:
+A) Synecdoche
+B) Metonymy
+C) Pun
+D) Oxymoron",A,,,,,max_options=4
+"""My backpack weighs a ton!"" The obvious exaggeration is:
+A) Hyperbole
+B) Litotes
+C) Irony
+D) Understatement",A,,,,,max_options=4
+"""His performance was not unimpressive."" meaning it was actually good. This double negative is:
+A) Hyperbole
+B) Litotes
+C) Oxymoron
+D) Pun",B,,,,,max_options=4
+"""We shape our buildings, and afterwards our buildings shape us."" The reversed structure is:
+A) Chiasmus
+B) Zeugma
+C) Antithesis
+D) Anaphora",A,,,,,max_options=4
+"""She broke his car and his spirit in one afternoon."" The verb ""broke"" applies to physical and emotional damage. This is:
+A) Zeugma
+B) Synecdoche
+C) Pun
+D) Oxymoron",A,,,,,max_options=4
+"""Jumbo shrimp is my favorite dish."" The combination of contradictory words is:
+A) Paradox
+B) Oxymoron
+C) Antithesis
+D) Irony",B,,,,,max_options=4
+"""O wild west wind, thou breath of autumn's being!"" Addressing the wind directly is:
+A) Apostrophe
+B) Personification
+C) Synecdoche
+D) Metonymy",A,,,,,max_options=4
+"""He's in a better place now."" The gentle substitute for death is:
+A) Euphemism
+B) Litotes
+C) Hyperbole
+D) Irony",A,,,,,max_options=4
+"""Alone, alone, all, all alone, alone on a wide wide sea!"" The immediate repetition of ""alone"" is:
+A) Anaphora
+B) Epizeuxis
+C) Assonance
+D) Consonance",B,,,,,max_options=4
+"""The world is a stage and we are merely players."" This extended metaphor is:
+A) Simile
+B) Metaphor
+C) Allegory
+D) Oxymoron",C,,,,,max_options=4
+"""As cold as ice in the heart of winter."" The comparison using ""as...as"" is:
+A) Simile
+B) Metaphor
+C) Personification
+D) Hyperbole",A,,,,,max_options=4
+"""The moon hid behind a curtain of clouds."" Human action given to moon is:
+A) Metaphor
+B) Personification
+C) Simile
+D) Hyperbole",B,,,,,max_options=4
+"""Lovely lilies lounged lazily."" The repeated /l/ sound is:
+A) Alliteration
+B) Assonance
+C) Onomatopoeia
+D) Consonance",A,,,,,max_options=4
+"""The deep green sea swept swiftly."" The repeated long 'e' sound is:
+A) Alliteration
+B) Assonance
+C) Euphony
+D) Cacophony",B,,,,,max_options=4
+"""The rattling, clanking, banging pipes woke everyone."" The harsh discordant sounds create:
+A) Euphony
+B) Cacophony
+C) Assonance
+D) Alliteration",B,,,,,max_options=4
+"""The bee buzzed angrily around the room."" The word ""buzzed"" imitates the sound. This is:
+A) Onomatopoeia
+B) Metaphor
+C) Simile
+D) Personification",A,,,,,max_options=4
+"""The Kremlin issued a warning."" (Kremlin = Russian government). This substitution is:
+A) Synecdoche
+B) Metonymy
+C) Metaphor
+D) Simile",B,,,,,max_options=4
+"""The restaurant needed ten new aprons for the rush hour."" (aprons = waiters). This part-for-whole is:
+A) Synecdoche
+B) Metonymy
+C) Pun
+D) Oxymoron",A,,,,,max_options=4
+"""She cried a river of tears after the breakup."" The extreme exaggeration is:
+A) Hyperbole
+B) Litotes
+C) Irony
+D) Understatement",A,,,,,max_options=4
+"""The test was not exactly a walk in the park."" meaning it was difficult. This understatement is:
+A) Hyperbole
+B) Litotes
+C) Oxymoron
+D) Pun",B,,,,,max_options=4
+"""The value of marriage is not that adults produce children, but that children produce adults."" The inverted structure is:
+A) Chiasmus
+B) Zeugma
+C) Antithesis
+D) Anaphora",A,,,,,max_options=4
+"""He lost his job, his house, and his favorite coffee mug."" The verb ""lost"" applies to three objects. This is:
+A) Zeugma
+B) Synecdoche
+C) Pun
+D) Oxymoron",A,,,,,max_options=4
+"""Living dead."" The two opposite words together form:
+A) Paradox
+B) Oxymoron
+C) Antithesis
+D) Irony",B,,,,,max_options=4
+"""O sleep, O gentle sleep, nature's soft nurse!"" Addressing sleep directly is:
+A) Apostrophe
+B) Personification
+C) Synecdoche
+D) Metonymy",A,,,,,max_options=4
+"""He's economically disadvantaged."" The gentle term for poor is:
+A) Euphemism
+B) Litotes
+C) Hyperbole
+D) Irony",A,,,,,max_options=4
+"""Wow, wow, wow! That's amazing!"" The immediate repetition of ""wow"" is:
+A) Anaphora
+B) Epizeuxis
+C) Assonance
+D) Consonance",B,,,,,max_options=4
+"""Her heart is a cold iron fortress."" This direct comparison is:
+A) Simile
+B) Metaphor
+C) Personification
+D) Hyperbole",B,,,,,max_options=4
+"""He eats like a horse at every meal."" The comparison using ""like"" is:
+A) Simile
+B) Metaphor
+C) Allegory
+D) Oxymoron",A,,,,,max_options=4
+"""The storm raged with fury through the night."" Human emotion given to storm is:
+A) Metaphor
+B) Personification
+C) Simile
+D) Hyperbole",B,,,,,max_options=4
+"""Silly snakes slither slowly."" The repeated /s/ sound is:
+A) Alliteration
+B) Assonance
+C) Onomatopoeia
+D) Consonance",A,,,,,max_options=4
+"""The old oak spoke of ages past."" The repeated long 'o' sound is:
+A) Alliteration
+B) Assonance
+C) Euphony
+D) Cacophony",B,,,,,max_options=4
+"""The screeching, squealing brakes announced our arrival."" The harsh sounds create:
+A) Euphony
+B) Cacophony
+C) Assonance
+D) Alliteration",B,,,,,max_options=4
+"""The fire crackled cheerfully in the hearth."" The word ""crackled"" imitates the sound. This is:
+A) Onomatopoeia
+B) Metaphor
+C) Simile
+D) Personification",A,,,,,max_options=4
+"""Silicon Valley is known for innovation."" (Silicon Valley = tech industry). This substitution is:
+A) Synecdoche
+B) Metonymy
+C) Metaphor
+D) Simile",B,,,,,max_options=4
+"""The stadium needed twenty fresh arms for the match."" (arms = players). This part-for-whole is:
+A) Synecdoche
+B) Metonymy
+C) Pun
+D) Oxymoron",A,,,,,max_options=4
+"""I've walked a thousand miles to find you."" The obvious exaggeration is:
+A) Hyperbole
+B) Litotes
+C) Irony
+D) Understatement",A,,,,,max_options=4
+"""His explanation was not entirely clear."" meaning it was confusing. This understatement is:
+A) Hyperbole
+B) Litotes
+C) Oxymoron
+D) Pun",B,,,,,max_options=4
+"""You forget what you want to remember, and you remember what you want to forget."" The reversed parallel structure is:
+A) Chiasmus
+B) Zeugma
+C) Antithesis
+D) Anaphora",A,,,,,max_options=4
+"""He took his time and his neighbor's wallet."" The verb ""took"" applies to both patient and criminal action. This is:
+A) Zeugma
+B) Synecdoche
+C) Pun
+D) Oxymoron",A,,,,,max_options=4
+"""Original copy."" The contradictory phrase is:
+A) Paradox
+B) Oxymoron
+C) Antithesis
+D) Irony",B,,,,,max_options=4
+"""O liberty, what crimes are committed in thy name!"" Addressing liberty directly is:
+A) Apostrophe
+B) Personification
+C) Synecdoche
+D) Metonymy",A,,,,,max_options=4
+"""She's between homes right now."" The gentle term for homeless is:
+A) Euphemism
+B) Litotes
+C) Hyperbole
+D) Irony",A,,,,,max_options=4
+"""Help, help, help! I'm drowning!"" The immediate repetition of ""help"" is:
+A) Anaphora
+B) Epizeuxis
+C) Assonance
+D) Consonance",B,,,,,max_options=4
+"""His words were daggers cutting through my pride."" This direct comparison is:
+A) Simile
+B) Metaphor
+C) Personification
+D) Hyperbole",B,,,,,max_options=4
+"""She sings like an angel in heaven."" The comparison using ""like"" is:
+A) Simile
+B) Metaphor
+C) Allegory
+D) Oxymoron",A,,,,,max_options=4
+"""The car coughed and sputtered before dying."" Human actions given to car are:
+A) Metaphor
+B) Personification
+C) Simile
+D) Hyperbole",B,,,,,max_options=4
+"""Mighty mountains move majestically."" The repeated /m/ sound is:
+A) Alliteration
+B) Assonance
+C) Onomatopoeia
+D) Consonance",A,,,,,max_options=4
+"""The light white kite flew high in the night sky."" The repeated long 'i' sound is:
+A) Alliteration
+B) Assonance
+C) Euphony
+D) Cacophony",B,,,,,max_options=4
+"""The grating, grinding, groaning engine finally stopped."" The harsh sounds create:
+A) Euphony
+B) Cacophony
+C) Assonance
+D) Alliteration",B,,,,,max_options=4
