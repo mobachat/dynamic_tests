@@ -4,24 +4,23 @@ import { ArrowRight, ArrowLeft, CheckCircle, Check, X, Clock, AArrowUp, AArrowDo
 export default function TestPassage({ data, testId, currentIndex, setCurrentIndex, answers, setAnswers, locked, setLocked, setViewState, persistProgress, submitTest, extractQuestionsFromRow, liveStats }) {
   const [fontSize, setFontSize] = useState(16);
   const [passageTimeSpent, setPassageTimeSpent] = useState(0);
+  const [questionTimeSpent, setQuestionTimeSpent] = useState({});
   const [splitSize, setSplitSize] = useState(50);
   const [dictBox, setDictBox] = useState(null);
   const [activeQ, setActiveQ] = useState(0);
-
+  
   const mainRef = useRef(null);
   const leftPaneRef = useRef(null);
   const rightPaneRef = useRef(null);
   const questionRefs = useRef([]);
   const isDragging = useRef(false);
-
+  
   const currentItem = data[currentIndex] || [];
   const rawQuestionText = currentItem[5] ? String(currentItem[5]).trim() : "";
   const isSingleColumn = rawQuestionText === "";
-
   const passageText = currentItem[0] ? String(currentItem[0]).trim() : "";
   const questionsData = extractQuestionsFromRow(currentItem);
 
-  // Helper to format text: applies **bolding** and newline breaks
   const formatText = (text) => {
     if (!text) return "";
     return text
@@ -39,11 +38,23 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
   }, [currentIndex]);
 
   useEffect(() => {
-    const interval = setInterval(() => setPassageTimeSpent(prev => prev + 1), 1000);
+    const interval = setInterval(() => {
+      setPassageTimeSpent(prev => prev + 1);
+      if (!isSingleColumn && questionsData.length > 0) {
+        setQuestionTimeSpent(prev => ({
+          ...prev,
+          [activeQ]: (prev[activeQ] || 0) + 1
+        }));
+      } else if (isSingleColumn && questionsData.length > 0) {
+        setQuestionTimeSpent(prev => ({
+          ...prev,
+          [0]: (prev[0] || 0) + 1
+        }));
+      }
+    }, 1000);
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  }, [currentIndex, activeQ, isSingleColumn, questionsData.length]);
 
-  // Enforce Fullscreen
   useEffect(() => {
     const enforceFullscreen = async () => {
       if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
@@ -61,14 +72,12 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     };
   }, []);
 
-  // Keyboard & Gesture Navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
       if (e.key === 'ArrowRight' && currentIndex < data.length - 1) setCurrentIndex(prev => prev + 1);
       if (e.key === 'ArrowLeft' && currentIndex > 0) setCurrentIndex(prev => prev - 1);
     };
-
     let touchStartX = 0;
     const handleTouchStart = (e) => { touchStartX = e.changedTouches[0].screenX; };
     const handleTouchEnd = (e) => {
@@ -76,11 +85,9 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
       if (touchStartX - touchEndX > 50 && currentIndex < data.length - 1) setCurrentIndex(prev => prev + 1);
       if (touchEndX - touchStartX > 50 && currentIndex > 0) setCurrentIndex(prev => prev - 1);
     };
-
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
-
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('touchstart', handleTouchStart);
@@ -88,7 +95,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     };
   }, [currentIndex, data.length, setCurrentIndex]);
 
-  // Active Question Observer
   useEffect(() => {
     if (isSingleColumn || questionsData.length === 0) return;
     const visibilities = {};
@@ -107,14 +113,13 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
       }
       if (bestIndex !== activeQ) setActiveQ(bestIndex);
     }, { root: rightPaneRef.current, threshold: [0, 0.25, 0.5, 0.75, 1] });
-
+    
     const timer = setTimeout(() => {
       questionRefs.current.forEach(ref => { if(ref) observer.observe(ref) });
     }, 50);
     return () => { clearTimeout(timer); observer.disconnect(); }
   }, [currentIndex, questionsData.length, isSingleColumn, activeQ]);
 
-  // Manual Dictionary Handler
   const handleTextSelection = async () => {
     const selection = window.getSelection();
     if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
@@ -151,9 +156,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
 
   const calculateSplit = (clientX, clientY) => {
     const isDesktop = window.innerWidth >= 1024;
-    // Check for landscape orientation to determine split logic
     const isLandscape = window.matchMedia("(orientation: landscape)").matches;
-    
     if (isDesktop || isLandscape) {
       setSplitSize(Math.max(20, Math.min(80, (clientX / window.innerWidth) * 100)));
     } else {
@@ -165,7 +168,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
 
   const onDragMove = (e) => { if (!isDragging.current) return; calculateSplit(e.clientX, e.clientY); };
   const onTouchDragMove = (e) => { if (!isDragging.current) return; e.preventDefault(); calculateSplit(e.touches[0].clientX, e.touches[0].clientY); };
-  
   const onDragEnd = () => {
     isDragging.current = false;
     document.removeEventListener('mousemove', onDragMove);
@@ -195,10 +197,8 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     let currentSelection = pageAnswers[qIndex];
     if (!Array.isArray(currentSelection)) currentSelection = [];
     let newSelection = currentSelection.includes(opt) ? currentSelection.filter(item => item !== opt) : [...currentSelection, opt];
-    
     const newAnswers = { ...answers, [currentIndex]: { ...pageAnswers, [qIndex]: newSelection } };
     let newLocked = locked;
-    
     const correctCount = String(correctAnswer).split(',').length;
     if (newSelection.length === correctCount) {
       newLocked = { ...locked, [currentIndex]: { ...pageLocked, [qIndex]: true } };
@@ -226,11 +226,15 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
   const renderOptionsPane = (qData, qIndex) => {
     if (!qData) return null;
     const { correctAnswer, flagsStr } = qData;
-    const flags = flagsStr.split(';').map(f => f.trim());
     
+    const flags = flagsStr.split(/[,;]/).map(f => f.trim().toLowerCase());
     const isMcma = String(correctAnswer).includes(',');
     let questionType = isMcma ? 'mcma' : 'mcsa';
-    if (flags.includes('textinput')) questionType = 'textinput';
+    
+    // Check for Text Input Flag
+    if (flags.includes('textinput') || flags.includes('tita')) {
+        questionType = 'textinput';
+    }
     
     let maxOptions = 4;
     const numFlag = flags.find(f => !isNaN(parseInt(f)) && f.trim() !== "");
@@ -238,12 +242,12 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
       const parsed = parseInt(numFlag);
       if (parsed > 0 && parsed <= 10) maxOptions = parsed;
     }
-
+    
     let optFormat = 'number';
     const cleanCorrectString = String(correctAnswer).replace(/[^A-Za-z0-9]/g, '');
     if (/[A-Z]/.test(cleanCorrectString)) optFormat = 'upper';
     else if (/[a-z]/.test(cleanCorrectString)) optFormat = 'lower';
-
+    
     const optionButtons = Array.from({length: maxOptions}, (_, i) => {
       if (optFormat === 'upper') return String.fromCharCode(65 + i);
       if (optFormat === 'lower') return String.fromCharCode(97 + i);
@@ -259,8 +263,12 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     return (
       <div className="w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm p-2 md:p-3 flex items-center justify-between gap-3 shrink-0">
         <div className="flex items-center gap-2">
-          <span className="font-extrabold text-indigo-500 uppercase tracking-widest text-[10px] md:text-xs bg-indigo-50 px-2 py-1 rounded-md whitespace-nowrap">
+          <span className="font-extrabold text-indigo-500 uppercase tracking-widest text-[10px] md:text-xs bg-indigo-50 px-2 py-1 rounded-md whitespace-nowrap flex items-center gap-1.5">
             {questionsData.length > 1 ? `Q ${qIndex + 1}` : 'Opts'}
+            <span className="bg-white/80 text-slate-500 px-1 rounded flex items-center gap-0.5">
+              <Clock size={10} className={questionTimeSpent[qIndex] > 0 ? "animate-pulse" : ""} />
+              {formatTime(questionTimeSpent[qIndex] || 0)}
+            </span>
           </span>
           {questionType === 'mcma' && !qLocked && (
             <span className="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-bold whitespace-nowrap hidden sm:inline-block">Select Multiple</span>
@@ -351,7 +359,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
             <Clock size={12} className={passageTimeSpent > 0 ? "animate-pulse" : ""} /> {formatTime(passageTimeSpent)}
           </div>
         </div>
-
         <div className="flex items-center bg-slate-900 rounded-xl border border-slate-700/50 p-0.5 md:p-1">
           <button disabled={currentIndex === 0} onClick={(e) => { e.stopPropagation(); setCurrentIndex(prev => prev - 1); }} className="p-1 md:p-1.5 disabled:opacity-30 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">
             <ArrowLeft size={16} />
@@ -369,7 +376,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
             </button>
           )}
         </div>
-
         <div className="flex items-center gap-1.5 md:gap-3">
           {liveStats.totalChecked > 0 && (
             <div className="hidden lg:flex items-center gap-1.5 bg-slate-900 text-emerald-400 px-3 py-1.5 rounded-xl border border-emerald-500/20 font-bold text-xs shadow-inner">
@@ -384,7 +390,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         </div>
       </header>
 
-      {/* Landscape layout support via landscape: modifier */}
       <main 
         style={{ '--split-size': `${splitSize}%` }}
         className={`flex-1 flex overflow-hidden min-h-0 ${isSingleColumn ? 'justify-center items-center p-2' : 'flex-col landscape:flex-row lg:flex-row'}`}
@@ -444,8 +449,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
                 />
               </div>
             ))}
-            
-            {/* Added empty spacer at bottom for last question visibility */}
             <div className="h-48 md:h-64 w-full shrink-0"></div>
           </div>
         </div>
