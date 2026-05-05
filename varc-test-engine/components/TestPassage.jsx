@@ -8,13 +8,12 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
   const [splitSize, setSplitSize] = useState(50);
   const [dictBox, setDictBox] = useState(null);
   const [activeQ, setActiveQ] = useState(0);
-  
   const mainRef = useRef(null);
   const leftPaneRef = useRef(null);
   const rightPaneRef = useRef(null);
   const questionRefs = useRef([]);
   const isDragging = useRef(false);
-  
+
   const currentItem = data[currentIndex] || [];
   const rawQuestionText = currentItem[5] ? String(currentItem[5]).trim() : "";
   const isSingleColumn = rawQuestionText === "";
@@ -231,7 +230,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     const isMcma = String(correctAnswer).includes(',');
     let questionType = isMcma ? 'mcma' : 'mcsa';
     
-    // Check for Text Input Flag
     if (flags.includes('textinput') || flags.includes('tita')) {
         questionType = 'textinput';
     }
@@ -309,22 +307,64 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
             })}
           </div>
         )}
+
         {questionType === 'textinput' && (
           <div className="flex-1 flex flex-col gap-1 ml-2 max-w-sm">
-            <input
-              type="text"
-              value={qAns || ""} onChange={(e) => handleTextInput(qIndex, e.target.value)} disabled={qLocked}
-              placeholder="Type answer & Enter"
-              onKeyDown={(e) => {
-                if(e.key === 'Enter') {
-                  e.preventDefault();
-                  const newLocked = { ...locked, [currentIndex]: { ...pageLocked, [qIndex]: true } };
-                  setLocked(newLocked);
-                  persistProgress(answers, newLocked);
-                }
-              }}
-              className={`w-full p-2 border rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 text-xs md:text-sm transition-all ${qLocked ? 'bg-slate-50 text-slate-500 border-slate-200' : 'bg-white shadow-inner'}`}
-            />
+            <div className="relative flex items-center">
+              <input
+                type="text"
+                value={qAns || ""} 
+                onChange={(e) => handleTextInput(qIndex, e.target.value)} 
+                disabled={qLocked}
+                placeholder="Type answer..."
+                onKeyDown={(e) => {
+                  if(e.key === 'Enter' && qAns && String(qAns).trim() !== '') {
+                    e.preventDefault();
+                    const newLocked = { ...locked, [currentIndex]: { ...pageLocked, [qIndex]: true } };
+                    setLocked(newLocked);
+                    persistProgress(answers, newLocked);
+                  }
+                }}
+                className={`w-full p-2 pr-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-100 text-xs md:text-sm transition-all ${
+                  qLocked 
+                    ? (cleanCorrectArr.includes(String(qAns).trim().toLowerCase()) 
+                        ? 'bg-emerald-50 text-emerald-700 border-emerald-400 shadow-sm' 
+                        : 'bg-rose-50 text-rose-700 border-rose-400 shadow-sm')
+                    : 'bg-white shadow-inner focus:border-indigo-500'
+                }`}
+              />
+              
+              {/* Submit Button (Only shows when typing and unlocked) */}
+              {!qLocked && qAns && String(qAns).trim() !== '' && (
+                <button
+                  onClick={() => {
+                    const newLocked = { ...locked, [currentIndex]: { ...pageLocked, [qIndex]: true } };
+                    setLocked(newLocked);
+                    persistProgress(answers, newLocked);
+                  }}
+                  className="absolute right-1.5 p-1 bg-indigo-100 text-indigo-600 hover:bg-indigo-600 hover:text-white rounded-md transition-colors"
+                >
+                  <Check size={14} strokeWidth={3} />
+                </button>
+              )}
+
+              {/* Feedback Icons (Only shows when locked) */}
+              {qLocked && (
+                <div className="absolute right-2">
+                  {cleanCorrectArr.includes(String(qAns).trim().toLowerCase()) 
+                    ? <CheckCircle size={16} className="text-emerald-500" /> 
+                    : <X size={16} className="text-rose-500" />
+                  }
+                </div>
+              )}
+            </div>
+
+            {/* Display correct answer if they got it wrong */}
+            {qLocked && !cleanCorrectArr.includes(String(qAns).trim().toLowerCase()) && (
+               <div className="text-[10px] text-emerald-600 font-extrabold ml-1">
+                 Answer: {correctAnswer}
+               </div>
+            )}
           </div>
         )}
       </div>
@@ -333,6 +373,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
 
   return (
     <div ref={mainRef} className="w-full h-[100dvh] bg-slate-950 flex flex-col overflow-hidden font-sans select-none relative">
+      
       {dictBox && (
         <div 
           className="fixed z-50 bg-slate-900/95 backdrop-blur-xl text-white p-4 rounded-xl shadow-2xl max-w-[250px] md:max-w-sm border border-slate-700/50 animate-in fade-in zoom-in duration-200 transform -translate-x-1/2"
@@ -359,6 +400,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
             <Clock size={12} className={passageTimeSpent > 0 ? "animate-pulse" : ""} /> {formatTime(passageTimeSpent)}
           </div>
         </div>
+
         <div className="flex items-center bg-slate-900 rounded-xl border border-slate-700/50 p-0.5 md:p-1">
           <button disabled={currentIndex === 0} onClick={(e) => { e.stopPropagation(); setCurrentIndex(prev => prev - 1); }} className="p-1 md:p-1.5 disabled:opacity-30 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">
             <ArrowLeft size={16} />
@@ -376,6 +418,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
             </button>
           )}
         </div>
+
         <div className="flex items-center gap-1.5 md:gap-3">
           {liveStats.totalChecked > 0 && (
             <div className="hidden lg:flex items-center gap-1.5 bg-slate-900 text-emerald-400 px-3 py-1.5 rounded-xl border border-emerald-500/20 font-bold text-xs shadow-inner">
