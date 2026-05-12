@@ -1,0 +1,703 @@
+Passage,Correct answers,Type,Difficulty,Size,Questions,Flags
+36=36=,729,,,,,TITA
+215=215=,32768,,,,,TITA
+"The sum of 50 odd numbers is
+(A) even
+(B) odd
+(C) Can't say",A,,,,,3
+"The product of 45 even numbers is
+(A) even
+(B) odd
+(C) Can't say",A,,,,,3
+"The sum of 30 composite numbers is
+(A) even
+(B) odd
+(C) Can't say",C,,,,,3
+"The product of 20 composite numbers is
+(A) even
+(B) odd
+(C) Can't say",C,,,,,3
+"The product of 20 prime numbers is
+(A) even
+(B) odd
+(C) Can't say",C,,,,,3
+"If the sum of 35 distinct prime numbers is even, then one of them has to be",2,,,,,TITA
+The number of distinct prime factors of 13013 is,3,,,,,TITA
+"0.27=0.27=
+(A) 518185​
+(B) 277999999277​
+(C) 152333333152​
+(D) 310103​",A,,,,,4
+"0.456=0.456=
+(A) 152300300152​
+(B) 152330330152​
+(C) 152333333152​
+(D) 226495495226​",D,,,,,4
+"0.12=0.12=
+(A) 3733333337​
+(B) 3733033037​
+(C) 3730030037​
+(D) 4133333341​",C,,,,,4
+"Which of the following are not twin primes?
+(A) 239 and 241
+(B) 149 and 151
+(C) 179 and 181
+(D) 229 and 231",D,,,,,4
+"Which of the following is a prime number?
+(A) 437
+(B) 323
+(C) 567
+(D) 241",D,,,,,4
+"Which of the following numbers is divisible by 11?
+(A) 1111111
+(B) 77777
+(C) 246642
+(D) 7654321",C,,,,,4
+The eight-digit number 7654321A is divisible by 9. Find A.,8,,,,,TITA
+"The six-digit number 24687X is divisible by 9. Find X.
+(A) 0
+(B) 7
+(C) 9
+(D) Cannot be determined",D,,,,,4
+"Is the ten-digit number PQRSTU6736 divisible by 32?
+(A) Yes
+(B) No
+(C) Can't say",C,,,,,3
+"Is the nine-digit number PQRST9875 divisible by 625?
+(A) Yes
+(B) No
+(C) Can't say",B,,,,,3
+"When the sum of the digits of a number is subtracted from the number, the result will always be divisible by
+(A) 6
+(B) 9
+(C) 11
+(D) 5",B,,,,,4
+"The LCM and HCF of two numbers are 264 and 2 respectively. If one of them is 22, the other is",24,,,,,TITA
+"If LCM (x, y, z) = (x)(y)(z), HCF (y, z) =
+(A) 1
+(B) 2
+(C) x
+(D) Can't say",A,,,,,4
+"HCF (x, y, z) = 1. Is LCM (x, y, z) = (x)(y)(z)?
+(A) Yes
+(B) No
+(C) Can't say",C,,,,,3
+Find the number of factors of 38×6438×64.,65,,,,,TITA
+"Is (33)(77)(215)(33)(77)(215) a perfect square?
+(A) Yes
+(B) No
+(C) Can't say",A,,,,,3
+"A number has an odd number of factors. Is it a perfect cube?
+(A) Yes
+(B) No
+(C) Can't say",C,,,,,3
+"A number has an even number of factors. Is it a perfect square?
+(A) Yes
+(B) No
+(C) Can't say",B,,,,,3
+111112=111112=,123454321,,,,,TITA
+"Find the number of ways in which (58)(710)(58)(710) can be written as a product of 2 distinct natural numbers.
+(A) 40
+(B) 45
+(C) 49
+(D) 50",C,,,,,4
+Find the number of ways in which (38)(73)(38)(73) can be written as a product of 2 distinct natural numbers.,14,,,,,TITA
+"Find the number of ways in which (28)(310)(28)(310) can be written as a product of two co-primes.
+(A) 2
+(B) 4
+(C) 6
+(D) 11",A,,,,,4
+Find the number of ways in which (23)(34)(56)(78)(23)(34)(56)(78) can be written as a product of two co-primes.,8,,,,,TITA
+"Find the sum of the factors of (24)(33)(24)(33)
+(A) 930
+(B) 1240
+(C) 1085
+(D) 808",B,,,,,4
+Find the sum of the factors of 437.,480,,,,,TITA
+"If N is a perfect number, the sum of all the factors of N equals
+(A) N
+(B) 2N
+(C) 3N
+(D) 4N",B,,,,,4
+"Find the number of numbers less than 214214 and co-prime to it.
+(A) 212212
+(B) 222222
+(C) 223223
+(D) 213213",D,,,,,4
+"If N=3p×2q×32rN=3p×2q×32r find the number of numbers less than N and co-prime to it (Express your answer in terms of N).
+(A) N44N​
+(B) N33N​
+(C) 2N332N​
+(D) N22N​",B,,,,,4
+Find the number of numbers co-prime to 289 and less than it.,272,,,,,TITA
+Find the sum of the numbers which are co-prime to 48 and less than 48.,384,,,,,TITA
+"If x+1x=4x+x1​=4 x2+1x2=x2+x21​=
+(A) 8
+(B) 10
+(C) 12
+(D) 14",D,,,,,4
+If y−1y=3y−y1​=3 y2+1y2=y2+y21​=,11,,,,,TITA
+"Which of the following is/are a factor(s) of x4−3x2+1?x4−3x2+1?
+(A) x2−2x+1x2−2x+1
+(B) x2−x−1x2−x−1
+(C) x2+x−1x2+x−1
+(D) More than one of the above",D,,,,,4
+If x+y=12x+y=12 and xy=18xy=18 x3+y3=x3+y3=,1080,,,,,TITA
+"If p3+q3+r3=3pqp3+q3+r3=3pq then which of the following is true?
+(A) p=q=rp=q=r
+(B) p+q+r=0p+q+r=0
+(C) p+q+r=0p+q+r=0 or p=q=rp=q=r
+(D) None of these",C,,,,,4
+"p3+r3−q3+3pqp2+q2+r2+pq+qr−rp=p2+q2+r2+pq+qr−rpp3+r3−q3+3pq​=
+(A) p+q−rp+q−r
+(B) p+r−qp+r−q
+(C) r+q−pr+q−p
+(D) p−rp−r",B,,,,,4
+"If p+q+r=0p+q+r=0 p3+q3+r3=p3+q3+r3=
+(A) 3pq
+(B) 6pq
+(C) 0
+(D) pq",A,,,,,4
+"LCM480,360,320",2880,,,,,TITA
+"HCF63,84,147",21,,,,,TITA
+"LCM (56,910,89)=(65​,109​,98​)=",360,,,,,TITA
+"HCF(712,215,1418)=HCF(127​,521​,1814​)=
+(A) 73603607​
+(B) 71801807​
+(C) 7108010807​
+(D) 7216021607​",B,,,,,4
+"Is HCF [HCF (p, q), HCF (r, s)] = HCF[HCF (p, r), HCF (q, s)]?
+(A) Yes
+(B) No
+(C) Can't say",A,,,,,3
+"Is LCM [LCM(p,q),LCM(r,s)] = LCM [LCM(p,r),LCM(q,s)]?
+(A) Yes
+(B) No
+(C) Can't say",A,,,,,3
+Find the value of 10.593−4.78310.592+4.782+(10.59)(4.78)10.592+4.782+(10.59)(4.78)10.593−4.783​,5.81,,,,,TITA
+Find the index of the greatest power of 2 which divides 2561.,255,,,,,TITA
+Find the least natural number that should be added to 54321677 to make it divisible by 8.,3,,,,,TITA
+"Any 6 consecutive natural numbers will have their product divisible by
+(A) 600
+(B) 2160
+(C) 480
+(D) 720",D,,,,,4
+"The product of 10 consecutive even natural numbers is always divisible by
+(A) 210×11210×11
+(B) 210×12!210×12!
+(C) 210×10!210×10!
+(D) None of these",C,,,,,4
+Find the least natural number by which (35)(513)(719)(35)(513)(719) must be multiplied so that the product is a perfect square.,35,,,,,TITA
+Find the least natural number by which (513)(717)(513)(717) must be divided so that the quotient is a perfect square and the remainder is zero.,35,,,,,TITA
+"Find the least natural number by which (210)(314)(59)(210)(314)(59) must be divided so that the quotient is a perfect cube and the remainder is zero.
+(A) 6
+(B) 12
+(C) 36
+(D) 18",D,,,,,4
+Find the least natural number to be added to 395 so that the sum is a perfect cube.,35,,,,,TITA
+Find the least natural number to be subtracted from 500 so that the result is a perfect square.,16,,,,,TITA
+A number when divided by 54 leaves a remainder of 31. Find the remainder when the number is divided by 27.,4,,,,,TITA
+"Find the least natural number which, when divided by 7 or 8, leaves a remainder of 3 in either case.
+(A) 3
+(B) 59
+(C) 31
+(D) 25",A,,,,,4
+Find the least natural number which when divided by 24 and 18 leaves remainders of 18 and 12 respectively.,66,,,,,TITA
+Find the least natural number which when divided by 5 and 6 leaves remainders of 3 and 5 respectively.,23,,,,,TITA
+"Find the area of the smallest square which can be formed with rectangles of dimensions 7cm×5cm7cm×5cm (in sq.cm).
+(A) 1225
+(B) 4900
+(C) 11025
+(D) None of these",A,,,,,4
+Find the largest number which divides 107 and 78 leaving remainders of 17 and 18 respectively.,30,,,,,TITA
+"Find the largest number which divides 34, 58 and 94 leaving the same remainder in each case.
+(A) 6
+(B) 9
+(C) 12
+(D) 8",C,,,,,4
+"Find the least natural number which when successively divided by 5, 6 and 7 leaves respective remainders of 3, 4 and 5.",173,,,,,TITA
+"Find the number of three-digit natural numbers divisible by 8, 12 and 15.",8,,,,,TITA
+"The product of a seven-digit, ten-digit and a twelve-digit number is a digit number.
+(A) 27
+(B) 28
+(C) 28 or 29
+(D) 27 or 28 or 29",D,,,,,4
+The number of digits in the square root of a thirteen,7,,,,,TITA
+"The number of digits in (2PQR)4(2PQR)4 where 2PQR is a four-digit number is
+(A) 13
+(B) 14
+(C) 15
+(D) Can't say",D,,,,,4
+"The number of digits in the cube root of a 29 digit number is
+(A) 10
+(B) 9
+(C) 8
+(D) Cannot say",A,,,,,4
+"A number when divided by a divisor D leaves a remainder of 13. When thrice the number is divided by D, the remainder obtained is 2. Find the number of possibilities for D.",1,,,,,TITA
+"C is a composite number with an even number of factors. Consider the following statements.
+a C has a factor lying between 1 and CC​
+b C has a factor lying between CC​ and C.
+Which of the following can be concluded?
+A Both a and b are true.
+B Both a and b are false.
+C a is true but b is false.
+D a is false but b is true.",A,,,,,4
+X is a number formed by the first 100 digits of the number N which is formed by writing the first 100 natural numbers one after another as follows: 1234567891011. Find the remainder when X is divided by 16.,9,,,,,TITA
+"P is a three-digit number. Upon reversing P, another three digit number Q is obtained. Q>PQ>P and Q−PQ−P is divisible by 5. Which of the following is always true?
+A 100<P<499100<P<499
+B 105<P<505105<P<505
+C 110<P<510110<P<510
+D 115<P<515115<P<515",D,,,,,4
+"i What is the product of the factors of 183183
+A 18841884
+B 18421842
+C 1831418314
+D None of these",B,,,,,4
+"ii What is the product of the factors of 12!12!
+A 2103552(77)2103552(77)
+B 121396121396
+C 121782121782
+D None of these",D,,,,,4
+What is the number of ways in which 11025 can be expressed as the product of a pair of co-primes?,4,,,,,TITA
+How many odd natural numbers up to 1400 are divisible neither by 5 nor by 7?,480,,,,,TITA
+"Find the sum of the numbers which are co-prime to 840 and are less than it.
+A) 40320
+(B) 80640
+(C) 120960
+(D) 60480",B,,,,,4
+"From a certain city, buses start for four different places every 15, 20, 25 and 30 minutes starting from 8:00 a.m. At what time, for the first time after 8:00 a.m., would all the buses start together again?
+A) 10:00 a.m.
+(B) 12:00 noon
+(C) 1:00 p.m.
+(D) 2:00 p.m.",B,,,,,4
+"I have less than 200 sweets with me. If I distribute them equally among 10, 16 or 20 children, I would be left with 1 sweet in each case. If I distribute the sweets equally among 23 children, I would not have any sweets left with me. How many sweets do I have?",161,,,,,TITA
+"What is the smallest five-digit number which when divided by 7, 11 and 21 leaves a remainder of 5 in each case?
+A) 10164
+B) 10169
+C) 10118
+D) 10123",B,,,,,4
+"Find the smallest number which when divided by 3, 5, 7 and 9 leaves respective remainders of 2, 4, 6 and 8.",314,,,,,TITA
+"Find the largest five-digit number which when divided by 8 leaves a remainder of 3 and when divided by 7 leaves a remainder of 1.
+A) 99948
+B) 99953
+C) 99960
+D) 99947",D,,,,,4
+"Find the greatest number which divides 565, 847 and 1551 leaving remainders of 5, 7 and 11 respectively.",140,,,,,TITA
+"The signboard outside the department store 'Ram and Shyam' lights up as described below. When the switch is turned on, all the three words light up and remain lighted for 3 seconds. After that, the first word is switched off for 75/675/6 seconds, the second word is switched off for 11/311/3 seconds and the third word is switched off for 52/352/3 seconds. Then each word is again switched on for 3 seconds and then switched off for the time duration mentioned above. This process continues repeatedly. After how many seconds of switching on the signboard will the entire board be switched on for the second time for 3 seconds?
+A)4013B)4123C)4223D)4313A)4031​B)4132​C)4232​D)4331​",D,,,,,4
+"The HCF and LCM of a pair of numbers are 11 and 1001 respectively. If the sum of the two numbers is 220, find the smaller of the two numbers.",77,,,,,TITA
+"In finding the HCF of two numbers using the division method the last divisor is 8 and the quotients are 1, 1, 14 and 2 in that order. Find the two numbers.
+A) 256,496
+(B) 248,480
+(C) 280,344
+(D) 320,464",B,,,,,4
+"What is the HCF of all numbers of the form n(n2+20)n(n2+20) , n being any even number?
+A) 24
+(B) 12
+(C) 8
+(D) 48",A,,,,,4
+A number when divided successively by 6 and 7 leaves remainders of 4 and 5 respectively. Find the remainder when the number is divided by 21.,19,,,,,TITA
+"Find the largest four-digit number which when successively divided by 3, 4 and 5 leaves respective remainders of 2, 3 and 4.
+(A) 9985
+(B) 9995
+(C) 9996
+(D) 9959",D,,,,,4
+Find the index of the greatest power of 20 which divides 200!,49,,,,,TITA
+Find the number of zeros at the end of 175!,43,,,,,TITA
+"If k(N) denotes the number of ways of expressing N as a difference of two perfect squares, then which of the following is the least?
+(A) k(187)
+(B) k(120)
+(C) k(110)
+(D) k(105)",C,,,,,4
+How many positive integers are factors of exactly one of 1125 and 1800?,30,,,,,TITA
+"The sum of the all the factors of 33333333 is
+(A) 49775912
+(B) 48833116
+(C) 47699184
+(D) 49997952",A,,,,,4
+"If n is an integer greater than 3, which of the following is always not a factor of n (n2−4)(n4−10n2+9)?(n2−4)(n4−10n2+9)?
+(A) 126
+(B) 72
+(C) 52
+(D) 144",C,,,,,4
+"A is an integer but A is not. B is an integer but B 3 6 5 10 is not. Which of the following may not be an integer?
+(A) 5A−3B15155A−3B​
+(B) 5A−3B30305A−3B​
+(C) 5A−B10105A−B​
+(D) 5A−B20205A−B​",D,,,,,4
+"Find the smallest natural number to be multiplied with 72000 so that the product is a 5th5th power of an integer.
+(A) 10800
+(B) 21600
+(C) 5400
+(D) 32400",A,,,,,4
+"There were N houses in a colony, numbered 1 to N. All but 5 of the houses were destroyed in an earthquake. The numbers on the houses which were not destroyed are consecutive. If the sum of the numbers on the destroyed houses is 1085, then the least of the numbers on the houses which were not destroyed can be
+(A) 36
+(B) 26
+(C) 25
+(D) Either (36) or (26)",D,,,,,4
+"N = 2 25315162531516 Find the number of factors of N which are perfect cubes.
+(A) 324
+(B) 200
+(C) 288
+(D) 225",D,,,,,4
+"X = {7771286432{7128​764​732​ 3584
+Y is a subset of X such that the product of no two elements of Y is 196. The maximum number of elements that Y can have is",9,,,,,TITA
+"Let x, y and z be three natural numbers such that x+y+z=9m+10x+y+z=9m+10 where m is a natural number. For any m, which of the following holds true?
+(A) The minimum possible value of x2+y2+z2x2+y2+z2 is 27m2−60m+3427m2−60m+34
+(B) The maximum possible value of x2+y2+z2x2+y2+z2 is 27m2+60m+3427m2+60m+34
+(C) The minimum possible value of x2+y2+z2x2+y2+z2 is 27m2+60m+3427m2+60m+34
+(D) The maximum possible value of x2+y2+z2x2+y2+z2 is 27m2−60m+3427m2−60m+34",C,,,,,4
+Find the index of the greatest power of 2 in 64! + 65! + ... + 120!.,64,,,,,TITA
+"If p, q and r are prime numbers satisfying p=q+2=r+4p=q+2=r+4 how many combinations exist for p, q, r?",1,,,,,TITA
+"[a] is the least integer greater than or equal to a
+F(b,a)=[ab].F(b,a)=[ba​].
+F (10, F(9, F(8, F(7, F(6, i)))) = 1, where i is an integer.
+Consider the following statements.
+I. i is not less than 9.
+II. i is not more than 30000.
+Which of the following is/are true?
+(A) Only I
+(B) Only II
+(C) Both I and II
+(D) Neither I nor II",C,,,,,4
+"The sets PpPp​ are defined to be (p, p + 1, p + 2, p + 3, p + 4, p + 5) where p = 1, 2, 3, ... 88. How many of these sets contain a multiple of 8?",66,,,,,TITA
+"If 25≤x≤4925≤x≤49 and y=x2+3x(x+9)+81x+6x+9y=x+6x​+9x2+3x​(x+9)+81​ then y satisfies
+(A) 18≤y<3618≤y<36
+(B) 19≤y≤3819≤y≤38
+(C) 20≤y<4520≤y<45
+(D) 23≤y<2023≤y<20",A,,,,,4
+"A pair of numbers is formed with the digits 1, 2, 3, 4, ...9 such that all the digits are used and no digit occurs more than once in any number. Find the minimum difference between the two numbers of any such pair.",247,,,,,TITA
+"Find the number of four-digit numbers, that have distinct digits whose product is 540.",48,,,,,TITA
+"If 1≤P≤401≤P≤40 how many values of P exist such that (P−1)!(P−1)! is not divisible by P?
+(A) 11
+(B) 10
+(C) 12
+(D) 13",C,,,,,4
+"If p is a prime number greater than 3, (p2−1)(p2−1) is divisible by which of the following?
+(A) 6
+(B) 24
+(C) 2
+(D) All of these",D,,,,,4
+What is the least natural number that should be subtracted from 478185 so that the resulting number is a multiple of 19?,12,,,,,TITA
+X denotes the set of all the prime numbers less than 50. How many zeroes does the product of the elements of X end with?,1,,,,,TITA
+"Find the smallest natural number which must be added to 1648 so that a remainder of 10 is left when the resulting number is divided by 14 or 21.
+(A) 28
+(B) 42
+(C) 32
+(D) 18",B,,,,,4
+"The product of the remainders obtained when (N3+N)(N3+N) and (N3−N)(N3−N) are divided by 6, N being a positive integer greater than 1, is",0,,,,,TITA
+"Express 10.0.43 as a fraction.
+(A) 10043/999
+(B) 9943/999
+(C) 10043/990
+(D) 9943/990",D,,,,,4
+"The difference of a four-digit number and any number formed by permuting its digits would always be divisible by
+(A) 18
+(B) 11
+(C) 10
+(D) 9",D,,,,,4
+"If n is a natural number, which of the following numbers always divides n2−nn2−n ?
+(A) 13
+(B) 9
+(C) 7
+(D) 5",C,,,,,4
+"If a and b are two positive integers then (a + b)! is divisible by
+(A) a!
+(B) b!
+(C) a!b!
+(D) All of these",D,,,,,4
+If 1≤k≤401≤k≤40 how many prime numbers are of the form 5k+1?5k+1?,10,,,,,TITA
+"Two numbers when divided by a certain divisor leave remainders 238 and 342 respectively. When the sum of the two numbers is divided by the same divisor, the remainder is 156. Find the divisor.
+(A) 384
+(B) 404
+(C) 424
+(D) Cannot be determined",C,,,,,4
+"S is a set of positive integers such that each element x of S satisfies the following conditions.
+(i) Each digit of x is even. (ii) 2100≤x≤23002100≤x≤2300 How many elements of S are divisible by 3?",9,,,,,TITA
+"(i) Find the number of divisors of 900 excluding 1 and itself.
+(A) 25
+(B) 27
+(C) 23
+(D) 21",A,,,,,4
+"(ii) In how many ways can 1500 be expressed as a product of two of its factors?
+(A) 18
+(B) 12
+(C) 24
+(D) 36",B,,,,,4
+What is the number of different ways in which the number 784 can be expressed as a product of two different factors?,7,,,,,TITA
+"What is the product of the factors of 4! x5!?
+(A) 1208×2441208×244
+(B) 2880
+(C) 2880²1
+(D) 2880²2",C,,,,,4
+"What is the product of the factors of (89×99)(89×99) ?
+(A) 23213319042321331904
+(B) 21904332132190433213
+(C) 62386238
+(D) 26426338082642633808",D,,,,,4
+How many numbers are co-prime to 8640 and are less than it?,2304,,,,,TITA
+"What is the minimum number of identical square tiles required to recover a rectangular floor of dimensions 3m78cmby4m80cm3m78cmby4m80cm
+(A) 3200
+(B) 5040
+(C) 7600
+(D) 8100",B,,,,,4
+The index of the greatest power of 11 in 900!450!450!900!​ is,45,,,,,TITA
+"When the numbers 5, 7 and 11 divide a multiple of 17, the remainders left are 4, 6 and 10 respectively. Which multiple of 17 is the least number that satisfies the given condition?
+(A) 384th384th
+(B) 317th317th
+(C) 385th385th
+(D) 325th325th",B,,,,,4
+Find the smallest number which when divided by 31 leaves a remainder of 7 and when divided by 25 leaves a remainder of 6.,131,,,,,TITA
+Find the greatest number which divides 6155 and 4935 leaving remainders of 5 and 15 respectively.,1230,,,,,TITA
+"Three cakes have weights 514541​ lb, 734743​ lb and 815851​ lb.
+Each cake is to be cut into pieces, such that all the pieces have equal weight, and each piece must have the maximum possible weight. Find the number of guests who can be served, if each piece is served to a different guest.",424,,,,,TITA
+"A number when successively divided by 7, 11 and 5 leaves respective remainders of 5, 1 and 1. Find the smallest such number.",89,,,,,TITA
+"A number when successively divided by 4, 5 and 6 leaves remainders of 3, 4 and 5 respectively.
+(i) Find the hundreds digit of the smallest such number.
+(A) 1
+(B) 2
+(C) 3
+(D) 4",A,,,,,4
+"(ii) Find the hundreds digit of the second smallest such number.
+(A) 2
+(B) 3
+(C) 4
+(D) 5",A,,,,,4
+"If A, B and C are distinct digits such that the square of the two-digit number AB equals the three-digit number CCB, then the sum of all possible values of CCB equals",666,,,,,TITA
+If a+b=11a+b=11 and b=7b=7 then find the value of a3+b3a3+b3,1100,,,,,TITA
+"If S is the sum of the first 15828 prime numbers, then S is divisible by
+(A) 6
+(B) 4
+(C) 8
+(D) None of these",D,,,,,4
+"M is the sum of 10 consecutive natural numbers. Which of the following is a possible value of M?
+(A) 785
+(B) 780
+(C) 45
+(D) 100",A,,,,,4
+"The nthnth element of a series, denoted by YnYn​ , is given by Yn=(−1)nYn−1Yn​=(−1)nYn−1​ .
+If Y0=−yY0​=−y , where yy is a positive number, which of the following is always true?
+(A) YnYn​ is positive when nn is even and is not divisible by 4.
+(B) YnYn​ is positive when nn is odd.
+(C) YnYn​ is negative when nn is even and is not divisible by 4.
+(D) More than one of the above",A,,,,,4
+"Find the value of the expression below.
+[162−1+182−1+1102−1+⋯+1162−1]203[62−11​+82−11​+102−11​+⋯+162−11​]320​
+(A) 817178​
+(B) 916169​
+(C) 21323221​
+(D) 27646427​",A,,,,,4
+"The nthnth triangular number is the sum of the first nn natural numbers. Which of the following is a triangular number?
+(A) 262
+(B) 515
+(C) 824
+(D) 903",D,,,,,4
+"A teacher gave a student the task of adding N natural numbers starting from 1. After a while, the student reported his result as 700. The teacher then replied that his result was wrong. The student then realized that he had added one number twice by mistake. Find the sum of the digits of the number which the student had added twice.",7,,,,,TITA
+A three-digit number 'xyz' is such that the number equals x!+y!+z!x!+y!+z! . Find the difference of the number formed by reversing its digits and the original number.,396,,,,,TITA
+(i) If x2−4x+1=0x2−4x+1=0 find the value of x4+1x4x4+x41​.,194,,,,,TITA
+"(ii) If x>1x>1 and x+1x=4x+x1​=4 find the value of x4−1x4x4−x41​.
+(A) 112
+(B) 11231123​
+(C) 224
+(D) 22432243​",D,,,,,4
+"The 600-digit number 1223334444....is divided by 16. Find the remainder.
+(A) 4
+(B) 8
+(C) 0
+(D) 12",A,,,,,4
+"X is any even natural number such that Y=X2−2XY=X2−2X . Find the greatest natural number which always divides Y2−8YY2−8Y .
+(A) 192
+(B) 96
+(C) 384
+(D) 144",C,,,,,4
+Find the sum of all the factors of 324 which are multiples of 3.,840,,,,,TITA
+"Let X be the set of integers {8, 14, 20, 26, 32, ..., 350, 356, 362, 368, 374} and Y be a subset of X such that no two elements of Y have a sum of 382. Find the maximum number of elements Y can have.",31,,,,,TITA
+"Five two-digit numbers less than 25 have a product of 838695. Find the sum of the five numbers.
+(A) 79
+(B) 83
+(C) 89
+(D) 73",A,,,,,4
+"N is a four-digit number having distinct digits. Each digit of N is one of 5, 6, 7, 8, 9. The number of values of N which are divisible by 8 is",14,,,,,TITA
+"E=(3p+6q−9r)3+(3p−6q+9r)3+(−3p+6q+9r)3−3(3p+6q−9r)(3p−6q+9r)(−3p+6q+9r)E=(3p+6q−9r)3+(3p−6q+9r)3+(−3p+6q+9r)3−3(3p+6q−9r)(3p−6q+9r)(−3p+6q+9r) , where p,q,rp,q,r are such that p+2q=−3rp+2q=−3r .
+Consider the following statements:
+I. E is at least zero.
+II. E is at most zero.
+Which of the statement(s) can be concluded?
+(A) Only I
+(B) Only II
+(C) Both I and II
+(D) Neither I nor II",C,,,,,4
+"If Tn=nTn​=n , where nn is a natural number, for how many values of nn up to 150 is Tn+Tn+1Tn​+Tn+1​ a perfect square?",8,,,,,TITA
+The nine-digit number 7543299p6 is divisible by 36. Find the value of p.,9,,,,,TITA
+"How many times the HCF of the fractions 21161621​ and 356,143635​,314​ is their LCM?
+(A) 1440
+(B) 144
+(C) 210
+(D) 48",A,,,,,4
+"S is a set of three-digit numbers which satisfy the following conditions.
+(i) No element of S exceeds 500.
+(ii) Each element of S is divisible by 7 but not by 11.
+How many elements does S contain?",52,,,,,TITA
+"N is a four-digit number. It exceeds the number formed by reversing its digits by M, where M is a multiple of 45. The first and the last digits of N can be _____ respectively.
+(A) 6, 2
+(B) 8, 5
+(C) 9, 3
+(D) 5, 0",D,,,,,4
+"P = 1! + 2! + 3! + ……… + 60!
+Which of the following can be concluded?
+(A) P is a perfect square but not a perfect cube.
+(B) P is a perfect cube but not a perfect square.
+(C) P is a perfect square as well as a perfect cube.
+(D) P is neither a perfect square nor a perfect cube.",D,,,,,4
+"The Oxford University Press designed a 1200 page dictionary on a computer. Just before the dictionary was supposed to go for printing, it was spotted that none of the pages of the dictionary were numbered. A typist then numbered the pages of the dictionary. How many times did the typist press the number keys (0 to 9) in order to number the pages of the dictionary?",3693,,,,,TITA
+"P is the product of four consecutive even natural numbers. Q = P + 16.
+How many of the following statements are true?
+(1) Q1616Q​ is an odd perfect square.
+(2) Q is divisible by 8.
+(3) Q is divisible by 16.
+(4) Q is divisible by 32.",3,,,,,TITA
+N is an integer and the product of all its factors is equal to N2. The sum of all the factors of N excluding N is 57. How many values of N are there?,4,,,,,TITA
+"The integers 39276 and 38304 leave the same remainder when divided by a three-digit natural number N. How many possible values can N assume?
+(A) 8
+(B) 7
+(C) 6
+(D) 5",C,,,,,4
+"When a three-digit number divides 64484 and 62767, the remainder is the same in both the cases. What is the number?
+(A) 101
+(B) 458
+(C) 767
+(D) Cannot be determined",A,,,,,4
+"P and Q are two two-digit numbers. Their product equals the product of the numbers obtained on reversing them. None of the digits in P or Q is equal to the other digit in it or any digit in the other number. The product of tens digits of the two numbers is a composite single digit number. How many ordered pairs (P, Q) satisfy these conditions?
+(A) 8
+(B) 16
+(C) 12
+(D) 4",B,,,,,4
+The HCF of 3p5q+4771153p5q+477115 and 3q+55p+47x11x3q+55p+47x11x is 3x5x7x11x3x5x7x11x where p and q are natural numbers. Find the value of p.,5,,,,,TITA
+"If a, b, c and d are natural numbers such that ad+bd=cdad+bd=cd, which of the following is always true?
+(A) d is never more than the minimum of a, b and c.
+(B) d is never less than the maximum of a, b and c.
+(C) d lies between the minimum of a, b and c and the maximum of a, b and c.
+(D) None of these",A,,,,,4
+"Given that a # b = HCF(a,b)LCM(a,b)LCM(a,b)HCF(a,b)​
+If (p # q) # (r # s) = 1, then p # q = _____.
+(A) 1
+(B) q
+(C) p
+(D) r # s",D,,,,,4
+"Let ⌈x⌉⌈x⌉ denote the least integer greater than or equal to x.
+Let A(x, y) = ⌈2x⌉+⌈2y⌉⌈2x⌉+⌈2y⌉ and B(x, y) = ⌈x⌉+⌈y⌉+⌈x+y⌉⌈x⌉+⌈y⌉+⌈x+y⌉. Which of the following is false?
+(A) A(x, y) = B(x, y)
+(B) A(x, y) > B(x, y)
+(C) A(x, y) < B(x, y)
+(D) A(x, y) ≠ B(x, y)",B,,,,,4
+"S is the sum of four consecutive two-digit numbers. When S is divided by 10, the quotient is q and the remainder is 0. If q is a perfect square, the number of combinations which exist for the four numbers is",2,,,,,TITA
+"How many natural numbers upto 2050 are neither perfect squares nor perfect cubes?
+(A) 1966
+(B) 1978
+(C) 1996
+(D) 1990",C,,,,,4
+"x, y, z are three consecutive prime numbers. What are the values of x, y, z?
+Ι. y−z=4,x−y=6y−z=4,x−y=6
+ΙΙ. x<60x<60
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",D,,,,,4
+"A number k has three prime factors 2, 5 and 3. What is the value of k?
+I. Number of factors of k is 12
+II. k is a multiple of 4
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",C,,,,,4
+"If k and ℓℓ are odd numbers, is 712+k3+ℓ6721​+3k​+6ℓ​ an integer?
+I. k=ℓk=ℓ
+II. k=5ℓk=5ℓ
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",A,,,,,4
+"If a and b are natural numbers, is a+b<aba+b<ab
+I. a=ba=b
+II. a=1a=1
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",A,,,,,4
+"N is a two digit integer greater than 70. What is the value of N?
+I. N is a product of two different single digit integers.
+II. N can be expressed as a product of three distinct prime numbers
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",B,,,,,4
+"x is a two digit number whose square is a three digit number. What is value of x?
+I. The units digit of x and x2x2 is the same.
+II. The digit in the units place and the hundreds place of x2x2 is same.
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",D,,,,,4
+"Is the sum of (2a−b)(2a−b) and (2a+5b−4c)(2a+5b−4c) divisible by 3?
+I. c is negative, while a >0>0 and b>0b>0
+II. a,b,c are successive integers.
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",C,,,,,4
+"Is N the HCF of two numbers x,y?
+I. Both x,y are multiples of N
+II. x−y=2Nx−y=2N
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",D,,,,,4
+"A number K is multiplied with 0-ab. Is the product an integer?
+I. K is a multiple of 9
+II. K is a multiple of 11
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",C,,,,,4
+"Both y and z are prime numbers and x is a natural number. If x+y=zx+y=z and z<50z<50 what is the value of x?
+I. x is a multiple of 14.
+II. LCM of y,z is 527.
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",A,,,,,4
+"x and y are integers. Is y an odd number?
+I. xy is an odd number.
+II. x+yx+y is an odd number
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",A,,,,,4
+"810A4B6C is a number where A,B,C represent distinct digits. Find A+B+CA+B+C
+I. The number is divisible by 5,8,9
+II. Both A and B are non-prime.
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",C,,,,,4
+"Is the natural number X, greater than 189, a prime number?
+I. The number has only five multiples less than 1000.
+II. The number is odd and does not end in 5.
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",C,,,,,4
+"If the product of three positive integers is 40, how many of these are odd?
+I. The sum of three positive integers is odd.
+II. If the three integers are a, b and c then, ab + bc + ca is odd.
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",B,,,,,4
+"What is the remainder when N2−30N+200N2−30N+200 is divided by 50?
+I. N is the smallest natural number which leaves a remainder of 4 when divided by 12, 13, 14.
+II. N is the smallest natural number which leaves a remainder of 6, 7 respectively when divided by 16 and 17.
+Choice (A) if the question can be answered by using one of the statements alone, but cannot be answered by using the other statement alone.
+Choice (B) if the question can be answered by using either statement alone.
+Choice (C) if the question can be answered by using both statements together, but cannot be answered by using either statement alone.
+Choice (D) if the question cannot be answered even by using both the statements together.",B,,,,,4
