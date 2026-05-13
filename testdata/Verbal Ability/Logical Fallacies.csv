@@ -1,0 +1,1443 @@
+Passage,Correct answers,Type,Difficulty,Size,Questions,Flags,Hint
+"1. “You can’t trust Dr. Shaw’s advice on nutrition; she was convicted of tax fraud last year.”
+A. Ad hominem
+B. Tu quoque
+C. Genetic fallacy
+D. Poisoning the well",A,,,,,,"Ad hominem: Attacking a person’s character instead of their argument.
+Tu quoque: Rejecting criticism because the accuser is guilty of the same thing.
+Genetic fallacy: Judging a claim solely by its origin.
+Poisoning the well: Preemptively discrediting a source before they speak."
+"2. “If we ban assault rifles, next they’ll ban hunting rifles, then shotguns, and soon citizens will be defenceless.”
+A. False dilemma
+B. Slippery slope
+C. Hasty generalization
+D. Red herring",B,,,,,,"False dilemma: Presenting only two options when more are possible.
+Slippery slope: Asserting that a small step will inevitably lead to an extreme.
+Hasty generalization: A broad conclusion drawn from insufficient evidence.
+Red herring: Introducing an irrelevant topic to divert the argument."
+"3. “Either you support the entire tax reform bill or you’re fine with our country going bankrupt.”
+A. Straw man
+B. False dilemma
+C. Begging the question
+D. Ad populum",B,,,,,,"Straw man: Misrepresenting an argument to make it easier to attack.
+False dilemma: Limiting options to two when more exist.
+Begging the question: Assuming the conclusion within the premise.
+Ad populum: Believing something is true because many people do."
+"4. “We know ghosts exist because no scientist has ever conclusively disproved their existence.”
+A. Appeal to ignorance
+B. Appeal to authority
+C. Burden of proof shift
+D. False cause",A,,,,,,"Appeal to ignorance: Claiming something is true because it hasn’t been proven false, or vice versa.
+Appeal to authority: Using an expert outside their field or an unreliable source.
+Burden of proof shift: Demanding the opponent disprove a claim instead of proving it.
+False cause: Assuming causation from correlation or sequence."
+"5. “My opponent wants to cut the military budget. He clearly thinks our soldiers deserve to be put in harm’s way.”
+A. Red herring
+B. Ad hominem
+C. Straw man
+D. False analogy",C,,,,,,"Red herring: Distracting with an irrelevant point.
+Ad hominem: Attacking the person, not the argument.
+Straw man: Exaggerating or distorting an opponent’s position.
+False analogy: Comparing two things that aren’t alike in relevant ways."
+"6. “Everyone I know watches that reality show; it must be the most popular programme on television.”
+A. Hasty generalization
+B. Composition
+C. Bandwagon (ad populum)
+D. Anecdotal evidence",A,,,,,,"Hasty generalization: Drawing a conclusion from an unrepresentative sample.
+Composition: Assuming what’s true of a part is true of the whole.
+Bandwagon (ad populum): Appealing to popularity as evidence of truth.
+Anecdotal evidence: Using personal stories instead of rigorous data."
+"7. “The last three times I wore my green sweater we lost the match; I’ll never wear it again.”
+A. Gambler’s fallacy
+B. Post hoc ergo propter hoc
+C. Confirmation bias
+D. Regression fallacy",B,,,,,,"Gambler’s fallacy: Believing independent past events influence future probability.
+Post hoc ergo propter hoc: Assuming because A happened before B, A caused B.
+Confirmation bias: Favoring evidence that supports existing beliefs.
+Regression fallacy: Ignoring regression to the mean and attributing a cause."
+"8. “Of course the minister says church attendance is rising; he’d be out of a job if he admitted otherwise.”
+A. Ad hominem (circumstantial)
+B. Bulverism
+C. Straw man
+D. Appeal to motive",A,,,,,,"Ad hominem (circumstantial): Dismissing a claim because of the person’s circumstances.
+Bulverism: Assuming the opponent is wrong and then explaining their psychological reasons.
+Straw man: Misrepresenting an argument.
+Appeal to motive: Questioning someone’s motives rather than addressing the argument (similar to circumstantial ad hominem)."
+"9. “A square has four sides. Therefore, every part of a square also has four sides.”
+A. Composition
+B. Division
+C. Equivocation
+D. False analogy",B,,,,,,"Composition: Assuming what’s true of the parts is true of the whole.
+Division: Assuming what’s true of the whole is true of its parts.
+Equivocation: Using a word with two meanings in the same argument.
+False analogy: A weak comparison."
+"10. “That applicant should not be hired. She’s been unemployed for two years, so she must be lazy.”
+A. Ad hominem
+B. Non sequitur
+C. Fallacy of the single cause
+D. Faulty generalization",B,,,,,,"Ad hominem: Attacking the person rather than their qualifications.
+Non sequitur: The conclusion doesn’t logically follow from the premise.
+Fallacy of the single cause: Oversimplifying causation by ignoring multiple factors.
+Faulty generalization: Broad claim drawn from insufficient evidence."
+"11. “Do you still download music illegally?”
+A. Loaded question
+B. Begging the question
+C. False dilemma
+D. Complex cause",A,,,,,,"Loaded question: A question that contains an unproven, often incriminating assumption.
+Begging the question: The conclusion is assumed in the premise.
+False dilemma: Reducing options to two.
+Complex cause: Oversimplifying a causal chain."
+"12. “Professor Black argues that the new grading policy is unfair. But she’s a notorious cynic who criticises everything the administration does.”
+A. Ad hominem (abusive)
+B. Poisoning the well
+C. Guilt by association
+D. Genetic fallacy",A,,,,,,"Ad hominem (abusive): Attacking a person’s character or traits instead of the argument.
+Poisoning the well: Discrediting a source before they speak.
+Guilt by association: Rejecting an idea because an undesirable group holds it.
+Genetic fallacy: Judging based on origin."
+"13. “You argue we should vote for the independent candidate because both major parties are corrupt. But you only say that because you’re cynical after losing your own campaign.”
+A. Straw man
+B. Tu quoque
+C. Ad hominem (circumstantial)
+D. Bulverism",C,,,,,,"Straw man: Distorting the original argument.
+Tu quoque: “You too” – dismissing criticism because the accuser has the same flaw.
+Ad hominem (circumstantial): Attacking a person’s motives or circumstances.
+Bulverism: Assuming the opponent is wrong and then explaining why they think that."
+"14. “You’re either with us in this war on terror, or you’re with the terrorists.”
+A. False dilemma
+B. Ad baculum
+C. Appeal to emotion
+D. Slippery slope",A,,,,,,"False dilemma: Posing a false either/or choice.
+Ad baculum: Appeal to force or threat.
+Appeal to emotion: Manipulating emotions instead of providing logic.
+Slippery slope: Claiming one minor step will lead to an extreme chain."
+"15. “No true athlete would ever use performance-enhancing drugs.”
+(Said after an Olympic champion tested positive for steroids.)
+A. No true Scotsman
+B. Special pleading
+C. Equivocation
+D. Begging the question",A,,,,,,"No true Scotsman: Redefining a category ad hoc to exclude a counterexample.
+Special pleading: Applying a rule to others but making an exception for one’s own case.
+Equivocation: Shifting the meaning of a word.
+Begging the question: Circular reasoning where the conclusion is assumed."
+"16. “This ancient herbal remedy has been used for centuries; it must effectively cure the common cold.”
+A. Appeal to tradition
+B. Appeal to nature
+C. Chronological snobbery
+D. Appeal to authority",A,,,,,,"Appeal to tradition: Believing something is correct because it’s old.
+Appeal to nature: Natural means good.
+Chronological snobbery: Dismissing old things because they’re old (or new ones because new).
+Appeal to authority: Wrongly relying on an authority."
+"17. “A sandwich is better than a hungry child, and a hungry child is better than nothing. So a sandwich is better than nothing.”
+A. Equivocation
+B. Amphiboly
+C. False analogy
+D. Four-term fallacy",A,,,,,,"Equivocation: “Better than” is used in two senses (morally preferable vs. logically preferable).
+Amphiboly: Ambiguity from sentence structure.
+False analogy: Weak comparison.
+Four-term fallacy: A syllogism with four terms due to ambiguous middle."
+"18. “If climate change were real, the government would have declared a global emergency. They haven’t, so it can’t be that serious.”
+A. Appeal to ignorance
+B. Ad verecundiam (appeal to authority)
+C. Appeal to consequences
+D. Non sequitur",A,,,,,,"Appeal to ignorance: Absence of government action is not proof that climate change isn’t real.
+Ad verecundiam: Improper appeal to authority.
+Appeal to consequences: Believing something because its consequences are desirable/undesirable.
+Non sequitur: Conclusion does not logically follow."
+"19. “I’m certain the crystal works: ever since I got it, I’ve had a run of good luck.”
+A. Post hoc ergo propter hoc
+B. Gambler’s fallacy
+C. Regression fallacy
+D. Hasty generalization",A,,,,,,"Post hoc ergo propter hoc: Assuming temporal order proves causation.
+Gambler’s fallacy: Expecting a deviation from long-term probability based on recent events.
+Regression fallacy: Failing to account for regression to the mean.
+Hasty generalization: Too small a sample."
+"20. “Either we continue testing on animals, or millions of people will die from untested drugs.”
+A. False dilemma
+B. Slippery slope
+C. Ad misericordiam
+D. Straw man",A,,,,,,"False dilemma: Presents only two extreme choices while ignoring alternatives (like computer modeling).
+Slippery slope: One step will set off an unstoppable chain.
+Ad misericordiam: Appeal to pity.
+Straw man: Exaggerating a position to refute it easily."
+"21. “If we don’t censor violent video games, children will become desensitized to violence and eventually society will descend into chaos.”
+A. Slippery slope
+B. False dilemma
+C. Post hoc ergo propter hoc
+D. Appeal to emotion",A,,,,,,"Slippery slope: A small first step will trigger an unstoppable, extreme chain.
+False dilemma: Limiting options to only two.
+Post hoc ergo propter hoc: Assuming causation from sequence.
+Appeal to emotion: Manipulating feelings instead of giving reasons."
+"22. “The senator says we should increase education funding, but he’s a former teacher, so of course he wants more money for schools.”
+A. Ad hominem (circumstantial)
+B. Tu quoque
+C. Genetic fallacy
+D. Special pleading",A,,,,,,"Ad hominem (circumstantial): Attacking the person’s circumstances/motives.
+Tu quoque: Dismissing criticism because the critic is guilty too.
+Genetic fallacy: Judging a claim solely by its origin.
+Special pleading: Applying rules to others but making exceptions for oneself."
+"23. “You can’t prove that UFOs aren’t alien spacecraft; therefore, it’s reasonable to believe they are.”
+A. Appeal to ignorance
+B. Shifting the burden of proof
+C. Ad verecundiam
+D. False cause",A,,,,,,"Appeal to ignorance: Lack of disproof is taken as proof.
+Shifting the burden of proof: Demanding the opponent disprove the claim.
+Ad verecundiam: Improper appeal to an authority.
+False cause: Assuming causation without evidence."
+"24. “Your plan will never work. I know because it just feels wrong.”
+A. Argument from personal incredulity
+B. Appeal to emotion
+C. Non sequitur
+D. Appeal to ignorance",A,,,,,,"Argument from personal incredulity: “I can’t imagine/feel it, therefore it’s false.”
+Appeal to emotion: Using feelings instead of logic.
+Non sequitur: Conclusion doesn’t follow from the premise.
+Appeal to ignorance: Absence of evidence as evidence of the opposite."
+"25. “We can’t trust the results of the climate study because it was funded by an environmental group.”
+A. Genetic fallacy
+B. Ad hominem
+C. Appeal to motive
+D. Guilt by association",A,,,,,,"Genetic fallacy: Rejecting a claim due to its source or origin.
+Ad hominem: Attacking the person making the argument.
+Appeal to motive: Questioning motives instead of claims.
+Guilt by association: Rejecting an idea because a disliked group holds it."
+"26. “How can you be against this anti-terrorism bill? Do you want another 9/11?”
+A. Appeal to emotion
+B. False dilemma
+C. Ad baculum
+D. Red herring",A,,,,,,"Appeal to emotion: Using fear, pity, etc. instead of evidence.
+False dilemma: Offering only two extreme choices.
+Ad baculum: Appeal to force or threat.
+Red herring: Introducing an irrelevant topic to divert."
+"27. “Atheists don’t believe in God, so they can’t have any moral values.”
+A. Non sequitur
+B. Straw man
+C. Ad hominem
+D. Hasty generalization",A,,,,,,"Non sequitur: The conclusion doesn’t logically follow.
+Straw man: Distorting an opponent’s position.
+Ad hominem: Attacking the person instead of the argument.
+Hasty generalization: Broad conclusion from too little evidence."
+"28. “If you’re not aiming for a university degree, you should drop out of school.”
+A. False dilemma
+B. Appeal to consequences
+C. Loaded question
+D. Special pleading",A,,,,,,"False dilemma: Presents only two options when many exist.
+Appeal to consequences: Belief based on desirable/undesirable outcomes.
+Loaded question: Question containing an unproven assumption.
+Special pleading: Applying a standard to others but excusing oneself."
+"29. “She works full-time, so she must be a neglectful mother.”
+A. Hasty generalization
+B. Ad hominem
+C. False analogy
+D. Post hoc ergo propter hoc",A,,,,,,"Hasty generalization: Drawing a sweeping conclusion from an insufficient sample.
+Ad hominem: Attacking the person.
+False analogy: Weak comparison between unlike things.
+Post hoc ergo propter hoc: Assuming sequence proves cause."
+"30. “Either you accept the theory of evolution, or you believe that a supernatural being magically created every species.”
+A. False dilemma
+B. Appeal to authority
+C. Begging the question
+D. Complex question",A,,,,,,"False dilemma: Only two extreme options are presented.
+Appeal to authority: Improperly citing an authority.
+Begging the question: Assuming the conclusion in the premise.
+Complex question: A question that smuggles in an assumption."
+"31. “This all-natural supplement can cure depression because it’s made from pure plant extracts.”
+A. Appeal to nature
+B. Appeal to tradition
+C. Appeal to authority
+D. Appeal to novelty",A,,,,,,"Appeal to nature: “Natural” equals good/effective.
+Appeal to tradition: Believing something is right because it’s old.
+Appeal to authority: Relying on an unreliable or irrelevant expert.
+Appeal to novelty: New equals better."
+"32. “I took an online quiz that rated me 95% logical, so I must be excellent at critical thinking.”
+A. Appeal to false authority
+B. Appeal to ignorance
+C. Ad populum
+D. Non sequitur",A,,,,,,"Appeal to false authority: Treating a non‑expert source as authoritative.
+Appeal to ignorance: Absence of evidence as proof.
+Ad populum: Popularity as evidence.
+Non sequitur: Conclusion not logically connected to premises."
+"33. “Thousands of people claim to have seen Elvis’s face in their toast; it must be genuine.”
+A. Ad populum
+B. Appeal to ignorance
+C. Hasty generalization
+D. False cause",A,,,,,,"Ad populum: Believing something because many people do.
+Appeal to ignorance: Proof by lack of disproof.
+Hasty generalization: Overgeneralizing from anecdotal cases.
+False cause: Mistaking correlation or sequence for causation."
+"34. “After the tax cut, unemployment fell. Hence, the tax cut caused the drop in unemployment.”
+A. Post hoc ergo propter hoc
+B. Cum hoc ergo propter hoc
+C. False dilemma
+D. Non sequitur",A,,,,,,"Post hoc ergo propter hoc: Because A preceded B, A caused B.
+Cum hoc ergo propter hoc: Correlation implies causation.
+False dilemma: Limiting options to two.
+Non sequitur: Premises don’t logically support the conclusion."
+"35. “You say we should legalize cannabis, but you’ve been smoking it for years. That’s why you support it.”
+A. Ad hominem (circumstantial)
+B. Tu quoque
+C. Poisoning the well
+D. Genetic fallacy",A,,,,,,"Ad hominem (circumstantial): Attack based on the person’s situation or motives.
+Tu quoque: “You do it too.”
+Poisoning the well: Pre‑discrediting someone before they speak.
+Genetic fallacy: Judging an idea by its origin."
+"36. “The airline CEO says service has never been better. But she’s paid to say that.”
+A. Ad hominem (circumstantial)
+B. Ad hominem (abusive)
+C. Straw man
+D. Begging the question",A,,,,,,"Ad hominem (circumstantial): Dismissing an argument because of the person’s vested interests.
+Ad hominem (abusive): Personal insults.
+Straw man: Misrepresenting the argument.
+Begging the question: Circular reasoning."
+"37. “We should abolish all prisons; after all, locking someone in a cage is cruel.”
+A. Appeal to emotion
+B. False dilemma
+C. Red herring
+D. Ad populum",A,,,,,,"Appeal to emotion: Pity or compassion substituted for reasoning.
+False dilemma: Reducing a complex issue to two choices.
+Red herring: Diverting to an irrelevant topic.
+Ad populum: Appealing to popular opinion."
+"38. “No one has ever been able to prove that the Earth is more than 6,000 years old, so it must be young.”
+A. Appeal to ignorance
+B. Appeal to authority
+C. Shifting the burden of proof
+D. False cause",A,,,,,,"Appeal to ignorance: Absence of proof is taken as proof of the opposite.
+Appeal to authority: Wrongly citing an expert.
+Shifting the burden of proof: Forcing the opponent to disprove the claim.
+False cause: Incorrectly assuming a causal link."
+"39. “You shouldn’t listen to her views on immigration; she was born in a different country, so she’s biased.”
+A. Genetic fallacy
+B. Ad hominem (abusive)
+C. Tu quoque
+D. Special pleading",A,,,,,,"Genetic fallacy: Judging an argument by its origin rather than its content.
+Ad hominem (abusive): Attacking the person with insults.
+Tu quoque: “You do it too.”
+Special pleading: Making your own case an exception."
+"40. “If I let you turn in this assignment late, then I’ll have to let everyone hand in assignments whenever they want.”
+A. Slippery slope
+B. False dilemma
+C. Appeal to pity
+D. Straw man",A,,,,,,"Slippery slope: A small action will trigger an extreme chain of events.
+False dilemma: Presenting only two choices.
+Appeal to pity: Using sympathy instead of logic.
+Straw man: Attacking a distorted version of an argument."
+"41. “I said a little wine is healthy. When studies show it’s not, I reply, ‘I never said everyone should drink heavily.’”
+A. Motte-and-bailey
+B. Straw man
+C. Moving the goalposts
+D. Equivocation",A,,,,,,"Motte-and-bailey: Defending a controversial claim by retreating to a trivial one when challenged.
+Straw man: Distorting an opponent’s argument.
+Moving the goalposts: Changing the criteria of proof after the fact.
+Equivocation: Using a word with two meanings in the same argument."
+"42. “No stone inscription mentions the king’s marriage, so he must never have married.”
+A. Appeal to ignorance
+B. Argument from silence
+C. Hasty generalization
+D. Begging the question",B,,,,,,"Appeal to ignorance: Absence of evidence as evidence of the opposite.
+Argument from silence: Drawing a conclusion based solely on the absence of mention in records.
+Hasty generalization: A broad conclusion from insufficient evidence.
+Begging the question: Assuming the conclusion in the premises."
+"43. “This new vaccine only prevented 60% of infections; it’s useless and we should stop distributing it.”
+A. False dilemma
+B. Slippery slope
+C. Nirvana fallacy (perfect solution)
+D. Post hoc ergo propter hoc",C,,,,,,"False dilemma: Limiting options to only two.
+Slippery slope: A small step will lead to extreme consequences.
+Nirvana fallacy: Rejecting a realistic solution because it isn’t perfect.
+Post hoc ergo propter hoc: Assuming A caused B because A happened first."
+"44. “Since no single grain of sand makes a heap, you cannot say when a heap begins; therefore heaps do not exist.”
+A. Equivocation
+B. False analogy
+C. Begging the question
+D. Fallacy of the beard (continuum fallacy)",D,,,,,,"Equivocation: Shifting word meanings.
+False analogy: Weak comparison.
+Begging the question: Circular reasoning.
+Fallacy of the beard: Denying a distinction because there is no sharp boundary."
+"45. “There’s a chance the stock might rise tomorrow, so I’m certain it will.”
+A. Appeal to probability
+B. Gambler’s fallacy
+C. Post hoc ergo propter hoc
+D. Hasty generalization",A,,,,,,"Appeal to probability: Assuming something will happen just because it can.
+Gambler’s fallacy: Believing independent past events influence future probability.
+Post hoc ergo propter hoc: Timing mistaken for causation.
+Hasty generalization: Overgeneralizing from too few cases."
+"46. “The stock market is anxious about the election results.”
+A. Pathetic fallacy
+B. Reification
+C. Appeal to emotion
+D. Ad hominem",B,,,,,,"Pathetic fallacy: Attributing human emotions to nature or inanimate objects in a literary sense.
+Reification: Treating an abstract concept (the market) as a concrete, feeling entity.
+Appeal to emotion: Manipulating feelings instead of providing arguments.
+Ad hominem: Attacking the person, not the argument."
+"47. “Everyone must pay taxes, but I shouldn’t have to because I worked hard for my money.”
+A. Tu quoque
+B. Ad hominem (circumstantial)
+C. Special pleading
+D. Begging the question",C,,,,,,"Tu quoque: “You too” – deflecting criticism by pointing out the accuser’s hypocrisy.
+Ad hominem (circumstantial): Attacking a person’s circumstances or motives.
+Special pleading: Applying a principle to others but making an unjustified exception for oneself.
+Begging the question: Circular reasoning where the conclusion is assumed."
+"48. “You said there are no white crows. I show you an albino crow, but you insist it has to be a common crow.”
+A. No true Scotsman
+B. Straw man
+C. Ad hoc rescue
+D. Moving the goalposts",D,,,,,,"No true Scotsman: Redefining a category to exclude a counterexample.
+Straw man: Misrepresenting an argument.
+Ad hoc rescue: Adding arbitrary modifications to save a claim.
+Moving the goalposts: Demanding ever‑higher evidence when original proof is supplied."
+"49. “A team is like a clock; all parts must move together. So if a player performs poorly, the whole team collapses.”
+A. False analogy
+B. Composition
+C. Division
+D. Slippery slope",A,,,,,,"False analogy: Comparing two things that differ in relevant respects.
+Composition: Assuming what is true of parts is true of the whole.
+Division: Assuming what is true of the whole is true of its parts.
+Slippery slope: One step leads to an extreme chain."
+"50. “The soul exists because the holy book says so, and the holy book is the word of God because it says it is.”
+A. False dilemma
+B. Begging the question
+C. Post hoc ergo propter hoc
+D. Non sequitur",B,,,,,,"False dilemma: Only two options presented.
+Begging the question: Circular reasoning; the conclusion is assumed in the premise.
+Post hoc ergo propter hoc: Assuming causation from order.
+Non sequitur: Conclusion doesn’t logically follow."
+"51. “Before the debate starts, I want everyone to know that my opponent has a history of plagiarizing speeches.”
+A. Ad hominem (abusive)
+B. Guilt by association
+C. Poisoning the well
+D. Genetic fallacy",C,,,,,,"Ad hominem (abusive): Direct personal insult.
+Guilt by association: Rejecting an idea because of an associated disliked group.
+Poisoning the well: Pre‑discrediting a source so their future arguments are dismissed.
+Genetic fallacy: Dismissing a claim based on its origin."
+"52. “You can’t support that health policy; it was proposed by an activist who also holds fringe religious views.”
+A. Ad hominem
+B. Genetic fallacy
+C. Straw man
+D. Guilt by association",D,,,,,,"Ad hominem: Attacking the person instead of the contention.
+Genetic fallacy: Judging a claim by its origin.
+Straw man: Distorting the original argument.
+Guilt by association: Discrediting an idea because an undesirable group or person is linked to it."
+"53. “If the leaked memo is true, the senator is corrupt and will lose the election. Therefore the memo must be false.”
+A. Appeal to consequences
+B. False dilemma
+C. Begging the question
+D. Slippery slope",A,,,,,,"Appeal to consequences: Deciding truth based on the desirability of the outcome.
+False dilemma: Only two choices given.
+Begging the question: Circular argument.
+Slippery slope: Chain of escalating consequences claimed."
+"54. “Scientists dispute whether a warm winter is caused by climate change. So we can’t say climate change is real.”
+A. Appeal to ignorance
+B. Inflation of conflict
+C. False dilemma
+D. Hasty generalization",B,,,,,,"Appeal to ignorance: Using lack of evidence as evidence.
+Inflation of conflict: Exaggerating expert disagreement to reject a well‑supported conclusion.
+False dilemma: Forcing an either/or choice.
+Hasty generalization: Broad conclusion from insufficient data."
+"55. “You can’t criticise chess coaching methods unless you’re a grandmaster.”
+A. Appeal to authority
+B. Genetic fallacy
+C. Courtier’s reply
+D. Special pleading",C,,,,,,"Appeal to authority: Citing an expert outside their field or a non‑expert.
+Genetic fallacy: Judging by source.
+Courtier’s reply: Dismissing criticism because the critic lacks insider status or extensive credentials.
+Special pleading: Making an exception for your own case."
+"56. “I refuse to engage with your argument about wages because you are yelling; your claim is clearly unreasonable.”
+A. Ad hominem
+B. Poisoning the well
+C. Red herring
+D. Tone policing",D,,,,,,"Ad hominem: Attacking the person.
+Poisoning the well: Pre‑discrediting.
+Red herring: Irrelevant distraction.
+Tone policing: Dismissing an argument based on the emotional manner in which it is delivered."
+"57. “I’ve already spent five hours queuing for this ride; I can’t leave now even though it might break down.”
+A. Sunk cost fallacy
+B. Gambler’s fallacy
+C. Appeal to emotion
+D. False dilemma",A,,,,,,"Sunk cost fallacy: Continuing a behaviour because of previously invested resources, even when it’s irrational.
+Gambler’s fallacy: Believing a streak affects independent probabilistic events.
+Appeal to emotion: Using feelings instead of logic.
+False dilemma: Presenting only two options."
+"58. “The department sign read ‘Students who do not pay fees will be fined.’ I didn’t pay, but they wouldn’t let me in. I thought ‘fine’ meant it was acceptable.”
+A. Amphiboly
+B. Equivocation
+C. Accent
+D. Reification",B,,,,,,"Amphiboly: Ambiguity due to sentence structure.
+Equivocation: Using a word with two different meanings (fine = penalty vs. fine = okay).
+Accent: Changing meaning through emphasis or tone.
+Reification: Treating an abstraction as a concrete thing."
+"59. “The advertisement quoted the critic as saying ‘Unforgettably brilliant…’ but the full review was ‘Unforgettably brilliant only in its disappointment.’”
+A. Straw man
+B. Amphiboly
+C. Quoting out of context
+D. Accent fallacy",C,,,,,,"Straw man: Distorting an argument.
+Amphiboly: Grammatical ambiguity.
+Quoting out of context: Removing surrounding text to distort the intended meaning.
+Accent fallacy: Changing meaning through tone or emphasis in speech."
+"60. “You argue we should abolish prison, but do you want violent criminals roaming the streets freely?”
+A. False dilemma
+B. Straw man
+C. Appeal to emotion
+D. Loaded question",B,,,,,,"False dilemma: Reducing options to two.
+Straw man: Misrepresenting a position (abolition does not mean no consequences).
+Appeal to emotion: Manipulating fear.
+Loaded question: A question that assumes an unproven premise."
+"61. “You say the proposed legislation is flawed, but you’re a union leader who would lose influence if it passes.”
+A. Tu quoque
+B. Ad hominem (circumstantial)
+C. Guilt by association
+D. Poisoning the well",B,,,,,,"Tu quoque: Dismissing criticism because the accuser is guilty of the same thing.
+Ad hominem (circumstantial): Attacking a person’s circumstances or motives rather than their argument.
+Guilt by association: Rejecting an idea because an undesirable group holds it.
+Poisoning the well: Pre‑discrediting a source before they speak."
+"62. “You argue I should exercise more, but you haven’t been to the gym in months. So your advice is worthless.”
+A. Ad hominem (abusive)
+B. Genetic fallacy
+C. Tu quoque
+D. Straw man",C,,,,,,"Ad hominem (abusive): Attacking the person with insults instead of the argument.
+Genetic fallacy: Judging a claim solely by its origin.
+Tu quoque: Rejecting a criticism because the critic practises the same flaw.
+Straw man: Misrepresenting an argument to make it easier to attack."
+"63. “Every brick in this wall is small; therefore, the wall must be small.”
+A. Division
+B. Composition
+C. Equivocation
+D. False dilemma",B,,,,,,"Division: Assuming what is true of the whole is true of its parts.
+Composition: Assuming what is true of the parts is true of the whole.
+Equivocation: Using a word with two different meanings in the same argument.
+False dilemma: Presenting only two options when more exist."
+"64. “Germany is a wealthy country, so every German citizen must be wealthy.”
+A. Composition
+B. Division
+C. Hasty generalization
+D. False analogy",B,,,,,,"Composition: Parts‑to‑whole reasoning.
+Division: Whole‑to‑parts reasoning.
+Hasty generalization: A broad conclusion drawn from insufficient evidence.
+False analogy: Comparing two things that differ in relevant respects."
+"65. “I’ve flipped tails five times in a row; the next flip is almost certain to be heads.”
+A. Hot‑hand fallacy
+B. Post hoc ergo propter hoc
+C. Gambler’s fallacy
+D. Regression fallacy",C,,,,,,"Hot‑hand fallacy: Believing a streak will continue in independent events.
+Post hoc ergo propter hoc: Assuming A caused B because A happened earlier.
+Gambler’s fallacy: Believing independent past events influence future probability.
+Regression fallacy: Ignoring regression to the mean and attributing a cause to natural fluctuation."
+"66. “After the new mayor took office, unemployment fell. The mayor’s policies therefore caused the drop.”
+A. Cum hoc ergo propter hoc
+B. Post hoc ergo propter hoc
+C. Slippery slope
+D. False dilemma",B,,,,,,"Cum hoc ergo propter hoc: Correlation implies causation.
+Post hoc ergo propter hoc: Assuming temporal precedence proves causation.
+Slippery slope: A small step inevitably leads to an extreme chain.
+False dilemma: Limiting options to only two."
+"67. “Ice‑cream sales and drowning deaths both rise in summer, so eating ice‑cream must cause drowning.”
+A. Post hoc ergo propter hoc
+B. Cum hoc ergo propter hoc
+C. Ignoring a common cause
+D. False cause (post hoc)",B,,,,,,"Post hoc ergo propter hoc: Sequence mistaken for cause.
+Cum hoc ergo propter hoc: Correlation mistaken for causation.
+Ignoring a common cause: Two correlated events are both caused by a third factor.
+False cause (post hoc): A general error of assuming causality incorrectly."
+"68. “A feather is light. What is light cannot be dark. So a feather cannot be dark.”
+A. Amphiboly
+B. Equivocation
+C. False cause
+D. Begging the question",B,,,,,,"Amphiboly: Ambiguity from sentence structure.
+Equivocation: Using a word in two different senses (light = not heavy / light = pale).
+False cause: Mistaking a causal connection.
+Begging the question: Circular reasoning where the conclusion is assumed in the premises."
+"69. “Don’t listen to his economic theories; he’s a high‑school dropout.”
+A. Ad hominem (abusive)
+B. Genetic fallacy
+C. Ad hominem (circumstantial)
+D. Poisoning the well",A,,,,,,"Ad hominem (abusive): Insulting the person rather than addressing the argument.
+Genetic fallacy: Judging an idea by its origin.
+Ad hominem (circumstantial): Attacking someone’s circumstances or interests.
+Poisoning the well: Pre‑discrediting a source so their argument is dismissed in advance."
+"70. “This herbal remedy is completely natural, so it must be safe and effective.”
+A. Appeal to tradition
+B. Appeal to nature
+C. Naturalistic fallacy
+D. Appeal to popularity",B,,,,,,"Appeal to tradition: Believing something is right because it is old.
+Appeal to nature: Claiming “natural” means good or effective.
+Naturalistic fallacy: Defining “good” in terms of a natural property, or deriving an ought from an is.
+Appeal to popularity: Assuming truth because many people believe it."
+"71. “Poverty exists simply because poor people are lazy.”
+A. Straw man
+B. Fallacy of the single cause
+C. Hasty generalization
+D. Ad hominem",B,,,,,,"Straw man: Distorting an opponent’s position.
+Fallacy of the single cause: Oversimplifying a complex issue by attributing it to one cause.
+Hasty generalization: A broad conclusion from insufficient evidence.
+Ad hominem: Attacking the person instead of the argument."
+"72. “My neighbour smoked three packs a day and lived to be 100, so smoking can’t be that dangerous.”
+A. Hasty generalization
+B. Anecdotal evidence
+C. False cause
+D. Cherry‑picking",B,,,,,,"Hasty generalization: Generalizing from a sample that is too small.
+Anecdotal evidence: Using a personal story or isolated example instead of rigorous data.
+False cause: Incorrectly assuming a causal relation.
+Cherry‑picking: Selectively presenting evidence that supports a claim while ignoring contrary data."
+"73. “Either we raise taxes sharply, or the roads will remain full of potholes forever.”
+A. False dilemma
+B. Slippery slope
+C. Ad baculum
+D. Straw man",A,,,,,,"False dilemma: Presenting only two extreme options when others exist.
+Slippery slope: A small step leads to an unstoppable chain.
+Ad baculum: Appeal to force or threat.
+Straw man: Misrepresenting an argument to refute it easily."
+"74. “If we allow students to redo tests, they’ll expect unlimited retakes and never learn responsibility.”
+A. False dilemma
+B. Slippery slope
+C. Ad misericordiam
+D. Straw man",B,,,,,,"False dilemma: Only two choices given.
+Slippery slope: Claiming a minor action will trigger an extreme, inevitable chain.
+Ad misericordiam: Appeal to pity.
+Straw man: Attacking a distorted version of an argument."
+"75. “I met two rude waiters from that restaurant; all the staff there must be rude.”
+A. Composition
+B. Division
+C. Hasty generalization
+D. False analogy",C,,,,,,"Composition: Part‑to‑whole reasoning.
+Division: Whole‑to‑part reasoning.
+Hasty generalization: Drawing a sweeping conclusion from too few examples.
+False analogy: Comparing things that aren’t sufficiently alike."
+"76. “The study presents only the success stories of the weight‑loss programme, ignoring those who dropped out or gained weight.”
+A. Texas sharpshooter
+B. Cherry‑picking
+C. Hasty generalization
+D. Anecdotal evidence",B,,,,,,"Texas sharpshooter: Clustering data around a randomly chosen target after seeing the data.
+Cherry‑picking: Selectively presenting favourable evidence while suppressing unfavourable data.
+Hasty generalization: Broad conclusion from insufficient evidence.
+Anecdotal evidence: Using personal stories rather than systematic data."
+"77. “I scolded my son for his terrible math score, and on the next test he did much better. Scolding really works.”
+A. Post hoc ergo propter hoc
+B. Regression fallacy
+C. Gambler’s fallacy
+D. Hasty generalization",B,,,,,,"Post hoc ergo propter hoc: Assuming A caused B because A came first.
+Regression fallacy: Attributing a cause to what is simply regression toward the mean.
+Gambler’s fallacy: Believing a future probability is altered by a streak of independent events.
+Hasty generalization: A broad conclusion from too small a sample."
+"78. “After marking three hummingbird sightings on my map, I notice they cluster near the feeder. That proves the feeder attracts them.” (But the spots were noticed haphazardly.)
+A. Cherry‑picking
+B. Texas sharpshooter
+C. False cause
+D. Appeal to probability",B,,,,,,"Cherry‑picking: Selecting only supporting evidence.
+Texas sharpshooter: Drawing a target around a random cluster of data and then claiming a pattern was predicted.
+False cause: Mistaking correlation or sequence for causation.
+Appeal to probability: Assuming something will happen just because it can."
+"79. “This dating app is brand new, so it must be much better than all the older ones.”
+A. Appeal to tradition
+B. Appeal to nature
+C. Appeal to novelty
+D. Snob appeal",C,,,,,,"Appeal to tradition: Old = good.
+Appeal to nature: Natural = good.
+Appeal to novelty: New = better.
+Snob appeal: Appealing to a sense of elitism or exclusivity."
+"80. “Humans are naturally omnivorous, so it is morally acceptable to eat meat.”
+A. Naturalistic fallacy
+B. Appeal to nature
+C. Is‑ought fallacy
+D. Moralistic fallacy",C,,,,,,"Naturalistic fallacy: Attempting to define “good” as a natural property; occasionally conflated with the is‑ought gap.
+Appeal to nature: Claiming natural means right.
+Is‑ought fallacy: Deriving a prescriptive (“ought”) statement solely from a descriptive (“is”) statement.
+Moralistic fallacy: Assuming what should be true is actually true."
+"81. “Vote for me—I’ve built a billion‑dollar empire, so I know how to run the economy better than any career politician.”
+A. Appeal to wealth (ad crumenam)
+B. Appeal to false authority
+C. Ad hominem (circumstantial)
+D. Genetic fallacy",A,,,,,,"Appeal to wealth: Assuming wealth indicates correctness or expertise.
+Appeal to false authority: Citing an expert outside their field or a non‑expert.
+Ad hominem (circumstantial): Attacking a person’s circumstances rather than their argument.
+Genetic fallacy: Judging a claim solely by its origin."
+"82. “He grew up in extreme poverty, so his views on economic inequality must be correct.”
+A. Appeal to poverty (ad lazarum)
+B. Appeal to authority
+C. Ad misericordiam
+D. Argument from silence",A,,,,,,"Appeal to poverty: Assuming someone is right because they are poor.
+Appeal to authority: Improperly relying on an authority figure.
+Ad misericordiam: Appeal to pity.
+Argument from silence: Drawing a conclusion from the absence of recorded mention."
+"83. “If you don’t like the government’s policy, why don’t you just leave the country?”
+A. Traitorous critic fallacy
+B. Ad baculum
+C. Straw man
+D. Poisoning the well",A,,,,,,"Traitorous critic fallacy: Responding to criticism by telling the critic to leave the group or country.
+Ad baculum: Appeal to force or threat.
+Straw man: Misrepresenting an argument to attack it easily.
+Poisoning the well: Pre‑discrediting a source before they speak."
+"84. “You only believe in God because you were raised in a religious home; therefore, your belief is false.”
+A. Bulverism
+B. Genetic fallacy
+C. Ad hominem
+D. Begging the question",A,,,,,,"Bulverism: Assuming a claim is false and then explaining it away with psychological reasons.
+Genetic fallacy: Dismissing a claim based on its source or origin.
+Ad hominem: Attacking the person instead of the argument.
+Begging the question: Circular reasoning where the conclusion is assumed."
+"85. “Only a nation that bans hate speech can be a true democracy, because a true democracy is defined as a system that fully protects human dignity.”
+A. Definist fallacy
+B. Begging the question
+C. Equivocation
+D. No true Scotsman",A,,,,,,"Definist fallacy: Defining a term in a biased way to support one’s argument.
+Begging the question: Circular reasoning.
+Equivocation: Using a word with two different meanings in the same argument.
+No true Scotsman: Ad hoc redefinition to exclude a counterexample."
+"86. “Our new product will definitely succeed; we simply cannot afford for it to fail.”
+A. Appeal to ignorance
+B. Appeal to consequences
+C. False dilemma
+D. Appeal to emotion",B,,,,,,"Appeal to ignorance: Using absence of evidence as evidence.
+Appeal to consequences: Believing something because its outcome is desirable (or undesirable).
+False dilemma: Presenting only two options when more exist.
+Appeal to emotion: Manipulating feelings instead of providing logic."
+"87. “The word ‘decimate’ originally meant to kill one in ten, so using it to mean ‘devastate’ is incorrect.”
+A. Etymological fallacy
+B. Equivocation
+C. Definist fallacy
+D. Begging the question",A,,,,,,"Etymological fallacy: Claiming the original meaning of a word is its true meaning.
+Equivocation: Shifting word meanings in an argument.
+Definist fallacy: Persuasive definition.
+Begging the question: Circular reasoning."
+"88. “You must accept the pay‑cut proposal, or we’ll have to let you go.”
+A. Ad baculum
+B. Ad misericordiam
+C. False dilemma
+D. Slippery slope",A,,,,,,"Ad baculum: Appeal to force or threat.
+Ad misericordiam: Appeal to pity.
+False dilemma: Reducing choices to two extremes.
+Slippery slope: Claiming a minor step will trigger an extreme chain."
+"89. “Donate to our shelter today—think of those innocent puppies shivering alone in the cold.”
+A. Ad misericordiam
+B. Ad populum
+C. Appeal to nature
+D. Red herring",A,,,,,,"Ad misericordiam: Appeal to pity.
+Ad populum: Appeal to popular opinion.
+Appeal to nature: Natural = good.
+Red herring: Introducing an irrelevant topic to divert."
+"90. “How can you believe in evolution? It says we descended from apes, and I’ve never seen a monkey give birth to a human.”
+A. Straw man
+B. Appeal to personal incredulity
+C. Hasty generalization
+D. False cause",A,,,,,,"Straw man: Distorting an opponent’s argument to refute a weaker version.
+Appeal to personal incredulity: “I can’t imagine it, so it’s false.”
+Hasty generalization: A broad conclusion from insufficient evidence.
+False cause: Assuming causation incorrectly."
+"91. “The universe is so incredibly complex that it simply must have been designed by a cosmic intelligence.”
+A. Argument from personal incredulity
+B. Begging the question
+C. Appeal to authority
+D. False dilemma",A,,,,,,"Argument from personal incredulity: “I can’t explain it, therefore an alternative explanation is true.”
+Begging the question: Circular reasoning.
+Appeal to authority: Citing an inappropriate authority.
+False dilemma: Presenting only two options."
+"92. “She said, ‘I didn’t steal your wallet,’ but her voice kept quivering, so she must be lying.”
+A. Appeal to emotion
+B. Ad hominem
+C. Non sequitur
+D. Accent fallacy",C,,,,,,"Appeal to emotion: Using emotion instead of logic.
+Ad hominem: Attacking the person.
+Non sequitur: The conclusion does not logically follow from the premises.
+Accent fallacy: Changing meaning through stress or tone."
+"93. “The radio spot shouted ‘FREE COFFEE TODAY!’ while a rushed, barely audible voice added ‘with purchase of a pastry’.”
+A. Amphiboly
+B. Accent fallacy
+C. Quoting out of context
+D. Equivocation",B,,,,,,"Amphiboly: Ambiguity from sentence structure.
+Accent fallacy: Changing meaning through emphasis or tone.
+Quoting out of context: Removing surrounding text to distort meaning.
+Equivocation: Using a word in two different senses."
+"94. “Either we legalise marijuana, or our prisons will remain full of non‑violent offenders and taxpayers will waste billions.”
+A. False dilemma
+B. Slippery slope
+C. Appeal to emotion
+D. Hasty generalization",A,,,,,,"False dilemma: Limiting the options to only two when others are available.
+Slippery slope: A small action leads inevitably to a disastrous chain.
+Appeal to emotion: Manipulating feelings.
+Hasty generalization: Drawing a sweeping conclusion from too little evidence."
+"95. “That famous fitness influencer says this detox tea burns belly fat, so it must be safe and effective.”
+A. Appeal to false authority
+B. Appeal to popularity
+C. Ad hominem
+D. Non sequitur",A,,,,,,"Appeal to false authority: Treating a non‑expert as a credible authority.
+Appeal to popularity: Believing something because many people do.
+Ad hominem: Attacking the person.
+Non sequitur: The conclusion doesn’t logically follow."
+"96. “He’s a convicted fraudster; therefore his economic theories are completely wrong.”
+A. Genetic fallacy
+B. Ad hominem (abusive)
+C. Tu quoque
+D. Guilt by association",B,,,,,,"Genetic fallacy: Judging a claim by its origin.
+Ad hominem (abusive): Attacking a person’s character rather than the argument.
+Tu quoque: Deflecting criticism because the accuser is guilty too.
+Guilt by association: Rejecting an idea because an undesirable group holds it."
+"97. “My uncle smoked two packs a day and lived to 98, so smoking can’t be that harmful.”
+A. Anecdotal evidence
+B. Hasty generalization
+C. Cherry‑picking
+D. Fallacy of the single cause",A,,,,,,"Anecdotal evidence: Using a personal story or isolated example in place of systematic data.
+Hasty generalization: Drawing a broad conclusion from an insufficient sample.
+Cherry‑picking: Selecting only supportive evidence.
+Fallacy of the single cause: Oversimplifying a complex cause."
+"98. “All dictators have moustaches. Therefore, every moustached politician is likely a dictator.”
+A. Affirming the consequent
+B. Illicit conversion
+C. Undistributed middle
+D. Fallacy of composition",B,,,,,,"Affirming the consequent: If P then Q, Q, therefore P.
+Illicit conversion: Invalidly reversing a universal affirmative (All A are B → All B are A).
+Undistributed middle: Syllogistic error where the middle term isn’t distributed.
+Fallacy of composition: Assuming what is true of parts is true of the whole."
+"99. “You argue for renewable energy subsidies, but that’s only because you own shares in a solar company.”
+A. Ad hominem (circumstantial)
+B. Bulverism
+C. Tu quoque
+D. Genetic fallacy",A,,,,,,"Ad hominem (circumstantial): Attacking a person’s motives or circumstances rather than their claim.
+Bulverism: Assuming a claim is wrong and then explaining it away psychologically.
+Tu quoque: “You do it too.”
+Genetic fallacy: Dismissing an idea because of its source."
+"100. “Everything that begins to exist has a cause. The universe began to exist. Therefore, God is necessarily the cause.”
+A. Modal scope fallacy
+B. Begging the question
+C. False cause
+D. Non sequitur",A,,,,,,"Modal scope fallacy: Confusing necessity de dicto (of a statement) with necessity de re (of a thing).
+Begging the question: Circular reasoning.
+False cause: Incorrectly assuming causation.
+Non sequitur: Conclusion does not follow."
+"101. ""The team's star player earns the most goals, so the team's total earnings must be due to him alone.""
+A. Division
+B. Composition
+C. Hasty generalization
+D. False cause",B,,,,,,"Division: Assuming what is true of the whole is true of its parts.
+Composition: Assuming what is true of the parts is true of the whole.
+Hasty generalization: Drawing a broad conclusion from an insufficient sample.
+False cause: Incorrectly assuming a causal connection."
+"102. ""Every society that legalized euthanasia saw an increase in its suicide rate. Therefore, legalizing euthanasia causes overall suicides to rise.""
+A. Cum hoc ergo propter hoc
+B. Post hoc ergo propter hoc
+C. Ignoring a common cause
+D. Slippery slope",A,,,,,,"Cum hoc ergo propter hoc: Correlation mistaken for causation.
+Post hoc ergo propter hoc: Sequence mistaken for causation.
+Ignoring a common cause: Overlooking a third factor that explains both trends.
+Slippery slope: A small step inevitably leads to an extreme chain."
+"103. ""You claim we should reduce military spending, but do you want our country to appear weak to its enemies?""
+A. Loaded question
+B. False dilemma
+C. Straw man
+D. Ad baculum",C,,,,,,"Loaded question: A question containing an unproven assumption.
+False dilemma: Presenting only two extreme options.
+Straw man: Misrepresenting a position to make it easier to attack.
+Ad baculum: Appeal to force or threat."
+"104. ""I know astrology works because my horoscope has been uncannily accurate several times.""
+A. Anecdotal evidence
+B. Cherry‑picking
+C. Texas sharpshooter
+D. Regression fallacy",B,,,,,,"Anecdotal evidence: Using personal stories instead of systematic data.
+Cherry‑picking: Selectively presenting only evidence that supports a claim while ignoring contrary data.
+Texas sharpshooter: Drawing a target around random data and then claiming a pattern was predicted.
+Regression fallacy: Ignoring regression to the mean."
+"105. ""Professor Lane argues we need stricter gun laws, but he's British, and British people have no understanding of American liberty.""
+A. Ad hominem (abusive)
+B. Genetic fallacy
+C. Traitorous critic fallacy
+D. Guilt by association",B,,,,,,"Ad hominem (abusive): Attacking the person with insults.
+Genetic fallacy: Dismissing a claim because of its source or origin.
+Traitorous critic fallacy: Telling a critic to leave the country or group.
+Guilt by association: Rejecting an idea because an undesirable person holds it."
+"106. ""If you fail this exam you'll never get into university, and then you'll end up homeless.""
+A. False dilemma
+B. Slippery slope
+C. Appeal to pity
+D. Ad baculum",B,,,,,,"False dilemma: Limiting options to only two.
+Slippery slope: Claiming a minor setback will trigger an unstoppable, catastrophic chain.
+Appeal to pity: Using sympathy instead of logic.
+Ad baculum: Appeal to force or threat."
+"107. ""I've researched this topic extensively in online forums, so I'm just as qualified as any scientist to speak about climate change.""
+A. Appeal to false authority
+B. Ad populum
+C. Courtier's reply
+D. Argument from ignorance",A,,,,,,"Appeal to false authority: Treating a non‑expert (including oneself) as a credible authority.
+Ad populum: Appealing to popular opinion.
+Courtier's reply: Dismissing a critic because they lack insider credentials.
+Argument from ignorance: Using absence of evidence as evidence."
+"108. ""You can't prove that the accused was not at the crime scene, so we must assume he was there.""
+A. Shifting the burden of proof
+B. Appeal to ignorance
+C. Begging the question
+D. False dilemma",B,,,,,,"Shifting the burden of proof: Demanding the opponent disprove a claim.
+Appeal to ignorance: Treating lack of evidence against a proposition as evidence for it.
+Begging the question: Circular reasoning.
+False dilemma: Offering only two choices."
+"109. ""He must be a good leader; look at how charismatically he speaks and how many people show up to his rallies.""
+A. Ad populum
+B. Appeal to emotion
+C. Appeal to false authority
+D. Non sequitur",A,,,,,,"Ad populum: Assuming something is true because many people believe or support it.
+Appeal to emotion: Manipulating feelings instead of providing arguments.
+Appeal to false authority: Citing an improper authority.
+Non sequitur: The conclusion doesn't logically follow."
+"110. ""The last time I wore this scarf my team won. I'll wear it again to guarantee another victory.""
+A. Gambler's fallacy
+B. Post hoc ergo propter hoc
+C. Regression fallacy
+D. Hot‑hand fallacy",B,,,,,,"Gambler's fallacy: Believing independent past events affect future probability.
+Post hoc ergo propter hoc: Assuming A caused B simply because A preceded B.
+Regression fallacy: Failing to account for regression toward the mean.
+Hot‑hand fallacy: Believing a streak will continue in independent events."
+"111. ""Of course the energy company claims fracking is safe; they'd lose billions if regulations tightened.""
+A. Ad hominem (circumstantial)
+B. Bulverism
+C. Special pleading
+D. Straw man",A,,,,,,"Ad hominem (circumstantial): Attacking a person's circumstances or vested interests rather than their argument.
+Bulverism: Assuming a claim is wrong and then explaining it away.
+Special pleading: Arbitrarily making an exception for one's own case.
+Straw man: Distorting an argument to refute it easily."
+"112. ""A society is just the sum of its individual citizens. If each citizen looks after their own happiness, society is happy.""
+A. Division
+B. Composition
+C. False analogy
+D. Reification",B,,,,,,"Division: Whole‑to‑parts fallacy.
+Composition: Assuming what is true of the parts is true of the whole.
+False analogy: Comparing two things that aren't alike in relevant respects.
+Reification: Treating an abstract concept as a concrete object."
+"113. ""Violent crime has been decreasing, yet the murderer in last week's headline shot his victim in cold blood. Society is clearly getting worse.""
+A. Hasty generalization
+B. Misleading vividness
+C. Cherry‑picking
+D. Appeal to emotion",B,,,,,,"Hasty generalization: Drawing a broad conclusion from insufficient data.
+Misleading vividness: Letting a dramatic, emotionally charged anecdote outweigh large‑scale data.
+Cherry‑picking: Selecting only supportive evidence.
+Appeal to emotion: Manipulating feelings."
+"114. ""Happiness is not just a state of mind; I can feel it in my chest when it arrives.""
+A. Reification
+B. Pathetic fallacy
+C. Appeal to emotion
+D. Non sequitur",A,,,,,,"Reification: Treating an abstract concept (happiness) as if it were a concrete physical object.
+Pathetic fallacy: Attributing human emotions to nature.
+Appeal to emotion: Using feelings instead of reasoning.
+Non sequitur: The conclusion doesn't follow."
+"115. ""Because no scientist has proved that a vegan diet is healthier than a balanced omnivorous diet, a vegan diet offers no health benefits.""
+A. Appeal to ignorance
+B. Shifting the burden of proof
+C. False dilemma
+D. Argument from silence",A,,,,,,"Appeal to ignorance: Absence of proof is taken as proof of the opposite.
+Shifting the burden of proof: Placing the onus on the wrong side.
+False dilemma: Reducing options to two.
+Argument from silence: Drawing a conclusion from a lack of recorded mention."
+"116. ""Only a coward would refuse to fight, and you're no coward, so you'll join the army.""
+A. Loaded question
+B. False dilemma
+C. Ad baculum
+D. Ad populum",B,,,,,,"Loaded question: A question that assumes an unproven premise.
+False dilemma: Presenting only two extreme options when more exist.
+Ad baculum: Appeal to force or threat.
+Ad populum: Appeal to popular opinion."
+"117. ""If we outlaw automatic weapons, the government will soon confiscate all guns. Then only criminals will be armed.""
+A. Slippery slope
+B. Red herring
+C. False cause
+D. Ad baculum",A,,,,,,"Slippery slope: A small restriction is claimed to inevitably lead to extreme totalitarianism.
+Red herring: Introducing an irrelevant distraction.
+False cause: Incorrectly assuming causality.
+Ad baculum: Threatening the listener."
+"118. ""Obviously, the suspect's argument that he's innocent cannot be trusted, because he's defending himself.""
+A. Ad hominem (circumstantial)
+B. Poisoning the well
+C. Bulverism
+D. Begging the question",A,,,,,,"Ad hominem (circumstantial): Dismissing a claim based on the speaker's circumstances or self‑interest.
+Poisoning the well: Pre‑discrediting someone before they speak.
+Bulverism: Assuming a claim is false and then psychologising.
+Begging the question: Assuming the conclusion."
+"119. ""The original meaning of the word 'awful' was 'full of awe'; therefore, describing a disaster as 'awful' means it was awe‑inspiring, not terrible.""
+A. Definist fallacy
+B. Equivocation
+C. Etymological fallacy
+D. Amphiboly",C,,,,,,"Definist fallacy: Persuading by using a biased definition.
+Equivocation: Shifting the meaning of a word mid‑argument.
+Etymological fallacy: Insisting that a word's original or historical meaning is its correct current meaning.
+Amphiboly: Grammatical ambiguity."
+"120. ""He didn't deny the corruption allegations until the police investigation started, therefore the allegations must be true.""
+A. Appeal to ignorance
+B. Argument from silence
+C. Post hoc ergo propter hoc
+D. Appeal to probability",B,,,,,,"Appeal to ignorance: Lack of evidence as evidence.
+Argument from silence: Concluding a fact based on the absence of a statement or denial.
+Post hoc ergo propter hoc: Assuming sequence proves causation.
+Appeal to probability: Assuming something will happen because it can."
+"121. “We shouldn’t listen to climate scientists; they only push their agenda because they depend on government grants for a living.”
+A. Ad hominem (circumstantial)
+B. Genetic fallacy
+C. Bulverism
+D. Poisoning the well",A,,,,,,"Ad hominem (circumstantial): Dismissing a claim by pointing to the speaker’s circumstances or interests.
+Genetic fallacy: Judging an idea solely by its origin.
+Bulverism: Assuming a claim is wrong and then explaining it away psychologically.
+Poisoning the well: Pre‑emptively discrediting a source before they speak."
+"122. “If you’re not working overtime, you clearly don’t care about the company’s success.”
+A. False dilemma
+B. Slippery slope
+C. Ad baculum
+D. Begging the question",A,,,,,,"False dilemma: Reducing a range of possibilities to only two extreme options.
+Slippery slope: Claiming one step will inevitably lead to disaster.
+Ad baculum: Appeal to force or threat.
+Begging the question: Circular reasoning that assumes the conclusion."
+"123. “I got a flu shot last year and still caught the flu. Therefore, flu vaccines don’t work.”
+A. Anecdotal evidence
+B. Hasty generalization
+C. Cherry‑picking
+D. Post hoc ergo propter hoc",B,,,,,,"Anecdotal evidence: Using a personal story instead of statistical data.
+Hasty generalization: Drawing a broad conclusion from an insufficient sample (one person’s experience).
+Cherry‑picking: Selectively presenting only supportive evidence.
+Post hoc ergo propter hoc: Mistaking sequence for cause."
+"124. “We either cut funding for the arts program or leave students with no extracurricular opportunities at all.”
+A. Slippery slope
+B. False dilemma
+C. Straw man
+D. Appeal to emotion",B,,,,,,"Slippery slope: A minor action triggering an unstoppable extreme chain.
+False dilemma: Presenting only two options when many exist.
+Straw man: Misrepresenting a position to attack it easily.
+Appeal to emotion: Manipulating feelings to persuade."
+"125. “You say we should boycott that company for using child labour, yet you own a smartphone made by a company with similar practices.”
+A. Ad hominem
+B. Tu quoque
+C. Genetic fallacy
+D. Special pleading",B,,,,,,"Ad hominem: Attacking the person instead of the argument.
+Tu quoque: Rejecting a criticism because the critic is guilty of the same thing.
+Genetic fallacy: Judging a claim by its source.
+Special pleading: Making an unjustified exception for oneself."
+"126. “Because I don’t understand how a computer chip can perform billions of calculations a second, I know it must involve some undiscovered force.”
+A. Argument from ignorance
+B. Argument from personal incredulity
+C. Appeal to false authority
+D. Non sequitur",B,,,,,,"Argument from ignorance: Absence of proof as proof of the opposite.
+Argument from personal incredulity: “I can’t understand/explain it, therefore it’s false (or another claim is true).”
+Appeal to false authority: Citing an improper authority.
+Non sequitur: The conclusion doesn’t logically follow."
+"127. “This novel is great because a Nobel laureate recommended it.”
+(The laureate won their prize in chemistry, not literature.)
+A. Ad verecundiam (appeal to false authority)
+B. Ad populum
+C. Appeal to tradition
+D. Genetic fallacy",A,,,,,,"Ad verecundiam (appeal to false authority): Treating an expert outside their field as a reliable source.
+Ad populum: Appealing to popular opinion.
+Appeal to tradition: Old = good.
+Genetic fallacy: Judging by origin."
+"128. “We can’t take the protesters’ demand seriously; they’re all just unemployed troublemakers.”
+A. Ad hominem (abusive)
+B. Genetic fallacy
+C. Guilt by association
+D. Poisoning the well",A,,,,,,"Ad hominem (abusive): Insulting the person rather than addressing their argument.
+Genetic fallacy: Dismissing based on origin.
+Guilt by association: Rejecting an idea because an undesirable group holds it.
+Poisoning the well: Pre‑discrediting."
+"129. “If you loved me, you would lend me the money.”
+A. Emotional appeal (ad passiones)
+B. Ad misericordiam
+C. Loaded question
+D. False dilemma",A,,,,,,"Ad passiones: General appeal to emotion (in this case, manipulating love/guilt).
+Ad misericordiam: Specifically an appeal to pity.
+Loaded question: A question that assumes an unproven premise.
+False dilemma: Presenting only two options."
+"130. “He claims the CEO is corrupt, but he’s only saying that because he was passed over for a promotion.”
+A. Bulverism
+B. Ad hominem (circumstantial)
+C. Tu quoque
+D. Begging the question",B,,,,,,"Bulverism: Assuming a claim is wrong and then explaining it away psychologically.
+Ad hominem (circumstantial): Attacking a person’s motives or circumstances.
+Tu quoque: Deflecting by accusing the accuser of the same flaw.
+Begging the question: Circular reasoning."
+"131. “The neighbour’s dog howled at midnight. The very next morning, I fell down the stairs. That dog is an evil omen.”
+A. Post hoc ergo propter hoc
+B. Cum hoc ergo propter hoc
+C. Confirmation bias
+D. Regression fallacy",A,,,,,,"Post hoc ergo propter hoc: Assuming that because A preceded B, A caused B.
+Cum hoc ergo propter hoc: Correlation mistaken for causation.
+Confirmation bias: Favouring evidence that supports existing beliefs.
+Regression fallacy: Ignoring regression to the mean."
+"132. “My opponent suggests a small tax increase on the wealthy, but what she really wants is full‑scale socialist confiscation of all private property.”
+A. Slippery slope
+B. Straw man
+C. Non sequitur
+D. Red herring",B,,,,,,"Slippery slope: A small step sets off an extreme chain.
+Straw man: Exaggerating or distorting an opponent’s position to refute a weaker version.
+Non sequitur: Conclusion doesn’t follow.
+Red herring: Irrelevant distraction."
+"133. “You can’t trust the expert panel’s report on nutrition because the panel included a few members who previously worked for a soft‑drink company.”
+A. Genetic fallacy
+B. Guilt by association
+C. Ad hominem
+D. Cherry‑picking",B,,,,,,"Genetic fallacy: Judging a claim solely by its origin.
+Guilt by association: Rejecting an entire argument or group because of an undesirable association with one part.
+Ad hominem: Attacking a person.
+Cherry‑picking: Selectively presenting evidence."
+"134. “We have always held this ceremony exactly this way. Therefore we must never change it.”
+A. Appeal to tradition
+B. Appeal to nature
+C. Is‑ought fallacy
+D. Sunk cost fallacy",A,,,,,,"Appeal to tradition: Believing something is right simply because it’s old or customary.
+Appeal to nature: Natural = good.
+Is‑ought fallacy: Deriving an “ought” solely from an “is.”
+Sunk cost fallacy: Continuing because of past investment."
+"135. “Don’t listen to her argument about pay equity; when she speaks, she sounds hysterical.”
+A. Ad hominem (abusive)
+B. Tone policing
+C. Poisoning the well
+D. Straw man",B,,,,,,"Ad hominem (abusive): Attacking with insults.
+Tone policing: Dismissing an argument based on the emotional tone rather than its content.
+Poisoning the well: Pre‑discrediting.
+Straw man: Misrepresenting the argument."
+"136. “If we allow same‑sex marriage, next people will want to marry animals or inanimate objects.”
+A. Slippery slope
+B. False analogy
+C. False dilemma
+D. Ad populum",A,,,,,,"Slippery slope: Arguing that a relatively minor action will lead to absurd and extreme outcomes.
+False analogy: A weak comparison.
+False dilemma: Only two choices given.
+Ad populum: Appealing to popularity."
+"137. “I won’t pay attention to his lecture on honesty because I heard he once cheated on a history quiz in high school.”
+A. Genetic fallacy
+B. Ad hominem (abusive)
+C. Tu quoque
+D. Special pleading",A,,,,,,"Genetic fallacy: Dismissing an argument based on its source (the speaker’s past behaviour).
+Ad hominem (abusive): Personal insult.
+Tu quoque: “You do it too.”
+Special pleading: Making an exception for one’s own case."
+"138. “It’s not fair to compare our school’s test scores with the private school’s. We serve a different population, and you’re ignoring how dedicated our teachers are.”
+A. Red herring
+B. Straw man
+C. Special pleading
+D. Ad misericordiam",A,,,,,,"Red herring: Introducing an irrelevant point (teacher dedication) to divert from the issue of test scores.
+Straw man: Distorting a position.
+Special pleading: Making an exception without justification.
+Ad misericordiam: Appeal to pity."
+"139. “I’m not going to read that study about screen time harming eyesight; it was published in a journal I’ve never heard of, so it can’t be correct.”
+A. Appeal to false authority
+B. Genetic fallacy
+C. Appeal to ignorance
+D. Argument from silence",B,,,,,,"Appeal to false authority: Improperly citing an authority.
+Genetic fallacy: Judging a claim by its source (the journal) rather than its content.
+Appeal to ignorance: Using absence of evidence as evidence.
+Argument from silence: Inferring from a lack of mention."
+"140. “You will either go to college or you will be a failure in life.”
+A. False dilemma
+B. Slippery slope
+C. Ad baculum
+D. Loaded question",A,,,,,,"False dilemma: Presenting only two possibilities when many paths exist.
+Slippery slope: One step cascades to disaster.
+Ad baculum: Threat.
+Loaded question: Question with a built‑in assumption."
+"141. “In a just world, good people would never suffer. So the report showing high illness rates among hard‑working citizens must be inaccurate.”
+A. Moralistic fallacy
+B. Appeal to nature
+C. Naturalistic fallacy
+D. Appeal to consequences",A,,,,,,"Moralistic fallacy: Assuming that what should be true actually is true.
+Appeal to nature: Claiming natural equals good or right.
+Naturalistic fallacy: Deriving an “ought” from an “is” (or defining good by a natural property).
+Appeal to consequences: Believing a claim because its outcome is desirable or undesirable."
+"142. “The hurricane destroyed entire neighbourhoods, but at least the rebuilding effort will create thousands of jobs and stimulate the economy.”
+A. Post hoc ergo propter hoc
+B. Broken window fallacy
+C. Sunk cost fallacy
+D. Nirvana fallacy",B,,,,,,"Post hoc ergo propter hoc: Assuming A caused B because A came first.
+Broken window fallacy: Ignoring hidden costs of destruction while focusing only on visible economic activity.
+Sunk cost fallacy: Continuing a behaviour because of previously invested resources.
+Nirvana fallacy: Rejecting a realistic improvement because it isn’t perfect."
+"143. “She must have done something to bring that robbery on herself; bad things don’t happen to innocent people.”
+A. False cause
+B. Ad hominem
+C. Appeal to ignorance
+D. Just‑world hypothesis",D,,,,,,"False cause: Incorrectly assuming a causal connection.
+Ad hominem: Attacking the person rather than the argument.
+Appeal to ignorance: Absence of evidence as proof of the opposite.
+Just‑world hypothesis: Assuming actions always lead to deserved outcomes, leading to victim‑blaming."
+"144. “The general should have known the offensive would fail, because today we know the enemy had secretly doubled their artillery.”
+A. Hindsight bias (not a fallacy)
+B. Historian’s fallacy
+C. Retrospective determinism
+D. Post hoc ergo propter hoc",B,,,,,,"Hindsight bias: The tendency to see past events as predictable after they occur (cognitive bias, not always a fallacy).
+Historian’s fallacy: Judging past decision‑makers using information only available later.
+Retrospective determinism: Claiming an event was inevitable merely because it happened.
+Post hoc ergo propter hoc: Assuming sequence proves causation."
+"145. “The treaty was signed in 1815, so from the very first moment of tension it was absolutely inevitable that the war would start.”
+A. False dilemma
+B. Slippery slope
+C. Retrospective determinism
+D. Post hoc ergo propter hoc",C,,,,,,"False dilemma: Limiting options to only two.
+Slippery slope: A small step sets off an extreme chain.
+Retrospective determinism: Asserting an event had to happen just because it did happen.
+Post hoc ergo propter hoc: Mistaking temporal order for causation."
+"146. “Aristotle lived over 2,000 years ago. Why should we bother reading his out‑of‑date ideas on ethics?”
+A. Appeal to novelty
+B. Genetic fallacy
+C. Ad hominem
+D. Chronological snobbery",D,,,,,,"Appeal to novelty: New equals better.
+Genetic fallacy: Judging a claim by its origin.
+Ad hominem: Attacking the person.
+Chronological snobbery: Dismissing old ideas simply because they are old (or new because they are new)."
+"147. “It’s perfectly legal to pay minimum wage, so the company’s compensation is morally acceptable.”
+A. Is‑ought fallacy
+B. Naturalistic fallacy
+C. Appeal to the law (ad legem)
+D. Appeal to authority",C,,,,,,"Is‑ought fallacy: Deriving a prescriptive statement solely from a descriptive one.
+Naturalistic fallacy: Defining “good” in terms of a natural property or deriving an ought from an is.
+Appeal to the law: Claiming something is moral because it is legal, or immoral because it is illegal.
+Appeal to authority: Improperly citing an authority."
+"148. “You only believe in free will because your culture taught you to. Therefore, free will does not exist.”
+A. Bulverism
+B. Psychogenetic fallacy
+C. Genetic fallacy
+D. Ad hominem (circumstantial)",B,,,,,,"Bulverism: Assuming a claim is wrong and then explaining it away psychologically.
+Psychogenetic fallacy: Concluding a belief is false based solely on its psychological origin.
+Genetic fallacy: Dismissing an idea because of its source.
+Ad hominem (circumstantial): Attacking a person’s circumstances or motives."
+"149. “You can’t criticise the novel—you’ve never published one yourself.”
+A. Appeal to accomplishment
+B. Courtier’s reply
+C. Genetic fallacy
+D. Ad verecundiam",A,,,,,,"Appeal to accomplishment: Dismissing a critic because they haven’t achieved as much in the field.
+Courtier’s reply: Dismissing criticism because the critic lacks special insider knowledge.
+Genetic fallacy: Judging an idea by its origin.
+Ad verecundiam: Appeal to false authority."
+"150. “Love is simply the feeling of being in love.”
+A. Begging the question
+B. Deepity
+C. Tautology (not necessarily a fallacy)
+D. Equivocation",B,,,,,,"Begging the question: Circular reasoning.
+Deepity: A statement that sounds profound but is either trivially true or logically empty.
+Tautology: A needless repetition of an idea (not always a logical fallacy).
+Equivocation: Using a word with two different meanings in the same argument."
+"151. “We are the universe becoming aware of itself. That explains consciousness.”
+A. Deepity
+B. Reification
+C. Metaphor confused for argument
+D. Pseudo‑profundity",D,,,,,,"Deepity: A statement seemingly profound but shallow on analysis.
+Reification: Treating an abstraction as a concrete thing.
+Metaphor confused for argument: Mistaking a poetic phrase for a real explanation.
+Pseudo‑profundity: Saying something that sounds insightful but is logically empty."
+"152. “I’ve told you ten times that the policy is fair. Therefore, it’s fair.”
+A. Argument by repetition (ad nauseam)
+B. Circular reasoning
+C. Proof by assertion
+D. Appeal to ignorance",C,,,,,,"Argument by repetition (ad nauseam): Repeating a claim until people accept it out of exhaustion.
+Circular reasoning: The conclusion is assumed in the premise.
+Proof by assertion: Stating a claim repeatedly as if repetition itself proves it.
+Appeal to ignorance: Lack of evidence as proof."
+"153. “The bill is a disaster, a catastrophe, a wreck. A disaster, a catastrophe, a wreck.” (Repeating without new evidence.)
+A. Argument by repetition (ad nauseam)
+B. Proof by assertion
+C. Begging the question
+D. Non sequitur",A,,,,,,"Argument by repetition (ad nauseam): Repeating a statement as a substitute for reasoning.
+Proof by assertion: Stating a claim as if it’s self‑evidently true through repetition.
+Begging the question: Assuming the conclusion.
+Non sequitur: The conclusion does not follow."
+"154. “The poet meant this sonnet to be about hope, so the despairing last line must really be a metaphor for hope.”
+A. Definist fallacy
+B. Intentional fallacy
+C. Etymological fallacy
+D. False cause",B,,,,,,"Definist fallacy: Persuasive redefinition of a term.
+Intentional fallacy: Judging a work by the author’s intent rather than its actual content.
+Etymological fallacy: Claiming the original meaning of a word is its true meaning.
+False cause: Assuming a causal connection incorrectly."
+"155. “All employees must clock in by 9 a.m. I’m the manager, so I can come in at any time I please.”
+A. Tu quoque
+B. Ad hominem
+C. Guilt by association
+D. Special pleading",D,,,,,,"Tu quoque: “You do it too.”
+Ad hominem: Attacking the person.
+Guilt by association: Rejecting an idea because of an undesirable group.
+Special pleading: Applying a rule to others but making an unjustified exception for oneself."
+"156. “A true friend is someone who would lend you money whenever you ask. You refused, so you’re not a true friend.”
+A. Definist fallacy
+B. No true Scotsman
+C. Begging the question
+D. Loaded question",A,,,,,,"Definist fallacy: Defining a term in a biased way to support one’s argument.
+No true Scotsman: Redefining a category ad hoc to exclude a counterexample.
+Begging the question: Circular reasoning.
+Loaded question: A question that assumes an unproven premise."
+"157. “You made a straw man argument in your speech, so your entire proposal must be rejected.”
+A. Ad hominem
+B. Red herring
+C. Fallacy fallacy (argumentum ad logicam)
+D. Non sequitur",C,,,,,,"Ad hominem: Attacking the person.
+Red herring: Irrelevant distraction.
+Fallacy fallacy: Concluding a claim is false merely because it was poorly argued or a fallacy was committed.
+Non sequitur: Conclusion doesn’t follow."
+"158. “Nations with higher chocolate consumption win more Nobel prizes. Therefore, winning a Nobel prize makes you eat more chocolate.”
+A. Post hoc ergo propter hoc
+B. Reverse causation
+C. Cum hoc ergo propter hoc
+D. Ignoring a common cause",B,,,,,,"Post hoc ergo propter hoc: A preceded B, so A caused B.
+Reverse causation: Mistaking the effect for the cause.
+Cum hoc ergo propter hoc: Correlation implies causation.
+Ignoring a common cause: Overlooking a third factor that explains both."
+"159. “Banning a single book from the school library is just as dangerous as burning all books, because both are forms of censorship.”
+A. Slippery slope
+B. False dilemma
+C. Moral equivalence
+D. False equivalence",D,,,,,,"Slippery slope: A small step leads to disaster.
+False dilemma: Only two choices.
+Moral equivalence: Claiming two actions are morally equal when they differ in degree.
+False equivalence: Treating two situations as equivalent when the differences are more significant than the similarities."
+"160. “There’s a one‑in‑a‑million chance this herbal pill cures cancer. That’s enough for me—I’m sure it will work.”
+A. Gambler’s fallacy
+B. Appeal to probability
+C. Hasty generalization
+D. Non sequitur",B,,,,,,"Gambler’s fallacy: Believing a past run of independent events changes the next probability.
+Appeal to probability: Assuming something will happen just because it can.
+Hasty generalization: Drawing a broad conclusion from an insufficient sample.
+Non sequitur: Conclusion does not logically follow."
+"161. “If it’s raining, the pavement will be wet. The pavement is wet, so it must be raining.”
+A. Affirming the consequent
+B. Denying the antecedent
+C. Post hoc ergo propter hoc
+D. Non sequitur",A,,,,,,"Affirming the consequent: If P then Q, Q is true, therefore P (invalid).
+Denying the antecedent: If P then Q, not P, therefore not Q.
+Post hoc ergo propter hoc: Assuming sequence proves causation.
+Non sequitur: Conclusion does not logically follow."
+"162. “If you were a talented artist, you would have a gallery exhibition. You are not a talented artist, so you will never have a gallery exhibition.”
+A. Denying the antecedent
+B. Affirming the consequent
+C. False dilemma
+D. Non sequitur",A,,,,,,"Denying the antecedent: If P then Q, not P, therefore not Q (ignoring other possible paths to Q).
+Affirming the consequent: If P then Q, Q, therefore P.
+False dilemma: Limiting options to only two.
+Non sequitur: The conclusion doesn’t follow."
+"163. “All cats are mammals. All dogs are mammals. Therefore, all cats are dogs.”
+A. Undistributed middle
+B. Illicit major
+C. Composition
+D. Equivocation",A,,,,,,"Undistributed middle: The middle term (“mammals”) is not distributed in either premise.
+Illicit major: The major term is distributed in the conclusion but not in the premise.
+Composition: Assuming what is true of parts is true of the whole.
+Equivocation: Using a word in two different senses."
+"164. “No athletes are lazy. Some lazy people are bookworms. Therefore, no athletes are bookworms.”
+A. Illicit major
+B. Undistributed middle
+C. Existential fallacy
+D. Affirmative conclusion from a negative premise",A,,,,,,"Illicit major: The major term (“bookworms”) is distributed in the conclusion but not in the major premise.
+Undistributed middle: Middle term not distributed in either premise.
+Existential fallacy: Universal premises yield a particular conclusion with an empty subject class.
+Affirmative conclusion from a negative premise: A syllogism with a negative premise cannot yield an affirmative conclusion."
+"165. “All birds are animals. All birds have wings. Therefore, all animals have wings.”
+A. Illicit minor
+B. Illicit major
+C. Undistributed middle
+D. Composition",A,,,,,,"Illicit minor: The minor term (“animals”) is distributed in the conclusion but not in the premise where it appears.
+Illicit major: Major term distributed in conclusion but not in premise.
+Undistributed middle: Middle term not distributed.
+Composition: Parts to whole fallacy."
+"166. “No dogs are reptiles. No reptiles are birds. Therefore, no dogs are birds.”
+A. Exclusive premises
+B. Negative conclusion from affirmative premises
+C. Equivocation
+D. Illicit major",A,,,,,,"Exclusive premises: A syllogism with two negative premises yields no valid conclusion.
+Negative conclusion from affirmative premises: A conclusion must match the quality of premises.
+Equivocation: Shifting word meanings.
+Illicit major: Major term distributed incorrectly."
+"167. “Some cats are pets. Some pets are dogs. Therefore, some cats are dogs.”
+A. Undistributed middle
+B. Illicit major
+C. Existential fallacy
+D. False cause",A,,,,,,"Undistributed middle: Middle term (“pets”) not distributed in either premise (both I‑propositions).
+Illicit major: Major term distributed in conclusion but not premise.
+Existential fallacy: Requires existence of the subject when possibly empty.
+False cause: Assuming causality incorrectly."
+"168. “All unicorns are magical. All unicorns are horses. Therefore, some horses are magical.”
+A. Existential fallacy
+B. Undistributed middle
+C. Illicit minor
+D. Begging the question",A,,,,,,"Existential fallacy: Universal premises cannot yield a particular conclusion when the subject class may be empty.
+Undistributed middle: Middle term not distributed.
+Illicit minor: Minor term distributed in conclusion but not premise.
+Begging the question: Assuming the conclusion in the premises."
+"169. “Either you love me or you hate me. You love me, so you don’t hate me.”
+A. Affirming a disjunct
+B. False dilemma
+C. Denying the antecedent
+D. Non sequitur",A,,,,,,"Affirming a disjunct: P or Q, P is true, therefore not Q (assumes exclusive disjunction without justification).
+False dilemma: Presenting only two options.
+Denying the antecedent: If P then Q, not P, therefore not Q.
+Non sequitur: Conclusion does not follow."
+"170. “Every event inside the universe has a cause. Therefore, the universe as a whole has a cause.”
+A. Composition
+B. Division
+C. Begging the question
+D. False cause",A,,,,,,"Composition: Assuming what is true of the parts is true of the whole.
+Division: Whole to parts.
+Begging the question: Circular reasoning.
+False cause: Incorrect causal inference."
+"171. “This car is red, so its engine must be red too.”
+A. Division
+B. Composition
+C. Equivocation
+D. Hasty generalization",A,,,,,,"Division: Assuming what is true of the whole is true of each part.
+Composition: Parts to whole.
+Equivocation: Changing the meaning of a word.
+Hasty generalization: Broad conclusion from insufficient evidence."
+"172. “Your idea for healthcare reform is utterly laughable; I can’t even take it seriously. So it must be wrong.”
+A. Appeal to ridicule
+B. Ad hominem (abusive)
+C. Straw man
+D. Red herring",A,,,,,,"Appeal to ridicule: Dismissing an argument by making it appear absurd without addressing the substance.
+Ad hominem (abusive): Attacking the person with insults.
+Straw man: Distorting a position.
+Red herring: Diverting to an irrelevant issue."
+"173. “Requiring photo ID to vote is no different from a totalitarian regime controlling every aspect of its citizens’ lives.”
+A. False equivalence
+B. False analogy
+C. Slippery slope
+D. Straw man",A,,,,,,"False equivalence: Treating two situations as equivalent when the differences are far more significant.
+False analogy: Comparing things that differ in relevant respects.
+Slippery slope: A small step leads to extreme consequences.
+Straw man: Misrepresenting an argument."
+"174. “Men are naturally more competitive, so it is right that they dominate business leadership.”
+A. Is‑ought fallacy
+B. Moralistic fallacy
+C. Appeal to nature
+D. Definist fallacy",A,,,,,,"Is‑ought fallacy: Deriving a prescriptive (“ought”) statement solely from a descriptive (“is”) statement.
+Moralistic fallacy: Assuming what should be is actually the case.
+Appeal to nature: Natural equals good.
+Definist fallacy: Persuasive redefinition of a term."
+"175. “Don’t report the restaurant for health code violations; the owner is a kind old man who would lose his life’s work.”
+A. Ad misericordiam
+B. Ad baculum
+C. Ad populum
+D. Red herring",A,,,,,,"Ad misericordiam: Appeal to pity instead of addressing the issue.
+Ad baculum: Appeal to force or threat.
+Ad populum: Appeal to popular opinion.
+Red herring: Introducing an irrelevant distraction."
+"176. “You should support the zoning change; after all, I know about your past legal troubles.”
+A. Ad baculum
+B. Ad misericordiam
+C. Ad hominem
+D. False dilemma",A,,,,,,"Ad baculum: Appeal to force or threat (implied blackmail).
+Ad misericordiam: Appeal to pity.
+Ad hominem: Attacking the person.
+False dilemma: Limiting options."
+"177. “She insulted me first, so I had every right to spread false rumours about her.”
+A. Two wrongs make a right
+B. Tu quoque
+C. Ad hominem
+D. False equivalence",A,,,,,,"Two wrongs make a right: Justifying an action because someone else did something similar.
+Tu quoque: Deflecting criticism by accusing the accuser of the same flaw.
+Ad hominem: Attacking the person.
+False equivalence: Treating unequal actions as equal."
+"178. “You criticize our country’s human rights record, but what about your own government’s treatment of minorities?”
+A. Whataboutism
+B. Tu quoque
+C. Red herring
+D. Genetic fallacy",A,,,,,,"Whataboutism: Deflecting criticism by pointing to the opponent’s flaws instead of addressing the original charge.
+Tu quoque: Similar, but typically “you too” directed at the accuser personally.
+Red herring: Irrelevant diversion.
+Genetic fallacy: Judging by origin."
+"179. “I claim telepathy is real. It’s up to the scientists to prove me wrong, not for me to prove it right.”
+A. Shifting the burden of proof
+B. Appeal to ignorance
+C. False dilemma
+D. Begging the question",A,,,,,,"Shifting the burden of proof: Requiring the opponent to disprove a claim rather than providing evidence for it.
+Appeal to ignorance: Absence of proof as proof of the opposite.
+False dilemma: Only two options.
+Begging the question: Circular reasoning."
+"180. “It is necessarily true that either the Labour candidate or the Conservative candidate will win. If Labour wins, then Labour’s victory is a logical necessity.”
+A. Modal scope fallacy
+B. False dilemma
+C. Non sequitur
+D. Affirming the consequent",A,,,,,,"Modal scope fallacy: Confusing necessity of a statement (de dicto) with necessity of a thing (de re).
+False dilemma: Only two choices given.
+Non sequitur: Conclusion doesn’t follow.
+Affirming the consequent: If P then Q, Q, therefore P."
