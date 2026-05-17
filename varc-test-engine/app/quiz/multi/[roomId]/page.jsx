@@ -143,6 +143,41 @@ function MultiRoomEngine({ roomId }) {
     }
   }, [isHost, quizData.length]);
 
+  // --- NEW: Global Directory Broadcasting ---
+  // Keeps the room listed in the lobby as long as we are waiting for players
+  useEffect(() => {
+    let globalChannel;
+    
+    if (isHost && roomState === 'waiting') {
+      globalChannel = supabase.channel('global-directory');
+      
+      globalChannel.subscribe(async (status) => {
+        if (status === 'SUBSCRIBED') {
+          // Reconstruct Name and IP from the URL roomId (e.g., JOHNDOE-192-168-1-5)
+          const parts = roomId.split('-');
+          const hostName = parts[0] || 'Arena Host';
+          const ip = parts.slice(1).join('.') || 'Active Network';
+
+          await globalChannel.track({
+            isHost: true,
+            hostName: hostName,
+            ip: ip,
+            roomId: roomId,
+            createdAt: new Date().toISOString()
+          });
+        }
+      });
+    }
+
+    // Cleanup: Remove room from lobby when the game starts, or the host leaves
+    return () => {
+      if (globalChannel) {
+        supabase.removeChannel(globalChannel);
+      }
+    };
+  }, [isHost, roomState, roomId]);
+  // ------------------------------------------
+
   const handlePersistProgress = async (newAnswers, newLocked) => {
     const stats = computeLiveStats(newAnswers || myAnswers, newLocked || myLocked, quizData);
     if (channelRef.current) {
@@ -172,7 +207,7 @@ function MultiRoomEngine({ roomId }) {
         <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
         <div className="absolute top-[20%] right-[-10%] w-96 h-96 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
         
-        <button onClick={() => router.push('/')} className="absolute top-6 left-6 z-10 flex items-center gap-2 text-slate-500 hover:text-indigo-600 font-bold transition-colors bg-white/50 px-4 py-2 rounded-full backdrop-blur-sm border border-slate-200 shadow-sm">
+        <button onClick={() => router.push('/quiz')} className="absolute top-6 left-6 z-10 flex items-center gap-2 text-slate-500 hover:text-indigo-600 font-bold transition-colors bg-white/50 px-4 py-2 rounded-full backdrop-blur-sm border border-slate-200 shadow-sm">
           <Home size={18}/> Leave Arena
         </button>
 
@@ -183,10 +218,10 @@ function MultiRoomEngine({ roomId }) {
              </div>
              <div className="absolute top-0 right-[25%] bg-rose-500 w-4 h-4 rounded-full animate-ping"></div>
           </div>
-          <h2 className="text-3xl font-extrabold text-slate-800 mb-2 tracking-tight">Arena: {roomId}</h2>
+          <h2 className="text-3xl font-extrabold text-slate-800 mb-2 tracking-tight">Arena: {roomId.split('-')[0]}</h2>
           <p className="text-slate-500 font-medium mb-8 flex items-center justify-center gap-2">
             <Loader2 size={16} className="animate-spin text-indigo-500"/>
-            {isHost ? 'Initializing Game Server...' : 'Syncing with Server Host...'}
+            {isHost ? 'Broadcasting to Lobby...' : 'Syncing with Server Host...'}
           </p>
 
           <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 mb-6 text-left">
@@ -201,7 +236,7 @@ function MultiRoomEngine({ roomId }) {
           </div>
 
           <button onClick={() => navigator.clipboard.writeText(roomId)} className="w-full group flex items-center justify-center gap-2 bg-indigo-50 hover:bg-indigo-600 hover:text-white text-indigo-700 font-bold py-4 rounded-xl transition-all shadow-sm">
-             <Copy size={18} className="group-hover:scale-110 transition-transform"/> Copy Room Code
+             <Copy size={18} className="group-hover:scale-110 transition-transform"/> Copy Direct Link
           </button>
         </div>
       </div>
@@ -330,7 +365,7 @@ function MultiRoomEngine({ roomId }) {
          </div>
       </aside>
 
-      {/* Mobile Sticky Top Ribbon (replaces floating widget so it doesn't block text) */}
+      {/* Mobile Sticky Top Ribbon */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-50 p-3 flex items-center justify-between">
          <div className="flex items-center gap-2">
             <div className="bg-indigo-100 p-2 rounded-lg"><Trophy size={18} className="text-indigo-600"/></div>
