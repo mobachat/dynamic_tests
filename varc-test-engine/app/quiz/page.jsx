@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Swords, ArrowRight, Home, Users, Globe, Play, Server, Loader2 } from 'lucide-react';
+import { Swords, ArrowRight, Home, Users, Globe, Play, Server, Loader2, Activity } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '../../lib/supabaseClient';
 
