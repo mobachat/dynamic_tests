@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { ArrowRight, ArrowLeft, CheckCircle, Check, X, Clock, AArrowUp, AArrowDown, List, Activity, Loader2 } from 'lucide-react';
 
 export default function TestPassage({ data, testId, currentIndex, setCurrentIndex, answers, setAnswers, locked, setLocked, setViewState, persistProgress, submitTest, extractQuestionsFromRow, liveStats }) {
-  const [fontSize, setFontSize] = useState(16);
+  const [fontSize, setFontSize] = useState(18); // Increased default size
   const [passageTimeSpent, setPassageTimeSpent] = useState(0);
   const [questionTimeSpent, setQuestionTimeSpent] = useState({});
   const [splitSize, setSplitSize] = useState(50);
@@ -119,30 +119,43 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     return () => { clearTimeout(timer); observer.disconnect(); }
   }, [currentIndex, questionsData.length, isSingleColumn, activeQ]);
 
-  const handleTextSelection = async () => {
-    const selection = window.getSelection();
-    if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
-      setDictBox(null);
-      return;
-    }
-    const text = selection.toString().trim();
-    if (text && text.length > 2 && text.length < 25 && !text.includes(' ')) {
-      const range = selection.getRangeAt(0);
-      const rect = range.getBoundingClientRect();
-      setDictBox(prev => prev && prev.word === text ? prev : { loading: true, word: text, x: rect.left + (rect.width / 2), y: rect.top });
-      try {
-        const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(text)}`);
-        if (res.ok) {
-          const resData = await res.json();
-          const meaning = resData[0]?.meanings[0]?.definitions[0]?.definition;
-          if (meaning) setDictBox({ word: text, meaning, x: rect.left + (rect.width / 2), y: rect.top });
-          else setDictBox(null);
-        } else setDictBox(null);
-      } catch (e) { setDictBox(null); }
-    } else {
-      setDictBox(null);
-    }
-  };
+  // Dictionary text selection logic (robust cross-device implementation)
+  useEffect(() => {
+    let timeoutId;
+    const handleSelection = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(async () => {
+        const selection = window.getSelection();
+        if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
+          setDictBox(null);
+          return;
+        }
+        const text = selection.toString().trim();
+        if (text && text.length > 2 && text.length < 25 && !text.includes(' ')) {
+          const range = selection.getRangeAt(0);
+          const rect = range.getBoundingClientRect();
+          setDictBox(prev => prev && prev.word === text ? prev : { loading: true, word: text, x: rect.left + (rect.width / 2), y: rect.top });
+          try {
+            const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(text)}`);
+            if (res.ok) {
+              const resData = await res.json();
+              const meaning = resData[0]?.meanings[0]?.definitions[0]?.definition;
+              if (meaning) setDictBox({ word: text, meaning, x: rect.left + (rect.width / 2), y: rect.top });
+              else setDictBox(null);
+            } else setDictBox(null);
+          } catch (e) { setDictBox(null); }
+        } else {
+          setDictBox(null);
+        }
+      }, 400); // 400ms debounce ensures mobile context menus have time to settle
+    };
+
+    document.addEventListener('selectionchange', handleSelection);
+    return () => {
+      document.removeEventListener('selectionchange', handleSelection);
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   const startResize = (e) => {
     e.preventDefault();
@@ -259,7 +272,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     const cleanCorrectArr = String(correctAnswer).split(',').map(s => s.trim().toLowerCase());
 
     return (
-      <div className="w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm p-2 md:p-3 flex items-center justify-between gap-3 shrink-0">
+      <div className="w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm p-2 md:p-3 flex items-center justify-between gap-3 shrink-0 select-none">
         <div className="flex items-center gap-2">
           <span className="font-extrabold text-indigo-500 uppercase tracking-widest text-[10px] md:text-xs bg-indigo-50 px-2 py-1 rounded-md whitespace-nowrap flex items-center gap-1.5">
             {questionsData.length > 1 ? `Q ${qIndex + 1}` : 'Opts'}
@@ -372,7 +385,8 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
   };
 
   return (
-    <div ref={mainRef} className="w-full h-[100dvh] bg-slate-950 flex flex-col overflow-hidden font-sans select-none relative">
+    {/* Removed global select-none to allow deep selection events */}
+    <div ref={mainRef} className="w-full h-[100dvh] bg-slate-950 flex flex-col overflow-hidden font-sans relative">
       
       {dictBox && (
         <div 
@@ -391,7 +405,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         </div>
       )}
 
-      <header className="text-slate-300 p-2 flex justify-between items-center shrink-0 border-b border-slate-800/80 bg-slate-950 z-40 shadow-md">
+      <header className="text-slate-300 p-2 flex justify-between items-center shrink-0 border-b border-slate-800/80 bg-slate-950 z-40 shadow-md select-none">
         <div className="flex items-center gap-1.5 md:gap-3">
           <button onClick={() => setViewState('selector')} className="hover:bg-slate-800 p-2 rounded-xl border border-slate-700/50 flex items-center gap-1.5 transition-colors">
             <List size={16} /> <span className="hidden md:inline font-bold text-xs">Index</span>
@@ -428,7 +442,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
           <div className="flex items-center gap-1 bg-slate-900 rounded-xl border border-slate-800 p-0.5 md:p-1 shadow-inner">
             <button onClick={(e) => {e.stopPropagation(); setFontSize(f => Math.max(12, f - 2))}} className="p-1.5 hover:bg-slate-800 rounded-lg text-slate-400"><AArrowDown size={14} /></button>
             <div className="w-px h-3 bg-slate-700"></div>
-            <button onClick={(e) => {e.stopPropagation(); setFontSize(f => Math.min(32, f + 2))}} className="p-1.5 hover:bg-slate-800 rounded-lg text-slate-400"><AArrowUp size={14} /></button>
+            <button onClick={(e) => {e.stopPropagation(); setFontSize(f => Math.min(36, f + 2))}} className="p-1.5 hover:bg-slate-800 rounded-lg text-slate-400"><AArrowUp size={14} /></button>
           </div>
         </div>
       </header>
@@ -440,13 +454,12 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         {!isSingleColumn && (
           <div 
             ref={leftPaneRef}
-            onMouseUp={handleTextSelection}
-            onTouchEnd={handleTextSelection}
-            className="w-full h-[var(--split-size)] lg:w-[var(--split-size)] landscape:w-[var(--split-size)] landscape:h-full lg:h-full shrink-0 bg-slate-50 md:m-2 md:rounded-2xl shadow-inner overflow-y-auto p-4 md:p-8 scrollbar-thin relative z-0"
+            className="w-full h-[var(--split-size)] lg:w-[var(--split-size)] landscape:w-[var(--split-size)] landscape:h-full lg:h-full shrink-0 bg-[#FDFCF8] md:m-2 md:rounded-2xl shadow-inner overflow-y-auto p-6 md:p-10 scrollbar-thin relative z-0 select-text"
           >
+            {/* Added reading-mode styling: font-serif, relaxed lines, soft colors */}
             <div 
-              style={{ fontSize: `${fontSize}px`, lineHeight: '1.7' }}
-              className="text-slate-800 font-medium whitespace-pre-wrap select-text selection:bg-indigo-200" 
+              style={{ fontSize: `${fontSize}px`, lineHeight: '1.9' }}
+              className="text-[#2D3748] font-serif tracking-wide whitespace-pre-wrap selection:bg-indigo-200 selection:text-indigo-900 pb-20" 
               dangerouslySetInnerHTML={{ __html: formatText(passageText) }} 
             />
           </div>
@@ -463,7 +476,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         )}
 
         <div 
-          className={`flex-1 bg-slate-100 flex flex-col relative min-h-0 ${isSingleColumn ? 'max-w-5xl h-full md:rounded-2xl shadow-inner m-2' : 'w-full h-full md:mr-2 md:my-2 md:rounded-2xl shadow-inner overflow-hidden'}`}
+          className={`flex-1 bg-white flex flex-col relative min-h-0 ${isSingleColumn ? 'max-w-5xl h-full md:rounded-2xl shadow-inner m-2' : 'w-full h-full md:mr-2 md:my-2 md:rounded-2xl shadow-inner overflow-hidden'}`}
         >
           {!isSingleColumn && questionsData.length > 0 && (
             <div className="sticky top-0 z-30 w-full shrink-0">
@@ -471,7 +484,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
             </div>
           )}
 
-          <div ref={rightPaneRef} className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin scroll-smooth relative">
+          <div ref={rightPaneRef} className="flex-1 overflow-y-auto p-5 md:p-8 scrollbar-thin scroll-smooth relative select-text">
             {isSingleColumn && questionsData.length > 0 && (
               <div className="sticky top-0 z-30 mb-6 shrink-0 rounded-xl overflow-hidden shadow-sm border border-slate-200">
                 {renderOptionsPane(questionsData[activeQ], activeQ)}
@@ -483,11 +496,12 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
                 key={idx}
                 data-index={idx}
                 ref={el => questionRefs.current[idx] = el}
-                className={`relative transition-opacity duration-300 ${activeQ === idx ? 'opacity-100' : 'opacity-40'} ${idx !== 0 ? 'mt-12 pt-12 border-t-2 border-slate-200/60' : ''}`}
+                className={`relative transition-opacity duration-300 ${activeQ === idx ? 'opacity-100' : 'opacity-40'} ${idx !== 0 ? 'mt-12 pt-12 border-t border-slate-100' : ''}`}
               >
+                {/* Questions have high-contrast sans-serif styling */}
                 <div 
-                  style={{ fontSize: `${fontSize}px`, lineHeight: '1.6' }}
-                  className="font-bold text-slate-900 whitespace-pre-wrap" 
+                  style={{ fontSize: `${fontSize}px`, lineHeight: '1.7' }}
+                  className="font-medium text-slate-800 whitespace-pre-wrap selection:bg-indigo-200 selection:text-indigo-900" 
                   dangerouslySetInnerHTML={{ __html: formatText(q.text) }} 
                 />
               </div>
