@@ -384,8 +384,8 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     );
   };
 
+  // Removed global select-none to allow deep selection events
   return (
-    {/* Removed global select-none to allow deep selection events */}
     <div ref={mainRef} className="w-full h-[100dvh] bg-slate-950 flex flex-col overflow-hidden font-sans relative">
       
       {dictBox && (
