@@ -1,0 +1,362 @@
+Passage,Correct answers,Type,Difficulty,Size,Questions,Flags
+Questions (with Instructions),Correct Answer,,,,,
+"Instructions (Q1-Q10): Directions for questions 1 to 10: In each of the following questions, two statements are followed by two conclusions numbered I and II. You have to take the two given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts. Mark your answer as: (a) if only conclusion I follows (b) if only conclusion II follows (c) if both I and II follow (d) if neither I nor II follow
+
+Q1. Statements:
+All exams are tough.
+No easy is tough.
+Conclusions:
+1. Some exams are easy.
+2. No easy is exam.",b,,,,,
+"Instructions (Q1-Q10): Directions for questions 1 to 10: In each of the following questions, two statements are followed by two conclusions numbered I and II. You have to take the two given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts. Mark your answer as: (a) if only conclusion I follows (b) if only conclusion II follows (c) if both I and II follow (d) if neither I nor II follow
+
+Q2. Statements:
+Some batteries are re-chargeable.
+No re-chargeable is cheap.
+Conclusions:
+1. Some batteries are not cheap.
+2. No cheap is re-chargeable.",c,,,,,
+"Instructions (Q1-Q10): Directions for questions 1 to 10: In each of the following questions, two statements are followed by two conclusions numbered I and II. You have to take the two given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts. Mark your answer as: (a) if only conclusion I follows (b) if only conclusion II follows (c) if both I and II follow (d) if neither I nor II follow
+
+Q3. Statements:
+Some Siris are googles.
+All googles are Alexas.
+Conclusions:
+1. Some Siris are Alexas.
+2. No Alexa is google.",a,,,,,
+"Instructions (Q1-Q10): Directions for questions 1 to 10: In each of the following questions, two statements are followed by two conclusions numbered I and II. You have to take the two given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts. Mark your answer as: (a) if only conclusion I follows (b) if only conclusion II follows (c) if both I and II follow (d) if neither I nor II follow
+
+Q4. Statements:
+Some coffees are filter coffees.
+All South Indians have filter coffee.
+Conclusions:
+1. Some South Indians have coffee.
+2. No filter coffee is coffee.",d,,,,,
+"Instructions (Q1-Q10): Directions for questions 1 to 10: In each of the following questions, two statements are followed by two conclusions numbered I and II. You have to take the two given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts. Mark your answer as: (a) if only conclusion I follows (b) if only conclusion II follows (c) if both I and II follow (d) if neither I nor II follow
+
+Q5. Statements:
+All tenth exams are cancelled.
+All cancellations are welcome.
+Conclusions:
+1. Some tenth exams are welcome.
+2. All cancelled are tenth exams.",a,,,,,
+"Instructions (Q1-Q10): Directions for questions 1 to 10: In each of the following questions, two statements are followed by two conclusions numbered I and II. You have to take the two given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts. Mark your answer as: (a) if only conclusion I follows (b) if only conclusion II follows (c) if both I and II follow (d) if neither I nor II follow
+
+Q6. Statements:
+Wall papers have matt finish.
+Matt finish is smooth.
+Conclusions:
+1. Some matt finish are wall papers.
+2. All wall papers are smooth.",c,,,,,
+"Instructions (Q1-Q10): Directions for questions 1 to 10: In each of the following questions, two statements are followed by two conclusions numbered I and II. You have to take the two given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts. Mark your answer as: (a) if only conclusion I follows (b) if only conclusion II follows (c) if both I and II follow (d) if neither I nor II follow
+
+Q7. Statements:
+Iron pipes do not leak.
+Some plastic pipes leak.
+Conclusions:
+1. Iron pipes leak.
+2. Some plastic pipes are not iron pipes.",b,,,,,
+"Instructions (Q1-Q10): Directions for questions 1 to 10: In each of the following questions, two statements are followed by two conclusions numbered I and II. You have to take the two given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts. Mark your answer as: (a) if only conclusion I follows (b) if only conclusion II follows (c) if both I and II follow (d) if neither I nor II follow
+
+Q8. Statements:
+Not all remotes work.
+No work is valuable.
+Conclusions:
+1. Some remotes are not valuable.
+2. Some valuable don't work.",c,,,,,
+"Instructions (Q1-Q10): Directions for questions 1 to 10: In each of the following questions, two statements are followed by two conclusions numbered I and II. You have to take the two given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts. Mark your answer as: (a) if only conclusion I follows (b) if only conclusion II follows (c) if both I and II follow (d) if neither I nor II follow
+
+Q9. Statements:
+Only girls are beautiful.
+No boy is beautiful.
+Conclusions:
+1. All girls are beautiful.
+2. Some girls are not boys.",b,,,,,
+"Instructions (Q1-Q10): Directions for questions 1 to 10: In each of the following questions, two statements are followed by two conclusions numbered I and II. You have to take the two given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts. Mark your answer as: (a) if only conclusion I follows (b) if only conclusion II follows (c) if both I and II follow (d) if neither I nor II follow
+
+Q10. Statements:
+Some bean bags are soft.
+Some soft are nice to touch.
+Conclusions:
+1. Some bean bags are not nice to touch.
+2. Some bean bags are nice to touch.",d,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q11. Statements:
+1. No sweater is comfortable.
+2. No comfortable is warm.
+3. All bright are warm.
+Conclusions:
+1. Some sweaters are bright.
+2. Some bright are not comfortable.
+Options:
+(a) Only A
+(b) Only B
+(c) Only C
+(d) Only D",c,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q12. Statements:
+1. Some kurtas are pyjamas.
+2. No pyjama is loose.
+3. Some kurtas are not loose.
+4. Hats are not caps.
+5. Caps are not mufflers.
+6. Hats are not mufflers.
+Conclusions:
+1. Some kurtas are not caps.
+2. Some caps are not hats.
+Options:
+(a) Only A
+(b) Only A and B
+(c) Only B
+(d) Only A and D",d,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q13. Statements:
+Allen Solly sells casuals.
+No casuals are sold by Raymonds.
+Some Allen Solly are not Raymonds.
+No Raymonds are Tuxedos.
+Tuxedos are formals.
+Formals are not casuals.
+Casuals are not Tuxedos.
+Conclusions:
+1. Some Allen Solly are not casuals.
+2. No Allen Solly are Tuxedos.
+3. Some Tuxedos are not Allen Solly.",c,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q14. Statements:
+All hoodies are worn by young people.
+No young person wears socks.
+Some hoodies are socks.
+Skirts are cute.
+No cute is sweater.
+Sweaters are not skirts.
+Conclusions:
+1. No skirt is sweater.
+2. Some skirts are not socks.
+3. Some skirts are not cute.",d,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q15. Statements:
+Singlets are vests.
+Vests are short.
+Singlets are short.
+Gloves are not handy.
+No handy are swimsuits.
+Swim suits are not gloves.
+Trench coats are bathrobes.
+Bathrobes are not wet.
+Trench coats are not wet.
+Sheath dresses are awesome.
+Tank tops are awesome.
+Sheath dresses are tank tops.
+Conclusions:
+1. No bathrobe is trench coat.
+2. Some tank tops are not bathrobes.
+3. No bathrobe is tank top.
+Options:
+(a) Only A
+(b) Only A and C
+(c) Only A and D
+(d) Only B",b,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q16. Statements:
+Some gym clothes are for exercising.
+No exercising reduces weight.
+Some gym clothes reduce weight.
+Some ear rings are perfumes.
+No perfume is cheap.
+Earrings are not cheap.
+Dresses are long coats.
+Long coats are necklaces.
+Dresses are necklaces.
+Uniforms are for children.
+Children are trendy.
+Trendy are uniforms.
+Conclusions:
+1. Some children are not trendy.
+2. Some trendy are not children.",b,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q17. Statements:
+Biba has good collection of chudidars.
+Good collection of chudidars impresses women.
+Biba impresses women.
+Mothers collection is classy.
+No classy is affordable.
+Mothers collection is not affordable.
+No aurelia stock is in India.
+India does not sell Red dot.
+Aurelia is not Red dot.
+Suti sells only in Hyderabad.
+Hyderabad sells Fab India.
+Suti is not Fab India.
+Conclusions:
+1. Biba does not sell Fab India.
+2. Suti does not sell Red dot.
+3. Some Fab India are Suti.",a,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q18. Statements:
+Little miss is sunshine.
+Any sunshine happens in Tuscan.
+No Tuscan is old.
+Conclusions:
+1. All Little miss are not old.
+2. No sunshine is old.
+3. Little miss is in Tuscan.
+Options:
+(a) Only conclusion 1, 2 follow
+(b) Only conclusion 2, 3 follow
+(c) Only conclusions 1, 3 follow
+(d) All follow",a,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q19. Statements:
+Harry potter is from Griffindor.
+Griffindors win Quidditch.
+Quidditch is played in Hogwarts.
+Conclusions:
+1. Only Griffindors play in Hogwarts.
+2. Harry Potter wins Quidditch.
+3. Harry Potter wins Quidditch.
+Options:
+(a) Only conclusion 1, 2 follow
+(b) Only conclusion 1, 3 follow
+(c) Only conclusions 2, 3 follow
+(d) All follow",d,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q20. Statements:
+Dark knight does not rise.
+The lord of the ring is the Dark Knight.
+Some lord of the ring are inceptions.
+Conclusions:
+1. No lord of the ring rises.
+2. Some Dark knights are inceptions.
+3. Some that do not rise are inceptions.
+Options:
+(a) Only conclusion 1, 2 follow
+(b) Only conclusion 1, 3 follow
+(c) Only conclusions 2, 3 follow
+(d) All follow",d,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q21. Statements:
+All roads are beige.
+Some beige are not pink.
+Some roads are pink.
+All roads are not pink.
+Conclusions:
+1. Some roads are pink.
+2. Some beige are not pink.
+3. Some roads are not pink.",b,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q22. Statements:
+No jewel is ink.
+Some files are pens.
+Some pens are not files.
+No file is pen.
+Conclusions:
+1. Some ink are not jewel.
+2. Some pens are ink.
+3. Some pens are not ink.",d,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q23. Statements:
+Kartik comes to work by bus.
+All work can be done by bus.
+Some work can be done by train.
+Conclusions:
+1. All Kartik can be done by bus.
+2. All work can be done by train.",b,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q24. Statements:
+No cat has whiskers.
+All cats have whiskers.
+Some dogs are cats.
+Conclusions:
+1. All cats have whiskers.
+2. All dogs have whiskers.",d,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q25. Statements:
+No portrait of a lady is on fire.
+Each man is in blue.
+Some men are on fire.
+Conclusions:
+1. Some men are not portraits of a lady.
+2. Not all men are in blue.
+3. Some portraits of a lady are not men.",a,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q26. Statements:
+Only Charlie's angels are smart.
+Cameron is Charlie's angel.
+Smart are rare.
+Conclusions:
+1. Only smart are Cameron.
+2. Some Charlie's angels are smart.
+3. Charlie's angels are rare.
+Options:
+(a) Only conclusion 1 follows
+(b) Only conclusion 1, 3 follow
+(c) Only conclusions 1, 3 follow
+(d) Only conclusion 2 follows",d,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q27. Statements:
+Each pain is glory.
+Any glory is hope.
+Some hopes are hopeless.
+Conclusions:
+1. All glory is hopeless.
+Options:
+(a) Only conclusion 1 follows
+(b) Only conclusion 2 follows
+(c) Only conclusion 3 follows
+(d) Both conclusion 1 and 3 follow",b,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q28. Statements:
+All paint is pink.
+Many paint are hopeless.
+Conclusions:
+1. Many paint are not pink.
+2. Some paint are pink.
+Options:
+(a) Only conclusion 1 follows
+(b) Only conclusion 2 follows
+(c) Only conclusion 3 follows
+(d) All follow",c,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q29. Statements:
+Mummy is not aunts.
+No aunties are human.
+Humans have sharp teeth.
+Conclusions:
+1. Mummy does not have sharp teeth.
+2. Mummy does not have human teeth.
+3. Mummy is human.",d,,,,,
+"Instructions (Q11-Q30): In each of the following questions, statements are followed by conclusions. You have to take the given statements to be true even if they seem to be at variance with the commonly known facts and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts.
+
+Q30. Statements:
+Honey shook the kids.
+Honey goes to jail.
+All those who shook kids won't have amnesia.
+Conclusions:
+1. Honey does not have amnesia.
+2. Honey goes to jail.
+3. Honey goes to jail.
+Options:
+(a) Only conclusion 1, 2 follow
+(b) Only conclusion 1, 3 follow
+(c) Only conclusions 2, 3 follow
+(d) All follow",,,,,,
