@@ -43,12 +43,11 @@ async function fetchModulesSafe() {
 function MultiRoomEngine({ roomId }) {
   const router = useRouter();
   
-  // Unique session ID for this peer
   const myUuid = useMemo(() => Math.random().toString(36).substring(2, 15), []);
   
   const [peers, setPeers] = useState([]);
   const [isHost, setIsHost] = useState(false);
-  const [roomState, setRoomState] = useState('waiting'); // waiting, setup, playing, finished
+  const [roomState, setRoomState] = useState('waiting'); 
   const [viewState, setViewState] = useState('testing');
   
   // Quiz & Progress State
@@ -57,6 +56,11 @@ function MultiRoomEngine({ roomId }) {
   const [myAnswers, setMyAnswers] = useState({});
   const [myLocked, setMyLocked] = useState({});
   const [globalStats, setGlobalStats] = useState({});
+
+  // 1. Lifted Filter States for the TestSelector / TestPassage
+  const [filterType, setFilterType] = useState('All');
+  const [filterDiff, setFilterDiff] = useState('All');
+  const [filterStatus, setFilterStatus] = useState('All');
 
   // Host Setup State
   const [isFetchingModules, setIsFetchingModules] = useState(false);
@@ -72,13 +76,13 @@ function MultiRoomEngine({ roomId }) {
   const channelRef = useRef(null);
   const dirChannelRef = useRef(null);
 
-  // --- 1. Prevent Reconnections using State Refs ---
+  // Prevent Reconnections using State Refs
   const stateRef = useRef({ isHost, roomState, quizData });
   useEffect(() => {
     stateRef.current = { isHost, roomState, quizData };
   }, [isHost, roomState, quizData]);
 
-  // --- 2. Helper Functions ---
+  // Helper Functions
   const extractQuestionsFromRow = (row) => {
     if (!row || row.length === 0) return [];
     const rawQuestionText = row[5] ? String(row[5]).trim() : "";
@@ -116,7 +120,7 @@ function MultiRoomEngine({ roomId }) {
     return { correct, totalChecked };
   };
 
-  // --- 3. Supabase Synchronization & Topology ---
+  // Supabase Synchronization & Topology
   useEffect(() => {
     let isMounted = true;
     const channel = supabase.channel(`multi-${roomId}`, { config: { presence: { key: myUuid } } });
@@ -150,7 +154,6 @@ function MultiRoomEngine({ roomId }) {
       }
     });
 
-    // Handle sync requests from late-joining clients
     channel.on('broadcast', { event: 'request_sync' }, () => {
       const { isHost: refHost, roomState: refState, quizData: refData } = stateRef.current;
       if (refHost && refState === 'playing' && refData.length > 0) {
@@ -161,7 +164,6 @@ function MultiRoomEngine({ roomId }) {
     channel.subscribe(async (status) => {
       if (status === 'SUBSCRIBED') {
          await channel.track({ online_at: new Date().toISOString() });
-         // Ask the host for the current state just in case we joined after the game started
          channel.send({ type: 'broadcast', event: 'request_sync' });
       }
     });
@@ -172,7 +174,7 @@ function MultiRoomEngine({ roomId }) {
     };
   }, [roomId, myUuid]);
 
-  // --- 4. Global Directory Broadcast (Active Arenas) ---
+  // Global Directory Broadcast (Active Arenas)
   useEffect(() => {
     if (!isHost) {
       if (dirChannelRef.current) {
@@ -203,7 +205,7 @@ function MultiRoomEngine({ roomId }) {
     };
   }, []);
 
-  // --- 5. Host Setup Logic ---
+  // Host Setup Logic
   useEffect(() => {
     if (isHost && roomState === 'setup') {
       setIsFetchingModules(true);
@@ -277,7 +279,6 @@ function MultiRoomEngine({ roomId }) {
     });
   };
 
-  // Regular backup broadcast to ensure clients are synced
   useEffect(() => {
     if (isHost && quizData.length > 0 && roomState === 'playing') {
        const syncInterval = setInterval(() => {
@@ -306,7 +307,7 @@ function MultiRoomEngine({ roomId }) {
     }
   };
 
-  // --- 6. Render Functions ---
+  // Render Functions
   if (roomState === 'waiting' || roomState === 'setup') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 flex-col gap-6 p-4 relative">
@@ -352,7 +353,22 @@ function MultiRoomEngine({ roomId }) {
                     <option value={25}>25 Passages</option>
                   </select>
                 </div>
+                
+                {/* ADDED: Question Type Selector */}
                 <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Type</label>
+                  <select disabled={isDeploying} value={setupConfig.type} onChange={e => setSetupConfig({...setupConfig, type: e.target.value})} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium text-slate-700 outline-none">
+                    <option value="All">Mixed</option>
+                    <option value="Assumption">Assumption</option>
+                    <option value="Strengthen">Strengthen</option>
+                    <option value="Weaken">Weaken</option>
+                    <option value="Inference">Inference</option>
+                    <option value="Main Idea">Main Idea</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Difficulty</label>
                   <select disabled={isDeploying} value={setupConfig.difficulty} onChange={e => setSetupConfig({...setupConfig, difficulty: e.target.value})} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium text-slate-700 outline-none">
                     <option value="All">Mixed</option>
@@ -360,7 +376,6 @@ function MultiRoomEngine({ roomId }) {
                     <option value="Medium">Medium</option>
                     <option value="Hard">Hard</option>
                   </select>
-                </div>
               </div>
 
               <button disabled={isFetchingModules || isDeploying} onClick={handleStartArena} className="w-full mt-4 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-400 text-white font-bold py-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
@@ -431,6 +446,10 @@ function MultiRoomEngine({ roomId }) {
            answers={myAnswers} 
            setViewState={setViewState} 
            setCurrentIndex={setCurrentIndex} 
+           /* FIX: Added missing filter states for the Test Selector */
+           filterType={filterType} setFilterType={setFilterType}
+           filterDiff={filterDiff} setFilterDiff={setFilterDiff}
+           filterStatus={filterStatus} setFilterStatus={setFilterStatus}
          />
       ) : (
         <TestPassage 
@@ -447,6 +466,10 @@ function MultiRoomEngine({ roomId }) {
            submitTest={submitQuiz} 
            extractQuestionsFromRow={extractQuestionsFromRow}
            liveStats={myStats}
+           /* FIX: Passed down missing filter states so Pagination honors the active filters */
+           filterType={filterType}
+           filterDiff={filterDiff}
+           filterStatus={filterStatus}
         />
       )}
     </div>
