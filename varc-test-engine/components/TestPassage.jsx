@@ -1,19 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
 import { ArrowRight, ArrowLeft, CheckCircle, Check, X, Clock, AArrowUp, AArrowDown, List, Activity, Loader2 } from 'lucide-react';
 
-export default function TestPassage({ data, testId, currentIndex, setCurrentIndex, answers, setAnswers, locked, setLocked, setViewState, persistProgress, submitTest, extractQuestionsFromRow, liveStats }) {
-  const [fontSize, setFontSize] = useState(18); // Increased default size
+export default function TestPassage({ 
+  data, testId, currentIndex, setCurrentIndex, answers, setAnswers, locked, setLocked, setViewState, persistProgress, submitTest, extractQuestionsFromRow, liveStats,
+  filterType = 'All', filterDiff = 'All', filterStatus = 'All' 
+}) {
+  const [fontSize, setFontSize] = useState(16);
   const [passageTimeSpent, setPassageTimeSpent] = useState(0);
   const [questionTimeSpent, setQuestionTimeSpent] = useState({});
   const [splitSize, setSplitSize] = useState(50);
   const [dictBox, setDictBox] = useState(null);
   const [activeQ, setActiveQ] = useState(0);
+  
   const mainRef = useRef(null);
   const leftPaneRef = useRef(null);
   const rightPaneRef = useRef(null);
   const questionRefs = useRef([]);
   const isDragging = useRef(false);
-
+  
   const currentItem = data[currentIndex] || [];
   const rawQuestionText = currentItem[5] ? String(currentItem[5]).trim() : "";
   const isSingleColumn = rawQuestionText === "";
@@ -71,28 +75,86 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     };
   }, []);
 
+  // Compute filtered array on the fly for Next/Prev logic
+  const filteredIndices = data.map((row, idx) => {
+    const hasAnswered = answers[idx] !== undefined && Object.keys(answers[idx] || {}).length > 0;
+    const type = row[2] ? String(row[2]).trim() : "Mixed";
+    const difficulty = row[3] ? String(row[3]).trim() : "Medium";
+    return { idx, hasAnswered, type, difficulty };
+  }).filter(p => {
+    if (filterType && filterType !== 'All' && p.type !== filterType) return false;
+    if (filterDiff && filterDiff !== 'All' && p.difficulty !== filterDiff) return false;
+    if (filterStatus && filterStatus !== 'All') {
+      if (filterStatus === 'Attempted' && !p.hasAnswered) return false;
+      if (filterStatus === 'Unattempted' && p.hasAnswered) return false;
+    }
+    return true;
+  }).map(p => p.idx);
+
+  const isFiltered = (filterType && filterType !== 'All') || (filterDiff && filterDiff !== 'All') || (filterStatus && filterStatus !== 'All');
+  const currentPos = filteredIndices.indexOf(currentIndex);
+  
+  const isFirst = isFiltered && currentPos !== -1 ? currentPos === 0 : currentIndex === 0;
+  const isLast = isFiltered && currentPos !== -1 ? currentPos === filteredIndices.length - 1 : currentIndex === data.length - 1;
+
+  const handleNavigation = (direction) => {
+    if (isFiltered && currentPos !== -1) {
+      if (direction === 'next' && currentPos < filteredIndices.length - 1) {
+        setCurrentIndex(filteredIndices[currentPos + 1]);
+      } else if (direction === 'prev' && currentPos > 0) {
+        setCurrentIndex(filteredIndices[currentPos - 1]);
+      }
+    } else {
+      if (direction === 'next' && currentIndex < data.length - 1) {
+        setCurrentIndex(prev => prev + 1);
+      } else if (direction === 'prev' && currentIndex > 0) {
+        setCurrentIndex(prev => prev - 1);
+      }
+    }
+  };
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-      if (e.key === 'ArrowRight' && currentIndex < data.length - 1) setCurrentIndex(prev => prev + 1);
-      if (e.key === 'ArrowLeft' && currentIndex > 0) setCurrentIndex(prev => prev - 1);
+      if (e.key === 'ArrowRight') handleNavigation('next');
+      if (e.key === 'ArrowLeft') handleNavigation('prev');
     };
+    
     let touchStartX = 0;
-    const handleTouchStart = (e) => { touchStartX = e.changedTouches[0].screenX; };
-    const handleTouchEnd = (e) => {
-      const touchEndX = e.changedTouches[0].screenX;
-      if (touchStartX - touchEndX > 50 && currentIndex < data.length - 1) setCurrentIndex(prev => prev + 1);
-      if (touchEndX - touchStartX > 50 && currentIndex > 0) setCurrentIndex(prev => prev - 1);
+    let touchStartY = 0;
+    
+    const handleTouchStart = (e) => { 
+      touchStartX = e.changedTouches[0].screenX; 
+      touchStartY = e.changedTouches[0].screenY; 
     };
+    
+    const handleTouchEnd = (e) => {
+      // Explicitly disable swipe navigation in the two-column view
+      if (!isSingleColumn) return;
+
+      const touchEndX = e.changedTouches[0].screenX;
+      const touchEndY = e.changedTouches[0].screenY;
+      
+      const deltaX = touchStartX - touchEndX;
+      const deltaY = touchStartY - touchEndY;
+      
+      // Ensure X movement is large AND dominant
+      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 60) {
+        if (deltaX > 0) handleNavigation('next');
+        if (deltaX < 0) handleNavigation('prev');
+      }
+    };
+    
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [currentIndex, data.length, setCurrentIndex]);
+  }, [currentIndex, data.length, isFiltered, currentPos, filteredIndices, answers, isSingleColumn]);
 
   useEffect(() => {
     if (isSingleColumn || questionsData.length === 0) return;
@@ -119,43 +181,30 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     return () => { clearTimeout(timer); observer.disconnect(); }
   }, [currentIndex, questionsData.length, isSingleColumn, activeQ]);
 
-  // Dictionary text selection logic (robust cross-device implementation)
-  useEffect(() => {
-    let timeoutId;
-    const handleSelection = () => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(async () => {
-        const selection = window.getSelection();
-        if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
-          setDictBox(null);
-          return;
-        }
-        const text = selection.toString().trim();
-        if (text && text.length > 2 && text.length < 25 && !text.includes(' ')) {
-          const range = selection.getRangeAt(0);
-          const rect = range.getBoundingClientRect();
-          setDictBox(prev => prev && prev.word === text ? prev : { loading: true, word: text, x: rect.left + (rect.width / 2), y: rect.top });
-          try {
-            const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(text)}`);
-            if (res.ok) {
-              const resData = await res.json();
-              const meaning = resData[0]?.meanings[0]?.definitions[0]?.definition;
-              if (meaning) setDictBox({ word: text, meaning, x: rect.left + (rect.width / 2), y: rect.top });
-              else setDictBox(null);
-            } else setDictBox(null);
-          } catch (e) { setDictBox(null); }
-        } else {
-          setDictBox(null);
-        }
-      }, 400); // 400ms debounce ensures mobile context menus have time to settle
-    };
-
-    document.addEventListener('selectionchange', handleSelection);
-    return () => {
-      document.removeEventListener('selectionchange', handleSelection);
-      clearTimeout(timeoutId);
-    };
-  }, []);
+  const handleTextSelection = async () => {
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
+      setDictBox(null);
+      return;
+    }
+    const text = selection.toString().trim();
+    if (text && text.length > 2 && text.length < 25 && !text.includes(' ')) {
+      const range = selection.getRangeAt(0);
+      const rect = range.getBoundingClientRect();
+      setDictBox(prev => prev && prev.word === text ? prev : { loading: true, word: text, x: rect.left + (rect.width / 2), y: rect.top });
+      try {
+        const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(text)}`);
+        if (res.ok) {
+          const resData = await res.json();
+          const meaning = resData[0]?.meanings[0]?.definitions[0]?.definition;
+          if (meaning) setDictBox({ word: text, meaning, x: rect.left + (rect.width / 2), y: rect.top });
+          else setDictBox(null);
+        } else setDictBox(null);
+      } catch (e) { setDictBox(null); }
+    } else {
+      setDictBox(null);
+    }
+  };
 
   const startResize = (e) => {
     e.preventDefault();
@@ -272,7 +321,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     const cleanCorrectArr = String(correctAnswer).split(',').map(s => s.trim().toLowerCase());
 
     return (
-      <div className="w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm p-2 md:p-3 flex items-center justify-between gap-3 shrink-0 select-none">
+      <div className="w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm p-2 md:p-3 flex items-center justify-between gap-3 shrink-0">
         <div className="flex items-center gap-2">
           <span className="font-extrabold text-indigo-500 uppercase tracking-widest text-[10px] md:text-xs bg-indigo-50 px-2 py-1 rounded-md whitespace-nowrap flex items-center gap-1.5">
             {questionsData.length > 1 ? `Q ${qIndex + 1}` : 'Opts'}
@@ -293,20 +342,20 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
               const isSelected = questionType === 'mcma'
                 ? (Array.isArray(qAns) && qAns.some(a => String(a).trim().toLowerCase() === cleanOpt))
                 : String(qAns).trim().toLowerCase() === cleanOpt;
-              
+                
               const isCorrectAnswer = questionType === 'mcma'
                 ? cleanCorrectArr.includes(cleanOpt)
                 : cleanOpt === cleanCorrectArr[0];
-              
+                
               let btnColor = "border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 bg-white";
               if (isSelected) btnColor = "border-indigo-600 bg-indigo-600 text-white shadow-md transform scale-105";
-              
+                
               if (qLocked) {
                 if (isCorrectAnswer) btnColor = "border-emerald-500 bg-emerald-500 text-white shadow-md z-10 relative";
                 else if (isSelected && !isCorrectAnswer) btnColor = "border-rose-500 bg-rose-500 text-white shadow-sm opacity-80";
                 else btnColor = "border-slate-100 bg-slate-50 text-slate-300 cursor-not-allowed opacity-50";
               }
-              
+                
               return (
                 <button
                   key={opt}
@@ -347,7 +396,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
                 }`}
               />
               
-              {/* Submit Button (Only shows when typing and unlocked) */}
               {!qLocked && qAns && String(qAns).trim() !== '' && (
                 <button
                   onClick={() => {
@@ -361,7 +409,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
                 </button>
               )}
 
-              {/* Feedback Icons (Only shows when locked) */}
               {qLocked && (
                 <div className="absolute right-2">
                   {cleanCorrectArr.includes(String(qAns).trim().toLowerCase()) 
@@ -371,8 +418,6 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
                 </div>
               )}
             </div>
-
-            {/* Display correct answer if they got it wrong */}
             {qLocked && !cleanCorrectArr.includes(String(qAns).trim().toLowerCase()) && (
                <div className="text-[10px] text-emerald-600 font-extrabold ml-1">
                  Answer: {correctAnswer}
@@ -384,9 +429,8 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
     );
   };
 
-  // Removed global select-none to allow deep selection events
   return (
-    <div ref={mainRef} className="w-full h-[100dvh] bg-slate-950 flex flex-col overflow-hidden font-sans relative">
+    <div ref={mainRef} className="w-full h-[100dvh] bg-slate-950 flex flex-col overflow-hidden font-sans select-none relative">
       
       {dictBox && (
         <div 
@@ -405,7 +449,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         </div>
       )}
 
-      <header className="text-slate-300 p-2 flex justify-between items-center shrink-0 border-b border-slate-800/80 bg-slate-950 z-40 shadow-md select-none">
+      <header className="text-slate-300 p-2 flex justify-between items-center shrink-0 border-b border-slate-800/80 bg-slate-950 z-40 shadow-md">
         <div className="flex items-center gap-1.5 md:gap-3">
           <button onClick={() => setViewState('selector')} className="hover:bg-slate-800 p-2 rounded-xl border border-slate-700/50 flex items-center gap-1.5 transition-colors">
             <List size={16} /> <span className="hidden md:inline font-bold text-xs">Index</span>
@@ -416,18 +460,20 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         </div>
 
         <div className="flex items-center bg-slate-900 rounded-xl border border-slate-700/50 p-0.5 md:p-1">
-          <button disabled={currentIndex === 0} onClick={(e) => { e.stopPropagation(); setCurrentIndex(prev => prev - 1); }} className="p-1 md:p-1.5 disabled:opacity-30 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">
+          <button disabled={isFirst} onClick={(e) => { e.stopPropagation(); handleNavigation('prev'); }} className="p-1 md:p-1.5 disabled:opacity-30 hover:bg-slate-800 rounded-lg text-slate-300 transition-colors">
             <ArrowLeft size={16} />
           </button>
+          
           <span className="px-2 md:px-3 font-mono font-bold text-slate-400 tracking-widest text-[10px] md:text-xs">
-            {currentIndex + 1}/{data.length}
+            {isFiltered && currentPos !== -1 ? `${currentPos + 1}/${filteredIndices.length}` : `${currentIndex + 1}/${data.length}`}
           </span>
-          {currentIndex === data.length - 1 ? (
+          
+          {isLast ? (
             <button onClick={(e) => { e.stopPropagation(); submitTest(); }} className="p-1 md:p-1.5 text-emerald-400 hover:bg-emerald-900/30 rounded-lg transition-colors flex items-center gap-1">
               <span className="hidden md:inline text-xs font-bold">Submit</span><CheckCircle size={16} />
             </button>
           ) : (
-            <button onClick={(e) => { e.stopPropagation(); setCurrentIndex(prev => prev + 1); }} className="p-1 md:p-1.5 hover:bg-slate-800 rounded-lg text-indigo-400 transition-colors flex items-center gap-1">
+            <button onClick={(e) => { e.stopPropagation(); handleNavigation('next'); }} className="p-1 md:p-1.5 hover:bg-slate-800 rounded-lg text-indigo-400 transition-colors flex items-center gap-1">
               <span className="hidden md:inline text-xs font-bold">Next</span><ArrowRight size={16} />
             </button>
           )}
@@ -442,7 +488,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
           <div className="flex items-center gap-1 bg-slate-900 rounded-xl border border-slate-800 p-0.5 md:p-1 shadow-inner">
             <button onClick={(e) => {e.stopPropagation(); setFontSize(f => Math.max(12, f - 2))}} className="p-1.5 hover:bg-slate-800 rounded-lg text-slate-400"><AArrowDown size={14} /></button>
             <div className="w-px h-3 bg-slate-700"></div>
-            <button onClick={(e) => {e.stopPropagation(); setFontSize(f => Math.min(36, f + 2))}} className="p-1.5 hover:bg-slate-800 rounded-lg text-slate-400"><AArrowUp size={14} /></button>
+            <button onClick={(e) => {e.stopPropagation(); setFontSize(f => Math.min(32, f + 2))}} className="p-1.5 hover:bg-slate-800 rounded-lg text-slate-400"><AArrowUp size={14} /></button>
           </div>
         </div>
       </header>
@@ -454,14 +500,15 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         {!isSingleColumn && (
           <div 
             ref={leftPaneRef}
-            className="w-full h-[var(--split-size)] lg:w-[var(--split-size)] landscape:w-[var(--split-size)] landscape:h-full lg:h-full shrink-0 bg-[#FDFCF8] md:m-2 md:rounded-2xl shadow-inner overflow-y-auto p-6 md:p-10 scrollbar-thin relative z-0 select-text"
+            onMouseUp={handleTextSelection}
+            onTouchEnd={handleTextSelection}
+            className="w-full h-[var(--split-size)] lg:w-[var(--split-size)] landscape:w-[var(--split-size)] landscape:h-full lg:h-full shrink-0 bg-slate-50 md:m-2 md:rounded-2xl shadow-inner overflow-y-auto p-4 md:p-8 scrollbar-thin relative z-0"
           >
-            {/* Added reading-mode styling: font-serif, relaxed lines, soft colors */}
             <div 
-              style={{ fontSize: `${fontSize}px`, lineHeight: '1.9' }}
-              className="text-[#2D3748] font-serif tracking-wide whitespace-pre-wrap selection:bg-indigo-200 selection:text-indigo-900 pb-20" 
+              style={{ fontSize: `${fontSize}px`, lineHeight: '1.7' }}
+              className="text-slate-800 font-medium whitespace-pre-wrap select-text selection:bg-indigo-200" 
               dangerouslySetInnerHTML={{ __html: formatText(passageText) }} 
-            />
+             />
           </div>
         )}
 
@@ -476,7 +523,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
         )}
 
         <div 
-          className={`flex-1 bg-white flex flex-col relative min-h-0 ${isSingleColumn ? 'max-w-5xl h-full md:rounded-2xl shadow-inner m-2' : 'w-full h-full md:mr-2 md:my-2 md:rounded-2xl shadow-inner overflow-hidden'}`}
+           className={`flex-1 bg-slate-100 flex flex-col relative min-h-0 ${isSingleColumn ? 'max-w-5xl h-full md:rounded-2xl shadow-inner m-2' : 'w-full h-full md:mr-2 md:my-2 md:rounded-2xl shadow-inner overflow-hidden'}`}
         >
           {!isSingleColumn && questionsData.length > 0 && (
             <div className="sticky top-0 z-30 w-full shrink-0">
@@ -484,7 +531,7 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
             </div>
           )}
 
-          <div ref={rightPaneRef} className="flex-1 overflow-y-auto p-5 md:p-8 scrollbar-thin scroll-smooth relative select-text">
+          <div ref={rightPaneRef} className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin scroll-smooth relative">
             {isSingleColumn && questionsData.length > 0 && (
               <div className="sticky top-0 z-30 mb-6 shrink-0 rounded-xl overflow-hidden shadow-sm border border-slate-200">
                 {renderOptionsPane(questionsData[activeQ], activeQ)}
@@ -496,14 +543,13 @@ export default function TestPassage({ data, testId, currentIndex, setCurrentInde
                 key={idx}
                 data-index={idx}
                 ref={el => questionRefs.current[idx] = el}
-                className={`relative transition-opacity duration-300 ${activeQ === idx ? 'opacity-100' : 'opacity-40'} ${idx !== 0 ? 'mt-12 pt-12 border-t border-slate-100' : ''}`}
+                className={`relative transition-opacity duration-300 ${activeQ === idx ? 'opacity-100' : 'opacity-40'} ${idx !== 0 ? 'mt-12 pt-12 border-t-2 border-slate-200/60' : ''}`}
               >
-                {/* Questions have high-contrast sans-serif styling */}
                 <div 
-                  style={{ fontSize: `${fontSize}px`, lineHeight: '1.7' }}
-                  className="font-medium text-slate-800 whitespace-pre-wrap selection:bg-indigo-200 selection:text-indigo-900" 
+                  style={{ fontSize: `${fontSize}px`, lineHeight: '1.6' }}
+                  className="font-bold text-slate-900 whitespace-pre-wrap" 
                   dangerouslySetInnerHTML={{ __html: formatText(q.text) }} 
-                />
+                 />
               </div>
             ))}
             <div className="h-48 md:h-64 w-full shrink-0"></div>
