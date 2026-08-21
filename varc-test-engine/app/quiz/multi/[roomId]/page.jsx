@@ -36,8 +36,15 @@ function MultiRoomEngine({ roomId }) {
   });
 
   const channelRef = useRef(null);
+  const dirChannelRef = useRef(null);
 
-  // --- Helper Functions ---
+  // --- 1. Prevent Reconnections using State Refs ---
+  const stateRef = useRef({ isHost, roomState, quizData });
+  useEffect(() => {
+    stateRef.current = { isHost, roomState, quizData };
+  }, [isHost, roomState, quizData]);
+
+  // --- 2. Helper Functions ---
   const extractQuestionsFromRow = (row) => {
     if (!row || row.length === 0) return [];
     const rawQuestionText = row[5] ? String(row[5]).trim() : "";
@@ -75,7 +82,7 @@ function MultiRoomEngine({ roomId }) {
     return { correct, totalChecked };
   };
 
-  // --- Supabase Synchronization & Topology ---
+  // --- 3. Supabase Synchronization & Topology ---
   useEffect(() => {
     let isMounted = true;
     const channel = supabase.channel(`multi-${roomId}`, { config: { presence: { key: myUuid } } });
@@ -88,9 +95,9 @@ function MultiRoomEngine({ roomId }) {
       setPeers(userIds);
       
       // Host Election: Oldest UUID in the room becomes the Host
-      if (userIds.length > 0 && userIds[0] === myUuid && !isHost) {
+      if (userIds.length > 0 && userIds[0] === myUuid && !stateRef.current.isHost) {
         setIsHost(true);
-        if (roomState === 'waiting') setRoomState('setup');
+        if (stateRef.current.roomState === 'waiting') setRoomState('setup');
       }
     });
 
@@ -98,7 +105,7 @@ function MultiRoomEngine({ roomId }) {
       if (!isMounted) return;
       
       // Receive quiz data from host
-      if (payload.quizData && payload.quizData.length > 0) {
+      if (payload.quizData && payload.quizData.length > 0 && stateRef.current.quizData.length === 0) {
         setQuizData(payload.quizData);
         setRoomState('playing');
       }
@@ -111,8 +118,9 @@ function MultiRoomEngine({ roomId }) {
 
     // Handle sync requests from late-joining clients
     channel.on('broadcast', { event: 'request_sync' }, () => {
-      if (isHost && roomState === 'playing' && quizData.length > 0) {
-        channel.send({ type: 'broadcast', event: 'sync_state', payload: { quizData, from: myUuid } });
+      const { isHost: refHost, roomState: refState, quizData: refData } = stateRef.current;
+      if (refHost && refState === 'playing' && refData.length > 0) {
+        channel.send({ type: 'broadcast', event: 'sync_state', payload: { quizData: refData, from: myUuid } });
       }
     });
 
@@ -128,9 +136,53 @@ function MultiRoomEngine({ roomId }) {
       isMounted = false;
       channel.unsubscribe();
     };
-  }, [roomId, myUuid, isHost, roomState, quizData]);
+  }, [roomId, myUuid]);
 
-  // --- Host Setup Logic ---
+  // --- 4. Global Directory Broadcast (Active Arenas) ---
+  useEffect(() => {
+    if (!isHost) {
+      if (dirChannelRef.current) {
+        dirChannelRef.current.unsubscribe();
+        dirChannelRef.current = null;
+      }
+      return;
+    }
+
+    // Initialize the directory channel if it doesn't exist
+    if (!dirChannelRef.current) {
+      dirChannelRef.current = supabase.channel('global-directory', { 
+        config: { presence: { key: roomId } } 
+      });
+      
+      dirChannelRef.current.subscribe(async (status) => {
+        if (status === 'SUBSCRIBED') {
+          await dirChannelRef.current.track({ 
+            roomId, 
+            state: roomState, 
+            peers: peers.length 
+          });
+        }
+      });
+    } else if (dirChannelRef.current.state === 'JOINED') {
+      // If already joined, just update the tracked presence data to reflect changes
+      dirChannelRef.current.track({ 
+        roomId, 
+        state: roomState, 
+        peers: peers.length 
+      });
+    }
+  }, [isHost, roomId, roomState, peers.length]);
+
+  // Clean up directory broadcast entirely if we leave the page
+  useEffect(() => {
+    return () => {
+      if (dirChannelRef.current) {
+        dirChannelRef.current.unsubscribe();
+      }
+    };
+  }, []);
+
+  // --- 5. Host Setup Logic ---
   useEffect(() => {
     if (isHost && roomState === 'setup') {
       getAvailableTests().then(tests => {
@@ -174,13 +226,25 @@ function MultiRoomEngine({ roomId }) {
     setQuizData(finalData);
     setRoomState('playing');
     
-    // Broadcast the generated arena to all peers
+    // Broadcast the generated arena to all peers immediately
     channelRef.current.send({ 
       type: 'broadcast', 
       event: 'sync_state', 
       payload: { quizData: finalData, from: myUuid } 
     });
   };
+
+  // Host interval sync to catch clients who joined but missed the 'request_sync' message
+  useEffect(() => {
+    if (isHost && quizData.length > 0 && roomState === 'playing') {
+       const syncInterval = setInterval(() => {
+         if (channelRef.current) {
+           channelRef.current.send({ type: 'broadcast', event: 'sync_state', payload: { quizData, from: myUuid } });
+         }
+       }, 5000);
+       return () => clearInterval(syncInterval);
+    }
+  }, [isHost, quizData, roomState, myUuid]);
 
   const handlePersistProgress = (newAnswers, newLocked) => {
     const stats = computeLiveStats(newAnswers || myAnswers, newLocked || myLocked, quizData);
@@ -199,7 +263,7 @@ function MultiRoomEngine({ roomId }) {
     }
   };
 
-  // --- Render Functions ---
+  // --- 6. Render Functions ---
   if (roomState === 'waiting' || roomState === 'setup') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 flex-col gap-6 p-4 relative">
