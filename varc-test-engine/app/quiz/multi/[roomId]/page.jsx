@@ -3,10 +3,42 @@
 import { useEffect, useState, useRef, useMemo, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '../../../../lib/supabaseClient';
-import { getAvailableTests, getTestData } from '../../../../lib/githubFetcher';
+import { getTestData } from '../../../../lib/githubFetcher';
 import TestPassage from '../../../../components/TestPassage';
 import TestSelector from '../../../../components/TestSelector';
-import { ShieldCheck, Wifi, Users, Copy, Home, Loader2, Star, Settings, Play } from 'lucide-react';
+import { Wifi, Users, Copy, Home, Loader2, Star, Settings, Play } from 'lucide-react';
+
+// Safe client-side fetcher to avoid Next.js "revalidate" fetch errors in Client Components
+const REPO_OWNER = 'mobachat';
+const REPO_NAME = 'dynamic_tests';
+
+async function fetchModulesSafe() {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/testdata`);
+    if (!res.ok) return [];
+    const items = await res.json();
+    let files = [];
+    for (const item of items) {
+      if (item.type === 'dir') {
+        const subRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${item.path}`);
+        if (subRes.ok) {
+          const subItems = await subRes.json();
+          for (const sub of subItems) {
+            if (sub.name.endsWith('.csv')) {
+              files.push({ filename: sub.path, name: decodeURIComponent(sub.name.replace('.csv', '')), folder: item.name });
+            }
+          }
+        }
+      } else if (item.name.endsWith('.csv')) {
+        files.push({ filename: item.path, name: decodeURIComponent(item.name.replace('.csv', '')), folder: 'Root' });
+      }
+    }
+    return files;
+  } catch (e) {
+    console.error("Failed to fetch modules:", e);
+    return [];
+  }
+}
 
 function MultiRoomEngine({ roomId }) {
   const router = useRouter();
@@ -27,6 +59,8 @@ function MultiRoomEngine({ roomId }) {
   const [globalStats, setGlobalStats] = useState({});
 
   // Host Setup State
+  const [isFetchingModules, setIsFetchingModules] = useState(false);
+  const [isDeploying, setIsDeploying] = useState(false);
   const [availableModules, setAvailableModules] = useState([]);
   const [setupConfig, setSetupConfig] = useState({
     passageCount: 5,
@@ -104,7 +138,7 @@ function MultiRoomEngine({ roomId }) {
     channel.on('broadcast', { event: 'sync_state' }, ({ payload }) => {
       if (!isMounted) return;
       
-      // Receive quiz data from host
+      // Receive quiz data from host (Ignore if we already have it to prevent overwriting)
       if (payload.quizData && payload.quizData.length > 0 && stateRef.current.quizData.length === 0) {
         setQuizData(payload.quizData);
         setRoomState('playing');
@@ -148,7 +182,6 @@ function MultiRoomEngine({ roomId }) {
       return;
     }
 
-    // Initialize the directory channel if it doesn't exist
     if (!dirChannelRef.current) {
       dirChannelRef.current = supabase.channel('global-directory', { 
         config: { presence: { key: roomId } } 
@@ -156,67 +189,78 @@ function MultiRoomEngine({ roomId }) {
       
       dirChannelRef.current.subscribe(async (status) => {
         if (status === 'SUBSCRIBED') {
-          await dirChannelRef.current.track({ 
-            roomId, 
-            state: roomState, 
-            peers: peers.length 
-          });
+          await dirChannelRef.current.track({ roomId, state: roomState, peers: peers.length });
         }
       });
     } else if (dirChannelRef.current.state === 'JOINED') {
-      // If already joined, just update the tracked presence data to reflect changes
-      dirChannelRef.current.track({ 
-        roomId, 
-        state: roomState, 
-        peers: peers.length 
-      });
+      dirChannelRef.current.track({ roomId, state: roomState, peers: peers.length });
     }
   }, [isHost, roomId, roomState, peers.length]);
 
-  // Clean up directory broadcast entirely if we leave the page
   useEffect(() => {
     return () => {
-      if (dirChannelRef.current) {
-        dirChannelRef.current.unsubscribe();
-      }
+      if (dirChannelRef.current) dirChannelRef.current.unsubscribe();
     };
   }, []);
 
   // --- 5. Host Setup Logic ---
   useEffect(() => {
     if (isHost && roomState === 'setup') {
-      getAvailableTests().then(tests => {
+      setIsFetchingModules(true);
+      fetchModulesSafe().then(tests => {
         setAvailableModules(tests || []);
-      });
+        setIsFetchingModules(false);
+      }).catch(() => setIsFetchingModules(false));
     }
   }, [isHost, roomState]);
 
   const handleStartArena = async () => {
     if (!isHost) return;
+    setIsDeploying(true);
 
-    let rawData = [];
+    let finalData = [];
+    
+    // Smarter Randomizer to avoid GitHub Rate Limits
     if (setupConfig.module === 'Random') {
-      const tests = await getAvailableTests();
-      for (const t of tests) {
-        const d = await getTestData(t.filename);
-        if (d) rawData = rawData.concat(d);
+      if (availableModules.length === 0) {
+        alert("No modules available. Please wait for them to load.");
+        setIsDeploying(false);
+        return;
+      }
+      
+      const shuffledModules = [...availableModules].sort(() => 0.5 - Math.random());
+      
+      for (const mod of shuffledModules) {
+        const d = await getTestData(mod.filename);
+        if (d && d.length > 0) {
+          const filtered = d.filter(row => {
+            const type = row[2] ? String(row[2]).trim() : "Mixed";
+            const diff = row[3] ? String(row[3]).trim() : "Medium";
+            if (setupConfig.type !== 'All' && type !== setupConfig.type) return false;
+            if (setupConfig.difficulty !== 'All' && diff !== setupConfig.difficulty) return false;
+            return true;
+          });
+          
+          finalData = finalData.concat(filtered);
+          if (finalData.length >= setupConfig.passageCount) break;
+        }
       }
     } else {
-      rawData = await getTestData(setupConfig.module);
+      const d = await getTestData(setupConfig.module);
+      if (d) {
+        finalData = d.filter(row => {
+          const type = row[2] ? String(row[2]).trim() : "Mixed";
+          const diff = row[3] ? String(row[3]).trim() : "Medium";
+          if (setupConfig.type !== 'All' && type !== setupConfig.type) return false;
+          if (setupConfig.difficulty !== 'All' && diff !== setupConfig.difficulty) return false;
+          return true;
+        });
+      }
     }
 
-    // Apply strict filters before shuffling
-    let filtered = rawData.filter(row => {
-      const type = row[2] ? String(row[2]).trim() : "Mixed";
-      const diff = row[3] ? String(row[3]).trim() : "Medium";
-      
-      if (setupConfig.type !== 'All' && type !== setupConfig.type) return false;
-      if (setupConfig.difficulty !== 'All' && diff !== setupConfig.difficulty) return false;
-      return true;
-    });
+    finalData = finalData.sort(() => 0.5 - Math.random()).slice(0, setupConfig.passageCount);
 
-    // Shuffle and slice to exact requested count
-    const finalData = filtered.sort(() => 0.5 - Math.random()).slice(0, setupConfig.passageCount);
+    setIsDeploying(false);
 
     if (finalData.length === 0) {
       alert("No questions found matching these filters. Please adjust the settings.");
@@ -226,7 +270,6 @@ function MultiRoomEngine({ roomId }) {
     setQuizData(finalData);
     setRoomState('playing');
     
-    // Broadcast the generated arena to all peers immediately
     channelRef.current.send({ 
       type: 'broadcast', 
       event: 'sync_state', 
@@ -234,7 +277,7 @@ function MultiRoomEngine({ roomId }) {
     });
   };
 
-  // Host interval sync to catch clients who joined but missed the 'request_sync' message
+  // Regular backup broadcast to ensure clients are synced
   useEffect(() => {
     if (isHost && quizData.length > 0 && roomState === 'playing') {
        const syncInterval = setInterval(() => {
@@ -267,7 +310,7 @@ function MultiRoomEngine({ roomId }) {
   if (roomState === 'waiting' || roomState === 'setup') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 flex-col gap-6 p-4 relative">
-        <button onClick={() => router.push('/')} className="absolute top-6 left-6 flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold transition-colors">
+        <button onClick={() => router.push('/quiz')} className="absolute top-6 left-6 flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold transition-colors">
           <Home size={18}/> Cancel
         </button>
 
@@ -290,8 +333,8 @@ function MultiRoomEngine({ roomId }) {
               
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Target Module</label>
-                <select value={setupConfig.module} onChange={e => setSetupConfig({...setupConfig, module: e.target.value})} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium text-slate-700 outline-none focus:ring-2 focus:ring-indigo-100">
-                  <option value="Random">All Modules (Randomized)</option>
+                <select disabled={isFetchingModules || isDeploying} value={setupConfig.module} onChange={e => setSetupConfig({...setupConfig, module: e.target.value})} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium text-slate-700 outline-none focus:ring-2 focus:ring-indigo-100 disabled:opacity-50">
+                  <option value="Random">{isFetchingModules ? 'Loading Modules...' : 'All Modules (Randomized)'}</option>
                   {availableModules.map(m => (
                     <option key={m.filename} value={m.filename}>{m.folder} - {m.name}</option>
                   ))}
@@ -301,7 +344,7 @@ function MultiRoomEngine({ roomId }) {
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Length</label>
-                  <select value={setupConfig.passageCount} onChange={e => setSetupConfig({...setupConfig, passageCount: Number(e.target.value)})} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium text-slate-700 outline-none">
+                  <select disabled={isDeploying} value={setupConfig.passageCount} onChange={e => setSetupConfig({...setupConfig, passageCount: Number(e.target.value)})} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium text-slate-700 outline-none">
                     <option value={1}>1 Passage</option>
                     <option value={3}>3 Passages</option>
                     <option value={5}>5 Passages</option>
@@ -311,7 +354,7 @@ function MultiRoomEngine({ roomId }) {
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Difficulty</label>
-                  <select value={setupConfig.difficulty} onChange={e => setSetupConfig({...setupConfig, difficulty: e.target.value})} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium text-slate-700 outline-none">
+                  <select disabled={isDeploying} value={setupConfig.difficulty} onChange={e => setSetupConfig({...setupConfig, difficulty: e.target.value})} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium text-slate-700 outline-none">
                     <option value="All">Mixed</option>
                     <option value="Easy">Easy</option>
                     <option value="Medium">Medium</option>
@@ -320,8 +363,9 @@ function MultiRoomEngine({ roomId }) {
                 </div>
               </div>
 
-              <button onClick={handleStartArena} className="w-full mt-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
-                 <Play size={18} fill="currentColor"/> Deploy Arena
+              <button disabled={isFetchingModules || isDeploying} onClick={handleStartArena} className="w-full mt-4 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-400 text-white font-bold py-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                 {isDeploying ? <Loader2 size={18} className="animate-spin" /> : <Play size={18} fill="currentColor"/>} 
+                 {isDeploying ? 'Deploying...' : 'Deploy Arena'}
               </button>
             </div>
           ) : (
@@ -359,7 +403,7 @@ function MultiRoomEngine({ roomId }) {
             ))}
           </div>
           
-          <button onClick={() => router.push('/')} className="w-full md:w-auto bg-slate-900 text-white font-bold px-10 py-4 rounded-2xl hover:bg-indigo-600 shadow-md hover:-translate-y-1 transition-all flex items-center justify-center gap-2 mx-auto">
+          <button onClick={() => router.push('/quiz')} className="w-full md:w-auto bg-slate-900 text-white font-bold px-10 py-4 rounded-2xl hover:bg-indigo-600 shadow-md hover:-translate-y-1 transition-all flex items-center justify-center gap-2 mx-auto">
              <Home size={20}/> Exit Arena
           </button>
         </div>
