@@ -1,26 +1,26 @@
 import { useState } from 'react';
 import { Search, Filter, Target, CheckCircle, BookOpen, ArrowRight, BrainCircuit, CheckSquare } from 'lucide-react';
 
-export default function TestSelector({ data, testId, answers, setViewState, setCurrentIndex }) {
+export default function TestSelector({ 
+  data, testId, answers, setViewState, setCurrentIndex,
+  filterType, setFilterType, filterDiff, setFilterDiff, filterStatus, setFilterStatus 
+}) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterType, setFilterType] = useState('All');
-  const [filterDiff, setFilterDiff] = useState('All');
-  const [filterStatus, setFilterStatus] = useState('All');
 
   const previews = data.map((row, idx) => {
     const rawQ = row[5] ? String(row[5]).trim() : "";
     const isSingle = rawQ === "";
     let previewText = isSingle ? String(row[0]).trim() : String(row[0]).trim() || rawQ;
-    previewText = previewText.replace(/<[^>]*>?/gm, ''); 
-    
+    previewText = previewText.replace(/<[^>]*>?/gm, '');
+      
     const type = row[2] ? String(row[2]).trim() : "Mixed";
     const difficulty = row[3] ? String(row[3]).trim() : "Medium";
-
+    
     return { 
-      idx, 
-      text: previewText.substring(0, 150) + '...', 
-      hasAnswered: answers[idx] !== undefined && Object.keys(answers[idx] || {}).length > 0,
-      type, difficulty
+       idx, 
+       text: previewText.substring(0, 150) + '...', 
+       hasAnswered: answers[idx] !== undefined && Object.keys(answers[idx] || {}).length > 0,
+       type, difficulty
     };
   });
 
@@ -80,8 +80,8 @@ export default function TestSelector({ data, testId, answers, setViewState, setC
         {filtered.length === 0 && <div className="text-center text-slate-400 font-bold p-10 bg-white rounded-3xl border border-dashed border-slate-300">No passages match your filters.</div>}
         {filtered.map((item) => (
           <div 
-            key={item.idx} 
-            onClick={() => { setCurrentIndex(item.idx); setViewState('testing'); }}
+             key={item.idx} 
+             onClick={() => { setCurrentIndex(item.idx); setViewState('testing'); }}
             className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-xl hover:border-indigo-300 cursor-pointer transition-all duration-300 flex flex-col md:flex-row md:items-center gap-5 group transform hover:-translate-y-1"
           >
             <div className={`p-4 rounded-2xl shrink-0 transition-colors ${item.hasAnswered ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-50 text-slate-400 group-hover:bg-indigo-600 group-hover:text-white'}`}>

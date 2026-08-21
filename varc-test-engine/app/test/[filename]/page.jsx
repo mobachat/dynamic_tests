@@ -1,31 +1,31 @@
 "use client";
-
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getTestData } from '../../../lib/githubFetcher';
 import { saveToDB, getFromDB } from '../../../lib/db';
 import { Target, Home, Loader2 } from 'lucide-react';
-
 import TestSelector from '../../../components/TestSelector';
 import TestPassage from '../../../components/TestPassage';
 
 export default function TestEngine({ params }) {
   const router = useRouter();
   const testId = decodeURIComponent(params.filename.replace('.csv', ''));
-  
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [viewState, setViewState] = useState('selector');
   const [currentIndex, setCurrentIndex] = useState(0);
-  
   const [answers, setAnswers] = useState({});
-  const [locked, setLocked] = useState({}); 
+  const [locked, setLocked] = useState({});
+  
+  // Lifted filter states
+  const [filterType, setFilterType] = useState('All');
+  const [filterDiff, setFilterDiff] = useState('All');
+  const [filterStatus, setFilterStatus] = useState('All');
 
   useEffect(() => {
     async function initializeTest() {
       const testData = await getTestData(params.filename);
       setData(testData);
-
       const savedResult = await getFromDB('results', testId);
       if (savedResult) {
         setAnswers(savedResult.answers || {});
@@ -34,7 +34,6 @@ export default function TestEngine({ params }) {
         setLoading(false);
         return;
       }
-
       const savedProgress = await getFromDB('progress', testId);
       if (savedProgress) {
         setAnswers(savedProgress.answers || {});
@@ -60,13 +59,10 @@ export default function TestEngine({ params }) {
       return [{ text: String(row[0]).trim(), correctAnswer: row[1] ? String(row[1]).trim() : "", flagsStr: row[6] ? String(row[6]).toLowerCase() : "" }];
     } else {
       const qBlocks = rawQuestionText.split('***').map(s => s.trim());
-      
-      // FIX: Splits answers by EITHER '***' OR a newline, then removes empty blank lines
       const ansBlocks = (row[1] ? String(row[1]) : "")
         .split(/\*\*\*|\r?\n/)
         .map(s => s.trim())
         .filter(s => s !== "");
-        
       const flagBlocks = (row[6] ? String(row[6]).toLowerCase() : "").split('***').map(s => s.trim());
       
       return qBlocks.map((qText, i) => ({
@@ -88,7 +84,6 @@ export default function TestEngine({ params }) {
         if (pLocked[qIdx]) {
           totalChecked++;
           const ans = pAnswers[qIdx];
-          
           const isMcma = String(q.correctAnswer).includes(',');
           const cleanCorrectArr = String(q.correctAnswer).split(',').map(s => s.trim().toLowerCase());
           
@@ -108,7 +103,6 @@ export default function TestEngine({ params }) {
       const { correct, totalChecked } = computeLiveStats();
       let totalQs = 0;
       data.forEach(row => totalQs += extractQuestionsFromRow(row).length);
-
       await saveToDB('results', {
         testId: testId,
         answers: answers,
@@ -129,7 +123,6 @@ export default function TestEngine({ params }) {
       <span className="font-bold text-xl tracking-wide text-slate-700 animate-pulse">Initializing Engine...</span>
     </div>
   );
-  
   if (data.length === 0) return <div className="flex min-h-screen items-center justify-center font-bold text-rose-500 text-xl">No data found.</div>;
 
   if (viewState === 'submitted') {
@@ -157,6 +150,9 @@ export default function TestEngine({ params }) {
          answers={answers}
          setViewState={setViewState}
          setCurrentIndex={setCurrentIndex}
+         filterType={filterType} setFilterType={setFilterType}
+         filterDiff={filterDiff} setFilterDiff={setFilterDiff}
+         filterStatus={filterStatus} setFilterStatus={setFilterStatus}
       />
     );
   }
@@ -176,6 +172,9 @@ export default function TestEngine({ params }) {
       submitTest={submitTest}
       extractQuestionsFromRow={extractQuestionsFromRow}
       liveStats={computeLiveStats()}
+      filterType={filterType}
+      filterDiff={filterDiff}
+      filterStatus={filterStatus}
     />
   );
 }
