@@ -75,42 +75,42 @@ export default function TestPassage({
     };
   }, []);
 
-  const isTypeOrDiffFiltered = (filterType && filterType !== 'All') || (filterDiff && filterDiff !== 'All');
-  const currentType = currentItem[2] ? String(currentItem[2]).trim() : "Mixed";
-  const currentDiff = currentItem[3] ? String(currentItem[3]).trim() : "Medium";
-
-  let nextMatchIdx = -1;
-  let prevMatchIdx = -1;
-
-  if (isTypeOrDiffFiltered) {
-    for (let i = currentIndex + 1; i < data.length; i++) {
-        const type = data[i][2] ? String(data[i][2]).trim() : "Mixed";
-        const diff = data[i][3] ? String(data[i][3]).trim() : "Medium";
-        if (type === currentType && diff === currentDiff) {
-            nextMatchIdx = i;
-            break;
-        }
+  // Use original filtered array logic. Now that TestSelector shares its filters with this component, 
+  // navigating 'next' on this array perfectly tracks the active type/difficulty, and falls back to sequential otherwise.
+  const filteredIndices = data.map((row, idx) => {
+    const hasAnswered = answers[idx] !== undefined && Object.keys(answers[idx] || {}).length > 0;
+    const type = row[2] ? String(row[2]).trim() : "Mixed";
+    const difficulty = row[3] ? String(row[3]).trim() : "Medium";
+    return { idx, hasAnswered, type, difficulty };
+  }).filter(p => {
+    if (filterType && filterType !== 'All' && p.type !== filterType) return false;
+    if (filterDiff && filterDiff !== 'All' && p.difficulty !== filterDiff) return false;
+    if (filterStatus && filterStatus !== 'All') {
+      if (filterStatus === 'Attempted' && !p.hasAnswered) return false;
+      if (filterStatus === 'Unattempted' && p.hasAnswered) return false;
     }
-    for (let i = currentIndex - 1; i >= 0; i--) {
-        const type = data[i][2] ? String(data[i][2]).trim() : "Mixed";
-        const diff = data[i][3] ? String(data[i][3]).trim() : "Medium";
-        if (type === currentType && diff === currentDiff) {
-            prevMatchIdx = i;
-            break;
-        }
-    }
-  }
+    return true;
+  }).map(p => p.idx);
 
-  const isFirst = isTypeOrDiffFiltered ? prevMatchIdx === -1 : currentIndex === 0;
-  const isLast = isTypeOrDiffFiltered ? nextMatchIdx === -1 : currentIndex === data.length - 1;
+  const isFiltered = (filterType && filterType !== 'All') || (filterDiff && filterDiff !== 'All') || (filterStatus && filterStatus !== 'All');
+  const currentPos = filteredIndices.indexOf(currentIndex);
+  
+  const isFirst = isFiltered && currentPos !== -1 ? currentPos === 0 : currentIndex === 0;
+  const isLast = isFiltered && currentPos !== -1 ? currentPos === filteredIndices.length - 1 : currentIndex === data.length - 1;
 
   const handleNavigation = (direction) => {
-    if (isTypeOrDiffFiltered) {
-      if (direction === 'next' && nextMatchIdx !== -1) setCurrentIndex(nextMatchIdx);
-      if (direction === 'prev' && prevMatchIdx !== -1) setCurrentIndex(prevMatchIdx);
+    if (isFiltered && currentPos !== -1) {
+      if (direction === 'next' && currentPos < filteredIndices.length - 1) {
+        setCurrentIndex(filteredIndices[currentPos + 1]);
+      } else if (direction === 'prev' && currentPos > 0) {
+        setCurrentIndex(filteredIndices[currentPos - 1]);
+      }
     } else {
-      if (direction === 'next' && currentIndex < data.length - 1) setCurrentIndex(prev => prev + 1);
-      if (direction === 'prev' && currentIndex > 0) setCurrentIndex(prev => prev - 1);
+      if (direction === 'next' && currentIndex < data.length - 1) {
+        setCurrentIndex(prev => prev + 1);
+      } else if (direction === 'prev' && currentIndex > 0) {
+        setCurrentIndex(prev => prev - 1);
+      }
     }
   };
 
@@ -152,7 +152,7 @@ export default function TestPassage({
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [currentIndex, data.length, isTypeOrDiffFiltered, nextMatchIdx, prevMatchIdx, answers, isSingleColumn]);
+  }, [currentIndex, data.length, isFiltered, currentPos, filteredIndices, answers, isSingleColumn]);
 
   useEffect(() => {
     if (isSingleColumn || questionsData.length === 0) return;
@@ -464,7 +464,7 @@ export default function TestPassage({
           </button>
           
           <span className="px-2 md:px-3 font-mono font-bold text-slate-400 tracking-widest text-[10px] md:text-xs">
-             {currentIndex + 1}/{data.length}
+            {isFiltered && currentPos !== -1 ? `${currentPos + 1}/${filteredIndices.length}` : `${currentIndex + 1}/${data.length}`}
           </span>
           
           {isLast ? (
