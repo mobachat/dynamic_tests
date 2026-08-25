@@ -11,13 +11,13 @@ export default function TestPassage({
   const [splitSize, setSplitSize] = useState(50);
   const [dictBox, setDictBox] = useState(null);
   const [activeQ, setActiveQ] = useState(0);
-  
+
   const mainRef = useRef(null);
   const leftPaneRef = useRef(null);
   const rightPaneRef = useRef(null);
   const questionRefs = useRef([]);
   const isDragging = useRef(false);
-  
+
   const currentItem = data[currentIndex] || [];
   const rawQuestionText = currentItem[5] ? String(currentItem[5]).trim() : "";
   const isSingleColumn = rawQuestionText === "";
@@ -75,41 +75,42 @@ export default function TestPassage({
     };
   }, []);
 
-  // Compute filtered array on the fly for Next/Prev logic
-  const filteredIndices = data.map((row, idx) => {
-    const hasAnswered = answers[idx] !== undefined && Object.keys(answers[idx] || {}).length > 0;
-    const type = row[2] ? String(row[2]).trim() : "Mixed";
-    const difficulty = row[3] ? String(row[3]).trim() : "Medium";
-    return { idx, hasAnswered, type, difficulty };
-  }).filter(p => {
-    if (filterType && filterType !== 'All' && p.type !== filterType) return false;
-    if (filterDiff && filterDiff !== 'All' && p.difficulty !== filterDiff) return false;
-    if (filterStatus && filterStatus !== 'All') {
-      if (filterStatus === 'Attempted' && !p.hasAnswered) return false;
-      if (filterStatus === 'Unattempted' && p.hasAnswered) return false;
-    }
-    return true;
-  }).map(p => p.idx);
+  const isTypeOrDiffFiltered = (filterType && filterType !== 'All') || (filterDiff && filterDiff !== 'All');
+  const currentType = currentItem[2] ? String(currentItem[2]).trim() : "Mixed";
+  const currentDiff = currentItem[3] ? String(currentItem[3]).trim() : "Medium";
 
-  const isFiltered = (filterType && filterType !== 'All') || (filterDiff && filterDiff !== 'All') || (filterStatus && filterStatus !== 'All');
-  const currentPos = filteredIndices.indexOf(currentIndex);
-  
-  const isFirst = isFiltered && currentPos !== -1 ? currentPos === 0 : currentIndex === 0;
-  const isLast = isFiltered && currentPos !== -1 ? currentPos === filteredIndices.length - 1 : currentIndex === data.length - 1;
+  let nextMatchIdx = -1;
+  let prevMatchIdx = -1;
+
+  if (isTypeOrDiffFiltered) {
+    for (let i = currentIndex + 1; i < data.length; i++) {
+        const type = data[i][2] ? String(data[i][2]).trim() : "Mixed";
+        const diff = data[i][3] ? String(data[i][3]).trim() : "Medium";
+        if (type === currentType && diff === currentDiff) {
+            nextMatchIdx = i;
+            break;
+        }
+    }
+    for (let i = currentIndex - 1; i >= 0; i--) {
+        const type = data[i][2] ? String(data[i][2]).trim() : "Mixed";
+        const diff = data[i][3] ? String(data[i][3]).trim() : "Medium";
+        if (type === currentType && diff === currentDiff) {
+            prevMatchIdx = i;
+            break;
+        }
+    }
+  }
+
+  const isFirst = isTypeOrDiffFiltered ? prevMatchIdx === -1 : currentIndex === 0;
+  const isLast = isTypeOrDiffFiltered ? nextMatchIdx === -1 : currentIndex === data.length - 1;
 
   const handleNavigation = (direction) => {
-    if (isFiltered && currentPos !== -1) {
-      if (direction === 'next' && currentPos < filteredIndices.length - 1) {
-        setCurrentIndex(filteredIndices[currentPos + 1]);
-      } else if (direction === 'prev' && currentPos > 0) {
-        setCurrentIndex(filteredIndices[currentPos - 1]);
-      }
+    if (isTypeOrDiffFiltered) {
+      if (direction === 'next' && nextMatchIdx !== -1) setCurrentIndex(nextMatchIdx);
+      if (direction === 'prev' && prevMatchIdx !== -1) setCurrentIndex(prevMatchIdx);
     } else {
-      if (direction === 'next' && currentIndex < data.length - 1) {
-        setCurrentIndex(prev => prev + 1);
-      } else if (direction === 'prev' && currentIndex > 0) {
-        setCurrentIndex(prev => prev - 1);
-      }
+      if (direction === 'next' && currentIndex < data.length - 1) setCurrentIndex(prev => prev + 1);
+      if (direction === 'prev' && currentIndex > 0) setCurrentIndex(prev => prev - 1);
     }
   };
 
@@ -123,22 +124,19 @@ export default function TestPassage({
     let touchStartX = 0;
     let touchStartY = 0;
     
-    const handleTouchStart = (e) => { 
-      touchStartX = e.changedTouches[0].screenX; 
-      touchStartY = e.changedTouches[0].screenY; 
-    };
+    const handleTouchStart = (e) => {
+       touchStartX = e.changedTouches[0].screenX;
+       touchStartY = e.changedTouches[0].screenY;
+     };
     
     const handleTouchEnd = (e) => {
-      // Explicitly disable swipe navigation in the two-column view
       if (!isSingleColumn) return;
-
       const touchEndX = e.changedTouches[0].screenX;
       const touchEndY = e.changedTouches[0].screenY;
       
       const deltaX = touchStartX - touchEndX;
       const deltaY = touchStartY - touchEndY;
       
-      // Ensure X movement is large AND dominant
       if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 60) {
         if (deltaX > 0) handleNavigation('next');
         if (deltaX < 0) handleNavigation('prev');
@@ -154,7 +152,7 @@ export default function TestPassage({
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [currentIndex, data.length, isFiltered, currentPos, filteredIndices, answers, isSingleColumn]);
+  }, [currentIndex, data.length, isTypeOrDiffFiltered, nextMatchIdx, prevMatchIdx, answers, isSingleColumn]);
 
   useEffect(() => {
     if (isSingleColumn || questionsData.length === 0) return;
@@ -418,6 +416,7 @@ export default function TestPassage({
                 </div>
               )}
             </div>
+
             {qLocked && !cleanCorrectArr.includes(String(qAns).trim().toLowerCase()) && (
                <div className="text-[10px] text-emerald-600 font-extrabold ml-1">
                  Answer: {correctAnswer}
@@ -465,7 +464,7 @@ export default function TestPassage({
           </button>
           
           <span className="px-2 md:px-3 font-mono font-bold text-slate-400 tracking-widest text-[10px] md:text-xs">
-            {isFiltered && currentPos !== -1 ? `${currentPos + 1}/${filteredIndices.length}` : `${currentIndex + 1}/${data.length}`}
+             {currentIndex + 1}/{data.length}
           </span>
           
           {isLast ? (
@@ -507,7 +506,7 @@ export default function TestPassage({
             <div 
               style={{ fontSize: `${fontSize}px`, lineHeight: '1.7' }}
               className="text-slate-800 font-medium whitespace-pre-wrap select-text selection:bg-indigo-200" 
-              dangerouslySetInnerHTML={{ __html: formatText(passageText) }} 
+              dangerouslySetInnerHTML={{ __html: formatText(passageText) }}
              />
           </div>
         )}
@@ -523,7 +522,7 @@ export default function TestPassage({
         )}
 
         <div 
-           className={`flex-1 bg-slate-100 flex flex-col relative min-h-0 ${isSingleColumn ? 'max-w-5xl h-full md:rounded-2xl shadow-inner m-2' : 'w-full h-full md:mr-2 md:my-2 md:rounded-2xl shadow-inner overflow-hidden'}`}
+          className={`flex-1 bg-slate-100 flex flex-col relative min-h-0 ${isSingleColumn ? 'max-w-5xl h-full md:rounded-2xl shadow-inner m-2' : 'w-full h-full md:mr-2 md:my-2 md:rounded-2xl shadow-inner overflow-hidden'}`}
         >
           {!isSingleColumn && questionsData.length > 0 && (
             <div className="sticky top-0 z-30 w-full shrink-0">
@@ -548,7 +547,7 @@ export default function TestPassage({
                 <div 
                   style={{ fontSize: `${fontSize}px`, lineHeight: '1.6' }}
                   className="font-bold text-slate-900 whitespace-pre-wrap" 
-                  dangerouslySetInnerHTML={{ __html: formatText(q.text) }} 
+                  dangerouslySetInnerHTML={{ __html: formatText(q.text) }}
                  />
               </div>
             ))}
